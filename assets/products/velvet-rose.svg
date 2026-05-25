@@ -1,0 +1,13 @@
+<svg width="900" height="900" viewBox="0 0 900 900" xmlns="http://www.w3.org/2000/svg">
+  <defs><linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#fff5f3"/><stop offset="1" stop-color="#ffd7d1"/></linearGradient><linearGradient id="b" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#f7c7bd"/><stop offset="1" stop-color="#8b2748"/></linearGradient></defs>
+  <rect width="900" height="900" rx="80" fill="url(#bg)"/>
+  <circle cx="680" cy="180" r="110" fill="#fff" opacity=".55"/>
+  <circle cx="200" cy="720" r="170" fill="#fff" opacity=".4"/>
+  <rect x="385" y="180" width="130" height="70" rx="18" fill="#51213a"/>
+  <rect x="355" y="244" width="190" height="60" rx="18" fill="#d3a063"/>
+  <rect x="270" y="300" width="360" height="410" rx="92" fill="url(#b)"/>
+  <rect x="320" y="350" width="260" height="300" rx="54" fill="#fff7f1" opacity=".88"/>
+  <text x="450" y="482" text-anchor="middle" font-family="Georgia,serif" font-size="48" fill="#54223a" font-weight="700">Velvet</text>
+  <text x="450" y="540" text-anchor="middle" font-family="Georgia,serif" font-size="52" fill="#54223a" font-weight="700">Rose</text>
+  <path d="M238 710c86-54 173-54 260 0" stroke="#9e3154" stroke-width="10" opacity=".35" fill="none" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,29 @@
+<svg width="720" height="240" viewBox="0 0 720 240" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Scentivity logo</title>
+  <desc id="desc">Elegant Scentivity perfume logo with perfume bottle icon and script S monogram.</desc>
+  <defs>
+    <linearGradient id="rose" x1="95" y1="14" x2="226" y2="202" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F6D4C8"/>
+      <stop offset="0.45" stop-color="#C88A7D"/>
+      <stop offset="1" stop-color="#6C263D"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="22" y1="20" x2="222" y2="220" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF2C6"/>
+      <stop offset="0.48" stop-color="#D7A35D"/>
+      <stop offset="1" stop-color="#8B5E2E"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="12" stdDeviation="10" flood-color="#3A1322" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+  <rect x="18" y="18" width="204" height="204" rx="62" fill="#FFF8F4" stroke="url(#gold)" stroke-width="5" filter="url(#shadow)"/>
+  <path d="M90 83h60v22H90z" fill="url(#gold)"/>
+  <path d="M103 47h34c6.5 0 12 5.2 12 11.8V78H91V58.8C91 52.2 96.3 47 103 47z" fill="#4A1327"/>
+  <path d="M73 110c0-18 14.8-32.5 33-32.5h28c18.2 0 33 14.5 33 32.5v48.5c0 20-16.4 36.5-36.5 36.5h-21C89.4 195 73 178.6 73 158.5V110z" fill="url(#rose)"/>
+  <path d="M111.5 161.2c13.7 7 35.4 2.4 35.4-14.3 0-20.6-48.4-11.7-48.4-42.1 0-19.6 21.6-29 39.2-21.1" stroke="#FFF7EA" stroke-width="9" stroke-linecap="round"/>
+  <path d="M122.8 72.3c8.2-24 32.1-31.6 50-30.8" stroke="#D7A35D" stroke-width="5" stroke-linecap="round"/>
+  <path d="M179.6 39.8c-8.2 2.4-15 8.6-18 16.7 8.8.8 17.1-2.8 22.2-9.8l5-6.9-9.2 0z" fill="#6C263D"/>
+  <text x="260" y="104" fill="#441525" font-family="Georgia, 'Times New Roman', serif" font-size="66" font-weight="700" letter-spacing="0.5">Scentivity</text>
+  <text x="265" y="148" fill="#9B6B4D" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" letter-spacing="5.8">PERFUMES • BEAUTY • CONFIDENCE</text>
+  <path d="M265 169h306" stroke="#D7A35D" stroke-width="3" stroke-linecap="round"/>
+</svg>

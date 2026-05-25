@@ -1,0 +1,34 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "assets/products/uploads"
+public_folder: "assets/products/uploads"
+
+publish_mode: simple
+
+collections:
+  - name: "store"
+    label: "Scentivity Store"
+    files:
+      - name: "products"
+        label: "Products"
+        file: "data/products.json"
+        format: "json"
+        fields:
+          - label: "Products"
+            name: "products"
+            widget: "list"
+            summary: "{{fields.name}} — {{fields.price}}"
+            collapsed: false
+            fields:
+              - { label: "Product Name", name: "name", widget: "string" }
+              - label: "Category"
+                name: "category"
+                widget: "select"
+                options: ["Floral", "Warm", "Fresh", "Luxury", "Body Mist", "Perfume Oil", "Gift Set", "New Arrival"]
+              - { label: "Price", name: "price", widget: "string", hint: "Example: $45, $58, or GH₵250" }
+              - { label: "Size", name: "size", widget: "string", required: false, hint: "Example: 50 mL, 75 mL, 100 mL, Gift set" }
+              - { label: "Product Photo", name: "image", widget: "image", required: false }
+              - { label: "Scent Notes / Description", name: "notes", widget: "text", required: false }
+              - { label: "Available", name: "available", widget: "boolean", default: true }

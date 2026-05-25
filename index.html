@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scentivity | Luxury Perfumes for Women</title>
+  <meta name="description" content="Scentivity is a ladies' perfume boutique offering elegant fragrances, gift sets, and signature scents for everyday confidence." />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header" id="top">
+    <a href="#top" class="brand" aria-label="Scentivity homepage">
+      <img src="assets/logo.svg" alt="Scentivity logo" />
+    </a>
+    <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="#collections">Collections</a>
+      <a href="#products">Shop</a>
+      <a href="#about">About</a>
+      <a href="#order">Order</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Ladies' fragrance boutique</p>
+        <h1>Signature scents for confidence, elegance, and unforgettable moments.</h1>
+        <p class="hero-text">Scentivity curates feminine perfumes, body mists, fragrance oils, and gift sets for women who want every entrance to feel intentional.</p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#products">Shop perfumes</a>
+          <a class="btn ghost" href="#order">How to order</a>
+        </div>
+        <div class="trust-row" aria-label="Business highlights">
+          <span>Authentic scents</span>
+          <span>Gift-ready packaging</span>
+          <span>Affordable luxury</span>
+        </div>
+      </div>
+      <div class="hero-card" aria-label="Featured perfume display">
+        <div class="bottle-scene">
+          <div class="sparkle one"></div>
+          <div class="sparkle two"></div>
+          <div class="perfume-bottle">
+            <div class="bottle-cap"></div>
+            <div class="bottle-neck"></div>
+            <div class="bottle-body">
+              <span>S</span>
+              <small>Scentivity</small>
+            </div>
+          </div>
+        </div>
+        <div class="feature-note">
+          <strong>New Arrival</strong>
+          <span>Velvet Rose Eau de Parfum</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section stats" aria-label="Store benefits">
+      <article>
+        <strong>4+</strong>
+        <span>Curated collections</span>
+      </article>
+      <article>
+        <strong>24 hr</strong>
+        <span>Response time for orders</span>
+      </article>
+      <article>
+        <strong>100%</strong>
+        <span>Giftable presentation</span>
+      </article>
+    </section>
+
+    <section class="section" id="collections">
+      <div class="section-heading">
+        <p class="eyebrow">Shop by mood</p>
+        <h2>Collections made for every personality.</h2>
+        <p>From soft florals to bold oud blends, organize your products into clear collections so customers can find their perfect scent faster.</p>
+      </div>
+      <div class="collection-grid">
+        <article class="collection-card floral">
+          <span>01</span>
+          <h3>Floral & Romantic</h3>
+          <p>Rose, jasmine, peony, and soft powder notes for elegant everyday wear.</p>
+        </article>
+        <article class="collection-card warm">
+          <span>02</span>
+          <h3>Warm & Sensual</h3>
+          <p>Amber, vanilla, musk, and sandalwood for evening confidence.</p>
+        </article>
+        <article class="collection-card fresh">
+          <span>03</span>
+          <h3>Fresh & Clean</h3>
+          <p>Citrus, green tea, aquatic notes, and light mists for daily freshness.</p>
+        </article>
+        <article class="collection-card luxury">
+          <span>04</span>
+          <h3>Luxury Gift Sets</h3>
+          <p>Perfume bundles, travel sprays, body oils, and beautifully wrapped gifts.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section products-section" id="products">
+      <div class="section-heading split">
+        <div>
+          <p class="eyebrow">Featured products</p>
+          <h2>Perfumes your customers can browse and request.</h2>
+          <p>Add product names, prices, photos, sizes, and descriptions from the private <code>/admin</code> dashboard after deployment.</p>
+        </div>
+        <div class="filter-controls" aria-label="Product filters">
+          <button class="filter active" data-filter="all">All</button>
+          <button class="filter" data-filter="Floral">Floral</button>
+          <button class="filter" data-filter="Warm">Warm</button>
+          <button class="filter" data-filter="Fresh">Fresh</button>
+          <button class="filter" data-filter="Luxury">Luxury</button>
+        </div>
+      </div>
+      <div class="product-grid" id="productGrid" aria-live="polite"></div>
+    </section>
+
+    <section class="section owner-note" aria-label="How to add products">
+      <div>
+        <p class="eyebrow">Easy product updates</p>
+        <h2>Add pictures, prices, and new scents without editing code.</h2>
+      </div>
+      <ol>
+        <li>Deploy the website from GitHub to Netlify.</li>
+        <li>Enable Netlify Identity and Git Gateway.</li>
+        <li>Visit <strong>/admin</strong>, log in, and open <strong>Products</strong>.</li>
+        <li>Click <strong>Add Product</strong>, upload a photo, enter the price, and publish.</li>
+      </ol>
+    </section>
+
+    <section class="section about" id="about">
+      <div class="about-image" aria-hidden="true">
+        <span>SCENTIVITY</span>
+      </div>
+      <div class="about-copy">
+        <p class="eyebrow">About Scentivity</p>
+        <h2>Where beauty meets memory.</h2>
+        <p>Scentivity helps women discover fragrances that match their mood, lifestyle, and special occasions. The boutique focuses on elegant scent profiles, attractive packaging, and a friendly buying experience.</p>
+        <div class="check-list">
+          <p>✓ Perfumes, oils, mists, and gift sets</p>
+          <p>✓ Product descriptions by scent family</p>
+          <p>✓ Simple ordering through phone, email, Instagram, or WhatsApp</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section order" id="order">
+      <div class="section-heading">
+        <p class="eyebrow">How to order</p>
+        <h2>A simple buying process for customers.</h2>
+      </div>
+      <div class="steps-grid">
+        <article>
+          <span>1</span>
+          <h3>Choose a scent</h3>
+          <p>Browse the product list and note the perfume name, size, and price.</p>
+        </article>
+        <article>
+          <span>2</span>
+          <h3>Send a request</h3>
+          <p>Use the order buttons, contact form, Instagram DM, or WhatsApp link.</p>
+        </article>
+        <article>
+          <span>3</span>
+          <h3>Confirm payment</h3>
+          <p>Confirm availability, delivery/pickup option, and payment method.</p>
+        </article>
+        <article>
+          <span>4</span>
+          <h3>Receive your perfume</h3>
+          <p>Enjoy a beautifully packaged fragrance or send it as a gift.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section contact" id="contact">
+      <div class="contact-copy">
+        <p class="eyebrow">Contact</p>
+        <h2>Ready to smell unforgettable?</h2>
+        <p>Replace the sample contact details below with Scentivity’s real phone number, Instagram handle, email, location, and business hours.</p>
+        <div class="contact-list">
+          <a href="mailto:hello@scentivity.com">hello@scentivity.com</a>
+          <a href="tel:+10000000000">+1 (000) 000-0000</a>
+          <a href="https://instagram.com/" target="_blank" rel="noreferrer">Instagram: @scentivity</a>
+          <span>Business hours: Mon–Sat, 9 AM–7 PM</span>
+        </div>
+      </div>
+      <form class="contact-form" action="mailto:hello@scentivity.com" method="post" enctype="text/plain">
+        <label>
+          Name
+          <input type="text" name="name" placeholder="Your name" required />
+        </label>
+        <label>
+          Email or phone
+          <input type="text" name="contact" placeholder="Email or phone number" required />
+        </label>
+        <label>
+          Perfume request
+          <textarea name="message" rows="5" placeholder="Tell us the perfume name, size, quantity, and delivery preference." required></textarea>
+        </label>
+        <button class="btn primary" type="submit">Send request</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div>
+      <img src="assets/logo.svg" alt="Scentivity logo" />
+      <p>Luxury-inspired perfumes and feminine fragrances for every occasion.</p>
+    </div>
+    <nav aria-label="Footer navigation">
+      <a href="#products">Shop</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <p class="copyright">© <span id="year"></span> Scentivity. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script>
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on('init', user => {
+        if (!user) {
+          window.netlifyIdentity.on('login', () => {
+            document.location.href = '/admin/';
+          });
+        }
+      });
+    }
+  </script>
+</body>
+</html>

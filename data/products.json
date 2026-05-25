@@ -1,0 +1,40 @@
+{
+  "products": [
+    {
+      "name": "Velvet Rose Eau de Parfum",
+      "category": "Floral",
+      "price": "$45",
+      "image": "assets/products/velvet-rose.svg",
+      "notes": "Rose petals, peony, soft musk, and vanilla cream.",
+      "size": "50 mL",
+      "available": true
+    },
+    {
+      "name": "Amber Noir",
+      "category": "Warm",
+      "price": "$58",
+      "image": "assets/products/amber-noir.svg",
+      "notes": "Amber, sandalwood, vanilla, tonka, and evening musk.",
+      "size": "75 mL",
+      "available": true
+    },
+    {
+      "name": "Citrus Bloom Mist",
+      "category": "Fresh",
+      "price": "$25",
+      "image": "assets/products/citrus-bloom.svg",
+      "notes": "Mandarin, green tea, white flowers, and clean musk.",
+      "size": "100 mL",
+      "available": true
+    },
+    {
+      "name": "Oud Muse Gift Set",
+      "category": "Luxury",
+      "price": "$85",
+      "image": "assets/products/oud-muse.svg",
+      "notes": "Oud, rosewood, saffron, praline, and soft incense.",
+      "size": "Gift set",
+      "available": true
+    }
+  ]
+}
