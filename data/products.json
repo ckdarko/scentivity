@@ -1,10 +1,10 @@
 {
   "products": [
     {
-      "name": "Velvet Rose Eau de Parfum",
-      "category": "Floral",
+      "name": "CKD Velvet Rose Eau de Parfum",
+      "category": "New Arrival",
       "price": "$45",
-      "image": "assets/products/velvet-rose.svg",
+      "image": "assets/products/uploads/ckd-perfume.jpg",
       "notes": "Rose petals, peony, soft musk, and vanilla cream.",
       "size": "50 mL",
       "available": true
