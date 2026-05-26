@@ -87,7 +87,7 @@ function renderProducts(filter = 'all') {
           </div>
           <p>${notes}</p>
           ${available
-            ? `<a class="btn ghost" href="mailto:hello@scentivity.com?subject=${orderSubject}&body=${orderBody}">Request this scent</a>`
+            ? `<a class="btn ghost" href="mailto:abenaoppongampofo@gmail.com?subject=${orderSubject}&body=${orderBody}">Request this scent</a>`
             : `<span class="sold-out">Currently unavailable</span>`
           }
         </div>
