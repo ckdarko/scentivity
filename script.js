@@ -43,7 +43,7 @@ const fallbackProducts = [
 
 let products = [...fallbackProducts];
 
-const SCENTIVITY_WHATSAPP = '233541132193';
+const SCENTIVITY_WHATSAPP = '233264284238';
 
 function buildWhatsAppLink(message) {
   return `https://wa.me/${SCENTIVITY_WHATSAPP}?text=${encodeURIComponent(message)}`;

@@ -4,7 +4,7 @@ This updated version includes:
 
 - Fused Scentivity logo based on the provided brand images.
 - Contact details updated to:
-  - WhatsApp: 054 113 2193
+  - WhatsApp: 026 428 4238
   - Call: 026 428 4238
   - Instagram: @scentivity
   - Website: scentivitygh.com

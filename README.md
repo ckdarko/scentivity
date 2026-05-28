@@ -15,7 +15,7 @@ This version includes:
 
 ## Current Business Details Used
 
-- WhatsApp: `054 113 2193`
+- WhatsApp: `026 428 4238`
 - Phone: `026 428 4238`
 - Instagram: `@scentivity`
 - Website: `scentivitygh.com`
