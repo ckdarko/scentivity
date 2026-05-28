@@ -59,3 +59,12 @@ Do **not** collect raw card numbers through a normal website form. Use a secure 
 ## How to Update the Live Site
 
 Upload the extracted files to your existing GitHub repository, commit the changes, and Netlify will redeploy automatically.
+
+
+## Updated Product Categories
+Products now use two category fields:
+
+- `mainCategory`: Victoria’s Secret, Bath & Body Works, Fragrances, Men’s Collection, Body Care, Home Fragrance, Gift Sets, or Others.
+- `subCategory`: product type, such as Body Mist, Fine Fragrance Mist, Candles, Hand Soap, Hand Sanitizers, Body Lotion & Cream, Men’s Fragrance, etc.
+
+In the `/admin` dashboard, add each product and choose both the main category and subcategory. The public shop page will automatically create filter buttons from these categories.

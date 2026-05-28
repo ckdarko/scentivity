@@ -1,47 +1,172 @@
+const productTaxonomy = [
+  {
+    name: 'Victoria’s Secret',
+    subcategories: [
+      'Perfumes',
+      'Eau de Parfum',
+      'Body Mist',
+      'Hair Mist',
+      'Lotions & Oils',
+      'Body Care',
+      'Travel Size',
+      'Gift Sets'
+    ]
+  },
+  {
+    name: 'Bath & Body Works',
+    subcategories: [
+      'Fine Fragrance Mist',
+      'Body Lotion & Cream',
+      'Body Wash & Shower Gel',
+      'Candles',
+      'Wallflowers',
+      'Room Sprays',
+      'Hand Soap',
+      'Hand Sanitizers',
+      'Men’s Body Care',
+      'Gift Sets'
+    ]
+  },
+  {
+    name: 'Fragrances',
+    subcategories: [
+      'Perfumes',
+      'Eau de Parfum',
+      'Fragrance Mist',
+      'Body Mist',
+      'Perfume Oil',
+      'Roll-On Oils',
+      'Travel Size'
+    ]
+  },
+  {
+    name: 'Men’s Collection',
+    subcategories: [
+      'Men’s Fragrance',
+      'Men’s Body Spray',
+      'Men’s Body Care',
+      'Men’s Gift Sets'
+    ]
+  },
+  {
+    name: 'Body Care',
+    subcategories: [
+      'Body Lotion & Cream',
+      'Body Oil',
+      'Body Wash & Shower Gel',
+      'Scrubs',
+      'Hand Cream',
+      'Hand Soap',
+      'Hand Sanitizers'
+    ]
+  },
+  {
+    name: 'Home Fragrance',
+    subcategories: [
+      'Candles',
+      'Wallflowers',
+      'Room Sprays',
+      'Car Fragrance'
+    ]
+  },
+  {
+    name: 'Gift Sets',
+    subcategories: [
+      'Perfume Gift Sets',
+      'Body Care Sets',
+      'Men’s Gift Sets',
+      'Travel Sets'
+    ]
+  },
+  {
+    name: 'Others',
+    subcategories: [
+      'Accessories',
+      'New Arrivals',
+      'Clearance',
+      'Other Products'
+    ]
+  }
+];
+
 const fallbackProducts = [
   {
-    name: 'Velvet Rose Eau de Parfum',
-    category: 'Floral',
-    price: 'GH₵450',
+    name: "Victoria's Secret Pure Wonder Fragrance Mist",
+    brand: "Victoria's Secret",
+    mainCategory: 'Victoria’s Secret',
+    subCategory: 'Body Mist',
+    price: 'GH₵250',
+    image: 'assets/products/citrus-bloom.svg',
+    notes: 'A bright, feminine mist profile for daily wear. Add exact notes and stock details in the admin dashboard.',
+    size: '236 mL',
+    available: true,
+    paymentLink: ''
+  },
+  {
+    name: 'Bath & Body Works Body Cream',
+    brand: 'Bath & Body Works',
+    mainCategory: 'Bath & Body Works',
+    subCategory: 'Body Lotion & Cream',
+    price: 'GH₵220',
     image: 'assets/products/velvet-rose.svg',
-    notes: 'Rose petals, peony, soft musk, and vanilla cream.',
+    notes: 'Moisturizing body cream options from popular sweet, floral, fresh, and warm scent families.',
+    size: '226 g / 8 oz',
+    available: true,
+    paymentLink: ''
+  },
+  {
+    name: 'Sweet Signature Eau de Parfum',
+    brand: 'Scentivity',
+    mainCategory: 'Fragrances',
+    subCategory: 'Eau de Parfum',
+    price: 'GH₵450',
+    image: 'assets/products/amber-noir.svg',
+    notes: 'A polished sweet scent profile with soft florals, vanilla, amber, and clean musk.',
     size: '50 mL',
     available: true,
     paymentLink: ''
   },
   {
-    name: 'Amber Noir',
-    category: 'Warm',
-    price: 'GH₵580',
-    image: 'assets/products/amber-noir.svg',
-    notes: 'Amber, sandalwood, vanilla, tonka, and evening musk.',
-    size: '75 mL',
-    available: true,
-    paymentLink: ''
-  },
-  {
-    name: 'Citrus Bloom Mist',
-    category: 'Fresh',
-    price: 'GH₵250',
-    image: 'assets/products/citrus-bloom.svg',
-    notes: 'Mandarin, green tea, white flowers, and clean musk.',
+    name: 'Men’s Fresh Body Spray',
+    brand: 'Scentivity',
+    mainCategory: 'Men’s Collection',
+    subCategory: 'Men’s Fragrance',
+    price: 'GH₵180',
+    image: 'assets/products/oud-muse.svg',
+    notes: 'Fresh, confident masculine scent profile for everyday use and gifting.',
     size: '100 mL',
     available: true,
     paymentLink: ''
   },
   {
-    name: 'Oud Muse Gift Set',
-    category: 'Luxury',
-    price: 'GH₵850',
-    image: 'assets/products/oud-muse.svg',
-    notes: 'Oud, rosewood, saffron, praline, and soft incense.',
-    size: 'Gift set',
+    name: 'Scented 3-Wick Candle',
+    brand: 'Scentivity',
+    mainCategory: 'Home Fragrance',
+    subCategory: 'Candles',
+    price: 'GH₵300',
+    image: 'assets/products/velvet-rose.svg',
+    notes: 'Home fragrance candle options for bedrooms, bathrooms, gifts, and cozy spaces.',
+    size: '3-wick candle',
+    available: true,
+    paymentLink: ''
+  },
+  {
+    name: 'Pocket Hand Sanitizer',
+    brand: 'Scentivity',
+    mainCategory: 'Body Care',
+    subCategory: 'Hand Sanitizers',
+    price: 'GH₵45',
+    image: 'assets/products/citrus-bloom.svg',
+    notes: 'Portable scented sanitizer options for bags, cars, school, work, and gifting.',
+    size: 'Travel size',
     available: true,
     paymentLink: ''
   }
 ];
 
 let products = [...fallbackProducts];
+let activeMainCategory = 'all';
+let activeSubCategory = 'all';
 
 const SCENTIVITY_WHATSAPP = '233264284238';
 
@@ -50,7 +175,8 @@ function buildWhatsAppLink(message) {
 }
 
 const productGrid = document.querySelector('#productGrid');
-const filters = document.querySelectorAll('.filter');
+const mainCategoryFilters = document.querySelector('#mainCategoryFilters');
+const subCategoryFilters = document.querySelector('#subCategoryFilters');
 const menuToggle = document.querySelector('.menu-toggle');
 const navLinks = document.querySelector('.nav-links');
 
@@ -63,26 +189,92 @@ function normalizeImagePath(path) {
   return path.startsWith('/') ? path.slice(1) : path;
 }
 
-function renderProducts(filter = 'all') {
-  const visibleProducts = filter === 'all'
-    ? products
-    : products.filter(product => product.category === filter);
+function legacyMainCategory(product) {
+  const category = product.category || '';
+  if (['Floral', 'Warm', 'Fresh', 'Luxury', 'Body Mist', 'Perfume Oil'].includes(category)) return 'Fragrances';
+  if (category === 'Gift Set') return 'Gift Sets';
+  if (category === 'New Arrival') return 'Others';
+  return 'Fragrances';
+}
+
+function getMainCategory(product) {
+  return cleanText(product.mainCategory || legacyMainCategory(product));
+}
+
+function getSubCategory(product) {
+  return cleanText(product.subCategory || product.category || 'Other Products');
+}
+
+function uniqueSorted(values) {
+  return [...new Set(values.filter(Boolean))].sort((a, b) => a.localeCompare(b));
+}
+
+function buttonMarkup(label, value, activeValue, dataName) {
+  return `<button class="filter ${value === activeValue ? 'active' : ''}" data-${dataName}="${cleanText(value)}">${cleanText(label)}</button>`;
+}
+
+function renderMainCategoryFilters() {
+  if (!mainCategoryFilters) return;
+  const productMainCategories = products.map(getMainCategory);
+  const taxonomyNames = productTaxonomy.map(item => item.name);
+  const categories = uniqueSorted([...taxonomyNames, ...productMainCategories]);
+
+  mainCategoryFilters.innerHTML = [
+    buttonMarkup('All', 'all', activeMainCategory, 'main'),
+    ...categories.map(category => buttonMarkup(category, category, activeMainCategory, 'main'))
+  ].join('');
+}
+
+function getSubcategoriesForActiveMain() {
+  const productSubs = products
+    .filter(product => activeMainCategory === 'all' || getMainCategory(product) === activeMainCategory)
+    .map(getSubCategory);
+
+  const taxonomySubs = activeMainCategory === 'all'
+    ? productTaxonomy.flatMap(item => item.subcategories)
+    : (productTaxonomy.find(item => item.name === activeMainCategory)?.subcategories || []);
+
+  return uniqueSorted([...taxonomySubs, ...productSubs]);
+}
+
+function renderSubCategoryFilters() {
+  if (!subCategoryFilters) return;
+  const subcategories = getSubcategoriesForActiveMain();
+  subCategoryFilters.innerHTML = [
+    buttonMarkup('All', 'all', activeSubCategory, 'sub'),
+    ...subcategories.map(category => buttonMarkup(category, category, activeSubCategory, 'sub'))
+  ].join('');
+}
+
+function getVisibleProducts() {
+  return products.filter(product => {
+    const matchesMain = activeMainCategory === 'all' || getMainCategory(product) === activeMainCategory;
+    const matchesSub = activeSubCategory === 'all' || getSubCategory(product) === activeSubCategory;
+    return matchesMain && matchesSub;
+  });
+}
+
+function renderProducts() {
+  if (!productGrid) return;
+  const visibleProducts = getVisibleProducts();
 
   if (!visibleProducts.length) {
-    productGrid.innerHTML = '<p class="empty-state">No products in this category yet. Add one from the Scentivity admin page.</p>';
+    productGrid.innerHTML = '<p class="empty-state">No products in this category yet. Add one from the Scentivity admin page or choose another category.</p>';
     return;
   }
 
   productGrid.innerHTML = visibleProducts.map(product => {
-    const name = cleanText(product.name || 'Untitled perfume');
-    const category = cleanText(product.category || 'Perfume');
+    const name = cleanText(product.name || 'Untitled product');
+    const brand = cleanText(product.brand || 'Scentivity');
+    const mainCategory = getMainCategory(product);
+    const subCategory = getSubCategory(product);
     const price = cleanText(product.price || 'Price on request');
     const size = cleanText(product.size || '');
-    const notes = cleanText(product.notes || 'Beautiful scent profile. Add full notes in the admin dashboard.');
+    const notes = cleanText(product.notes || 'Add product details and scent notes in the admin dashboard.');
     const available = product.available !== false;
     const image = normalizeImagePath(product.image);
     const paymentLink = cleanText(product.paymentLink || '');
-    const whatsappMessage = `Hello Scentivity, I am interested in ${name}${size ? ` (${size})` : ''} priced at ${price}. Please confirm availability and delivery/checkout details.\n\nName:\nPhone:\nDelivery address:\nQuantity:`;
+    const whatsappMessage = `Hello Scentivity, I am interested in ${name}${size ? ` (${size})` : ''} priced at ${price}. Category: ${mainCategory} / ${subCategory}. Please confirm availability and delivery/checkout details.\n\nName:\nPhone:\nDelivery address:\nQuantity:`;
     const whatsappLink = buildWhatsAppLink(whatsappMessage);
     const buyButton = paymentLink
       ? `<a class="btn primary" href="${paymentLink}" target="_blank" rel="noreferrer">Buy now</a>`
@@ -94,20 +286,31 @@ function renderProducts(filter = 'all') {
         <div class="product-info">
           <div class="product-top">
             <div>
-              <span class="product-category">${category}${size ? ` • ${size}` : ''}</span>
+              <span class="product-brand">${brand}</span>
+              <div class="product-tags">
+                <span>${mainCategory}</span>
+                <span>${subCategory}</span>
+                ${size ? `<span>${size}</span>` : ''}
+              </div>
               <h3>${name}</h3>
             </div>
             <span class="price">${price}</span>
           </div>
           <p>${notes}</p>
           ${available
-            ? `<div class="product-actions">${buyButton}<a class="btn ghost" href="${whatsappLink}" target="_blank" rel="noreferrer">Ask about this scent</a></div>`
+            ? `<div class="product-actions">${buyButton}<a class="btn ghost" href="${whatsappLink}" target="_blank" rel="noreferrer">Ask about this product</a></div>`
             : `<span class="sold-out">Currently unavailable</span>`
           }
         </div>
       </article>
     `;
   }).join('');
+}
+
+function refreshShop() {
+  renderMainCategoryFilters();
+  renderSubCategoryFilters();
+  renderProducts();
 }
 
 async function loadProducts() {
@@ -121,29 +324,42 @@ async function loadProducts() {
   } catch (error) {
     console.warn('Using fallback products:', error.message);
   }
-  renderProducts(document.querySelector('.filter.active')?.dataset.filter || 'all');
+  refreshShop();
 }
 
-filters.forEach(button => {
-  button.addEventListener('click', () => {
-    filters.forEach(item => item.classList.remove('active'));
-    button.classList.add('active');
-    renderProducts(button.dataset.filter);
+if (mainCategoryFilters) {
+  mainCategoryFilters.addEventListener('click', event => {
+    const button = event.target.closest('[data-main]');
+    if (!button) return;
+    activeMainCategory = button.dataset.main;
+    activeSubCategory = 'all';
+    refreshShop();
   });
-});
+}
 
-menuToggle.addEventListener('click', () => {
-  const isOpen = navLinks.classList.toggle('open');
-  menuToggle.setAttribute('aria-expanded', String(isOpen));
-});
-
-document.querySelectorAll('.nav-links a').forEach(link => {
-  link.addEventListener('click', () => {
-    navLinks.classList.remove('open');
-    menuToggle.setAttribute('aria-expanded', 'false');
+if (subCategoryFilters) {
+  subCategoryFilters.addEventListener('click', event => {
+    const button = event.target.closest('[data-sub]');
+    if (!button) return;
+    activeSubCategory = button.dataset.sub;
+    renderSubCategoryFilters();
+    renderProducts();
   });
-});
+}
 
+if (menuToggle && navLinks) {
+  menuToggle.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('open');
+    menuToggle.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+}
 
 const backToTop = document.querySelector('#backToTop');
 

@@ -19,16 +19,61 @@ collections:
           - label: "Products"
             name: "products"
             widget: "list"
-            summary: "{{fields.name}} — {{fields.price}}"
+            summary: "{{fields.name}} — {{fields.mainCategory}} / {{fields.subCategory}} — {{fields.price}}"
             collapsed: false
             fields:
               - { label: "Product Name", name: "name", widget: "string" }
-              - label: "Category"
-                name: "category"
+              - { label: "Brand", name: "brand", widget: "string", required: false, hint: "Example: Scentivity, Victoria's Secret, Bath & Body Works" }
+              - label: "Main Category"
+                name: "mainCategory"
                 widget: "select"
-                options: ["Floral", "Warm", "Fresh", "Luxury", "Body Mist", "Perfume Oil", "Gift Set", "New Arrival"]
-              - { label: "Price", name: "price", widget: "string", hint: "Example: $45, $58, or GH₵250" }
-              - { label: "Size", name: "size", widget: "string", required: false, hint: "Example: 50 mL, 75 mL, 100 mL, Gift set" }
+                options:
+                  - "Victoria’s Secret"
+                  - "Bath & Body Works"
+                  - "Fragrances"
+                  - "Men’s Collection"
+                  - "Body Care"
+                  - "Home Fragrance"
+                  - "Gift Sets"
+                  - "Others"
+              - label: "Subcategory"
+                name: "subCategory"
+                widget: "select"
+                options:
+                  - "Perfumes"
+                  - "Eau de Parfum"
+                  - "Fine Fragrance Mist"
+                  - "Fragrance Mist"
+                  - "Body Mist"
+                  - "Hair Mist"
+                  - "Perfume Oil"
+                  - "Roll-On Oils"
+                  - "Lotions & Oils"
+                  - "Body Care"
+                  - "Body Lotion & Cream"
+                  - "Body Oil"
+                  - "Body Wash & Shower Gel"
+                  - "Scrubs"
+                  - "Hand Cream"
+                  - "Hand Soap"
+                  - "Hand Sanitizers"
+                  - "PocketBac"
+                  - "Candles"
+                  - "Wallflowers"
+                  - "Room Sprays"
+                  - "Car Fragrance"
+                  - "Men’s Fragrance"
+                  - "Men’s Body Spray"
+                  - "Men’s Body Care"
+                  - "Men’s Gift Sets"
+                  - "Travel Size"
+                  - "Gift Sets"
+                  - "Accessories"
+                  - "New Arrivals"
+                  - "Clearance"
+                  - "Other Products"
+              - { label: "Price", name: "price", widget: "string", hint: "Example: GH₵250" }
+              - { label: "Size", name: "size", widget: "string", required: false, hint: "Example: 50 mL, 236 mL, 8 oz, 3-wick candle, Gift set" }
               - { label: "Product Photo", name: "image", widget: "image", required: false }
               - { label: "Stripe Payment Link / Checkout URL", name: "paymentLink", widget: "string", required: false, hint: "Paste the Stripe Payment Link for this product. Stripe should collect customer name, email, phone, billing address, shipping address, and card payment." }
               - { label: "Scent Notes / Description", name: "notes", widget: "text", required: false }
