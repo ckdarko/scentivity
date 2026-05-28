@@ -82,8 +82,8 @@ function renderProducts(filter = 'all') {
     const available = product.available !== false;
     const image = normalizeImagePath(product.image);
     const paymentLink = cleanText(product.paymentLink || '');
-    const orderSubject = encodeURIComponent(`Perfume Question: ${name}`);
-    const orderBody = encodeURIComponent(`Hello Scentivity,\n\nI have a question about ${name}.\n\nName:\nPhone:\nQuestion:`);
+    const whatsappMessage = `Hello Scentivity, I am interested in ${name}${size ? ` (${size})` : ''} priced at ${price}. Please confirm availability and delivery/checkout details.\n\nName:\nPhone:\nDelivery address:\nQuantity:`;
+    const whatsappLink = buildWhatsAppLink(whatsappMessage);
     const buyButton = paymentLink
       ? `<a class="btn primary" href="${paymentLink}" target="_blank" rel="noreferrer">Buy now</a>`
       : `<a class="btn primary" href="#contact">Request checkout link</a>`;
