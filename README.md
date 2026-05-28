@@ -1,105 +1,61 @@
 # Scentivity Perfume Website
 
-A polished static website for **Scentivity**, a ladies' perfume selling business. It includes:
+A polished website for **Scentivity** — **Everything Sweet Scented**.
 
-- A custom SVG logo
-- Responsive homepage
-- Featured products section
-- Product category filters
-- Product image, price, size, notes, and order-request buttons
-- About, ordering steps, contact section, and business information
-- Free deployment instructions
+This version includes:
 
-## File Structure
+- Updated fused Scentivity logo
+- Contact details from the Scentivity brand card
+- WhatsApp product-order buttons
+- Product admin dashboard through `/admin`
+- Product image, price, size, notes, and payment-link fields
+- Floating **back-to-top** button that appears when visitors scroll down
+- Netlify Forms contact form
+- Stripe/checkout-link support for secure payments
+
+## Current Business Details Used
+
+- WhatsApp: `054 113 2193`
+- Phone: `026 428 4238`
+- Instagram: `@scentivity`
+- Website: `scentivitygh.com`
+- Motto: `Everything Sweet Scented`
+
+## Important Files
 
 ```text
-scentivity_site/
-├── index.html
-├── styles.css
-├── script.js
-├── DEPLOYMENT_STEPS.md
-└── assets/
-    ├── logo.svg
-    ├── favicon.svg
-    └── products/
-        ├── velvet-rose.svg
-        ├── amber-noir.svg
-        ├── citrus-bloom.svg
-        └── oud-muse.svg
+index.html                  Main public website
+styles.css                  Website design and styling
+script.js                   Product rendering, filters, WhatsApp buttons, back-to-top button
+data/products.json          Product data edited by the admin dashboard
+admin/config.yml            Admin dashboard configuration
+assets/scentivity-logo-fused.png       Main updated logo
+assets/scentivity-contact-banner.png   Contact section banner
+SCENTIVITY_UPDATE_NOTES.md  Summary of this update
 ```
 
-## How to Edit Business Information
+## How to Add Products Without Editing Code
 
-Open `index.html` and update these placeholders:
+Go to:
 
-- Email: `hello@scentivity.com`
-- Phone: `+1 (000) 000-0000`
-- Instagram: `@scentivity`
-- Business hours
-- Business location, if you want to add one
-- Delivery, pickup, and payment information
-
-## How to Add or Edit Products
-
-Open `script.js`. At the top, you will see the product list:
-
-```js
-const products = [
-  {
-    name: 'Velvet Rose Eau de Parfum',
-    category: 'Floral',
-    price: '$45',
-    image: 'assets/products/velvet-rose.svg',
-    notes: 'Rose petals, peony, soft musk, and vanilla cream.',
-    size: '50 mL'
-  }
-];
+```text
+https://your-site-name.netlify.app/admin/
 ```
 
-To add a new perfume:
+Then:
 
-1. Put the perfume photo in `assets/products/`.
-2. Copy one product block.
-3. Paste it below the last product.
-4. Change `name`, `category`, `price`, `image`, `notes`, and `size`.
-5. Save the file.
-6. Redeploy or upload the updated folder.
+1. Log in.
+2. Open **Scentivity Store**.
+3. Open **Products**.
+4. Click **Add Product**.
+5. Upload a perfume photo.
+6. Enter product name, category, price, size, scent notes, availability, and optional checkout/payment link.
+7. Click **Publish**.
 
-Example:
+## Secure Payment Note
 
-```js
-{
-  name: 'Midnight Jasmine',
-  category: 'Floral',
-  price: '$52',
-  image: 'assets/products/midnight-jasmine.jpg',
-  notes: 'Jasmine, pear, vanilla orchid, and soft musk.',
-  size: '50 mL'
-}
-```
+Do **not** collect raw card numbers through a normal website form. Use a secure payment provider such as Stripe Payment Links. Paste the product's payment link into the product entry in `/admin`. Customers can then pay securely and provide their name, phone, and shipping details through the payment provider.
 
-Supported product categories in the current filter buttons are:
+## How to Update the Live Site
 
-- Floral
-- Warm
-- Fresh
-- Luxury
-
-You can add more categories by adding a new filter button in `index.html` and using the same category name in `script.js`.
-
-## Recommended Product Photo Size
-
-Use square images for best results:
-
-- 1000 × 1000 px, JPG, PNG, or WebP
-- Clear perfume bottle photo
-- Bright background or clean lifestyle setting
-- Consistent style for all products
-
-## Contact Form Note
-
-The current contact form uses `mailto:`, which opens the customer's email app. This works for a simple free static website. For a more professional form later, you can connect Formspree, Netlify Forms, Google Forms, or a backend service.
-
-## Free Hosting Options
-
-See `DEPLOYMENT_STEPS.md` for GitHub Pages, Netlify, and Vercel instructions.
+Upload the extracted files to your existing GitHub repository, commit the changes, and Netlify will redeploy automatically.

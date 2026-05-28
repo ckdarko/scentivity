@@ -1,40 +1,44 @@
 {
   "products": [
     {
-      "name": "CKD Velvet Rose Eau de Parfum",
-      "category": "New Arrival",
-      "price": "$45",
-      "image": "assets/products/uploads/ckd-perfume.jpg",
+      "name": "Velvet Rose Eau de Parfum",
+      "category": "Floral",
+      "price": "GH₵450",
+      "image": "assets/products/velvet-rose.svg",
       "notes": "Rose petals, peony, soft musk, and vanilla cream.",
       "size": "50 mL",
-      "available": true
+      "available": true,
+      "paymentLink": ""
     },
     {
       "name": "Amber Noir",
       "category": "Warm",
-      "price": "$58",
+      "price": "GH₵580",
       "image": "assets/products/amber-noir.svg",
       "notes": "Amber, sandalwood, vanilla, tonka, and evening musk.",
       "size": "75 mL",
-      "available": true
+      "available": true,
+      "paymentLink": ""
     },
     {
       "name": "Citrus Bloom Mist",
       "category": "Fresh",
-      "price": "$25",
+      "price": "GH₵250",
       "image": "assets/products/citrus-bloom.svg",
       "notes": "Mandarin, green tea, white flowers, and clean musk.",
       "size": "100 mL",
-      "available": true
+      "available": true,
+      "paymentLink": ""
     },
     {
       "name": "Oud Muse Gift Set",
       "category": "Luxury",
-      "price": "$85",
+      "price": "GH₵850",
       "image": "assets/products/oud-muse.svg",
       "notes": "Oud, rosewood, saffron, praline, and soft incense.",
       "size": "Gift set",
-      "available": true
+      "available": true,
+      "paymentLink": ""
     }
   ]
 }

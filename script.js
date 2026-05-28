@@ -2,42 +2,52 @@ const fallbackProducts = [
   {
     name: 'Velvet Rose Eau de Parfum',
     category: 'Floral',
-    price: '$45',
+    price: 'GH₵450',
     image: 'assets/products/velvet-rose.svg',
     notes: 'Rose petals, peony, soft musk, and vanilla cream.',
     size: '50 mL',
-    available: true
+    available: true,
+    paymentLink: ''
   },
   {
     name: 'Amber Noir',
     category: 'Warm',
-    price: '$58',
+    price: 'GH₵580',
     image: 'assets/products/amber-noir.svg',
     notes: 'Amber, sandalwood, vanilla, tonka, and evening musk.',
     size: '75 mL',
-    available: true
+    available: true,
+    paymentLink: ''
   },
   {
     name: 'Citrus Bloom Mist',
     category: 'Fresh',
-    price: '$25',
+    price: 'GH₵250',
     image: 'assets/products/citrus-bloom.svg',
     notes: 'Mandarin, green tea, white flowers, and clean musk.',
     size: '100 mL',
-    available: true
+    available: true,
+    paymentLink: ''
   },
   {
     name: 'Oud Muse Gift Set',
     category: 'Luxury',
-    price: '$85',
+    price: 'GH₵850',
     image: 'assets/products/oud-muse.svg',
     notes: 'Oud, rosewood, saffron, praline, and soft incense.',
     size: 'Gift set',
-    available: true
+    available: true,
+    paymentLink: ''
   }
 ];
 
 let products = [...fallbackProducts];
+
+const SCENTIVITY_WHATSAPP = '233541132193';
+
+function buildWhatsAppLink(message) {
+  return `https://wa.me/${SCENTIVITY_WHATSAPP}?text=${encodeURIComponent(message)}`;
+}
 
 const productGrid = document.querySelector('#productGrid');
 const filters = document.querySelectorAll('.filter');
@@ -71,8 +81,12 @@ function renderProducts(filter = 'all') {
     const notes = cleanText(product.notes || 'Beautiful scent profile. Add full notes in the admin dashboard.');
     const available = product.available !== false;
     const image = normalizeImagePath(product.image);
-    const orderSubject = encodeURIComponent(`Perfume Order Request: ${name}`);
-    const orderBody = encodeURIComponent(`Hello Scentivity,\n\nI would like to order ${name}. Please confirm availability, payment, and delivery options.\n\nName:\nPhone:\nQuantity:\nDelivery or pickup:`);
+    const paymentLink = cleanText(product.paymentLink || '');
+    const orderSubject = encodeURIComponent(`Perfume Question: ${name}`);
+    const orderBody = encodeURIComponent(`Hello Scentivity,\n\nI have a question about ${name}.\n\nName:\nPhone:\nQuestion:`);
+    const buyButton = paymentLink
+      ? `<a class="btn primary" href="${paymentLink}" target="_blank" rel="noreferrer">Buy now</a>`
+      : `<a class="btn primary" href="#contact">Request checkout link</a>`;
 
     return `
       <article class="product-card ${available ? '' : 'is-unavailable'}">
@@ -87,7 +101,7 @@ function renderProducts(filter = 'all') {
           </div>
           <p>${notes}</p>
           ${available
-            ? `<a class="btn ghost" href="mailto:abenaoppongampofo@gmail.com?subject=${orderSubject}&body=${orderBody}">Request this scent</a>`
+            ? `<div class="product-actions">${buyButton}<a class="btn ghost" href="${whatsappLink}" target="_blank" rel="noreferrer">Ask about this scent</a></div>`
             : `<span class="sold-out">Currently unavailable</span>`
           }
         </div>
@@ -129,6 +143,19 @@ document.querySelectorAll('.nav-links a').forEach(link => {
     menuToggle.setAttribute('aria-expanded', 'false');
   });
 });
+
+
+const backToTop = document.querySelector('#backToTop');
+
+if (backToTop) {
+  window.addEventListener('scroll', () => {
+    backToTop.classList.toggle('visible', window.scrollY > 500);
+  });
+
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
 
 document.querySelector('#year').textContent = new Date().getFullYear();
 loadProducts();

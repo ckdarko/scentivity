@@ -30,5 +30,6 @@ collections:
               - { label: "Price", name: "price", widget: "string", hint: "Example: $45, $58, or GH₵250" }
               - { label: "Size", name: "size", widget: "string", required: false, hint: "Example: 50 mL, 75 mL, 100 mL, Gift set" }
               - { label: "Product Photo", name: "image", widget: "image", required: false }
+              - { label: "Stripe Payment Link / Checkout URL", name: "paymentLink", widget: "string", required: false, hint: "Paste the Stripe Payment Link for this product. Stripe should collect customer name, email, phone, billing address, shipping address, and card payment." }
               - { label: "Scent Notes / Description", name: "notes", widget: "text", required: false }
               - { label: "Available", name: "available", widget: "boolean", default: true }
