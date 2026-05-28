@@ -168,10 +168,10 @@ let products = [...fallbackProducts];
 let activeMainCategory = 'all';
 let activeSubCategory = 'all';
 
-const SCENTIVITY_WHATSAPP = '233264284238';
+const SCENTIVITY_EMAIL = 'scentivitygh@gmail.com';
 
-function buildWhatsAppLink(message) {
-  return `https://wa.me/${SCENTIVITY_WHATSAPP}?text=${encodeURIComponent(message)}`;
+function buildEmailLink(subject, body) {
+  return `mailto:${SCENTIVITY_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
 
 const productGrid = document.querySelector('#productGrid');
@@ -274,11 +274,28 @@ function renderProducts() {
     const available = product.available !== false;
     const image = normalizeImagePath(product.image);
     const paymentLink = cleanText(product.paymentLink || '');
-    const whatsappMessage = `Hello Scentivity, I am interested in ${name}${size ? ` (${size})` : ''} priced at ${price}. Category: ${mainCategory} / ${subCategory}. Please confirm availability and delivery/checkout details.\n\nName:\nPhone:\nDelivery address:\nQuantity:`;
-    const whatsappLink = buildWhatsAppLink(whatsappMessage);
+    const emailSubject = `Scentivity Product Request - ${name}`;
+    const emailBody = `Hello Scentivity,
+
+I am interested in this product:
+
+Product: ${name}
+Brand: ${brand}
+Category: ${mainCategory} / ${subCategory}
+Size: ${size || 'Not specified'}
+Price: ${price}
+
+Please confirm availability and delivery/checkout details.
+
+Customer name:
+Phone number:
+Delivery address or pickup preference:
+Quantity:
+Additional notes:`;
+    const requestLink = buildEmailLink(emailSubject, emailBody);
     const buyButton = paymentLink
       ? `<a class="btn primary" href="${paymentLink}" target="_blank" rel="noreferrer">Buy now</a>`
-      : `<a class="btn primary" href="#contact">Request checkout link</a>`;
+      : '';
 
     return `
       <article class="product-card ${available ? '' : 'is-unavailable'}">
@@ -298,7 +315,7 @@ function renderProducts() {
           </div>
           <p>${notes}</p>
           ${available
-            ? `<div class="product-actions">${buyButton}<a class="btn ghost" href="${whatsappLink}" target="_blank" rel="noreferrer">Ask about this product</a></div>`
+            ? `<div class="product-actions">${buyButton}<a class="btn ghost" href="${requestLink}">Send Request</a></div>`
             : `<span class="sold-out">Currently unavailable</span>`
           }
         </div>
@@ -370,6 +387,31 @@ if (backToTop) {
 
   backToTop.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
+
+
+const emailRequestForm = document.querySelector('#emailRequestForm');
+
+if (emailRequestForm) {
+  emailRequestForm.addEventListener('submit', event => {
+    event.preventDefault();
+    const formData = new FormData(emailRequestForm);
+    const name = cleanText(formData.get('name') || '');
+    const contact = cleanText(formData.get('contact') || '');
+    const message = cleanText(formData.get('message') || '');
+    const body = `Hello Scentivity,
+
+I would like to send a product request.
+
+Name: ${name}
+Email/Phone: ${contact}
+
+Request details:
+${message}
+
+Thank you.`;
+    window.location.href = buildEmailLink('Scentivity Product Request', body);
   });
 }
 

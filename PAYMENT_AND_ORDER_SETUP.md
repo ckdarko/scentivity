@@ -31,7 +31,7 @@ Do not collect or store card numbers, CVV codes, or full card details directly o
 4. Paste the Stripe URL into **Stripe Payment Link / Checkout URL**.
 5. Click **Publish**.
 
-The public product card will show **Buy now** when a payment link exists. If no payment link is added, the product will show **Request checkout link**.
+The public product card will show **Buy now** when a payment link exists. Every available product also shows **Send Request**, which opens a prefilled email to scentivitygh@gmail.com.
 
 ## Where the admin sees orders
 

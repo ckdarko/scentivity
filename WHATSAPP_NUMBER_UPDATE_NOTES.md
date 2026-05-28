@@ -1,9 +1,7 @@
-# WhatsApp number update
+# Email request update
 
-This version updates all WhatsApp buttons and prefilled product inquiry links to use the same number as the call line:
+This version changes public product request links to email links. All product **Send Request** buttons open a prefilled email to:
 
-- WhatsApp: 026 428 4238
-- Call: 026 428 4238
-- WhatsApp URL: https://wa.me/233264284238
+scentivitygh@gmail.com
 
-The older 054 113 2193 number has been removed from visible WhatsApp links and public contact sections to avoid confusion.
+The public contact section lists email, phone, and Instagram.

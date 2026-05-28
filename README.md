@@ -6,19 +6,19 @@ This version includes:
 
 - Updated fused Scentivity logo
 - Contact details from the Scentivity brand card
-- WhatsApp product-order buttons
+- Email product-request buttons
 - Product admin dashboard through `/admin`
 - Product image, price, size, notes, and payment-link fields
 - Floating **back-to-top** button that appears when visitors scroll down
-- Netlify Forms contact form
+- Email request form that opens a prefilled message to Scentivity
 - Stripe/checkout-link support for secure payments
 
 ## Current Business Details Used
 
-- WhatsApp: `026 428 4238`
+- Email: `scentivitygh@gmail.com`
 - Phone: `026 428 4238`
 - Instagram: `@scentivity`
-- Website: `scentivitygh.com`
+- Phone: `026 428 4238`
 - Motto: `Everything Sweet Scented`
 
 ## Important Files
@@ -26,11 +26,10 @@ This version includes:
 ```text
 index.html                  Main public website
 styles.css                  Website design and styling
-script.js                   Product rendering, filters, WhatsApp buttons, back-to-top button
+script.js                   Product rendering, filters, email request buttons, back-to-top button
 data/products.json          Product data edited by the admin dashboard
 admin/config.yml            Admin dashboard configuration
 assets/scentivity-logo-fused.png       Main updated logo
-assets/scentivity-contact-banner.png   Contact section banner
 SCENTIVITY_UPDATE_NOTES.md  Summary of this update
 ```
 
