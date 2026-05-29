@@ -428,6 +428,16 @@ code { padding: 4px 8px; border-radius: 8px; background: rgba(125,45,71,.08); }
   font-weight: 900;
   font-size: 1.15rem;
 }
+
+.contact-icon svg {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+  display: block;
+}
+.whatsapp-icon {
+  background: linear-gradient(135deg, #25d366, #128c7e);
+}
 .contact-card strong,
 .contact-card small { display: block; }
 .contact-card strong { font-size: .98rem; }

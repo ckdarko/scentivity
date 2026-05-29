@@ -169,9 +169,14 @@ let activeMainCategory = 'all';
 let activeSubCategory = 'all';
 
 const SCENTIVITY_EMAIL = 'scentivitygh@gmail.com';
+const SCENTIVITY_WHATSAPP = '233534584470';
 
 function buildEmailLink(subject, body) {
   return `mailto:${SCENTIVITY_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+
+function buildWhatsAppLink(message) {
+  return `https://wa.me/${SCENTIVITY_WHATSAPP}?text=${encodeURIComponent(message)}`;
 }
 
 const productGrid = document.querySelector('#productGrid');
@@ -291,7 +296,7 @@ Phone number:
 Delivery address or pickup preference:
 Quantity:
 Additional notes:`;
-    const requestLink = buildEmailLink(`Product request: ${name}`, requestMessage);
+    const requestLink = buildWhatsAppLink(requestMessage);
     const buyButton = paymentLink
       ? `<a class="btn primary" href="${paymentLink}" target="_blank" rel="noreferrer">Buy now</a>`
       : '';
@@ -314,7 +319,7 @@ Additional notes:`;
           </div>
           <p>${notes}</p>
           ${available
-            ? `<div class="product-actions">${buyButton}<a class="btn ghost" href="${requestLink}">Send Request</a></div>`
+            ? `<div class="product-actions">${buyButton}<a class="btn ghost" href="${requestLink}" target="_blank" rel="noreferrer">Send Request</a></div>`
             : `<span class="sold-out">Currently unavailable</span>`
           }
         </div>
