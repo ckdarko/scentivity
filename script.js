@@ -168,6 +168,7 @@ let products = [...fallbackProducts];
 let activeMainCategory = 'all';
 let activeSubCategory = 'all';
 
+// FORCE_PRODUCT_REQUEST_TO_WHATSAPP_UPDATE
 const SCENTIVITY_EMAIL = 'scentivitygh@gmail.com';
 const SCENTIVITY_WHATSAPP = '233534584470';
 
@@ -319,7 +320,7 @@ Additional notes:`;
           </div>
           <p>${notes}</p>
           ${available
-            ? `<div class="product-actions">${buyButton}<a class="btn ghost" href="${requestLink}" target="_blank" rel="noreferrer">Send Request</a></div>`
+            ? `<div class="product-actions">${buyButton}<a class="btn ghost" href="${requestLink}" target="_blank" rel="noreferrer">Send Request on WhatsApp</a></div>`
             : `<span class="sold-out">Currently unavailable</span>`
           }
         </div>
@@ -332,7 +333,34 @@ function refreshShop() {
   renderMainCategoryFilters();
   renderSubCategoryFilters();
   renderProducts();
+  enforceProductWhatsAppLinks();
 }
+
+function enforceProductWhatsAppLinks() {
+  document.querySelectorAll('.product-card .product-actions a.btn.ghost').forEach(link => {
+    if (!link.href.includes('wa.me/233534584470')) {
+      const card = link.closest('.product-card');
+      const productName = card?.querySelector('h3')?.textContent?.trim() || 'this product';
+      const price = card?.querySelector('.price')?.textContent?.trim() || 'Price on request';
+      const message = `Hello Scentivity,
+
+I am interested in ${productName}.
+Price: ${price}
+
+Please confirm availability.
+
+Customer name:
+Phone number:
+Delivery address or pickup preference:
+Quantity:`;
+      link.href = buildWhatsAppLink(message);
+      link.target = '_blank';
+      link.rel = 'noreferrer';
+      link.textContent = 'Send Request on WhatsApp';
+    }
+  });
+}
+
 
 async function loadProducts() {
   try {
