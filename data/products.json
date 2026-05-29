@@ -1,76 +1,76 @@
 {
   "products": [
     {
-      "name": "Victoria's Secret Pure Wonder Fragrance Mist",
-      "brand": "Victoria's Secret",
-      "mainCategory": "Victoria’s Secret",
-      "subCategory": "Body Mist",
-      "price": "GH₵250",
-      "image": "assets/products/citrus-bloom.svg",
-      "notes": "A bright, feminine mist profile for daily wear. Add exact notes and stock details in the admin dashboard.",
+      "paymentLink": "",
       "size": "236 mL",
+      "notes": "A bright, feminine mist profile for daily wear. Add exact notes and stock details in the admin dashboard.",
+      "brand": "Victoria's Secret",
+      "price": "GH₵250",
       "available": true,
-      "paymentLink": ""
+      "name": "Victoria's Secret Pure Wonder Fragrance Mist",
+      "mainCategory": "Victoria’s Secret",
+      "image": "assets/products/uploads/image-may-28-2026-07_51_40-pm-2-.png",
+      "subCategory": "Body Mist"
     },
     {
-      "name": "Bath & Body Works Body Cream",
-      "brand": "Bath & Body Works",
-      "mainCategory": "Bath & Body Works",
-      "subCategory": "Body Lotion & Cream",
-      "price": "GH₵220",
-      "image": "assets/products/velvet-rose.svg",
-      "notes": "Moisturizing body cream options from popular sweet, floral, fresh, and warm scent families.",
+      "paymentLink": "",
       "size": "226 g / 8 oz",
+      "notes": "Moisturizing body cream options from popular sweet, floral, fresh, and warm scent families.",
+      "brand": "Bath & Body Works",
+      "price": "GH₵220",
       "available": true,
-      "paymentLink": ""
-    },
-    {
-      "name": "Sweet Signature Eau de Parfum",
-      "brand": "Scentivity",
-      "mainCategory": "Fragrances",
-      "subCategory": "Eau de Parfum",
-      "price": "GH₵450",
-      "image": "assets/products/amber-noir.svg",
-      "notes": "A polished sweet scent profile with soft florals, vanilla, amber, and clean musk.",
-      "size": "50 mL",
-      "available": true,
-      "paymentLink": ""
-    },
-    {
-      "name": "Men’s Fresh Body Spray",
-      "brand": "Scentivity",
-      "mainCategory": "Men’s Collection",
-      "subCategory": "Men’s Fragrance",
-      "price": "GH₵180",
-      "image": "assets/products/oud-muse.svg",
-      "notes": "Fresh, confident masculine scent profile for everyday use and gifting.",
-      "size": "100 mL",
-      "available": true,
-      "paymentLink": ""
-    },
-    {
-      "name": "Scented 3-Wick Candle",
-      "brand": "Scentivity",
-      "mainCategory": "Home Fragrance",
-      "subCategory": "Candles",
-      "price": "GH₵300",
+      "name": "Bath & Body Works Body Cream",
+      "mainCategory": "Bath & Body Works",
       "image": "assets/products/velvet-rose.svg",
-      "notes": "Home fragrance candle options for bedrooms, bathrooms, gifts, and cozy spaces.",
-      "size": "3-wick candle",
-      "available": true,
-      "paymentLink": ""
+      "subCategory": "Body Lotion & Cream"
     },
     {
-      "name": "Pocket Hand Sanitizer",
+      "paymentLink": "",
+      "size": "50 mL",
+      "notes": "A polished sweet scent profile with soft florals, vanilla, amber, and clean musk.",
       "brand": "Scentivity",
-      "mainCategory": "Body Care",
-      "subCategory": "Hand Sanitizers",
-      "price": "GH₵45",
-      "image": "assets/products/citrus-bloom.svg",
-      "notes": "Portable scented sanitizer options for bags, cars, school, work, and gifting.",
-      "size": "Travel size",
+      "price": "GH₵450",
       "available": true,
-      "paymentLink": ""
+      "name": "Sweet Signature Eau de Parfum",
+      "mainCategory": "Fragrances",
+      "image": "assets/products/amber-noir.svg",
+      "subCategory": "Eau de Parfum"
+    },
+    {
+      "paymentLink": "",
+      "size": "100 mL",
+      "notes": "Fresh, confident masculine scent profile for everyday use and gifting.",
+      "brand": "Scentivity",
+      "price": "GH₵180",
+      "available": true,
+      "name": "Men’s Fresh Body Spray",
+      "mainCategory": "Men’s Collection",
+      "image": "assets/products/oud-muse.svg",
+      "subCategory": "Men’s Fragrance"
+    },
+    {
+      "paymentLink": "",
+      "size": "3-wick candle",
+      "notes": "Home fragrance candle options for bedrooms, bathrooms, gifts, and cozy spaces.",
+      "brand": "Scentivity",
+      "price": "GH₵300",
+      "available": true,
+      "name": "Scented 3-Wick Candle",
+      "mainCategory": "Home Fragrance",
+      "image": "assets/products/velvet-rose.svg",
+      "subCategory": "Candles"
+    },
+    {
+      "paymentLink": "",
+      "size": "Travel size",
+      "notes": "Portable scented sanitizer options for bags, cars, school, work, and gifting.",
+      "brand": "Scentivity",
+      "price": "GH₵45",
+      "available": true,
+      "name": "Pocket Hand Sanitizer",
+      "mainCategory": "Body Care",
+      "image": "assets/products/citrus-bloom.svg",
+      "subCategory": "Hand Sanitizers"
     }
   ]
 }
