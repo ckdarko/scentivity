@@ -8,4 +8,4 @@ This update keeps the WhatsApp contact number as `053 458 4470` with Ghana count
 - The contact form now opens a prefilled email request instead of WhatsApp.
 - Main request buttons now say **Send Request by Email**.
 - WhatsApp remains visible as a separate contact option.
-- Call number remains unchanged: `026 428 4238`.
+- Call number removed from the public site.

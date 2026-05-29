@@ -5,7 +5,6 @@ This version keeps the Scentivity logo, colors, category system, and product adm
 Current public contact details:
 
 - Email: scentivitygh@gmail.com
-- Call: 026 428 4238
 - Instagram: @scentivity
 - Motto: Everything Sweet Scented
 

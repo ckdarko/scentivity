@@ -70,7 +70,7 @@ Then connect it through GitHub Pages, Netlify, or Vercel domain settings.
 
 ## What to Update Before Going Live
 
-- Real business phone number
+- Real business contact details
 - Real email address
 - Real Instagram/TikTok/Facebook links
 - Real product photos
