@@ -31,8 +31,8 @@ Do not collect or store card numbers, CVV codes, or full card details directly o
 4. Paste the Stripe URL into **Stripe Payment Link / Checkout URL**.
 5. Click **Publish**.
 
-The public product card will show **Buy now** when a payment link exists. Every available product also shows **Send Request**, which opens a prefilled email to scentivitygh@gmail.com.
+The public product card will show **Buy now** when a payment link exists. Every available product also shows **Send Request**, which opens a prefilled email addressed to `scentivitygh@gmail.com`.
 
 ## Where the admin sees orders
 
-Paid orders, customer names, addresses, and payment status are visible in the Stripe Dashboard. Contact form messages are visible in Netlify under **Forms**.
+Paid orders, customer names, addresses, and payment status are visible in the Stripe Dashboard. Contact/request form messages open as a prefilled email for the customer to send directly to Scentivity. Paid orders, customer names, addresses, and payment status are visible in the Stripe Dashboard when Stripe checkout links are used.

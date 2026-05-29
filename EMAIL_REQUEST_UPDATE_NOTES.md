@@ -1,11 +1,8 @@
-# Email request and contact section update
+# Request Button Update
 
-Updates made in this version:
+The site now sends product and contact requests through email. WhatsApp remains listed as a separate contact option.
 
-- Replaced the public website line with email: scentivitygh@gmail.com
-- Updated product **Send Request** buttons to open a prefilled email request
-- Updated the main contact form so the submit button opens a prefilled email request
-- Reorganized the contact section into clear Email Orders, Call, and Instagram cards
-- Added an order checklist beside the contact form
-
-Note: Because this is a free static website, email requests open the visitor's email app. To receive form submissions without opening the visitor's email app, connect a free form service or Netlify Forms notifications later.
+- WhatsApp order number: `053 458 4470`
+- WhatsApp country-code link number: `233534584470`
+- Email remains listed as a contact option: `scentivitygh@gmail.com`
+- Call number remains: `026 428 4238`

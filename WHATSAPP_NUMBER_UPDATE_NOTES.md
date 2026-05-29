@@ -1,7 +1,10 @@
-# Email request update
+# WhatsApp Number Update
 
-This version changes public product request links to email links. All product **Send Request** buttons open a prefilled email to:
+Current WhatsApp ordering number:
 
-scentivitygh@gmail.com
+- Local: `053 458 4470`
+- Link format: `https://wa.me/233534584470`
 
-The public contact section lists email, phone, and Instagram.
+The call number remains unchanged:
+
+- `026 428 4238`

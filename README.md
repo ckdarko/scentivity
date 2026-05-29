@@ -15,10 +15,10 @@ This version includes:
 
 ## Current Business Details Used
 
+- WhatsApp: `053 458 4470` (`+233 53 458 4470`)
+- Call: `026 428 4238`
 - Email: `scentivitygh@gmail.com`
-- Phone: `026 428 4238`
 - Instagram: `@scentivity`
-- Phone: `026 428 4238`
 - Motto: `Everything Sweet Scented`
 
 ## Important Files

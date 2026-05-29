@@ -274,8 +274,7 @@ function renderProducts() {
     const available = product.available !== false;
     const image = normalizeImagePath(product.image);
     const paymentLink = cleanText(product.paymentLink || '');
-    const emailSubject = `Scentivity Product Request - ${name}`;
-    const emailBody = `Hello Scentivity,
+    const requestMessage = `Hello Scentivity,
 
 I am interested in this product:
 
@@ -292,7 +291,7 @@ Phone number:
 Delivery address or pickup preference:
 Quantity:
 Additional notes:`;
-    const requestLink = buildEmailLink(emailSubject, emailBody);
+    const requestLink = buildEmailLink(`Product request: ${name}`, requestMessage);
     const buyButton = paymentLink
       ? `<a class="btn primary" href="${paymentLink}" target="_blank" rel="noreferrer">Buy now</a>`
       : '';
