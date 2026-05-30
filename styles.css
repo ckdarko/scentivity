@@ -450,7 +450,7 @@ code { padding: 4px 8px; border-radius: 8px; background: rgba(125,45,71,.08); }
   display: block;
 }
 .whatsapp-icon {
-  background: linear-gradient(135deg, #25d366, #128c7e);
+  background: linear-gradient(135deg, var(--hot-pink), var(--rose));
 }
 .contact-card strong,
 .contact-card small { display: block; }
@@ -847,7 +847,7 @@ code { padding: 4px 8px; border-radius: 8px; background: rgba(125,45,71,.08); }
 }
 
 
-/* Update: removed standalone category cards and combined preorder request into one clean form */
+/* Update: removed standalone categories section and combined preorder request into one clean card */
 .preorder-card {
   align-self: stretch;
 }
@@ -898,3 +898,25 @@ code { padding: 4px 8px; border-radius: 8px; background: rgba(125,45,71,.08); }
     padding: 9px 10px;
   }
 }
+
+/* remove-categories-combine-preorder */
+
+
+/* WhatsApp icon now matches Email and Instagram contact icon colors */
+.whatsapp-icon {
+  background: linear-gradient(135deg, var(--hot-pink), var(--rose));
+}
+
+/* Clearer fragrance-themed wording support */
+.preorder-card {
+  align-self: stretch;
+}
+
+.preorder-form .form-intro {
+  margin: 0 0 6px;
+  color: var(--muted);
+  font-weight: 700;
+  line-height: 1.65;
+}
+
+/* whatsapp-icon-fragrance-label-update */

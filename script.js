@@ -264,7 +264,7 @@ function renderSubCategoryFilters() {
   if (!subCategoryFilters) return;
   const subcategories = getSubcategoriesForActiveMain();
   subCategoryFilters.innerHTML = [
-    buttonMarkup('All', 'all', activeSubCategory, 'sub'),
+    buttonMarkup('All types', 'all', activeSubCategory, 'sub'),
     ...subcategories.map(category => buttonMarkup(category, category, activeSubCategory, 'sub'))
   ].join('');
 }

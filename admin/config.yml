@@ -31,7 +31,7 @@ collections:
                   - "Victoria's Secret Collection"
                   - "Bath & Body Works Collection"
                   - "Designer and Luxury Fragrances"
-              - label: "Subcategory"
+              - label: "Fragrance / Care Type"
                 name: "subCategory"
                 widget: "select"
                 options:
