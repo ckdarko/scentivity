@@ -845,3 +845,56 @@ code { padding: 4px 8px; border-radius: 8px; background: rgba(125,45,71,.08); }
   margin: 0;
   color: var(--deep-ink);
 }
+
+
+/* Update: removed standalone category cards and combined preorder request into one clean form */
+.preorder-card {
+  align-self: stretch;
+}
+
+.preorder-form {
+  height: 100%;
+  align-content: start;
+}
+
+.preorder-form .eyebrow {
+  margin-bottom: 0;
+}
+
+.preorder-form .form-intro {
+  margin: 0 0 6px;
+  color: var(--muted);
+  font-weight: 700;
+  line-height: 1.65;
+}
+
+.fulfillment-options {
+  display: grid;
+  gap: 10px;
+}
+
+.fulfillment-choice-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: nowrap;
+}
+
+.fulfillment-choice-row label {
+  flex: 1 1 0;
+  justify-content: center;
+  border: 1px solid rgba(224,0,91,.14);
+  border-radius: 999px;
+  padding: 10px 12px;
+  background: rgba(255,255,255,.82);
+}
+
+@media (max-width: 420px) {
+  .fulfillment-choice-row {
+    gap: 8px;
+  }
+
+  .fulfillment-choice-row label {
+    padding: 9px 10px;
+  }
+}

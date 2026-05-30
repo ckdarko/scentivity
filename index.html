@@ -18,7 +18,6 @@
     </a>
     <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
     <nav class="nav-links" aria-label="Main navigation">
-      <a href="#collections">Categories</a>
       <a href="#products">Shop</a>
       <a href="#preorder">Preorder</a>
       <a href="#contact">Contact</a>
@@ -74,31 +73,6 @@
         <strong>@scentivity</strong>
         <span>Follow on Instagram</span>
       </article>
-    </section>
-
-    <section class="section" id="collections">
-      <div class="section-heading">
-        <p class="eyebrow">Categories</p>
-        <h2>Shop Scentivity by three main collections.</h2>
-        <p>Choose from Victoria’s Secret favorites, Bath & Body Works essentials, and designer or luxury fragrances. Use the shop filters below to narrow products by body care, fragrance mists, home fragrances, candles, room sprays, car fragrances, and more.</p>
-      </div>
-      <div class="collection-grid category-guide-grid three-category-grid">
-        <article class="collection-card floral">
-          <span>01</span>
-          <h3>Victoria's Secret Collection</h3>
-          <p>Fragrance mists, body care, body lotions and creams, body washes, shower gels, and selected favorites.</p>
-        </article>
-        <article class="collection-card warm">
-          <span>02</span>
-          <h3>Bath & Body Works Collection</h3>
-          <p>Fine fragrance mists, body care, scented candles, room sprays, car fragrances, Wallflower refills and plugs, and sanitizers.</p>
-        </article>
-        <article class="collection-card luxury">
-          <span>03</span>
-          <h3>Designer and Luxury Fragrances</h3>
-          <p>Designer scents, luxury fragrance options, men’s body care, and premium fragrance picks for gifting and daily use.</p>
-        </article>
-      </div>
     </section>
 
     <section class="section products-section" id="products">
@@ -197,32 +171,28 @@
         </div>
         <p class="contact-note">For cart orders, use the checkout panel. For unavailable products or special fragrance requests, use the preorder form.</p>
       </div>
-      <div class="contact-panel" id="preorder" aria-label="Preorder and fragrance request">
-        <h3>Missing your favorite fragrance?</h3>
-        <p>Tell us the perfume, mist, body care item, or home fragrance you are looking for. We’ll notify you as soon as it becomes available or help you find a similar option.</p>
-        <ul>
-          <li>Product name, brand, or screenshot description</li>
-          <li>Preferred size and quantity</li>
-          <li>Your name and best contact number</li>
-          <li>Pickup or delivery preference</li>
-        </ul>
+
+      <div class="preorder-card" id="preorder" aria-label="Preorder and fragrance request">
+        <form id="emailRequestForm" name="preorder-request" class="contact-form preorder-form">
+          <p class="eyebrow">Preorder</p>
+          <h3>Missing your favorite fragrance?</h3>
+          <p class="form-intro">Let us know and we’ll notify you the moment it becomes available.</p>
+          <label>
+            Name
+            <input type="text" name="name" placeholder="Your name" required />
+          </label>
+          <label>
+            Email or WhatsApp number
+            <input type="text" name="contact" placeholder="Your email or WhatsApp number" required />
+          </label>
+          <label>
+            Fragrance request
+            <textarea name="message" rows="5" placeholder="Tell us the product name, brand, size, quantity, pickup/delivery preference, address if delivery is needed, or any question you have." required></textarea>
+          </label>
+          <button class="btn primary" type="submit">Send Request</button>
+        </form>
       </div>
-      <form id="emailRequestForm" name="preorder-request" class="contact-form">
-        <h3>Preorder / fragrance request</h3>
-        <label>
-          Name
-          <input type="text" name="name" placeholder="Your name" required />
-        </label>
-        <label>
-          Email or WhatsApp number
-          <input type="text" name="contact" placeholder="Your email or WhatsApp number" required />
-        </label>
-        <label>
-          Fragrance request
-          <textarea name="message" rows="5" placeholder="Tell us the perfume name, brand, size, quantity, pickup/delivery preference, address if delivery is needed, or any question you have." required></textarea>
-        </label>
-        <button class="btn primary" type="submit">Send Request</button>
-      </form>
+
     </section>
   </main>
 
@@ -261,10 +231,12 @@
         <input type="tel" name="customerPhone" placeholder="053 000 0000" required />
       </label>
 
-      <fieldset class="checkout-options">
+      <fieldset class="checkout-options fulfillment-options">
         <legend>Pickup or delivery</legend>
-        <label><input type="radio" name="fulfillment" value="delivery" checked /> Delivery</label>
-        <label><input type="radio" name="fulfillment" value="pickup" /> Pickup</label>
+        <div class="fulfillment-choice-row">
+          <label><input type="radio" name="fulfillment" value="delivery" checked /> Delivery</label>
+          <label><input type="radio" name="fulfillment" value="pickup" /> Pickup</label>
+        </div>
       </fieldset>
 
       <label id="deliveryFields">
@@ -302,10 +274,9 @@
   <footer class="site-footer">
     <div>
       <img src="assets/scentivity-logo-fused.png" alt="Scentivity logo" />
-      <p>Everything Sweet Scented — perfumes, mists, body care, candles, soaps, sanitizers, and gift-ready products.</p>
+      <p>Everything Sweet Scented — perfumes, fragrance mists, body care essentials, home fragrances, and gift-ready products.</p>
     </div>
     <nav aria-label="Footer navigation">
-      <a href="#collections">Categories</a>
       <a href="#products">Shop</a>
       <a href="#preorder">Preorder</a>
       <a href="#contact">Contact</a>
@@ -317,7 +288,7 @@
 
   <button class="back-to-top" id="backToTop" type="button" aria-label="Move back to the top of the page">↑</button>
 
-  <script src="script.js?v=categories-preorder-nav-20260530"></script>
+  <script src="script.js?v=remove-categories-combine-preorder-v2-20260530"></script>
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script>
     if (window.netlifyIdentity) {

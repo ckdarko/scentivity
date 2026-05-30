@@ -340,7 +340,7 @@ function renderProducts() {
           ${available
             ? `<div class="product-actions">
                 <button class="btn primary add-to-cart" type="button" data-product-key="${product._key}">Add to Cart</button>
-                <a class="btn ghost" href="${requestLink}" target="_blank" rel="noreferrer">Ask on WhatsApp</a>
+                <a class="btn ghost" href="${requestLink}" target="_blank" rel="noreferrer">Request on WhatsApp</a>
                 ${directBuyButton}
               </div>`
             : `<span class="sold-out">Currently unavailable</span>`
