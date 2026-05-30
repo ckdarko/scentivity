@@ -23,6 +23,7 @@
       <a href="#about">About</a>
       <a href="#order">Order</a>
       <a href="#contact">Contact</a>
+      <button class="cart-nav-button" id="cartToggle" type="button" aria-label="Open cart">Cart <span id="cartCount">0</span></button>
       <a href="https://wa.me/233534584470" target="_blank" rel="noreferrer">WhatsApp</a>
     </nav>
   </header>
@@ -34,13 +35,13 @@
         <h1>Sweet, elegant scents for confidence and unforgettable moments.</h1>
         <p class="hero-text">Scentivity offers perfumes, fragrance mists, body care, candles, hand soaps, sanitizers, men’s scents, and gift-ready products for everyday freshness, special occasions, and thoughtful gifting.</p>
         <div class="hero-actions">
-          <a class="btn primary" href="#products">Shop perfumes</a>
+          <a class="btn primary" href="#products">Shop & add to cart</a>
           <a class="btn ghost" href="mailto:scentivitygh@gmail.com?subject=Scentivity%20Product%20Request&body=Hello%20Scentivity%2C%0A%0AI%20would%20like%20to%20send%20a%20product%20request.%0A%0AProduct%20name%3A%0ASize%3A%0AQuantity%3A%0ADelivery%20or%20pickup%20location%3A%0APhone%20number%3A%0A%0AThank%20you.">Send request by email</a>
         </div>
         <div class="trust-row" aria-label="Business highlights">
           <span>Everything Sweet Scented</span>
           <span>Victoria’s Secret & Bath & Body Works picks</span>
-          <span>Pickup & delivery support</span>
+          <span>Pickup, delivery & cart checkout</span>
         </div>
       </div>
       <div class="hero-card" aria-label="Featured perfume display">
@@ -122,7 +123,7 @@
         <div>
           <p class="eyebrow">Featured products</p>
           <h2>Shop by brand, category, and product type.</h2>
-          <p>Filter by main category and subcategory, compare product details, then send a WhatsApp request from each product card or use the secure checkout link when available.</p>
+          <p>Filter by category, add products to your cart, then choose pickup or delivery and select your preferred payment method at checkout.</p>
         </div>
         <div class="filter-panel" aria-label="Product filters">
           <div>
@@ -150,7 +151,7 @@
         <div class="check-list">
           <p>✓ Perfumes, mists, body care, candles, soaps, sanitizers, and gift sets</p>
           <p>✓ Email product requests, WhatsApp support, and Instagram updates</p>
-          <p>✓ Secure checkout links can be added for paid orders</p>
+          <p>✓ Cart checkout with pickup, delivery, WhatsApp confirmation, and optional online card/MoMo payment</p>
         </div>
       </div>
     </section>
@@ -158,28 +159,28 @@
     <section class="section order" id="order">
       <div class="section-heading">
         <p class="eyebrow">How to order</p>
-        <h2>Secure checkout and easy delivery details.</h2>
+        <h2>Add to cart, choose delivery or pickup, and checkout securely.</h2>
       </div>
       <div class="steps-grid">
         <article>
           <span>1</span>
           <h3>Choose a scent</h3>
-          <p>Browse the product list and choose the fragrance, size, and price you want.</p>
+          <p>Browse the shop, choose your products, and click <strong>Add to Cart</strong>.</p>
         </article>
         <article>
           <span>2</span>
-          <h3>Checkout securely</h3>
-          <p>Use the checkout button when available, or send Scentivity an email request to confirm availability.</p>
+          <h3>Choose payment</h3>
+          <p>Select online card/Mobile Money payment, manual MoMo confirmation, bank transfer, or pay on pickup/delivery.</p>
         </article>
         <article>
           <span>3</span>
           <h3>Enter delivery details</h3>
-          <p>Share your name, phone number, quantity, and delivery or pickup details so your order can be prepared correctly.</p>
+          <p>Enter your name, email, phone number, and pickup or delivery address in the cart checkout form.</p>
         </article>
         <article>
           <span>4</span>
           <h3>Receive your perfume</h3>
-          <p>Scentivity confirms your order and prepares your perfume for pickup or delivery.</p>
+          <p>After payment or confirmation, Scentivity prepares the order for pickup or delivery.</p>
         </article>
       </div>
     </section>
@@ -237,6 +238,79 @@
     </section>
   </main>
 
+
+  <div class="cart-overlay" id="cartOverlay" aria-hidden="true"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-hidden="true" aria-label="Shopping cart and checkout">
+    <div class="cart-header">
+      <div>
+        <p class="eyebrow">Your cart</p>
+        <h2>Checkout</h2>
+      </div>
+      <button class="cart-close" id="closeCart" type="button" aria-label="Close cart">×</button>
+    </div>
+
+    <p class="cart-empty" id="cartEmptyMessage">Your cart is empty. Add products from the Shop section.</p>
+    <div class="cart-items" id="cartItems"></div>
+
+    <div class="cart-summary">
+      <span>Subtotal</span>
+      <strong id="cartSubtotal">GH₵0</strong>
+    </div>
+    <p class="cart-small-note">Delivery fees are confirmed by Scentivity after your pickup/delivery location is reviewed.</p>
+
+    <form class="checkout-form" id="checkoutForm">
+      <h3>Buyer information</h3>
+      <label>
+        Full name
+        <input type="text" name="customerName" placeholder="Your full name" required />
+      </label>
+      <label>
+        Email
+        <input type="email" name="customerEmail" placeholder="example@email.com" required />
+      </label>
+      <label>
+        Phone / WhatsApp number
+        <input type="tel" name="customerPhone" placeholder="053 000 0000" required />
+      </label>
+
+      <fieldset class="checkout-options">
+        <legend>Pickup or delivery</legend>
+        <label><input type="radio" name="fulfillment" value="delivery" checked /> Delivery</label>
+        <label><input type="radio" name="fulfillment" value="pickup" /> Pickup</label>
+      </fieldset>
+
+      <label id="deliveryFields">
+        Delivery address
+        <textarea name="deliveryAddress" rows="3" placeholder="Enter delivery address, area, landmark, city, and any useful directions"></textarea>
+      </label>
+      <label id="pickupFields" class="hidden">
+        Pickup note / preferred pickup area
+        <textarea name="pickupLocation" rows="3" placeholder="Enter preferred pickup area or any pickup note"></textarea>
+      </label>
+
+      <label>
+        Payment method
+        <select name="paymentMethod" id="paymentMethod" required>
+          <option value="online_card_momo">Pay online now: Card or Mobile Money</option>
+          <option value="momo_manual">Mobile Money confirmation by WhatsApp</option>
+          <option value="bank_transfer">Bank transfer / deposit confirmation</option>
+          <option value="pay_on_pickup">Pay on pickup</option>
+          <option value="cash_delivery">Cash on delivery, if available</option>
+        </select>
+      </label>
+
+      <label>
+        Extra notes
+        <textarea name="orderNotes" rows="3" placeholder="Any special request, scent preference, gift note, delivery time, etc."></textarea>
+      </label>
+
+      <button class="btn primary checkout-submit" type="submit">Proceed to Checkout</button>
+      <p class="payment-status" id="paymentStatus" aria-live="polite"></p>
+      <p class="payment-security-note">Scentivity does not collect card details on this website. Card and Mobile Money payments must be completed through a secure payment processor such as Paystack or Flutterwave.</p>
+    </form>
+  </aside>
+
+
   <footer class="site-footer">
     <div>
       <img src="assets/scentivity-logo-fused.png" alt="Scentivity logo" />
@@ -254,7 +328,7 @@
 
   <button class="back-to-top" id="backToTop" type="button" aria-label="Move back to the top of the page">↑</button>
 
-  <script src="script.js?v=logo-visuals-no-call-20260529"></script>
+  <script src="script.js?v=cart-checkout-payments-20260529"></script>
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script>
     if (window.netlifyIdentity) {

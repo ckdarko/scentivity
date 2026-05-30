@@ -75,6 +75,6 @@ collections:
               - { label: "Price", name: "price", widget: "string", hint: "Example: GH₵250" }
               - { label: "Size", name: "size", widget: "string", required: false, hint: "Example: 50 mL, 236 mL, 8 oz, 3-wick candle, Gift set" }
               - { label: "Product Photo", name: "image", widget: "image", required: false }
-              - { label: "Stripe Payment Link / Checkout URL", name: "paymentLink", widget: "string", required: false, hint: "Paste the Stripe Payment Link for this product. Stripe should collect customer name, email, phone, billing address, shipping address, and card payment." }
+              - { label: "Optional Direct Payment Link / Checkout URL", name: "paymentLink", widget: "string", required: false, hint: "Optional: paste a Paystack, Flutterwave, Stripe, or other hosted checkout link for this individual product. The cart checkout can also use Paystack through the Netlify Function setup." }
               - { label: "Scent Notes / Description", name: "notes", widget: "text", required: false }
               - { label: "Available", name: "available", widget: "boolean", default: true }

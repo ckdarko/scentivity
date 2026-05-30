@@ -164,13 +164,16 @@ const fallbackProducts = [
   }
 ];
 
-let products = [...fallbackProducts];
+
+let products = [];
 let activeMainCategory = 'all';
 let activeSubCategory = 'all';
+let cart = loadCart();
 
-// FORCE_PRODUCT_REQUEST_TO_WHATSAPP_UPDATE
 const SCENTIVITY_EMAIL = 'scentivitygh@gmail.com';
 const SCENTIVITY_WHATSAPP = '233534584470';
+const CART_STORAGE_KEY = 'scentivityCartV1';
+const CHECKOUT_PAYMENT_METHOD_ONLINE = 'online_card_momo';
 
 function buildEmailLink(subject, body) {
   return `mailto:${SCENTIVITY_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
@@ -185,9 +188,29 @@ const mainCategoryFilters = document.querySelector('#mainCategoryFilters');
 const subCategoryFilters = document.querySelector('#subCategoryFilters');
 const menuToggle = document.querySelector('.menu-toggle');
 const navLinks = document.querySelector('.nav-links');
+const backToTop = document.querySelector('#backToTop');
+const cartToggle = document.querySelector('#cartToggle');
+const cartCount = document.querySelector('#cartCount');
+const cartOverlay = document.querySelector('#cartOverlay');
+const cartDrawer = document.querySelector('#cartDrawer');
+const closeCartButton = document.querySelector('#closeCart');
+const cartItemsContainer = document.querySelector('#cartItems');
+const cartEmptyMessage = document.querySelector('#cartEmptyMessage');
+const cartSubtotal = document.querySelector('#cartSubtotal');
+const checkoutForm = document.querySelector('#checkoutForm');
+const fulfillmentRadios = document.querySelectorAll('input[name="fulfillment"]');
+const deliveryFields = document.querySelector('#deliveryFields');
+const pickupFields = document.querySelector('#pickupFields');
+const paymentMethodSelect = document.querySelector('#paymentMethod');
+const paymentStatus = document.querySelector('#paymentStatus');
+const emailRequestForm = document.querySelector('#emailRequestForm');
 
 function cleanText(value = '') {
-  return String(value).replace(/[<>]/g, '');
+  return String(value).replace(/[<>]/g, '').trim();
+}
+
+function slugify(value = '') {
+  return cleanText(value).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 }
 
 function normalizeImagePath(path) {
@@ -211,6 +234,27 @@ function getSubCategory(product) {
   return cleanText(product.subCategory || product.category || 'Other Products');
 }
 
+function parseGHSPrice(price = '') {
+  const match = String(price).replace(/,/g, '').match(/\d+(?:\.\d+)?/);
+  return match ? Number(match[0]) : 0;
+}
+
+function formatGHS(amount) {
+  return `GH₵${Number(amount || 0).toLocaleString('en-GH', { minimumFractionDigits: 0, maximumFractionDigits: 2 })}`;
+}
+
+function makeProductKey(product, index) {
+  return slugify(`${product.name || 'product'}-${product.size || ''}-${product.price || ''}-${index}`) || `product-${index}`;
+}
+
+function enrichProducts(list) {
+  return list.map((product, index) => ({
+    ...product,
+    _key: product.id || product.slug || makeProductKey(product, index),
+    _unitPrice: parseGHSPrice(product.price)
+  }));
+}
+
 function uniqueSorted(values) {
   return [...new Set(values.filter(Boolean))].sort((a, b) => a.localeCompare(b));
 }
@@ -224,7 +268,6 @@ function renderMainCategoryFilters() {
   const productMainCategories = products.map(getMainCategory);
   const taxonomyNames = productTaxonomy.map(item => item.name);
   const categories = uniqueSorted([...taxonomyNames, ...productMainCategories]);
-
   mainCategoryFilters.innerHTML = [
     buttonMarkup('All', 'all', activeMainCategory, 'main'),
     ...categories.map(category => buttonMarkup(category, category, activeMainCategory, 'main'))
@@ -235,11 +278,9 @@ function getSubcategoriesForActiveMain() {
   const productSubs = products
     .filter(product => activeMainCategory === 'all' || getMainCategory(product) === activeMainCategory)
     .map(getSubCategory);
-
   const taxonomySubs = activeMainCategory === 'all'
     ? productTaxonomy.flatMap(item => item.subcategories)
     : (productTaxonomy.find(item => item.name === activeMainCategory)?.subcategories || []);
-
   return uniqueSorted([...taxonomySubs, ...productSubs]);
 }
 
@@ -260,15 +301,23 @@ function getVisibleProducts() {
   });
 }
 
+function productWhatsAppMessage(product) {
+  const name = cleanText(product.name || 'Untitled product');
+  const brand = cleanText(product.brand || 'Scentivity');
+  const mainCategory = getMainCategory(product);
+  const subCategory = getSubCategory(product);
+  const price = cleanText(product.price || 'Price on request');
+  const size = cleanText(product.size || 'Not specified');
+  return `Hello Scentivity,\n\nI am interested in this product:\n\nProduct: ${name}\nBrand: ${brand}\nCategory: ${mainCategory} / ${subCategory}\nSize: ${size}\nPrice: ${price}\n\nPlease confirm availability.\n\nCustomer name:\nPhone number:\nPickup or delivery:\nDelivery address, if needed:\nQuantity:`;
+}
+
 function renderProducts() {
   if (!productGrid) return;
   const visibleProducts = getVisibleProducts();
-
   if (!visibleProducts.length) {
     productGrid.innerHTML = '<p class="empty-state">No products in this category yet. Add one from the Scentivity admin page or choose another category.</p>';
     return;
   }
-
   productGrid.innerHTML = visibleProducts.map(product => {
     const name = cleanText(product.name || 'Untitled product');
     const brand = cleanText(product.brand || 'Scentivity');
@@ -280,28 +329,10 @@ function renderProducts() {
     const available = product.available !== false;
     const image = normalizeImagePath(product.image);
     const paymentLink = cleanText(product.paymentLink || '');
-    const requestMessage = `Hello Scentivity,
-
-I am interested in this product:
-
-Product: ${name}
-Brand: ${brand}
-Category: ${mainCategory} / ${subCategory}
-Size: ${size || 'Not specified'}
-Price: ${price}
-
-Please confirm availability and delivery/checkout details.
-
-Customer name:
-Phone number:
-Delivery address or pickup preference:
-Quantity:
-Additional notes:`;
-    const requestLink = buildWhatsAppLink(requestMessage);
-    const buyButton = paymentLink
-      ? `<a class="btn primary" href="${paymentLink}" target="_blank" rel="noreferrer">Buy now</a>`
+    const requestLink = buildWhatsAppLink(productWhatsAppMessage(product));
+    const directBuyButton = paymentLink
+      ? `<a class="btn ghost" href="${paymentLink}" target="_blank" rel="noreferrer">Direct payment link</a>`
       : '';
-
     return `
       <article class="product-card ${available ? '' : 'is-unavailable'}">
         <img src="${image}" alt="${name}" loading="lazy" />
@@ -320,7 +351,11 @@ Additional notes:`;
           </div>
           <p>${notes}</p>
           ${available
-            ? `<div class="product-actions">${buyButton}<a class="btn ghost" href="${requestLink}" target="_blank" rel="noreferrer">Send Request on WhatsApp</a></div>`
+            ? `<div class="product-actions">
+                <button class="btn primary add-to-cart" type="button" data-product-key="${product._key}">Add to Cart</button>
+                <a class="btn ghost" href="${requestLink}" target="_blank" rel="noreferrer">Ask on WhatsApp</a>
+                ${directBuyButton}
+              </div>`
             : `<span class="sold-out">Currently unavailable</span>`
           }
         </div>
@@ -333,47 +368,224 @@ function refreshShop() {
   renderMainCategoryFilters();
   renderSubCategoryFilters();
   renderProducts();
-  enforceProductWhatsAppLinks();
 }
 
-function enforceProductWhatsAppLinks() {
-  document.querySelectorAll('.product-card .product-actions a.btn.ghost').forEach(link => {
-    if (!link.href.includes('wa.me/233534584470')) {
-      const card = link.closest('.product-card');
-      const productName = card?.querySelector('h3')?.textContent?.trim() || 'this product';
-      const price = card?.querySelector('.price')?.textContent?.trim() || 'Price on request';
-      const message = `Hello Scentivity,
+function loadCart() {
+  try {
+    const parsed = JSON.parse(localStorage.getItem(CART_STORAGE_KEY) || '[]');
+    return Array.isArray(parsed) ? parsed : [];
+  } catch (_) {
+    return [];
+  }
+}
 
-I am interested in ${productName}.
-Price: ${price}
+function saveCart() {
+  localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
+}
 
-Please confirm availability.
+function getCartQuantity() {
+  return cart.reduce((sum, item) => sum + Number(item.quantity || 0), 0);
+}
 
-Customer name:
-Phone number:
-Delivery address or pickup preference:
-Quantity:`;
-      link.href = buildWhatsAppLink(message);
-      link.target = '_blank';
-      link.rel = 'noreferrer';
-      link.textContent = 'Send Request on WhatsApp';
-    }
+function getCartTotal() {
+  return cart.reduce((sum, item) => sum + (Number(item.unitPrice || 0) * Number(item.quantity || 0)), 0);
+}
+
+function updateCartCount() {
+  if (cartCount) cartCount.textContent = String(getCartQuantity());
+}
+
+function productSnapshot(product) {
+  return {
+    key: product._key,
+    name: cleanText(product.name || 'Untitled product'),
+    brand: cleanText(product.brand || 'Scentivity'),
+    mainCategory: getMainCategory(product),
+    subCategory: getSubCategory(product),
+    size: cleanText(product.size || ''),
+    priceText: cleanText(product.price || 'Price on request'),
+    unitPrice: Number(product._unitPrice || parseGHSPrice(product.price)),
+    image: normalizeImagePath(product.image)
+  };
+}
+
+function addToCart(productKey) {
+  const product = products.find(item => item._key === productKey);
+  if (!product) return;
+  const existing = cart.find(item => item.key === productKey);
+  if (existing) {
+    existing.quantity += 1;
+  } else {
+    cart.push({ ...productSnapshot(product), quantity: 1 });
+  }
+  saveCart();
+  renderCart();
+  openCart();
+}
+
+function updateCartItem(key, action) {
+  const item = cart.find(product => product.key === key);
+  if (!item) return;
+  if (action === 'increase') item.quantity += 1;
+  if (action === 'decrease') item.quantity -= 1;
+  if (action === 'remove' || item.quantity <= 0) {
+    cart = cart.filter(product => product.key !== key);
+  }
+  saveCart();
+  renderCart();
+}
+
+function renderCart() {
+  updateCartCount();
+  const total = getCartTotal();
+  if (cartSubtotal) cartSubtotal.textContent = formatGHS(total);
+  if (!cartItemsContainer) return;
+  if (!cart.length) {
+    cartItemsContainer.innerHTML = '';
+    if (cartEmptyMessage) cartEmptyMessage.classList.remove('hidden');
+    if (checkoutForm) checkoutForm.classList.add('checkout-disabled');
+    return;
+  }
+  if (cartEmptyMessage) cartEmptyMessage.classList.add('hidden');
+  if (checkoutForm) checkoutForm.classList.remove('checkout-disabled');
+  cartItemsContainer.innerHTML = cart.map(item => `
+    <article class="cart-item">
+      <img src="${item.image}" alt="${item.name}" />
+      <div>
+        <strong>${item.name}</strong>
+        <small>${item.brand}${item.size ? ` • ${item.size}` : ''}</small>
+        <span>${item.priceText}</span>
+        <div class="cart-qty" aria-label="Quantity controls for ${item.name}">
+          <button type="button" data-cart-action="decrease" data-cart-key="${item.key}" aria-label="Decrease quantity">−</button>
+          <b>${item.quantity}</b>
+          <button type="button" data-cart-action="increase" data-cart-key="${item.key}" aria-label="Increase quantity">+</button>
+          <button type="button" class="remove" data-cart-action="remove" data-cart-key="${item.key}">Remove</button>
+        </div>
+      </div>
+    </article>
+  `).join('');
+}
+
+function openCart() {
+  renderCart();
+  cartDrawer?.classList.add('open');
+  cartOverlay?.classList.add('visible');
+  cartDrawer?.setAttribute('aria-hidden', 'false');
+}
+
+function closeCart() {
+  cartDrawer?.classList.remove('open');
+  cartOverlay?.classList.remove('visible');
+  cartDrawer?.setAttribute('aria-hidden', 'true');
+}
+
+function updateFulfillmentFields() {
+  const selected = document.querySelector('input[name="fulfillment"]:checked')?.value || 'delivery';
+  if (deliveryFields) deliveryFields.classList.toggle('hidden', selected !== 'delivery');
+  if (pickupFields) pickupFields.classList.toggle('hidden', selected !== 'pickup');
+}
+
+function orderSummaryForMessage(order) {
+  const itemLines = order.items.map(item => `- ${item.name}${item.size ? ` (${item.size})` : ''} x ${item.quantity} — ${formatGHS(item.unitPrice * item.quantity)}`).join('\n');
+  return `Hello Scentivity,\n\nI would like to place this order:\n\n${itemLines}\n\nSubtotal: ${formatGHS(order.subtotalGHS)}\nFulfillment: ${order.fulfillment}\nDelivery address: ${order.deliveryAddress || 'N/A'}\nPickup note/location: ${order.pickupLocation || 'N/A'}\nPayment method: ${order.paymentMethodLabel}\n\nCustomer name: ${order.customer.name}\nPhone: ${order.customer.phone}\nEmail: ${order.customer.email}\nAdditional notes: ${order.notes || 'N/A'}\n\nPlease confirm availability and payment/delivery details.`;
+}
+
+function showPaymentStatus(message, type = 'info') {
+  if (!paymentStatus) return;
+  paymentStatus.textContent = message;
+  paymentStatus.className = `payment-status ${type}`;
+}
+
+function buildOrderFromForm() {
+  const formData = new FormData(checkoutForm);
+  const fulfillment = formData.get('fulfillment') || 'delivery';
+  const paymentMethod = formData.get('paymentMethod') || CHECKOUT_PAYMENT_METHOD_ONLINE;
+  const paymentLabel = paymentMethodSelect?.selectedOptions?.[0]?.textContent?.trim() || paymentMethod;
+  return {
+    customer: {
+      name: cleanText(formData.get('customerName') || ''),
+      email: cleanText(formData.get('customerEmail') || ''),
+      phone: cleanText(formData.get('customerPhone') || '')
+    },
+    fulfillment: fulfillment === 'pickup' ? 'Pickup' : 'Delivery',
+    deliveryAddress: fulfillment === 'delivery' ? cleanText(formData.get('deliveryAddress') || '') : '',
+    pickupLocation: fulfillment === 'pickup' ? cleanText(formData.get('pickupLocation') || '') : '',
+    paymentMethod,
+    paymentMethodLabel: paymentLabel,
+    notes: cleanText(formData.get('orderNotes') || ''),
+    items: cart.map(item => ({
+      name: item.name,
+      brand: item.brand,
+      size: item.size,
+      quantity: item.quantity,
+      unitPrice: item.unitPrice,
+      priceText: item.priceText,
+      mainCategory: item.mainCategory,
+      subCategory: item.subCategory
+    })),
+    subtotalGHS: getCartTotal(),
+    currency: 'GHS'
+  };
+}
+
+async function checkoutOnline(order) {
+  showPaymentStatus('Opening secure online checkout for card or Mobile Money payment...', 'info');
+  const response = await fetch('/.netlify/functions/create-paystack-checkout', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(order)
   });
+  const result = await response.json().catch(() => ({}));
+  if (!response.ok || !result.authorization_url) {
+    throw new Error(result.error || 'Online payment is not ready yet. Please use WhatsApp checkout or check Paystack setup.');
+  }
+  localStorage.setItem('scentivityLastOrder', JSON.stringify({ ...order, paystackReference: result.reference || '' }));
+  window.location.href = result.authorization_url;
 }
 
+async function handleCheckoutSubmit(event) {
+  event.preventDefault();
+  if (!cart.length) {
+    showPaymentStatus('Your cart is empty. Add a product first.', 'error');
+    return;
+  }
+  const order = buildOrderFromForm();
+  if (!order.customer.name || !order.customer.email || !order.customer.phone) {
+    showPaymentStatus('Please enter your name, email, and phone number.', 'error');
+    return;
+  }
+  if (order.fulfillment === 'Delivery' && !order.deliveryAddress) {
+    showPaymentStatus('Please enter the delivery address.', 'error');
+    return;
+  }
+  if (order.paymentMethod === CHECKOUT_PAYMENT_METHOD_ONLINE) {
+    try {
+      await checkoutOnline(order);
+      return;
+    } catch (error) {
+      showPaymentStatus(error.message, 'error');
+      return;
+    }
+  }
+  const whatsappMessage = orderSummaryForMessage(order);
+  window.open(buildWhatsAppLink(whatsappMessage), '_blank', 'noopener,noreferrer');
+  showPaymentStatus('Your order summary has been opened in WhatsApp for confirmation.', 'success');
+}
 
 async function loadProducts() {
+  products = enrichProducts(fallbackProducts);
   try {
-    const response = await fetch('data/products.json', { cache: 'no-store' });
+    const response = await fetch(`data/products.json?v=${Date.now()}`, { cache: 'no-store' });
     if (!response.ok) throw new Error('Could not load product data.');
     const data = await response.json();
     if (Array.isArray(data.products) && data.products.length) {
-      products = data.products;
+      products = enrichProducts(data.products);
     }
   } catch (error) {
     console.warn('Using fallback products:', error.message);
   }
   refreshShop();
+  renderCart();
 }
 
 if (mainCategoryFilters) {
@@ -396,12 +608,32 @@ if (subCategoryFilters) {
   });
 }
 
+if (productGrid) {
+  productGrid.addEventListener('click', event => {
+    const addButton = event.target.closest('.add-to-cart');
+    if (!addButton) return;
+    addToCart(addButton.dataset.productKey);
+  });
+}
+
+cartToggle?.addEventListener('click', openCart);
+closeCartButton?.addEventListener('click', closeCart);
+cartOverlay?.addEventListener('click', closeCart);
+
+cartItemsContainer?.addEventListener('click', event => {
+  const control = event.target.closest('[data-cart-action]');
+  if (!control) return;
+  updateCartItem(control.dataset.cartKey, control.dataset.cartAction);
+});
+
+fulfillmentRadios.forEach(radio => radio.addEventListener('change', updateFulfillmentFields));
+checkoutForm?.addEventListener('submit', handleCheckoutSubmit);
+
 if (menuToggle && navLinks) {
   menuToggle.addEventListener('click', () => {
     const isOpen = navLinks.classList.toggle('open');
     menuToggle.setAttribute('aria-expanded', String(isOpen));
   });
-
   document.querySelectorAll('.nav-links a').forEach(link => {
     link.addEventListener('click', () => {
       navLinks.classList.remove('open');
@@ -410,20 +642,14 @@ if (menuToggle && navLinks) {
   });
 }
 
-const backToTop = document.querySelector('#backToTop');
-
 if (backToTop) {
   window.addEventListener('scroll', () => {
     backToTop.classList.toggle('visible', window.scrollY > 500);
   });
-
   backToTop.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 }
-
-
-const emailRequestForm = document.querySelector('#emailRequestForm');
 
 if (emailRequestForm) {
   emailRequestForm.addEventListener('submit', event => {
@@ -432,20 +658,12 @@ if (emailRequestForm) {
     const name = cleanText(formData.get('name') || '');
     const contact = cleanText(formData.get('contact') || '');
     const message = cleanText(formData.get('message') || '');
-    const body = `Hello Scentivity,
-
-I would like to send a product request.
-
-Name: ${name}
-Email/Phone: ${contact}
-
-Request details:
-${message}
-
-Thank you.`;
+    const body = `Hello Scentivity,\n\nI would like to send a product request.\n\nName: ${name}\nEmail/Phone: ${contact}\n\nRequest details:\n${message}\n\nThank you.`;
     window.location.href = buildEmailLink('Scentivity Product Request', body);
   });
 }
 
-document.querySelector('#year').textContent = new Date().getFullYear();
+const year = document.querySelector('#year');
+if (year) year.textContent = new Date().getFullYear();
+updateFulfillmentFields();
 loadProducts();

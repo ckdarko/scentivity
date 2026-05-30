@@ -66,3 +66,8 @@ Products now use two category fields:
 - `subCategory`: product type, such as Body Mist, Fine Fragrance Mist, Candles, Hand Soap, Hand Sanitizers, Body Lotion & Cream, Men’s Fragrance, etc.
 
 In the `/admin` dashboard, add each product and choose both the main category and subcategory. The public shop page will automatically create filter buttons from these categories.
+
+
+## Cart checkout and payments
+
+This package includes cart checkout, pickup/delivery fields, WhatsApp order confirmation, and an optional Paystack Netlify Function for online card and Mobile Money payments. See `CART_AND_PAYMENT_SETUP_GUIDE.md`.
