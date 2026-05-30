@@ -1,100 +1,33 @@
+const MAIN_CATEGORY_VS = "Victoria's Secret Collection";
+const MAIN_CATEGORY_BBW = 'Bath & Body Works Collection';
+const MAIN_CATEGORY_DESIGNER = 'Designer and Luxury Fragrances';
+
+const SCENTIVITY_SUBCATEGORIES = [
+  "Body Care",
+  "Body Lotions and Cream",
+  "Fine Fragrance Mist",
+  "Body Washes & Shower Gels",
+  "Hand Sanitizers",
+  "Men's Body Care",
+  "Home Fragrances",
+  "Scented Candles",
+  "Room Sprays",
+  "Car Fragrances",
+  "Wallflower Refills & Plugs"
+];
+
 const productTaxonomy = [
-  {
-    name: 'Victoria’s Secret',
-    subcategories: [
-      'Perfumes',
-      'Eau de Parfum',
-      'Body Mist',
-      'Hair Mist',
-      'Lotions & Oils',
-      'Body Care',
-      'Travel Size',
-      'Gift Sets'
-    ]
-  },
-  {
-    name: 'Bath & Body Works',
-    subcategories: [
-      'Fine Fragrance Mist',
-      'Body Lotion & Cream',
-      'Body Wash & Shower Gel',
-      'Candles',
-      'Wallflowers',
-      'Room Sprays',
-      'Hand Soap',
-      'Hand Sanitizers',
-      'Men’s Body Care',
-      'Gift Sets'
-    ]
-  },
-  {
-    name: 'Fragrances',
-    subcategories: [
-      'Perfumes',
-      'Eau de Parfum',
-      'Fragrance Mist',
-      'Body Mist',
-      'Perfume Oil',
-      'Roll-On Oils',
-      'Travel Size'
-    ]
-  },
-  {
-    name: 'Men’s Collection',
-    subcategories: [
-      'Men’s Fragrance',
-      'Men’s Body Spray',
-      'Men’s Body Care',
-      'Men’s Gift Sets'
-    ]
-  },
-  {
-    name: 'Body Care',
-    subcategories: [
-      'Body Lotion & Cream',
-      'Body Oil',
-      'Body Wash & Shower Gel',
-      'Scrubs',
-      'Hand Cream',
-      'Hand Soap',
-      'Hand Sanitizers'
-    ]
-  },
-  {
-    name: 'Home Fragrance',
-    subcategories: [
-      'Candles',
-      'Wallflowers',
-      'Room Sprays',
-      'Car Fragrance'
-    ]
-  },
-  {
-    name: 'Gift Sets',
-    subcategories: [
-      'Perfume Gift Sets',
-      'Body Care Sets',
-      'Men’s Gift Sets',
-      'Travel Sets'
-    ]
-  },
-  {
-    name: 'Others',
-    subcategories: [
-      'Accessories',
-      'New Arrivals',
-      'Clearance',
-      'Other Products'
-    ]
-  }
+  { name: MAIN_CATEGORY_VS, subcategories: SCENTIVITY_SUBCATEGORIES },
+  { name: MAIN_CATEGORY_BBW, subcategories: SCENTIVITY_SUBCATEGORIES },
+  { name: MAIN_CATEGORY_DESIGNER, subcategories: SCENTIVITY_SUBCATEGORIES }
 ];
 
 const fallbackProducts = [
   {
     name: "Victoria's Secret Pure Wonder Fragrance Mist",
     brand: "Victoria's Secret",
-    mainCategory: 'Victoria’s Secret',
-    subCategory: 'Body Mist',
+    mainCategory: MAIN_CATEGORY_VS,
+    subCategory: 'Fine Fragrance Mist',
     price: 'GH₵250',
     image: 'assets/products/citrus-bloom.svg',
     notes: 'A bright, feminine mist profile for daily wear. Add exact notes and stock details in the admin dashboard.',
@@ -105,8 +38,8 @@ const fallbackProducts = [
   {
     name: 'Bath & Body Works Body Cream',
     brand: 'Bath & Body Works',
-    mainCategory: 'Bath & Body Works',
-    subCategory: 'Body Lotion & Cream',
+    mainCategory: MAIN_CATEGORY_BBW,
+    subCategory: 'Body Lotions and Cream',
     price: 'GH₵220',
     image: 'assets/products/velvet-rose.svg',
     notes: 'Moisturizing body cream options from popular sweet, floral, fresh, and warm scent families.',
@@ -117,8 +50,8 @@ const fallbackProducts = [
   {
     name: 'Sweet Signature Eau de Parfum',
     brand: 'Scentivity',
-    mainCategory: 'Fragrances',
-    subCategory: 'Eau de Parfum',
+    mainCategory: MAIN_CATEGORY_DESIGNER,
+    subCategory: 'Home Fragrances',
     price: 'GH₵450',
     image: 'assets/products/amber-noir.svg',
     notes: 'A polished sweet scent profile with soft florals, vanilla, amber, and clean musk.',
@@ -129,7 +62,7 @@ const fallbackProducts = [
   {
     name: 'Men’s Fresh Body Spray',
     brand: 'Scentivity',
-    mainCategory: 'Men’s Collection',
+    mainCategory: MAIN_CATEGORY_DESIGNER,
     subCategory: 'Men’s Fragrance',
     price: 'GH₵180',
     image: 'assets/products/oud-muse.svg',
@@ -141,8 +74,8 @@ const fallbackProducts = [
   {
     name: 'Scented 3-Wick Candle',
     brand: 'Scentivity',
-    mainCategory: 'Home Fragrance',
-    subCategory: 'Candles',
+    mainCategory: MAIN_CATEGORY_BBW,
+    subCategory: 'Scented Candles',
     price: 'GH₵300',
     image: 'assets/products/velvet-rose.svg',
     notes: 'Home fragrance candle options for bedrooms, bathrooms, gifts, and cozy spaces.',
@@ -153,7 +86,7 @@ const fallbackProducts = [
   {
     name: 'Pocket Hand Sanitizer',
     brand: 'Scentivity',
-    mainCategory: 'Body Care',
+    mainCategory: MAIN_CATEGORY_BBW,
     subCategory: 'Hand Sanitizers',
     price: 'GH₵45',
     image: 'assets/products/citrus-bloom.svg',
@@ -168,6 +101,7 @@ const fallbackProducts = [
 let products = [];
 let activeMainCategory = 'all';
 let activeSubCategory = 'all';
+let activeSearchTerm = '';
 let cart = loadCart();
 
 const SCENTIVITY_EMAIL = 'scentivitygh@gmail.com';
@@ -186,11 +120,15 @@ function buildWhatsAppLink(message) {
 const productGrid = document.querySelector('#productGrid');
 const mainCategoryFilters = document.querySelector('#mainCategoryFilters');
 const subCategoryFilters = document.querySelector('#subCategoryFilters');
+const productSearch = document.querySelector('#productSearch');
+const navSearchButton = document.querySelector('#navSearchButton');
 const menuToggle = document.querySelector('.menu-toggle');
 const navLinks = document.querySelector('.nav-links');
 const backToTop = document.querySelector('#backToTop');
 const cartToggle = document.querySelector('#cartToggle');
+const cartToggleFooter = document.querySelector('#cartToggleFooter');
 const cartCount = document.querySelector('#cartCount');
+const cartCountFooter = document.querySelector('#cartCountFooter');
 const cartOverlay = document.querySelector('#cartOverlay');
 const cartDrawer = document.querySelector('#cartDrawer');
 const closeCartButton = document.querySelector('#closeCart');
@@ -218,20 +156,58 @@ function normalizeImagePath(path) {
   return path.startsWith('/') ? path.slice(1) : path;
 }
 
+function normalizeMainCategory(product = {}) {
+  const main = cleanText(product.mainCategory || product.category || '').toLowerCase();
+  const brand = cleanText(product.brand || '').toLowerCase();
+  const combined = `${main} ${brand}`;
+
+  if (combined.includes('victoria')) return MAIN_CATEGORY_VS;
+  if (combined.includes('bath') || main.includes('body care') || main.includes('home fragrance')) return MAIN_CATEGORY_BBW;
+  return MAIN_CATEGORY_DESIGNER;
+}
+
 function legacyMainCategory(product) {
-  const category = product.category || '';
-  if (['Floral', 'Warm', 'Fresh', 'Luxury', 'Body Mist', 'Perfume Oil'].includes(category)) return 'Fragrances';
-  if (category === 'Gift Set') return 'Gift Sets';
-  if (category === 'New Arrival') return 'Others';
-  return 'Fragrances';
+  return normalizeMainCategory(product);
 }
 
 function getMainCategory(product) {
-  return cleanText(product.mainCategory || legacyMainCategory(product));
+  return normalizeMainCategory(product);
+}
+
+function normalizeSubCategory(value = '') {
+  const raw = cleanText(value || '');
+  const key = raw.toLowerCase().replace(/[’']/g, "'");
+  const map = {
+    'body lotion & cream': 'Body Lotions and Cream',
+    'body lotion and cream': 'Body Lotions and Cream',
+    'body lotions and cream': 'Body Lotions and Cream',
+    'body wash & shower gel': 'Body Washes & Shower Gels',
+    'body washes & shower gels': 'Body Washes & Shower Gels',
+    'candles': 'Scented Candles',
+    'scented candles': 'Scented Candles',
+    'wallflowers': 'Wallflower Refills & Plugs',
+    'wallflower': 'Wallflower Refills & Plugs',
+    'wallflower refills & plugs': 'Wallflower Refills & Plugs',
+    'men’s body care': "Men's Body Care",
+    "men's body care": "Men's Body Care",
+    'home fragrance': 'Home Fragrances',
+    'home fragrances': 'Home Fragrances',
+    'body mist': 'Fine Fragrance Mist',
+    'fragrance mist': 'Fine Fragrance Mist',
+    'fine fragrance mist': 'Fine Fragrance Mist',
+    'hand sanitizers': 'Hand Sanitizers',
+    'hand sanitizer': 'Hand Sanitizers',
+    'room spray': 'Room Sprays',
+    'room sprays': 'Room Sprays',
+    'car fragrance': 'Car Fragrances',
+    'car fragrances': 'Car Fragrances',
+    'body care': 'Body Care'
+  };
+  return map[key] || raw || 'Body Care';
 }
 
 function getSubCategory(product) {
-  return cleanText(product.subCategory || product.category || 'Other Products');
+  return normalizeSubCategory(product.subCategory || product.category || 'Body Care');
 }
 
 function parseGHSPrice(price = '') {
@@ -294,10 +270,21 @@ function renderSubCategoryFilters() {
 }
 
 function getVisibleProducts() {
+  const search = activeSearchTerm.toLowerCase();
   return products.filter(product => {
     const matchesMain = activeMainCategory === 'all' || getMainCategory(product) === activeMainCategory;
     const matchesSub = activeSubCategory === 'all' || getSubCategory(product) === activeSubCategory;
-    return matchesMain && matchesSub;
+    const searchableText = [
+      product.name,
+      product.brand,
+      getMainCategory(product),
+      getSubCategory(product),
+      product.size,
+      product.notes,
+      product.price
+    ].join(' ').toLowerCase();
+    const matchesSearch = !search || searchableText.includes(search);
+    return matchesMain && matchesSub && matchesSearch;
   });
 }
 
@@ -315,7 +302,7 @@ function renderProducts() {
   if (!productGrid) return;
   const visibleProducts = getVisibleProducts();
   if (!visibleProducts.length) {
-    productGrid.innerHTML = '<p class="empty-state">No products in this category yet. Add one from the Scentivity admin page or choose another category.</p>';
+    productGrid.innerHTML = '<p class="empty-state">No products match this selection yet. Try a different category, clear the search, or add the product from the Scentivity admin page.</p>';
     return;
   }
   productGrid.innerHTML = visibleProducts.map(product => {
@@ -392,7 +379,9 @@ function getCartTotal() {
 }
 
 function updateCartCount() {
-  if (cartCount) cartCount.textContent = String(getCartQuantity());
+  const quantity = String(getCartQuantity());
+  if (cartCount) cartCount.textContent = quantity;
+  if (cartCountFooter) cartCountFooter.textContent = quantity;
 }
 
 function productSnapshot(product) {
@@ -598,6 +587,17 @@ if (mainCategoryFilters) {
   });
 }
 
+
+productSearch?.addEventListener('input', event => {
+  activeSearchTerm = cleanText(event.target.value);
+  renderProducts();
+});
+
+navSearchButton?.addEventListener('click', () => {
+  document.querySelector('#products')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  setTimeout(() => productSearch?.focus(), 350);
+});
+
 if (subCategoryFilters) {
   subCategoryFilters.addEventListener('click', event => {
     const button = event.target.closest('[data-sub]');
@@ -617,6 +617,7 @@ if (productGrid) {
 }
 
 cartToggle?.addEventListener('click', openCart);
+cartToggleFooter?.addEventListener('click', openCart);
 closeCartButton?.addEventListener('click', closeCart);
 cartOverlay?.addEventListener('click', closeCart);
 
