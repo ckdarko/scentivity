@@ -102,6 +102,8 @@ let products = [];
 let activeMainCategory = 'all';
 let activeSubCategory = 'all';
 let activeSearchTerm = '';
+let showcaseIndex = 0;
+let showcaseTimer = null;
 let cart = loadCart();
 
 const SCENTIVITY_EMAIL = 'scentivitygh@gmail.com';
@@ -142,6 +144,10 @@ const pickupFields = document.querySelector('#pickupFields');
 const paymentMethodSelect = document.querySelector('#paymentMethod');
 const paymentStatus = document.querySelector('#paymentStatus');
 const emailRequestForm = document.querySelector('#emailRequestForm');
+const homepageProductSlides = document.querySelector('#homepageProductSlides');
+const homepageProductDots = document.querySelector('#homepageProductDots');
+const showcasePrev = document.querySelector('#showcasePrev');
+const showcaseNext = document.querySelector('#showcaseNext');
 
 function cleanText(value = '') {
   return String(value).replace(/[<>]/g, '').trim();
@@ -349,6 +355,120 @@ function renderProducts() {
       </article>
     `;
   }).join('');
+}
+
+
+function getHomepageSlides() {
+  const availableSlides = products
+    .filter(product => product.available !== false)
+    .slice(0, 4)
+    .map(product => ({ ...product, _slideStatus: 'Available now', _slideType: 'available' }));
+
+  const incomingSlides = products
+    .filter(product => product.available === false)
+    .slice(0, 3)
+    .map(product => ({ ...product, _slideStatus: 'Coming soon', _slideType: 'coming-soon' }));
+
+  const fallbackIncoming = [
+    {
+      name: 'New fragrance drops',
+      brand: 'Scentivity',
+      mainCategory: MAIN_CATEGORY_DESIGNER,
+      subCategory: 'Fine Fragrance Mist',
+      price: 'Coming soon',
+      size: 'New arrivals',
+      notes: 'Fresh perfume, mist, and luxury fragrance picks will be added soon.',
+      image: 'assets/scentivity-logo-fused.png',
+      available: false,
+      _slideStatus: 'Coming soon',
+      _slideType: 'coming-soon'
+    },
+    {
+      name: 'More body care essentials',
+      brand: 'Scentivity',
+      mainCategory: MAIN_CATEGORY_BBW,
+      subCategory: 'Body Care',
+      price: 'Coming soon',
+      size: 'Body care',
+      notes: 'Watch this space for lotions, creams, washes, candles, and home fragrance items.',
+      image: 'assets/scentivity-product-photo-background.png',
+      available: false,
+      _slideStatus: 'Coming soon',
+      _slideType: 'coming-soon'
+    }
+  ];
+
+  const incoming = incomingSlides.length ? incomingSlides : fallbackIncoming;
+  return [...availableSlides.slice(0, 4), ...incoming].slice(0, 7);
+}
+
+function renderHomepageShowcase() {
+  if (!homepageProductSlides) return;
+  const slides = getHomepageSlides();
+  if (!slides.length) {
+    homepageProductSlides.innerHTML = '<p class="empty-state">Add products in the admin dashboard to feature them here.</p>';
+    if (homepageProductDots) homepageProductDots.innerHTML = '';
+    return;
+  }
+
+  if (showcaseIndex >= slides.length) showcaseIndex = 0;
+  homepageProductSlides.style.transform = `translateX(-${showcaseIndex * 100}%)`;
+  homepageProductSlides.innerHTML = slides.map(product => {
+    const name = cleanText(product.name || 'Scentivity product');
+    const brand = cleanText(product.brand || 'Scentivity');
+    const mainCategory = getMainCategory(product);
+    const subCategory = getSubCategory(product);
+    const price = cleanText(product.price || (product.available === false ? 'Coming soon' : 'Price on request'));
+    const size = cleanText(product.size || '');
+    const notes = cleanText(product.notes || 'Scentivity favorite selected for sweet, confident moments.');
+    const image = normalizeImagePath(product.image);
+    const available = product.available !== false;
+    return `
+      <article class="showcase-slide" aria-label="${name}">
+        <div class="showcase-image-wrap">
+          <img src="${image}" alt="${name}" loading="lazy" />
+          <span class="showcase-badge ${available ? 'available' : 'soon'}">${available ? 'Available now' : 'Coming soon'}</span>
+        </div>
+        <div class="showcase-copy">
+          <p class="eyebrow">${cleanText(product._slideStatus || (available ? 'Available now' : 'Coming soon'))}</p>
+          <h3>${name}</h3>
+          <div class="product-tags showcase-tags">
+            <span>${brand}</span>
+            <span>${mainCategory}</span>
+            <span>${subCategory}</span>
+            ${size ? `<span>${size}</span>` : ''}
+          </div>
+          <p>${notes}</p>
+          <div class="showcase-bottom">
+            <strong>${price}</strong>
+            ${available && product._key
+              ? `<button class="btn primary add-to-cart" type="button" data-product-key="${product._key}">Add to Cart</button>`
+              : `<a class="btn ghost" href="#preorder">Notify me</a>`
+            }
+          </div>
+        </div>
+      </article>
+    `;
+  }).join('');
+
+  if (homepageProductDots) {
+    homepageProductDots.innerHTML = slides.map((_, index) => `
+      <button type="button" class="showcase-dot ${index === showcaseIndex ? 'active' : ''}" data-slide-index="${index}" aria-label="Show slide ${index + 1}"></button>
+    `).join('');
+  }
+}
+
+function moveShowcase(direction = 1) {
+  const total = getHomepageSlides().length;
+  if (!total) return;
+  showcaseIndex = (showcaseIndex + direction + total) % total;
+  renderHomepageShowcase();
+}
+
+function startShowcaseAutoplay() {
+  if (!homepageProductSlides) return;
+  window.clearInterval(showcaseTimer);
+  showcaseTimer = window.setInterval(() => moveShowcase(1), 6500);
 }
 
 function refreshShop() {
@@ -574,6 +694,8 @@ async function loadProducts() {
     console.warn('Using fallback products:', error.message);
   }
   refreshShop();
+  renderHomepageShowcase();
+  startShowcaseAutoplay();
   renderCart();
 }
 
@@ -615,6 +737,31 @@ if (productGrid) {
     addToCart(addButton.dataset.productKey);
   });
 }
+
+
+homepageProductSlides?.addEventListener('click', event => {
+  const addButton = event.target.closest('.add-to-cart');
+  if (!addButton) return;
+  addToCart(addButton.dataset.productKey);
+});
+
+homepageProductDots?.addEventListener('click', event => {
+  const dot = event.target.closest('[data-slide-index]');
+  if (!dot) return;
+  showcaseIndex = Number(dot.dataset.slideIndex || 0);
+  renderHomepageShowcase();
+  startShowcaseAutoplay();
+});
+
+showcasePrev?.addEventListener('click', () => {
+  moveShowcase(-1);
+  startShowcaseAutoplay();
+});
+
+showcaseNext?.addEventListener('click', () => {
+  moveShowcase(1);
+  startShowcaseAutoplay();
+});
 
 cartToggle?.addEventListener('click', openCart);
 cartToggleFooter?.addEventListener('click', openCart);
