@@ -3,8 +3,8 @@
     {
       "name": "Victoria's Secret Pure Wonder Fragrance Mist",
       "brand": "Victoria's Secret",
-      "mainCategory": "Victoria’s Secret",
-      "subCategory": "Body Mist",
+      "mainCategory": "Victoria's Secret Collection",
+      "subCategory": "Fine Fragrance Mist",
       "price": "GH₵250",
       "image": "assets/products/citrus-bloom.svg",
       "notes": "A bright, feminine mist profile for daily wear. Add exact notes and stock details in the admin dashboard.",
@@ -15,8 +15,8 @@
     {
       "name": "Bath & Body Works Body Cream",
       "brand": "Bath & Body Works",
-      "mainCategory": "Bath & Body Works",
-      "subCategory": "Body Lotion & Cream",
+      "mainCategory": "Bath & Body Works Collection",
+      "subCategory": "Body Lotions and Cream",
       "price": "GH₵220",
       "image": "assets/products/velvet-rose.svg",
       "notes": "Moisturizing body cream options from popular sweet, floral, fresh, and warm scent families.",
@@ -27,8 +27,8 @@
     {
       "name": "Sweet Signature Eau de Parfum",
       "brand": "Scentivity",
-      "mainCategory": "Fragrances",
-      "subCategory": "Eau de Parfum",
+      "mainCategory": "Designer and Luxury Fragrances",
+      "subCategory": "Home Fragrances",
       "price": "GH₵450",
       "image": "assets/products/amber-noir.svg",
       "notes": "A polished sweet scent profile with soft florals, vanilla, amber, and clean musk.",
@@ -39,8 +39,8 @@
     {
       "name": "Men’s Fresh Body Spray",
       "brand": "Scentivity",
-      "mainCategory": "Men’s Collection",
-      "subCategory": "Men’s Fragrance",
+      "mainCategory": "Designer and Luxury Fragrances",
+      "subCategory": "Men's Body Care",
       "price": "GH₵180",
       "image": "assets/products/oud-muse.svg",
       "notes": "Fresh, confident masculine scent profile for everyday use and gifting.",
@@ -51,8 +51,8 @@
     {
       "name": "Scented 3-Wick Candle",
       "brand": "Scentivity",
-      "mainCategory": "Home Fragrance",
-      "subCategory": "Candles",
+      "mainCategory": "Bath & Body Works Collection",
+      "subCategory": "Scented Candles",
       "price": "GH₵300",
       "image": "assets/products/velvet-rose.svg",
       "notes": "Home fragrance candle options for bedrooms, bathrooms, gifts, and cozy spaces.",
@@ -63,7 +63,7 @@
     {
       "name": "Pocket Hand Sanitizer",
       "brand": "Scentivity",
-      "mainCategory": "Body Care",
+      "mainCategory": "Bath & Body Works Collection",
       "subCategory": "Hand Sanitizers",
       "price": "GH₵45",
       "image": "assets/products/citrus-bloom.svg",

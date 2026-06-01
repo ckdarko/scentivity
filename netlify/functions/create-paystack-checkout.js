@@ -41,21 +41,25 @@ exports.handler = async function handler(event) {
   }
 
   const customer = order.customer || {};
-  const email = cleanText(customer.email);
   const name = cleanText(customer.name);
   const phone = cleanText(customer.phone);
   const items = Array.isArray(order.items) ? order.items : [];
   const subtotalGHS = Number(order.subtotalGHS || 0);
-  const amount = toPesewas(subtotalGHS);
+  const deliveryFeeGHS = Number(order.deliveryFeeGHS || 0);
+  const totalGHS = Number(order.totalGHS || (subtotalGHS + deliveryFeeGHS));
+  const amount = toPesewas(totalGHS);
 
   if (!items.length) return jsonResponse(400, { error: 'Cart is empty.' });
-  if (!email || !email.includes('@')) return jsonResponse(400, { error: 'A valid customer email is required.' });
   if (!name || !phone) return jsonResponse(400, { error: 'Customer name and phone number are required.' });
   if (!amount || amount < 100) return jsonResponse(400, { error: 'Order total is too low or invalid.' });
 
   const siteUrl = process.env.URL || process.env.DEPLOY_PRIME_URL || 'https://scentivitygh.com';
   const reference = `SCENTIVITY-${Date.now()}-${Math.random().toString(36).slice(2, 8).toUpperCase()}`;
+  const phoneDigits = phone.replace(/\D/g, '').slice(-12) || reference.toLowerCase();
+  const email = cleanText(customer.email || '') || `customer-${phoneDigits}@scentivitygh.com`;
   const cartSummary = items.map(item => `${item.name}${item.size ? ` (${item.size})` : ''} x ${item.quantity}`).join('; ');
+  const paymentMethod = cleanText(order.paymentMethod || 'card');
+  const channels = paymentMethod === 'momo' ? ['mobile_money'] : ['card'];
 
   const payload = {
     email,
@@ -63,7 +67,7 @@ exports.handler = async function handler(event) {
     currency: 'GHS',
     reference,
     callback_url: `${siteUrl.replace(/\/$/, '')}/thank-you.html`,
-    channels: ['card', 'mobile_money'],
+    channels,
     metadata: {
       business: 'Scentivity',
       customer_name: name,
@@ -72,13 +76,18 @@ exports.handler = async function handler(event) {
       delivery_address: cleanText(order.deliveryAddress || ''),
       pickup_location: cleanText(order.pickupLocation || ''),
       order_notes: cleanText(order.notes || ''),
+      delivery_fee_ghs: deliveryFeeGHS,
+      total_ghs: totalGHS,
+      payment_method: paymentMethod,
       cart_items: cartSummary,
       items,
       custom_fields: [
         { display_name: 'Customer Name', variable_name: 'customer_name', value: name },
         { display_name: 'Customer Phone', variable_name: 'customer_phone', value: phone },
+        { display_name: 'Payment Method', variable_name: 'payment_method', value: paymentMethod === 'momo' ? 'MoMo' : 'Card' },
         { display_name: 'Fulfillment', variable_name: 'fulfillment', value: cleanText(order.fulfillment || '') },
         { display_name: 'Delivery Address', variable_name: 'delivery_address', value: cleanText(order.deliveryAddress || 'N/A') },
+        { display_name: 'Delivery Fee', variable_name: 'delivery_fee', value: `GH₵${deliveryFeeGHS}` },
         { display_name: 'Cart Items', variable_name: 'cart_items', value: cartSummary }
       ]
     }
