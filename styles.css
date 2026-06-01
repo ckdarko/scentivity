@@ -1198,3 +1198,20 @@ code { padding: 4px 8px; border-radius: 8px; background: rgba(125,45,71,.08); }
     font-size: .92rem;
   }
 }
+
+/* Cacheproof JS fix: keep slideshow area visible while JavaScript loads */
+.showcase-window {
+  min-height: 340px;
+}
+
+#homepageProductSlides:empty::before {
+  content: "Loading Scentivity products...";
+  display: grid;
+  place-items: center;
+  min-width: 100%;
+  min-height: 340px;
+  color: var(--muted);
+  font-weight: 900;
+  text-align: center;
+  padding: 2rem;
+}
