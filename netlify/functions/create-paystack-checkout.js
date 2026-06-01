@@ -44,8 +44,7 @@ exports.handler = async function handler(event) {
   const phone = cleanText(customer.phone);
   const items = Array.isArray(order.items) ? order.items : [];
   const subtotalGHS = Number(order.subtotalGHS || 0);
-  const deliveryFeeGHS = Number(order.deliveryFeeGHS || 0);
-  const totalGHS = Number(order.totalGHS || (subtotalGHS + deliveryFeeGHS));
+  const totalGHS = Number(order.totalGHS || subtotalGHS);
   const amount = toPesewas(totalGHS);
 
   if (!items.length) return jsonResponse(400, { error: 'Cart is empty.' });
@@ -76,9 +75,9 @@ exports.handler = async function handler(event) {
       pickup_location: cleanText(order.pickupLocation || ''),
       order_notes: cleanText(order.notes || ''),
       subtotal_ghs: subtotalGHS,
-      delivery_fee_ghs: deliveryFeeGHS,
       total_ghs: totalGHS,
       payment_method: paymentMethod,
+      delivery_fee_note: 'Delivery fee applies to delivery orders and will be determined after checkout based on location.',
       cart_items: cartSummary,
       items,
       custom_fields: [
@@ -87,7 +86,6 @@ exports.handler = async function handler(event) {
         { display_name: 'Payment Method', variable_name: 'payment_method', value: paymentMethod === 'momo' ? 'MoMo' : 'Card' },
         { display_name: 'Fulfillment', variable_name: 'fulfillment', value: cleanText(order.fulfillment || '') },
         { display_name: 'Delivery Address', variable_name: 'delivery_address', value: cleanText(order.deliveryAddress || 'N/A') },
-        { display_name: 'Delivery Fee', variable_name: 'delivery_fee', value: `GH₵${deliveryFeeGHS}` },
         { display_name: 'Cart Items', variable_name: 'cart_items', value: cartSummary }
       ]
     }

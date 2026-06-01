@@ -129,9 +129,9 @@
         <h2>Where beauty meets memory.</h2>
         <p>Scentivity helps customers discover sweet, elegant fragrances and body-care products that match their mood, lifestyle, and special occasions. From everyday freshness to memorable gifts, every item is selected to feel beautiful, personal, and unforgettable.</p>
         <div class="check-list">
-          <p>✓ Perfumes, fragrance mists, body care, home fragrances, candles, room sprays, and car fragrances</p>
-          <p>✓ Email product requests, WhatsApp support, and Instagram updates</p>
-          <p>✓ Cart checkout with pickup, delivery, WhatsApp confirmation, and optional online card/MoMo payment</p>
+          <p>✓ Perfumes, fragrance mists, body care essentials, home fragrances, candles, room sprays, and car fragrances</p>
+          <p>✓ Product requests, WhatsApp support, and Instagram updates</p>
+          <p>✓ Easy cart checkout with pickup, delivery, Paystack card/MoMo payment, and pay on pickup</p>
         </div>
       </div>
     </section>
@@ -228,20 +228,12 @@
     <div class="cart-items" id="cartItems"></div>
 
     <div class="cart-summary cart-totals">
-      <div class="cart-total-line">
-        <span>Subtotal</span>
-        <strong id="cartSubtotal">GH₵0</strong>
-      </div>
-      <div class="cart-total-line" id="deliveryFeeSummaryRow">
-        <span>Delivery fee</span>
-        <strong id="deliveryFeeAmount">GH₵0</strong>
-      </div>
       <div class="cart-total-line cart-grand-total">
         <span>Total</span>
         <strong id="cartTotal">GH₵0</strong>
       </div>
     </div>
-    <p class="cart-small-note">Delivery fee applies only to delivery orders and can be entered after the delivery location is confirmed.</p>
+    <p class="cart-small-note delivery-fee-note">Delivery fee applies to delivery orders and will be determined after checkout based on your location.</p>
 
     <form class="checkout-form" id="checkoutForm">
       <h3>Buyer information</h3>
@@ -267,10 +259,6 @@
           Delivery address
           <textarea name="deliveryAddress" rows="3" placeholder="Enter delivery address, area, landmark, city, and any useful directions"></textarea>
         </label>
-        <label>
-          Delivery fee (GH₵)
-          <input type="number" name="deliveryFee" id="deliveryFeeInput" min="0" step="1" value="0" placeholder="Enter delivery fee after location is confirmed" />
-        </label>
       </div>
       <label id="pickupFields" class="hidden">
         Pickup note / preferred pickup area
@@ -293,7 +281,7 @@
 
       <button class="btn primary checkout-submit" type="submit">Proceed to Checkout</button>
       <p class="payment-status" id="paymentStatus" aria-live="polite"></p>
-      <p class="payment-security-note">Scentivity does not collect card details, card PINs, or MoMo PINs on this website. Card and MoMo payments open through a secure payment processor such as Paystack.</p>
+      <p class="payment-security-note">Scentivity does not collect card details, card PINs, or MoMo PINs on this website. Card and MoMo payments open through Paystack, a secure payment processor.</p>
     </form>
   </aside>
 
@@ -315,7 +303,7 @@
 
   <button class="back-to-top" id="backToTop" type="button" aria-label="Move back to the top of the page">↑</button>
 
-  <script src="app-cacheproof-20260601.js"></script>
+  <script src="app-cacheproof-delivery-note-20260601.js"></script>
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script>
     if (window.netlifyIdentity) {
