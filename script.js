@@ -1,33 +1,100 @@
-const MAIN_CATEGORY_VS = "Victoria's Secret Collection";
-const MAIN_CATEGORY_BBW = 'Bath & Body Works Collection';
-const MAIN_CATEGORY_DESIGNER = 'Designer and Luxury Fragrances';
-
-const SCENTIVITY_SUBCATEGORIES = [
-  "Body Care",
-  "Body Lotions and Cream",
-  "Fine Fragrance Mist",
-  "Body Washes & Shower Gels",
-  "Hand Sanitizers",
-  "Men's Body Care",
-  "Home Fragrances",
-  "Scented Candles",
-  "Room Sprays",
-  "Car Fragrances",
-  "Wallflower Refills & Plugs"
-];
-
 const productTaxonomy = [
-  { name: MAIN_CATEGORY_VS, subcategories: SCENTIVITY_SUBCATEGORIES },
-  { name: MAIN_CATEGORY_BBW, subcategories: SCENTIVITY_SUBCATEGORIES },
-  { name: MAIN_CATEGORY_DESIGNER, subcategories: SCENTIVITY_SUBCATEGORIES }
+  {
+    name: 'Victoria’s Secret',
+    subcategories: [
+      'Perfumes',
+      'Eau de Parfum',
+      'Body Mist',
+      'Hair Mist',
+      'Lotions & Oils',
+      'Body Care',
+      'Travel Size',
+      'Gift Sets'
+    ]
+  },
+  {
+    name: 'Bath & Body Works',
+    subcategories: [
+      'Fine Fragrance Mist',
+      'Body Lotion & Cream',
+      'Body Wash & Shower Gel',
+      'Candles',
+      'Wallflowers',
+      'Room Sprays',
+      'Hand Soap',
+      'Hand Sanitizers',
+      'Men’s Body Care',
+      'Gift Sets'
+    ]
+  },
+  {
+    name: 'Fragrances',
+    subcategories: [
+      'Perfumes',
+      'Eau de Parfum',
+      'Fragrance Mist',
+      'Body Mist',
+      'Perfume Oil',
+      'Roll-On Oils',
+      'Travel Size'
+    ]
+  },
+  {
+    name: 'Men’s Collection',
+    subcategories: [
+      'Men’s Fragrance',
+      'Men’s Body Spray',
+      'Men’s Body Care',
+      'Men’s Gift Sets'
+    ]
+  },
+  {
+    name: 'Body Care',
+    subcategories: [
+      'Body Lotion & Cream',
+      'Body Oil',
+      'Body Wash & Shower Gel',
+      'Scrubs',
+      'Hand Cream',
+      'Hand Soap',
+      'Hand Sanitizers'
+    ]
+  },
+  {
+    name: 'Home Fragrance',
+    subcategories: [
+      'Candles',
+      'Wallflowers',
+      'Room Sprays',
+      'Car Fragrance'
+    ]
+  },
+  {
+    name: 'Gift Sets',
+    subcategories: [
+      'Perfume Gift Sets',
+      'Body Care Sets',
+      'Men’s Gift Sets',
+      'Travel Sets'
+    ]
+  },
+  {
+    name: 'Others',
+    subcategories: [
+      'Accessories',
+      'New Arrivals',
+      'Clearance',
+      'Other Products'
+    ]
+  }
 ];
 
 const fallbackProducts = [
   {
     name: "Victoria's Secret Pure Wonder Fragrance Mist",
     brand: "Victoria's Secret",
-    mainCategory: MAIN_CATEGORY_VS,
-    subCategory: 'Fine Fragrance Mist',
+    mainCategory: 'Victoria’s Secret',
+    subCategory: 'Body Mist',
     price: 'GH₵250',
     image: 'assets/products/citrus-bloom.svg',
     notes: 'A bright, feminine mist profile for daily wear. Add exact notes and stock details in the admin dashboard.',
@@ -38,8 +105,8 @@ const fallbackProducts = [
   {
     name: 'Bath & Body Works Body Cream',
     brand: 'Bath & Body Works',
-    mainCategory: MAIN_CATEGORY_BBW,
-    subCategory: 'Body Lotions and Cream',
+    mainCategory: 'Bath & Body Works',
+    subCategory: 'Body Lotion & Cream',
     price: 'GH₵220',
     image: 'assets/products/velvet-rose.svg',
     notes: 'Moisturizing body cream options from popular sweet, floral, fresh, and warm scent families.',
@@ -50,8 +117,8 @@ const fallbackProducts = [
   {
     name: 'Sweet Signature Eau de Parfum',
     brand: 'Scentivity',
-    mainCategory: MAIN_CATEGORY_DESIGNER,
-    subCategory: 'Home Fragrances',
+    mainCategory: 'Fragrances',
+    subCategory: 'Eau de Parfum',
     price: 'GH₵450',
     image: 'assets/products/amber-noir.svg',
     notes: 'A polished sweet scent profile with soft florals, vanilla, amber, and clean musk.',
@@ -62,7 +129,7 @@ const fallbackProducts = [
   {
     name: 'Men’s Fresh Body Spray',
     brand: 'Scentivity',
-    mainCategory: MAIN_CATEGORY_DESIGNER,
+    mainCategory: 'Men’s Collection',
     subCategory: 'Men’s Fragrance',
     price: 'GH₵180',
     image: 'assets/products/oud-muse.svg',
@@ -74,8 +141,8 @@ const fallbackProducts = [
   {
     name: 'Scented 3-Wick Candle',
     brand: 'Scentivity',
-    mainCategory: MAIN_CATEGORY_BBW,
-    subCategory: 'Scented Candles',
+    mainCategory: 'Home Fragrance',
+    subCategory: 'Candles',
     price: 'GH₵300',
     image: 'assets/products/velvet-rose.svg',
     notes: 'Home fragrance candle options for bedrooms, bathrooms, gifts, and cozy spaces.',
@@ -86,7 +153,7 @@ const fallbackProducts = [
   {
     name: 'Pocket Hand Sanitizer',
     brand: 'Scentivity',
-    mainCategory: MAIN_CATEGORY_BBW,
+    mainCategory: 'Body Care',
     subCategory: 'Hand Sanitizers',
     price: 'GH₵45',
     image: 'assets/products/citrus-bloom.svg',
@@ -101,9 +168,6 @@ const fallbackProducts = [
 let products = [];
 let activeMainCategory = 'all';
 let activeSubCategory = 'all';
-let activeSearchTerm = '';
-let showcaseIndex = 0;
-let showcaseTimer = null;
 let cart = loadCart();
 
 const SCENTIVITY_EMAIL = 'scentivitygh@gmail.com';
@@ -122,15 +186,11 @@ function buildWhatsAppLink(message) {
 const productGrid = document.querySelector('#productGrid');
 const mainCategoryFilters = document.querySelector('#mainCategoryFilters');
 const subCategoryFilters = document.querySelector('#subCategoryFilters');
-const productSearch = document.querySelector('#productSearch');
-const navSearchButton = document.querySelector('#navSearchButton');
 const menuToggle = document.querySelector('.menu-toggle');
 const navLinks = document.querySelector('.nav-links');
 const backToTop = document.querySelector('#backToTop');
 const cartToggle = document.querySelector('#cartToggle');
-const cartToggleFooter = document.querySelector('#cartToggleFooter');
 const cartCount = document.querySelector('#cartCount');
-const cartCountFooter = document.querySelector('#cartCountFooter');
 const cartOverlay = document.querySelector('#cartOverlay');
 const cartDrawer = document.querySelector('#cartDrawer');
 const closeCartButton = document.querySelector('#closeCart');
@@ -144,10 +204,6 @@ const pickupFields = document.querySelector('#pickupFields');
 const paymentMethodSelect = document.querySelector('#paymentMethod');
 const paymentStatus = document.querySelector('#paymentStatus');
 const emailRequestForm = document.querySelector('#emailRequestForm');
-const homepageProductSlides = document.querySelector('#homepageProductSlides');
-const homepageProductDots = document.querySelector('#homepageProductDots');
-const showcasePrev = document.querySelector('#showcasePrev');
-const showcaseNext = document.querySelector('#showcaseNext');
 
 function cleanText(value = '') {
   return String(value).replace(/[<>]/g, '').trim();
@@ -162,58 +218,20 @@ function normalizeImagePath(path) {
   return path.startsWith('/') ? path.slice(1) : path;
 }
 
-function normalizeMainCategory(product = {}) {
-  const main = cleanText(product.mainCategory || product.category || '').toLowerCase();
-  const brand = cleanText(product.brand || '').toLowerCase();
-  const combined = `${main} ${brand}`;
-
-  if (combined.includes('victoria')) return MAIN_CATEGORY_VS;
-  if (combined.includes('bath') || main.includes('body care') || main.includes('home fragrance')) return MAIN_CATEGORY_BBW;
-  return MAIN_CATEGORY_DESIGNER;
-}
-
 function legacyMainCategory(product) {
-  return normalizeMainCategory(product);
+  const category = product.category || '';
+  if (['Floral', 'Warm', 'Fresh', 'Luxury', 'Body Mist', 'Perfume Oil'].includes(category)) return 'Fragrances';
+  if (category === 'Gift Set') return 'Gift Sets';
+  if (category === 'New Arrival') return 'Others';
+  return 'Fragrances';
 }
 
 function getMainCategory(product) {
-  return normalizeMainCategory(product);
-}
-
-function normalizeSubCategory(value = '') {
-  const raw = cleanText(value || '');
-  const key = raw.toLowerCase().replace(/[’']/g, "'");
-  const map = {
-    'body lotion & cream': 'Body Lotions and Cream',
-    'body lotion and cream': 'Body Lotions and Cream',
-    'body lotions and cream': 'Body Lotions and Cream',
-    'body wash & shower gel': 'Body Washes & Shower Gels',
-    'body washes & shower gels': 'Body Washes & Shower Gels',
-    'candles': 'Scented Candles',
-    'scented candles': 'Scented Candles',
-    'wallflowers': 'Wallflower Refills & Plugs',
-    'wallflower': 'Wallflower Refills & Plugs',
-    'wallflower refills & plugs': 'Wallflower Refills & Plugs',
-    'men’s body care': "Men's Body Care",
-    "men's body care": "Men's Body Care",
-    'home fragrance': 'Home Fragrances',
-    'home fragrances': 'Home Fragrances',
-    'body mist': 'Fine Fragrance Mist',
-    'fragrance mist': 'Fine Fragrance Mist',
-    'fine fragrance mist': 'Fine Fragrance Mist',
-    'hand sanitizers': 'Hand Sanitizers',
-    'hand sanitizer': 'Hand Sanitizers',
-    'room spray': 'Room Sprays',
-    'room sprays': 'Room Sprays',
-    'car fragrance': 'Car Fragrances',
-    'car fragrances': 'Car Fragrances',
-    'body care': 'Body Care'
-  };
-  return map[key] || raw || 'Body Care';
+  return cleanText(product.mainCategory || legacyMainCategory(product));
 }
 
 function getSubCategory(product) {
-  return normalizeSubCategory(product.subCategory || product.category || 'Body Care');
+  return cleanText(product.subCategory || product.category || 'Other Products');
 }
 
 function parseGHSPrice(price = '') {
@@ -270,27 +288,16 @@ function renderSubCategoryFilters() {
   if (!subCategoryFilters) return;
   const subcategories = getSubcategoriesForActiveMain();
   subCategoryFilters.innerHTML = [
-    buttonMarkup('All types', 'all', activeSubCategory, 'sub'),
+    buttonMarkup('All', 'all', activeSubCategory, 'sub'),
     ...subcategories.map(category => buttonMarkup(category, category, activeSubCategory, 'sub'))
   ].join('');
 }
 
 function getVisibleProducts() {
-  const search = activeSearchTerm.toLowerCase();
   return products.filter(product => {
     const matchesMain = activeMainCategory === 'all' || getMainCategory(product) === activeMainCategory;
     const matchesSub = activeSubCategory === 'all' || getSubCategory(product) === activeSubCategory;
-    const searchableText = [
-      product.name,
-      product.brand,
-      getMainCategory(product),
-      getSubCategory(product),
-      product.size,
-      product.notes,
-      product.price
-    ].join(' ').toLowerCase();
-    const matchesSearch = !search || searchableText.includes(search);
-    return matchesMain && matchesSub && matchesSearch;
+    return matchesMain && matchesSub;
   });
 }
 
@@ -308,7 +315,7 @@ function renderProducts() {
   if (!productGrid) return;
   const visibleProducts = getVisibleProducts();
   if (!visibleProducts.length) {
-    productGrid.innerHTML = '<p class="empty-state">No products match this selection yet. Try a different category, clear the search, or add the product from the Scentivity admin page.</p>';
+    productGrid.innerHTML = '<p class="empty-state">No products in this category yet. Add one from the Scentivity admin page or choose another category.</p>';
     return;
   }
   productGrid.innerHTML = visibleProducts.map(product => {
@@ -346,7 +353,7 @@ function renderProducts() {
           ${available
             ? `<div class="product-actions">
                 <button class="btn primary add-to-cart" type="button" data-product-key="${product._key}">Add to Cart</button>
-                <a class="btn ghost" href="${requestLink}" target="_blank" rel="noreferrer">Request on WhatsApp</a>
+                <a class="btn ghost" href="${requestLink}" target="_blank" rel="noreferrer">Ask on WhatsApp</a>
                 ${directBuyButton}
               </div>`
             : `<span class="sold-out">Currently unavailable</span>`
@@ -355,120 +362,6 @@ function renderProducts() {
       </article>
     `;
   }).join('');
-}
-
-
-function getHomepageSlides() {
-  const availableSlides = products
-    .filter(product => product.available !== false)
-    .slice(0, 4)
-    .map(product => ({ ...product, _slideStatus: 'Available now', _slideType: 'available' }));
-
-  const incomingSlides = products
-    .filter(product => product.available === false)
-    .slice(0, 3)
-    .map(product => ({ ...product, _slideStatus: 'Coming soon', _slideType: 'coming-soon' }));
-
-  const fallbackIncoming = [
-    {
-      name: 'New fragrance drops',
-      brand: 'Scentivity',
-      mainCategory: MAIN_CATEGORY_DESIGNER,
-      subCategory: 'Fine Fragrance Mist',
-      price: 'Coming soon',
-      size: 'New arrivals',
-      notes: 'Fresh perfume, mist, and luxury fragrance picks will be added soon.',
-      image: 'assets/scentivity-logo-fused.png',
-      available: false,
-      _slideStatus: 'Coming soon',
-      _slideType: 'coming-soon'
-    },
-    {
-      name: 'More body care essentials',
-      brand: 'Scentivity',
-      mainCategory: MAIN_CATEGORY_BBW,
-      subCategory: 'Body Care',
-      price: 'Coming soon',
-      size: 'Body care',
-      notes: 'Watch this space for lotions, creams, washes, candles, and home fragrance items.',
-      image: 'assets/scentivity-product-photo-background.png',
-      available: false,
-      _slideStatus: 'Coming soon',
-      _slideType: 'coming-soon'
-    }
-  ];
-
-  const incoming = incomingSlides.length ? incomingSlides : fallbackIncoming;
-  return [...availableSlides.slice(0, 4), ...incoming].slice(0, 7);
-}
-
-function renderHomepageShowcase() {
-  if (!homepageProductSlides) return;
-  const slides = getHomepageSlides();
-  if (!slides.length) {
-    homepageProductSlides.innerHTML = '<p class="empty-state">Add products in the admin dashboard to feature them here.</p>';
-    if (homepageProductDots) homepageProductDots.innerHTML = '';
-    return;
-  }
-
-  if (showcaseIndex >= slides.length) showcaseIndex = 0;
-  homepageProductSlides.style.transform = `translateX(-${showcaseIndex * 100}%)`;
-  homepageProductSlides.innerHTML = slides.map(product => {
-    const name = cleanText(product.name || 'Scentivity product');
-    const brand = cleanText(product.brand || 'Scentivity');
-    const mainCategory = getMainCategory(product);
-    const subCategory = getSubCategory(product);
-    const price = cleanText(product.price || (product.available === false ? 'Coming soon' : 'Price on request'));
-    const size = cleanText(product.size || '');
-    const notes = cleanText(product.notes || 'Scentivity favorite selected for sweet, confident moments.');
-    const image = normalizeImagePath(product.image);
-    const available = product.available !== false;
-    return `
-      <article class="showcase-slide" aria-label="${name}">
-        <div class="showcase-image-wrap">
-          <img src="${image}" alt="${name}" loading="lazy" />
-          <span class="showcase-badge ${available ? 'available' : 'soon'}">${available ? 'Available now' : 'Coming soon'}</span>
-        </div>
-        <div class="showcase-copy">
-          <p class="eyebrow">${cleanText(product._slideStatus || (available ? 'Available now' : 'Coming soon'))}</p>
-          <h3>${name}</h3>
-          <div class="product-tags showcase-tags">
-            <span>${brand}</span>
-            <span>${mainCategory}</span>
-            <span>${subCategory}</span>
-            ${size ? `<span>${size}</span>` : ''}
-          </div>
-          <p>${notes}</p>
-          <div class="showcase-bottom">
-            <strong>${price}</strong>
-            ${available && product._key
-              ? `<button class="btn primary add-to-cart" type="button" data-product-key="${product._key}">Add to Cart</button>`
-              : `<a class="btn ghost" href="#preorder">Notify me</a>`
-            }
-          </div>
-        </div>
-      </article>
-    `;
-  }).join('');
-
-  if (homepageProductDots) {
-    homepageProductDots.innerHTML = slides.map((_, index) => `
-      <button type="button" class="showcase-dot ${index === showcaseIndex ? 'active' : ''}" data-slide-index="${index}" aria-label="Show slide ${index + 1}"></button>
-    `).join('');
-  }
-}
-
-function moveShowcase(direction = 1) {
-  const total = getHomepageSlides().length;
-  if (!total) return;
-  showcaseIndex = (showcaseIndex + direction + total) % total;
-  renderHomepageShowcase();
-}
-
-function startShowcaseAutoplay() {
-  if (!homepageProductSlides) return;
-  window.clearInterval(showcaseTimer);
-  showcaseTimer = window.setInterval(() => moveShowcase(1), 6500);
 }
 
 function refreshShop() {
@@ -499,9 +392,7 @@ function getCartTotal() {
 }
 
 function updateCartCount() {
-  const quantity = String(getCartQuantity());
-  if (cartCount) cartCount.textContent = quantity;
-  if (cartCountFooter) cartCountFooter.textContent = quantity;
+  if (cartCount) cartCount.textContent = String(getCartQuantity());
 }
 
 function productSnapshot(product) {
@@ -694,8 +585,6 @@ async function loadProducts() {
     console.warn('Using fallback products:', error.message);
   }
   refreshShop();
-  renderHomepageShowcase();
-  startShowcaseAutoplay();
   renderCart();
 }
 
@@ -708,17 +597,6 @@ if (mainCategoryFilters) {
     refreshShop();
   });
 }
-
-
-productSearch?.addEventListener('input', event => {
-  activeSearchTerm = cleanText(event.target.value);
-  renderProducts();
-});
-
-navSearchButton?.addEventListener('click', () => {
-  document.querySelector('#products')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  setTimeout(() => productSearch?.focus(), 350);
-});
 
 if (subCategoryFilters) {
   subCategoryFilters.addEventListener('click', event => {
@@ -738,33 +616,7 @@ if (productGrid) {
   });
 }
 
-
-homepageProductSlides?.addEventListener('click', event => {
-  const addButton = event.target.closest('.add-to-cart');
-  if (!addButton) return;
-  addToCart(addButton.dataset.productKey);
-});
-
-homepageProductDots?.addEventListener('click', event => {
-  const dot = event.target.closest('[data-slide-index]');
-  if (!dot) return;
-  showcaseIndex = Number(dot.dataset.slideIndex || 0);
-  renderHomepageShowcase();
-  startShowcaseAutoplay();
-});
-
-showcasePrev?.addEventListener('click', () => {
-  moveShowcase(-1);
-  startShowcaseAutoplay();
-});
-
-showcaseNext?.addEventListener('click', () => {
-  moveShowcase(1);
-  startShowcaseAutoplay();
-});
-
 cartToggle?.addEventListener('click', openCart);
-cartToggleFooter?.addEventListener('click', openCart);
 closeCartButton?.addEventListener('click', closeCart);
 cartOverlay?.addEventListener('click', closeCart);
 

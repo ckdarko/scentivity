@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Scentivity | Everything Sweet Scented</title>
-  <meta name="description" content="Scentivity is a beauty and fragrance boutique offering Victoria's Secret collection picks, Bath & Body Works collection products, and designer and luxury fragrances." />
+  <meta name="description" content="Scentivity is a beauty and fragrance boutique offering perfumes, body mists, Bath & Body Works-style body care, candles, hand soaps, sanitizers, men’s fragrances, and gift-ready scents." />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,11 +18,13 @@
     </a>
     <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
     <nav class="nav-links" aria-label="Main navigation">
+      <a href="#collections">Categories</a>
       <a href="#products">Shop</a>
-      <a href="#preorder">Preorder</a>
+      <a href="#about">About</a>
+      <a href="#order">Order</a>
       <a href="#contact">Contact</a>
-      <button class="nav-search-button" id="navSearchButton" type="button">Search</button>
       <button class="cart-nav-button" id="cartToggle" type="button" aria-label="Open cart">Cart <span id="cartCount">0</span></button>
+      <a href="https://wa.me/233534584470" target="_blank" rel="noreferrer">WhatsApp</a>
     </nav>
   </header>
 
@@ -30,15 +32,16 @@
     <section class="hero">
       <div class="hero-copy">
         <p class="eyebrow">Everything Sweet Scented</p>
-        <h1>Wear Confidence, Embrace Elegance. Leave a lasting impression.</h1>
-        <p class="hero-text">At Scentivity, we bring together your favorite perfumes, fragrance mists, body care essentials, and home fragrances to help you look, feel, and smell amazing every day.</p>
+        <h1>Sweet, elegant scents for confidence and unforgettable moments.</h1>
+        <p class="hero-text">Scentivity offers perfumes, fragrance mists, body care, candles, hand soaps, sanitizers, men’s scents, and gift-ready products for everyday freshness, special occasions, and thoughtful gifting.</p>
         <div class="hero-actions">
-          <a class="btn primary" href="#products">Shop now</a>
+          <a class="btn primary" href="#products">Shop & add to cart</a>
+          <a class="btn ghost" href="mailto:scentivitygh@gmail.com?subject=Scentivity%20Product%20Request&body=Hello%20Scentivity%2C%0A%0AI%20would%20like%20to%20send%20a%20product%20request.%0A%0AProduct%20name%3A%0ASize%3A%0AQuantity%3A%0ADelivery%20or%20pickup%20location%3A%0APhone%20number%3A%0A%0AThank%20you.">Send request by email</a>
         </div>
         <div class="trust-row" aria-label="Business highlights">
           <span>Everything Sweet Scented</span>
-          <span>Victoria’s Secret, Bath & Body Works & luxury fragrances</span>
-          <span>Pickup, delivery & secure checkout options</span>
+          <span>Victoria’s Secret & Bath & Body Works picks</span>
+          <span>Pickup, delivery & cart checkout</span>
         </div>
       </div>
       <div class="hero-card" aria-label="Featured perfume display">
@@ -60,33 +63,14 @@
       </div>
     </section>
 
-    <section class="section homepage-showcase" id="featured-products" aria-label="Available and coming soon products">
-      <div class="section-heading split showcase-heading">
-        <div>
-          <p class="eyebrow">Now showing</p>
-          <h2>Available favorites and coming-soon scents.</h2>
-          <p>Swipe through selected products customers can shop now, plus upcoming items to watch for. Mark any product as unavailable in the admin dashboard to show it as coming soon.</p>
-        </div>
-        <div class="showcase-controls" aria-label="Slideshow controls">
-          <button class="showcase-arrow" id="showcasePrev" type="button" aria-label="Previous product">‹</button>
-          <button class="showcase-arrow" id="showcaseNext" type="button" aria-label="Next product">›</button>
-        </div>
-      </div>
-      <div class="showcase-window">
-        <div class="showcase-track" id="homepageProductSlides"></div>
-      </div>
-      <div class="showcase-dots" id="homepageProductDots" aria-label="Slideshow pagination"></div>
-    </section>
-
-
     <section class="section stats" aria-label="Store benefits">
       <article>
-        <strong>3</strong>
-        <span>Main collections</span>
+        <strong>8+</strong>
+        <span>Main shopping categories</span>
       </article>
       <article>
-        <strong>11</strong>
-        <span>Fragrance & care types</span>
+        <strong>20+</strong>
+        <span>Product subcategories</span>
       </article>
       <article>
         <strong>@scentivity</strong>
@@ -94,24 +78,60 @@
       </article>
     </section>
 
+    <section class="section" id="collections">
+      <div class="section-heading">
+        <p class="eyebrow">Shop by category</p>
+        <h2>Main categories with clear subcategories.</h2>
+        <p>Browse by brand-inspired sections and product type, including Victoria’s Secret, Bath & Body Works, fragrances, men’s collection, candles, hand soaps, sanitizers, body care, and gift sets.</p>
+      </div>
+      <div class="collection-grid category-guide-grid">
+        <article class="collection-card floral">
+          <span>01</span>
+          <h3>Victoria’s Secret</h3>
+          <p>Perfumes, Eau de Parfum, body mists, hair mists, lotions, oils, travel sizes, and gift sets.</p>
+        </article>
+        <article class="collection-card warm">
+          <span>02</span>
+          <h3>Bath & Body Works</h3>
+          <p>Fine fragrance mists, body creams, body wash, candles, Wallflowers, room sprays, soaps, and sanitizers.</p>
+        </article>
+        <article class="collection-card fresh">
+          <span>03</span>
+          <h3>Fragrances</h3>
+          <p>Perfumes, body mists, fragrance oils, roll-on oils, travel sprays, and signature scents.</p>
+        </article>
+        <article class="collection-card luxury">
+          <span>04</span>
+          <h3>Men’s Collection</h3>
+          <p>Men’s fragrances, body sprays, body care, and men’s gift sets.</p>
+        </article>
+        <article class="collection-card floral">
+          <span>05</span>
+          <h3>Body Care</h3>
+          <p>Body lotion, body cream, body oil, body wash, scrubs, hand creams, hand soaps, and sanitizers.</p>
+        </article>
+        <article class="collection-card warm">
+          <span>06</span>
+          <h3>Home Fragrance & Gifts</h3>
+          <p>Candles, room sprays, car fragrances, gift bundles, travel sets, accessories, and other products.</p>
+        </article>
+      </div>
+    </section>
+
     <section class="section products-section" id="products">
       <div class="section-heading split">
         <div>
-          <p class="eyebrow">Shop</p>
-          <h2>Find your next signature scent.</h2>
-          <p>Filter by main collection, fragrance or care type, or search by product name. Add products to your cart, then choose pickup or delivery at checkout.</p>
+          <p class="eyebrow">Featured products</p>
+          <h2>Shop by brand, category, and product type.</h2>
+          <p>Filter by category, add products to your cart, then choose pickup or delivery and select your preferred payment method at checkout.</p>
         </div>
         <div class="filter-panel" aria-label="Product filters">
-          <div>
-            <span>Search</span>
-            <input class="product-search" id="productSearch" type="search" placeholder="Search perfume, mist, lotion, candle..." />
-          </div>
           <div>
             <span>Main category</span>
             <div class="filter-controls" id="mainCategoryFilters"></div>
           </div>
           <div>
-            <span>Fragrance / care type</span>
+            <span>Subcategory</span>
             <div class="filter-controls subcategory-controls" id="subCategoryFilters"></div>
           </div>
         </div>
@@ -129,7 +149,7 @@
         <h2>Where beauty meets memory.</h2>
         <p>Scentivity helps customers discover sweet, elegant fragrances and body-care products that match their mood, lifestyle, and special occasions. From everyday freshness to memorable gifts, every item is selected to feel beautiful, personal, and unforgettable.</p>
         <div class="check-list">
-          <p>✓ Perfumes, fragrance mists, body care, home fragrances, candles, room sprays, and car fragrances</p>
+          <p>✓ Perfumes, mists, body care, candles, soaps, sanitizers, and gift sets</p>
           <p>✓ Email product requests, WhatsApp support, and Instagram updates</p>
           <p>✓ Cart checkout with pickup, delivery, WhatsApp confirmation, and optional online card/MoMo payment</p>
         </div>
@@ -169,7 +189,7 @@
       <div class="contact-copy">
         <p class="eyebrow">Contact</p>
         <h2>Ready to smell unforgettable?</h2>
-        <p>Need help choosing a fragrance, arranging pickup, confirming delivery, or asking about availability? Contact Scentivity by WhatsApp, email, or Instagram.</p>
+        <p>Need help choosing a fragrance, arranging pickup, confirming delivery, or sending a product request? Contact Scentivity by email, WhatsApp, or Instagram.</p>
         <div class="contact-methods" aria-label="Scentivity contact details">
           <a class="contact-card highlight" href="https://wa.me/233534584470?text=Hello%20Scentivity%2C%20I%20would%20like%20to%20send%20a%20product%20request." target="_blank" rel="noreferrer">
             <span class="contact-icon whatsapp-icon" aria-hidden="true">
@@ -188,28 +208,33 @@
             <span><strong>Instagram</strong><small>@scentivity</small></span>
           </a>
         </div>
-        <p class="contact-note">For cart orders, use the checkout panel. For unavailable products or special fragrance requests, use the preorder form.</p>
+        <p class="contact-note">For product requests, include the product name, size, quantity, delivery location, and phone number.</p>
       </div>
-      <div class="preorder-card" id="preorder" aria-label="Preorder and fragrance request">
-        <form id="emailRequestForm" name="preorder-request" class="contact-form preorder-form">
-          <p class="eyebrow">Preorder</p>
-          <h3>Missing your favorite fragrance?</h3>
-          <p class="form-intro">Let us know and we’ll notify you the moment it becomes available.</p>
-          <label>
-            Name
-            <input type="text" name="name" placeholder="Your name" required />
-          </label>
-          <label>
-            Email or WhatsApp number
-            <input type="text" name="contact" placeholder="Your email or WhatsApp number" required />
-          </label>
-          <label>
-            Fragrance request
-            <textarea name="message" rows="5" placeholder="Tell us the product name, brand, size, quantity, pickup/delivery preference, address if delivery is needed, or any question you have." required></textarea>
-          </label>
-          <button class="btn primary" type="submit">Send Request</button>
-        </form>
+      <div class="contact-panel" aria-label="Ordering checklist">
+        <h3>Send request details</h3>
+        <ul>
+          <li>Product name or screenshot</li>
+          <li>Size and quantity needed</li>
+          <li>Your name and phone number</li>
+          <li>Pickup or delivery location</li>
+        </ul>
+        <a class="btn primary" href="mailto:scentivitygh@gmail.com?subject=Scentivity%20Product%20Request&body=Hello%20Scentivity%2C%0A%0AI%20would%20like%20to%20send%20a%20product%20request.%0A%0AProduct%20name%3A%0ASize%3A%0AQuantity%3A%0ADelivery%20or%20pickup%20location%3A%0APhone%20number%3A%0A%0AThank%20you.">Send Request by Email</a>
       </div>
+      <form id="emailRequestForm" name="contact" class="contact-form">
+        <label>
+          Name
+          <input type="text" name="name" placeholder="Your name" required />
+        </label>
+        <label>
+          Email or WhatsApp number
+          <input type="text" name="contact" placeholder="Your email or WhatsApp number" required />
+        </label>
+        <label>
+          Perfume request
+          <textarea name="message" rows="5" placeholder="Tell us the perfume name, size, quantity, pickup/delivery preference, address if delivery is needed, or any question you have." required></textarea>
+        </label>
+        <button class="btn primary" type="submit">Send Request</button>
+      </form>
     </section>
   </main>
 
@@ -248,12 +273,10 @@
         <input type="tel" name="customerPhone" placeholder="053 000 0000" required />
       </label>
 
-      <fieldset class="checkout-options fulfillment-options">
+      <fieldset class="checkout-options">
         <legend>Pickup or delivery</legend>
-        <div class="fulfillment-choice-row">
-          <label><input type="radio" name="fulfillment" value="delivery" checked /> Delivery</label>
-          <label><input type="radio" name="fulfillment" value="pickup" /> Pickup</label>
-        </div>
+        <label><input type="radio" name="fulfillment" value="delivery" checked /> Delivery</label>
+        <label><input type="radio" name="fulfillment" value="pickup" /> Pickup</label>
       </fieldset>
 
       <label id="deliveryFields">
@@ -291,13 +314,13 @@
   <footer class="site-footer">
     <div>
       <img src="assets/scentivity-logo-fused.png" alt="Scentivity logo" />
-      <p>Everything Sweet Scented — perfumes, fragrance mists, body care essentials, home fragrances, and gift-ready products.</p>
+      <p>Everything Sweet Scented — perfumes, mists, body care, candles, soaps, sanitizers, and gift-ready products.</p>
     </div>
     <nav aria-label="Footer navigation">
       <a href="#products">Shop</a>
-      <a href="#preorder">Preorder</a>
+      <a href="#about">About</a>
       <a href="#contact">Contact</a>
-      <button class="cart-nav-button" id="cartToggleFooter" type="button" aria-label="Open cart">Cart <span id="cartCountFooter">0</span></button>
+      <a href="https://wa.me/233534584470" target="_blank" rel="noreferrer">WhatsApp</a>
       <a href="mailto:scentivitygh@gmail.com">Email</a>
     </nav>
     <p class="copyright">© <span id="year"></span> Scentivity. All rights reserved.</p>
@@ -305,7 +328,7 @@
 
   <button class="back-to-top" id="backToTop" type="button" aria-label="Move back to the top of the page">↑</button>
 
-  <script src="script.js?v=homepage-product-slideshow-20260601"></script>
+  <script src="script.js?v=cart-checkout-payments-20260529"></script>
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script>
     if (window.netlifyIdentity) {
