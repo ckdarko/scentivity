@@ -1,4 +1,3 @@
-
 const PAYSTACK_INITIALIZE_URL = 'https://api.paystack.co/transaction/initialize';
 
 function jsonResponse(statusCode, body) {
@@ -76,6 +75,7 @@ exports.handler = async function handler(event) {
       delivery_address: cleanText(order.deliveryAddress || ''),
       pickup_location: cleanText(order.pickupLocation || ''),
       order_notes: cleanText(order.notes || ''),
+      subtotal_ghs: subtotalGHS,
       delivery_fee_ghs: deliveryFeeGHS,
       total_ghs: totalGHS,
       payment_method: paymentMethod,

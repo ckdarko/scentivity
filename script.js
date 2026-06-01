@@ -622,27 +622,11 @@ function updateFulfillmentFields() {
 }
 
 function orderSummaryForMessage(order) {
-  const itemLines = order.items.map(item => `- ${item.name}${item.size ? ` (${item.size})` : ''} x ${item.quantity} — ${formatGHS(item.unitPrice * item.quantity)}`).join('
-');
-  return `Hello Scentivity,
+  const itemLines = order.items
+    .map(item => `- ${item.name}${item.size ? ` (${item.size})` : ''} x ${item.quantity} — ${formatGHS(item.unitPrice * item.quantity)}`)
+    .join('\n');
 
-I would like to place this order:
-
-${itemLines}
-
-Subtotal: ${formatGHS(order.subtotalGHS)}
-Delivery fee: ${formatGHS(order.deliveryFeeGHS || 0)}
-Total: ${formatGHS(order.totalGHS)}
-Fulfillment: ${order.fulfillment}
-Delivery address: ${order.deliveryAddress || 'N/A'}
-Pickup note/location: ${order.pickupLocation || 'N/A'}
-Payment method: ${order.paymentMethodLabel}
-
-Customer name: ${order.customer.name}
-Phone: ${order.customer.phone}
-Additional notes: ${order.notes || 'N/A'}
-
-Please confirm availability and payment/delivery details.`;
+  return `Hello Scentivity,\n\nI would like to place this order:\n\n${itemLines}\n\nSubtotal: ${formatGHS(order.subtotalGHS)}\nDelivery fee: ${formatGHS(order.deliveryFeeGHS || 0)}\nTotal: ${formatGHS(order.totalGHS)}\nFulfillment: ${order.fulfillment}\nDelivery address: ${order.deliveryAddress || 'N/A'}\nPickup note/location: ${order.pickupLocation || 'N/A'}\nPayment method: ${order.paymentMethodLabel}\n\nCustomer name: ${order.customer.name}\nPhone: ${order.customer.phone}\nAdditional notes: ${order.notes || 'N/A'}\n\nPlease confirm availability and payment/delivery details.`;
 }
 
 function showPaymentStatus(message, type = 'info') {
@@ -658,6 +642,7 @@ function buildOrderFromForm() {
   const paymentLabel = paymentMethodSelect?.selectedOptions?.[0]?.textContent?.trim() || paymentMethod;
   const subtotalGHS = getCartTotal();
   const deliveryFeeGHS = fulfillment === 'delivery' ? getDeliveryFee() : 0;
+
   return {
     customer: {
       name: cleanText(formData.get('customerName') || ''),
@@ -695,7 +680,7 @@ async function checkoutOnline(order) {
   });
   const result = await response.json().catch(() => ({}));
   if (!response.ok || !result.authorization_url) {
-    throw new Error(result.error || 'Online payment is not ready yet. Please use WhatsApp checkout or check Paystack setup.');
+    throw new Error(result.error || 'Online payment is not ready yet. Please check Paystack setup or choose Pay on pickup.');
   }
   localStorage.setItem('scentivityLastOrder', JSON.stringify({ ...order, paystackReference: result.reference || '' }));
   window.location.href = result.authorization_url;
@@ -707,6 +692,7 @@ async function handleCheckoutSubmit(event) {
     showPaymentStatus('Your cart is empty. Add a product first.', 'error');
     return;
   }
+
   const order = buildOrderFromForm();
   if (!order.customer.name || !order.customer.phone) {
     showPaymentStatus('Please enter your name and phone/WhatsApp number.', 'error');
@@ -716,6 +702,7 @@ async function handleCheckoutSubmit(event) {
     showPaymentStatus('Please enter the delivery address.', 'error');
     return;
   }
+
   if (order.paymentMethod === CHECKOUT_PAYMENT_METHOD_CARD || order.paymentMethod === CHECKOUT_PAYMENT_METHOD_MOMO) {
     try {
       await checkoutOnline(order);
@@ -725,9 +712,10 @@ async function handleCheckoutSubmit(event) {
       return;
     }
   }
+
   const whatsappMessage = orderSummaryForMessage(order);
   window.open(buildWhatsAppLink(whatsappMessage), '_blank', 'noopener,noreferrer');
-  showPaymentStatus('Your order summary has been opened in WhatsApp for confirmation.', 'success');
+  showPaymentStatus('Your order summary has been opened in WhatsApp for pickup confirmation.', 'success');
 }
 
 async function loadProducts() {

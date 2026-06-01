@@ -1116,8 +1116,8 @@ code { padding: 4px 8px; border-radius: 8px; background: rgba(125,45,71,.08); }
 /* homepage-product-slideshow-20260601 */
 
 
-/* Checkout refinement: buyer-friendly payment options, delivery fee, and mobile pickup/delivery controls */
-.cart-totals {
+/* Fixed checkout refinement: totals, delivery fee, and mobile-friendly fulfillment buttons */
+.cart-summary.cart-totals {
   display: grid;
   gap: 10px;
 }
@@ -1139,26 +1139,42 @@ code { padding: 4px 8px; border-radius: 8px; background: rgba(125,45,71,.08); }
   gap: 14px;
 }
 
-.fulfillment-choice-row {
+.checkout-options.fulfillment-options {
   display: grid !important;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-  width: 100%;
+  gap: 12px !important;
+  align-items: stretch !important;
+  flex-wrap: initial !important;
 }
 
+.checkout-options.fulfillment-options legend {
+  float: none !important;
+  margin: 0 !important;
+  line-height: 1.2 !important;
+}
+
+.fulfillment-choice-row {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+  width: 100% !important;
+}
+
+.checkout-options .fulfillment-choice,
 .fulfillment-choice {
   display: flex !important;
-  align-items: center;
-  justify-content: center;
-  gap: 9px;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  width: 100% !important;
   min-height: 48px;
   padding: 12px 10px !important;
-  border: 1px solid rgba(224,0,91,.18);
-  border-radius: 999px;
-  background: rgba(255,255,255,.92);
+  border: 1px solid rgba(224,0,91,.18) !important;
+  border-radius: 999px !important;
+  background: rgba(255,255,255,.92) !important;
   text-align: center;
   line-height: 1.1;
   white-space: nowrap;
+  margin: 0 !important;
 }
 
 .fulfillment-choice input {
@@ -1173,17 +1189,12 @@ code { padding: 4px 8px; border-radius: 8px; background: rgba(125,45,71,.08); }
 }
 
 @media (max-width: 420px) {
-  .checkout-options {
-    padding: 12px;
-  }
-
-  .fulfillment-choice-row {
-    gap: 8px;
-  }
-
+  .checkout-options.fulfillment-options { padding: 12px; }
+  .fulfillment-choice-row { gap: 8px !important; }
+  .checkout-options .fulfillment-choice,
   .fulfillment-choice {
     min-height: 44px;
     padding: 10px 8px !important;
-    font-size: .93rem;
+    font-size: .92rem;
   }
 }
