@@ -1,3 +1,4 @@
+// SCENTIVITY_LAYOUT_CLEANUP_UPDATE_20260602
 // SCENTIVITY_MOBILE_UI_FIXES_UPDATE_20260602
 // SCENTIVITY_MOBILE_OVERFLOW_FIX_UPDATE_20260602
 // SCENTIVITY_MOBILE_PERFUMEGH_STYLE_UPDATE_20260602
@@ -430,7 +431,6 @@ function renderCombos() {
 
   comboGrid.innerHTML = visibleCombos.map(combo => {
     const name = cleanText(combo.name || 'Scentivity Combo');
-    const description = cleanText(combo.description || 'A curated Scentivity bundle at a discounted price.');
     const includedItems = cleanText(combo.includedItems || 'Selected Scentivity products');
     const originalPrice = cleanText(combo.originalPrice || '');
     const comboPrice = cleanText(combo.comboPrice || combo.price || 'Price on request');
@@ -441,23 +441,14 @@ function renderCombos() {
     const savingsLabel = discountText || (savings > 0 ? `Save ${formatGHS(savings)}` : 'Discounted combo');
 
     return `
-      <article class="combo-card">
+      <article class="combo-card" data-combo-contains="${includedItems}">
         <div class="combo-image-wrap">
-          <img src="${image}" alt="${name}" loading="lazy" />
+          <img src="${image}" alt="${name}" loading="lazy" onerror="this.onerror=null;this.src='assets/scentivity-logo-fused.png';" />
           <span class="combo-badge">${savingsLabel}</span>
         </div>
         <div class="combo-info">
           <span class="product-brand">Combo deal</span>
           <h3>${name}</h3>
-          <p class="combo-description">${description}</p>
-          <div class="combo-contents-web" aria-label="What this combo contains">
-            <strong>Contains:</strong>
-            <span>${includedItems}</span>
-          </div>
-          <div class="combo-contains">
-            <strong>What this combo contains:</strong>
-            ${comboContainsListHtml(includedItems)}
-          </div>
           <div class="combo-prices">
             ${originalPrice ? `<span class="combo-old-price"><small>Old price</small><s>${originalPrice}</s></span>` : ''}
             <span class="combo-new-price"><small>Combo price</small><strong>${comboPrice}</strong></span>
@@ -472,7 +463,6 @@ function renderCombos() {
     `;
   }).join('');
 }
-
 
 function renderProducts() {
   if (!productGrid) return;
@@ -582,7 +572,7 @@ function renderHomepageShowcase() {
   }
 
   if (showcaseIndex >= slides.length) showcaseIndex = 0;
-  homepageProductSlides.style.transform = `translateX(-${showcaseIndex * 100}%)`;
+
   homepageProductSlides.innerHTML = slides.map(product => {
     const name = cleanText(product.name || 'Scentivity product');
     const brand = cleanText(product.brand || 'Scentivity');
@@ -591,12 +581,12 @@ function renderHomepageShowcase() {
     const price = cleanText(product.price || (product.available === false ? 'Coming soon' : 'Price on request'));
     const size = cleanText(product.size || '');
     const notes = cleanText(product.notes || 'Scentivity favorite selected for sweet, confident moments.');
-    const image = normalizeImagePath(product.image);
+    const image = normalizeImagePath(product.image || 'assets/products/velvet-rose.svg');
     const available = product.available !== false;
     return `
       <article class="showcase-slide" aria-label="${name}">
         <div class="showcase-image-wrap">
-          <img src="${image}" alt="${name}" loading="lazy" />
+          <img src="${image}" alt="${name}" loading="lazy" onerror="this.onerror=null;this.src='assets/scentivity-logo-fused.png';" />
           <span class="showcase-badge ${available ? 'available' : 'soon'}">${available ? 'Available now' : 'Coming soon'}</span>
         </div>
         <div class="showcase-copy">
@@ -620,6 +610,8 @@ function renderHomepageShowcase() {
       </article>
     `;
   }).join('');
+
+  homepageProductSlides.style.transform = `translateX(-${showcaseIndex * 100}%)`;
 
   if (homepageProductDots) {
     homepageProductDots.innerHTML = slides.map((_, index) => `
@@ -1051,6 +1043,7 @@ async function loadProducts() {
   }
   refreshShop();
   renderCombos();
+  renderBundleBuilder();
   renderHomepageShowcase();
   startShowcaseAutoplay();
   renderCart();
@@ -1180,7 +1173,7 @@ if (emailRequestForm) {
     event.preventDefault();
     const formData = new FormData(emailRequestForm);
     const name = cleanText(formData.get('name') || '');
-    const contact = cleanText(formData.get('contact') || '');
+    const contact = '';
     const message = cleanText(formData.get('message') || '');
     const body = `Hello Scentivity,\n\nI would like to send a product request.\n\nName: ${name}\nEmail/Phone: ${contact}\n\nRequest details:\n${message}\n\nThank you.`;
     window.location.href = buildEmailLink('Scentivity Product Request', body);
@@ -1309,6 +1302,75 @@ document.addEventListener('click', event => {
   if (event.target.closest('[data-cart-action]') || event.target.closest('.add-to-cart') || event.target.closest('.add-combo-to-cart')) {
     window.setTimeout(syncMobileCartCountFix, 60);
   }
+});
+
+
+let orderSlideIndex = 0;
+let statsSlideIndex = 0;
+
+function renderSimpleSlider(trackSelector, dotsSelector, activeIndex) {
+  const track = document.querySelector(trackSelector);
+  const dots = document.querySelector(dotsSelector);
+  if (!track) return;
+  const slides = [...track.children];
+  if (!slides.length) return;
+  const index = ((activeIndex % slides.length) + slides.length) % slides.length;
+  track.style.transform = `translateX(-${index * 100}%)`;
+  if (dots) {
+    dots.innerHTML = slides.map((_, i) => `<button type="button" class="${i === index ? 'active' : ''}" data-simple-slide="${i}" aria-label="Show item ${i + 1}"></button>`).join('');
+  }
+}
+
+function showOrderSlide(index) {
+  const total = document.querySelectorAll('#orderSlides > article').length || 1;
+  orderSlideIndex = ((index % total) + total) % total;
+  renderSimpleSlider('#orderSlides', '#orderDots', orderSlideIndex);
+}
+
+function showStatsSlide(index) {
+  const total = document.querySelectorAll('#statsSlides > article').length || 1;
+  statsSlideIndex = ((index % total) + total) % total;
+  renderSimpleSlider('#statsSlides', '#statsDots', statsSlideIndex);
+}
+
+document.querySelector('#orderPrev')?.addEventListener('click', () => showOrderSlide(orderSlideIndex - 1));
+document.querySelector('#orderNext')?.addEventListener('click', () => showOrderSlide(orderSlideIndex + 1));
+document.querySelector('#orderDots')?.addEventListener('click', event => {
+  const dot = event.target.closest('[data-simple-slide]');
+  if (dot) showOrderSlide(Number(dot.dataset.simpleSlide || 0));
+});
+document.querySelector('#statsDots')?.addEventListener('click', event => {
+  const dot = event.target.closest('[data-simple-slide]');
+  if (dot) showStatsSlide(Number(dot.dataset.simpleSlide || 0));
+});
+
+showOrderSlide(0);
+showStatsSlide(0);
+window.setInterval(() => showStatsSlide(statsSlideIndex + 1), 4500);
+
+const aboutModal = document.querySelector('#aboutModal');
+const openAboutButton = document.querySelector('#openAboutButton');
+const closeAboutModal = document.querySelector('#closeAboutModal');
+
+function openAboutModal() {
+  if (!aboutModal) return;
+  aboutModal.classList.add('open');
+  aboutModal.setAttribute('aria-hidden', 'false');
+}
+
+function closeAboutModalFn() {
+  if (!aboutModal) return;
+  aboutModal.classList.remove('open');
+  aboutModal.setAttribute('aria-hidden', 'true');
+}
+
+openAboutButton?.addEventListener('click', openAboutModal);
+closeAboutModal?.addEventListener('click', closeAboutModalFn);
+aboutModal?.addEventListener('click', event => {
+  if (event.target === aboutModal) closeAboutModalFn();
+});
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape') closeAboutModalFn();
 });
 
 loadProducts();

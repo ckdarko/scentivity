@@ -27,6 +27,7 @@
       <a href="#products">Shop</a>
       <a href="#comboDeals">Combos</a>
       <a href="#preorder">Preorder</a>
+      <button class="nav-about-button" id="openAboutButton" type="button">About</button>
       <a href="#contact">Contact</a>
       <button class="nav-search-button" id="navSearchButton" type="button">Search</button>
       <button class="cart-nav-button" id="cartToggle" type="button" aria-label="Open cart">Cart <span id="cartCount">0</span></button>
@@ -69,45 +70,24 @@
     </section>
 
 
-    <section class="shop-shortcuts" aria-label="Popular Scentivity shopping shortcuts">
-      <a href="#products" data-scroll-search="Fine Fragrance Mist">
-        <span>01</span>
-        <strong>Fragrance Mists</strong>
-        <small>Sweet everyday freshness</small>
-      </a>
-      <a href="#products" data-scroll-search="Men's Body Care">
-        <span>02</span>
-        <strong>Men’s Picks</strong>
-        <small>Fresh, bold, confident</small>
-      </a>
-      <a href="#products" data-scroll-search="Scented Candles">
-        <span>03</span>
-        <strong>Candles & Home</strong>
-        <small>Make every room memorable</small>
-      </a>
-      <a href="#comboDeals">
-        <span>04</span>
-        <strong>Gift Combos</strong>
-        <small>Discounted bundles</small>
-      </a>
-    </section>
 
-    <section class="feature-banners" aria-label="Featured fragrance shopping banners">
-      <article class="feature-banner feature-dark">
-        <p class="eyebrow">Just arrived</p>
-        <h2>Fresh scents for everyday confidence.</h2>
-        <p>Explore available perfumes, mists, body care essentials, and home fragrances curated for daily freshness.</p>
-        <a class="btn light" href="#products">Shop now</a>
-      </article>
-      <article class="feature-banner feature-soft">
-        <p class="eyebrow">Gifting made easy</p>
-        <h2>Build a sweet scent bundle.</h2>
-        <p>Select combo deals with discount pricing, then choose pickup, delivery, Card, MoMo, or Pay on pickup at checkout.</p>
-        <a class="btn primary" href="#comboDeals">View combos</a>
-      </article>
+    <section class="section quick-shop-controls" id="quickShop" aria-label="Search and filter products">
+      <div class="filter-panel" aria-label="Product filters">
+          <div>
+            <span>Search</span>
+            <input class="product-search" id="productSearch" type="search" placeholder="Search perfume, mist, lotion, candle..." />
+          </div>
+          <div>
+            <span>Main Categories</span>
+            <div class="filter-controls" id="mainCategoryFilters"></div>
+          </div>
+          <div>
+            <span>Fragrance / care type</span>
+            <div class="filter-controls subcategory-controls" id="subCategoryFilters"></div>
+          </div>
+        </div>
     </section>
-
-    <section class="section homepage-showcase" id="featured-products" aria-label="Available and coming soon products">
+<section class="section homepage-showcase" id="featured-products" aria-label="Available and coming soon products">
       <div class="section-heading split showcase-heading">
         <div>
           <p class="eyebrow">Now showing</p>
@@ -126,43 +106,28 @@
     </section>
 
 
-    <section class="section stats" aria-label="Store benefits">
-      <article>
-        <strong>3</strong>
-        <span>Main collections</span>
-      </article>
-      <article>
-        <strong>11</strong>
-        <span>Fragrance & care types</span>
-      </article>
-      <article>
-        <strong>@scentivity</strong>
-        <span>Follow on Instagram</span>
-      </article>
+
+    <section class="section stats stats-slider" aria-label="Store highlights">
+      <div class="stats-track" id="statsSlides">
+        <article>
+          <strong>3</strong>
+          <span>Main collections</span>
+        </article>
+        <article>
+          <strong>11</strong>
+          <span>Fragrance & care types</span>
+        </article>
+        <article>
+          <strong>@scentivity</strong>
+          <span>Follow on Instagram</span>
+        </article>
+      </div>
+      <div class="stats-dots" id="statsDots" aria-label="Store highlight pagination"></div>
     </section>
 
+
     <section class="section products-section" id="products">
-      <div class="section-heading split">
-        <div>
-          <p class="eyebrow">Shop</p>
-          <h2>Best sellers, trending picks, and scent essentials.</h2>
-          <p>Use the filters to browse products by collection, fragrance or care type, or product name. For savings, choose a combo deal and add it to your cart.</p>
-        </div>
-        <div class="filter-panel" aria-label="Product filters">
-          <div>
-            <span>Search</span>
-            <input class="product-search" id="productSearch" type="search" placeholder="Search perfume, mist, lotion, candle..." />
-          </div>
-          <div>
-            <span>Main category</span>
-            <div class="filter-controls" id="mainCategoryFilters"></div>
-          </div>
-          <div>
-            <span>Fragrance / care type</span>
-            <div class="filter-controls subcategory-controls" id="subCategoryFilters"></div>
-          </div>
-        </div>
-      </div>
+
 
       <div class="combo-deals" id="comboDeals" aria-label="Scentivity combo deals">
         <div class="combo-heading">
@@ -202,55 +167,45 @@
         <button type="button" data-scroll-search="Luxury">Luxury</button>
         <button type="button" data-scroll-search="Combo">Combos</button>
       </div>
-
-      <div class="product-section-subtitle"><p class="eyebrow">Best Selling</p><h3>Popular picks customers can shop now.</h3></div>
-      <div class="product-grid" id="productGrid" aria-live="polite"></div>
+<div class="product-grid" id="productGrid" aria-live="polite"></div>
     </section>
 
-
-    <section class="section about" id="about">
-      <div class="about-image" aria-label="Scentivity logo display">
-        <img src="assets/scentivity-logo-fused.png" alt="Scentivity business logo" />
-      </div>
-      <div class="about-copy">
-        <p class="eyebrow">About Scentivity</p>
-        <h2>Where beauty meets memory.</h2>
-        <p>Scentivity helps customers discover sweet, elegant fragrances and body-care products that match their mood, lifestyle, and special occasions. From everyday freshness to memorable gifts, every item is selected to feel beautiful, personal, and unforgettable.</p>
-        <div class="check-list">
-          <p>✓ Perfumes, fragrance mists, body care essentials, home fragrances, candles, room sprays, and car fragrances</p>
-          <p>✓ Product requests, WhatsApp support, and Instagram updates</p>
-          <p>✓ Easy cart checkout with pickup, delivery, combo discounts, card/MoMo payment, and pay on pickup</p>
+    <section class="section order order-slider-section" id="order">
+      <div class="section-heading split">
+        <div>
+          <p class="eyebrow">How to order</p>
+          <h2>Simple steps to get your scent.</h2>
+        </div>
+        <div class="order-controls" aria-label="How to order slideshow controls">
+          <button class="order-arrow" id="orderPrev" type="button" aria-label="Previous step">‹</button>
+          <button class="order-arrow" id="orderNext" type="button" aria-label="Next step">›</button>
         </div>
       </div>
-    </section>
-
-    <section class="section order" id="order">
-      <div class="section-heading">
-        <p class="eyebrow">How to order</p>
-        <h2>Add to cart, choose delivery or pickup, and checkout securely.</h2>
+      <div class="order-slider" aria-live="polite">
+        <div class="order-track" id="orderSlides">
+          <article>
+            <span>1</span>
+            <h3>Choose a scent</h3>
+            <p>Pick a product, combo, or custom bundle.</p>
+          </article>
+          <article>
+            <span>2</span>
+            <h3>Add to cart</h3>
+            <p>Review your items and total before checkout.</p>
+          </article>
+          <article>
+            <span>3</span>
+            <h3>Choose payment</h3>
+            <p>Use Card, MoMo, or Pay on pickup.</p>
+          </article>
+          <article>
+            <span>4</span>
+            <h3>Receive order</h3>
+            <p>Scentivity prepares pickup or delivery.</p>
+          </article>
+        </div>
       </div>
-      <div class="steps-grid">
-        <article>
-          <span>1</span>
-          <h3>Choose a scent</h3>
-          <p>Browse the shop, choose products or discounted combo deals, and click <strong>Add to Cart</strong>.</p>
-        </article>
-        <article>
-          <span>2</span>
-          <h3>Choose payment</h3>
-          <p>Choose Card, MoMo, or Pay on pickup at checkout.</p>
-        </article>
-        <article>
-          <span>3</span>
-          <h3>Enter delivery details</h3>
-          <p>Enter your name, phone number, and pickup or delivery details in the cart checkout form.</p>
-        </article>
-        <article>
-          <span>4</span>
-          <h3>Receive your perfume</h3>
-          <p>After payment or confirmation, Scentivity prepares the order for pickup or delivery.</p>
-        </article>
-      </div>
+      <div class="order-dots" id="orderDots" aria-label="How to order pagination"></div>
     </section>
 
 
@@ -327,10 +282,6 @@
             <input type="text" name="name" placeholder="Your name" required />
           </label>
           <label>
-            Email or WhatsApp number
-            <input type="text" name="contact" placeholder="Your email or WhatsApp number" required />
-          </label>
-          <label>
             Fragrance request
             <textarea name="message" rows="5" placeholder="Tell us the product name, brand, size, quantity, pickup/delivery preference, address if delivery is needed, or any question you have." required></textarea>
           </label>
@@ -340,6 +291,24 @@
     </section>
   </main>
 
+
+
+  <div class="modal-overlay" id="aboutModal" aria-hidden="true">
+    <div class="about-modal" role="dialog" aria-modal="true" aria-labelledby="aboutModalTitle">
+      <button class="modal-close" id="closeAboutModal" type="button" aria-label="Close about Scentivity">×</button>
+      <div class="about-modal-logo">
+        <img src="assets/scentivity-logo-fused.png" alt="Scentivity business logo" />
+      </div>
+      <p class="eyebrow">About Scentivity</p>
+      <h2 id="aboutModalTitle">Where beauty meets memory.</h2>
+      <p>Scentivity helps customers discover sweet, elegant fragrances and body-care products that match their mood, lifestyle, and special occasions. From everyday freshness to memorable gifts, every item is selected to feel beautiful, personal, and unforgettable.</p>
+      <div class="check-list">
+        <p>✓ Perfumes, fragrance mists, body care essentials, home fragrances, candles, room sprays, and car fragrances</p>
+        <p>✓ Product requests, WhatsApp support, and Instagram updates</p>
+        <p>✓ Easy cart checkout with pickup, delivery, combo discounts, card/MoMo payment, and pay on pickup</p>
+      </div>
+    </div>
+  </div>
 
   <div class="cart-overlay" id="cartOverlay" aria-hidden="true"></div>
   <aside class="cart-drawer" id="cartDrawer" aria-hidden="true" aria-label="Shopping cart and checkout">
@@ -422,6 +391,7 @@
       <a href="#products">Shop</a>
       <a href="#comboDeals">Combos</a>
       <a href="#preorder">Preorder</a>
+      <button class="nav-about-button" id="openAboutButton" type="button">About</button>
       <a href="#contact">Contact</a>
       <button class="cart-nav-button" id="cartToggleFooter" type="button" aria-label="Open cart">Cart <span id="cartCountFooter">0</span></button>
       <a href="mailto:scentivitygh@gmail.com">Email</a>
@@ -431,7 +401,7 @@
 
   <button class="back-to-top" id="backToTop" type="button" aria-label="Move back to the top of the page">↑</button>
 
-  <script src="app-cacheproof-mobile-ui-fixes-20260602.js"></script>
+  <script src="app-cacheproof-layout-cleanup-20260602.js"></script>
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script>
     if (window.netlifyIdentity) {
