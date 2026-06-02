@@ -76,8 +76,8 @@
   "combos": [
     {
       "name": "Sweet Starter Combo",
-      "description": "A simple pair for everyday freshness: one fragrance mist and one body care item.",
-      "includedItems": "Fragrance mist + body lotion or cream",
+      "description": "A simple everyday freshness bundle for someone starting with sweet Scentivity favorites.",
+      "includedItems": "1 Fine Fragrance Mist (236 mL) + 1 Body Lotion/Cream (226 g or 8 oz)",
       "originalPrice": "GH₵470",
       "comboPrice": "GH₵430",
       "discountText": "Save GH₵40",
@@ -86,8 +86,8 @@
     },
     {
       "name": "Home & Body Refresh Combo",
-      "description": "A refreshing bundle for personal care and a sweet-smelling space.",
-      "includedItems": "Body care item + hand sanitizer + room spray or candle",
+      "description": "A balanced personal-care and room-refresh bundle for a sweet-smelling body and space.",
+      "includedItems": "1 Body Care Item + 1 Hand Sanitizer + 1 Room Spray or Scented Candle",
       "originalPrice": "GH₵565",
       "comboPrice": "GH₵510",
       "discountText": "Save GH₵55",
@@ -96,8 +96,8 @@
     },
     {
       "name": "Luxury Gift Combo",
-      "description": "A gift-ready set for birthdays, surprises, appreciation packages, and special occasions.",
-      "includedItems": "Designer fragrance + fragrance mist/body care add-on",
+      "description": "A gift-ready combo for birthdays, appreciation packages, surprises, and special occasions.",
+      "includedItems": "1 Designer/Luxury Fragrance + 1 Fragrance Mist or Body Care Add-on + Gift-ready packaging note",
       "originalPrice": "GH₵700",
       "comboPrice": "GH₵630",
       "discountText": "Save GH₵70",

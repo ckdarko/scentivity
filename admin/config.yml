@@ -63,8 +63,8 @@ collections:
             fields:
               - { label: "Combo Name", name: "name", widget: "string", hint: "Example: Sweet Starter Combo" }
               - { label: "Description", name: "description", widget: "text", required: false, hint: "Short buyer-facing description of the combo." }
-              - { label: "Included Items", name: "includedItems", widget: "text", required: false, hint: "Example: Fragrance mist + body lotion + hand sanitizer" }
-              - { label: "Original Price", name: "originalPrice", widget: "string", required: false, hint: "Example: GH₵470" }
+              - { label: "What the Combo Contains", name: "includedItems", widget: "text", required: false, hint: "Example: 1 Fine Fragrance Mist + 1 Body Lotion/Cream + 1 Hand Sanitizer" }
+              - { label: "Old Price / Original Price", name: "originalPrice", widget: "string", required: false, hint: "This will show crossed out. Example: GH₵470" }
               - { label: "Combo Discount Price", name: "comboPrice", widget: "string", hint: "Example: GH₵430" }
               - { label: "Discount Text", name: "discountText", widget: "string", required: false, hint: "Example: Save GH₵40 or 10% off" }
               - { label: "Combo Photo", name: "image", widget: "image", required: false, hint: "Upload a photo of the combo or one main product photo." }

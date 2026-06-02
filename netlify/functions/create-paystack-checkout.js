@@ -55,7 +55,7 @@ exports.handler = async function handler(event) {
   const reference = `SCENTIVITY-${Date.now()}-${Math.random().toString(36).slice(2, 8).toUpperCase()}`;
   const phoneDigits = phone.replace(/\D/g, '').slice(-12) || reference.toLowerCase();
   const email = cleanText(customer.email || '') || `customer-${phoneDigits}@scentivitygh.com`;
-  const cartSummary = items.map(item => `${item.itemType === 'combo' ? 'Combo: ' : ''}${item.name}${item.size ? ` (${item.size})` : ''} x ${item.quantity}${item.discountText ? ` [${item.discountText}]` : ''}`).join('; ');
+  const cartSummary = items.map(item => `${item.itemType === 'combo' ? 'Combo: ' : ''}${item.name}${item.size ? ` (${item.size})` : ''} x ${item.quantity}${item.originalPriceText ? ` (old price: ${item.originalPriceText})` : ''}${item.discountText ? ` [${item.discountText}]` : ''}${item.includedItems ? ` — Contains: ${item.includedItems}` : ''}`).join('; ');
   const paymentMethod = cleanText(order.paymentMethod || 'card');
   const channels = paymentMethod === 'momo' ? ['mobile_money'] : ['card'];
 

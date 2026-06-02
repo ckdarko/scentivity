@@ -1,3 +1,4 @@
+// SCENTIVITY_COMBO_CART_FIX_UPDATE_20260601
 // SCENTIVITY_LIMITED_DEALWEEK_REVIEWS_UPDATE_20260601
 // SCENTIVITY_PERFUMEGH_INSPIRED_RESPONSIVE_UPDATE_20260601
 // SCENTIVITY_COMBO_DEALS_UPDATE_20260601
@@ -396,6 +397,18 @@ function productWhatsAppMessage(product) {
 }
 
 
+
+function comboContainsListHtml(includedItems = '') {
+  const items = cleanText(includedItems)
+    .split(/\s*(?:\+|;|\n|, and | and )\s*/i)
+    .map(item => item.trim())
+    .filter(Boolean);
+
+  if (!items.length) return '<p class="combo-contains-empty">Selected Scentivity products</p>';
+
+  return `<ul class="combo-contains-list">${items.map(item => `<li>${item}</li>`).join('')}</ul>`;
+}
+
 function renderCombos() {
   if (!comboGrid) return;
   const visibleCombos = combos.filter(combo => combo.available !== false);
@@ -426,10 +439,14 @@ function renderCombos() {
           <span class="product-brand">Combo deal</span>
           <h3>${name}</h3>
           <p>${description}</p>
-          <div class="combo-includes"><strong>Includes:</strong> ${includedItems}</div>
+          <div class="combo-contains">
+            <strong>What this combo contains:</strong>
+            ${comboContainsListHtml(includedItems)}
+          </div>
           <div class="combo-prices">
-            ${originalPrice ? `<span class="old-price">${originalPrice}</span>` : ''}
-            <strong>${comboPrice}</strong>
+            ${originalPrice ? `<span class="combo-old-price"><small>Old price</small><s>${originalPrice}</s></span>` : ''}
+            <span class="combo-new-price"><small>Combo price</small><strong>${comboPrice}</strong></span>
+            <span class="combo-save-pill">${savingsLabel}</span>
           </div>
           <div class="product-actions">
             <button class="btn primary add-combo-to-cart" type="button" data-combo-key="${combo._key}">Add Combo to Cart</button>
@@ -747,7 +764,8 @@ function renderCart() {
       <div>
         <strong>${item.name}</strong>
         <small>${item.itemType === 'combo' ? 'Combo deal' : item.brand}${item.size ? ` • ${item.size}` : ''}</small>
-        <span>
+        ${item.itemType === 'combo' && item.includedItems ? `<small class="cart-includes">Contains: ${item.includedItems}</small>` : ''}
+        <span class="cart-price-line">
           ${item.originalPriceText ? `<em>${item.originalPriceText}</em> ` : ''}
           ${item.priceText}
           ${item.discountText ? `<b class="cart-discount">${item.discountText}</b>` : ''}
@@ -785,7 +803,7 @@ function updateFulfillmentFields() {
 
 function orderSummaryForMessage(order) {
   const itemLines = order.items
-    .map(item => `- ${item.itemType === 'combo' ? 'Combo: ' : ''}${item.name}${item.size ? ` (${item.size})` : ''} x ${item.quantity} — ${formatGHS(item.unitPrice * item.quantity)}${item.discountText ? ` [${item.discountText}]` : ''}`)
+    .map(item => `- ${item.itemType === 'combo' ? 'Combo: ' : ''}${item.name}${item.size ? ` (${item.size})` : ''} x ${item.quantity} — ${formatGHS(item.unitPrice * item.quantity)}${item.originalPriceText ? ` (old price: ${item.originalPriceText})` : ''}${item.discountText ? ` [${item.discountText}]` : ''}${item.includedItems ? `\n  Contains: ${item.includedItems}` : ''}`)
     .join('\n');
 
   return `Hello Scentivity,
@@ -953,6 +971,24 @@ if (subCategoryFilters) {
     renderProducts();
   });
 }
+
+
+if (comboGrid) {
+  comboGrid.addEventListener('click', event => {
+    const addComboButton = event.target.closest('[data-combo-key]');
+    if (!addComboButton) return;
+    addComboToCart(addComboButton.dataset.comboKey);
+  });
+}
+
+// Fallback listener for combo buttons if the combo section is moved or re-rendered.
+document.addEventListener('click', event => {
+  const addComboButton = event.target.closest('.add-combo-to-cart[data-combo-key]');
+  if (!addComboButton) return;
+  if (comboGrid && comboGrid.contains(addComboButton)) return;
+  addComboToCart(addComboButton.dataset.comboKey);
+});
+
 
 if (productGrid) {
   productGrid.addEventListener('click', event => {
