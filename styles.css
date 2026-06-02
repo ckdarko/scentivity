@@ -4100,3 +4100,88 @@ main > .contact {
     min-height: 190px !important;
   }
 }
+
+
+/* Buttons and multi-slide fixes */
+#aboutModal.open,
+#contactModal.open,
+.modal-overlay.open {
+  display: grid !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+#homepageProductSlides {
+  display: block !important;
+  width: 100% !important;
+  transform: none !important;
+}
+
+#homepageProductSlides .showcase-slide {
+  display: grid !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  flex: none !important;
+}
+
+.showcase-dots,
+.testimonial-dots {
+  display: flex !important;
+  justify-content: center !important;
+  flex-wrap: wrap !important;
+}
+
+.testimonial-track {
+  display: block !important;
+  transform: none !important;
+  width: 100% !important;
+}
+
+.testimonial-track article {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  flex: none !important;
+}
+
+.testimonial-track article:not(.active) {
+  display: none !important;
+}
+
+.testimonial-track article.active {
+  display: grid !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.nav-about-button,
+.nav-contact-button,
+.nav-preorder-button,
+#mobileContactButton {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+}
+
+@media (max-width: 760px) {
+  #homepageProductSlides .showcase-slide {
+    grid-template-columns: 1fr !important;
+  }
+
+  .homepage-showcase .showcase-window {
+    min-height: 0 !important;
+    height: auto !important;
+  }
+
+  .testimonial-slider {
+    min-height: 0 !important;
+    height: auto !important;
+  }
+
+  .testimonial-track article.active {
+    min-height: 210px !important;
+  }
+}

@@ -1,3 +1,4 @@
+// SCENTIVITY_BUTTONS_SLIDES_FIX_UPDATE_20260602
 // SCENTIVITY_LOGO_SLIDESHOW_CONTACT_FIX_UPDATE_20260602
 // SCENTIVITY_LAYOUT_CLEANUP_UPDATE_20260602
 // SCENTIVITY_MOBILE_UI_FIXES_UPDATE_20260602
@@ -522,7 +523,7 @@ function renderProducts() {
 function getHomepageSlides() {
   const availableSlides = products
     .filter(product => product.available !== false)
-    .slice(0, 4)
+    .slice(0, 6)
     .map(product => ({ ...product, _slideStatus: 'Available now', _slideType: 'available' }));
 
   const incomingSlides = products
@@ -560,7 +561,9 @@ function getHomepageSlides() {
   ];
 
   const incoming = incomingSlides.length ? incomingSlides : fallbackIncoming;
-  return [...availableSlides.slice(0, 4), ...incoming].slice(0, 7);
+  const slides = [...availableSlides, ...incoming];
+
+  return slides.length ? slides.slice(0, 8) : fallbackIncoming;
 }
 
 function renderHomepageShowcase() {
@@ -568,7 +571,7 @@ function renderHomepageShowcase() {
   const slides = getHomepageSlides();
   if (!slides.length) {
     homepageProductSlides.innerHTML = `
-      <article class="showcase-slide fallback-showcase">
+      <article class="showcase-slide active fallback-showcase">
         <div class="showcase-image-wrap">
           <img src="assets/scentivity-logo-fused.png" alt="Scentivity logo" loading="lazy" />
           <span class="showcase-badge soon">Coming soon</span>
@@ -584,47 +587,47 @@ function renderHomepageShowcase() {
     return;
   }
 
-  if (showcaseIndex >= slides.length) showcaseIndex = 0;
+  showcaseIndex = ((showcaseIndex % slides.length) + slides.length) % slides.length;
+  const product = slides[showcaseIndex];
 
-  homepageProductSlides.innerHTML = slides.map(product => {
-    const name = cleanText(product.name || 'Scentivity product');
-    const brand = cleanText(product.brand || 'Scentivity');
-    const mainCategory = getMainCategory(product);
-    const subCategory = getSubCategory(product);
-    const price = cleanText(product.price || (product.available === false ? 'Coming soon' : 'Price on request'));
-    const size = cleanText(product.size || '');
-    const notes = cleanText(product.notes || 'Scentivity favorite selected for sweet, confident moments.');
-    const image = normalizeImagePath(product.image || 'assets/scentivity-logo-fused.png');
-    const available = product.available !== false;
-    return `
-      <article class="showcase-slide" aria-label="${name}">
-        <div class="showcase-image-wrap">
-          <img src="${image}" alt="${name}" loading="lazy" onerror="this.onerror=null;this.src='assets/scentivity-logo-fused.png';" />
-          <span class="showcase-badge ${available ? 'available' : 'soon'}">${available ? 'Available now' : 'Coming soon'}</span>
-        </div>
-        <div class="showcase-copy">
-          <p class="eyebrow">${cleanText(product._slideStatus || (available ? 'Available now' : 'Coming soon'))}</p>
-          <h3>${name}</h3>
-          <div class="product-tags showcase-tags">
-            <span>${brand}</span>
-            <span>${mainCategory}</span>
-            <span>${subCategory}</span>
-            ${size ? `<span>${size}</span>` : ''}
-          </div>
-          <p>${notes}</p>
-          <div class="showcase-bottom">
-            <strong>${price}</strong>
-            ${available && product._key
-              ? `<button class="btn primary add-to-cart" type="button" data-product-key="${product._key}">Add to Cart</button>`
-              : `<a class="btn ghost" href="#preorder">Notify me</a>`
-            }
-          </div>
-        </div>
-      </article>
-    `;
-  }).join('');
+  const name = cleanText(product.name || 'Scentivity product');
+  const brand = cleanText(product.brand || 'Scentivity');
+  const mainCategory = getMainCategory(product);
+  const subCategory = getSubCategory(product);
+  const price = cleanText(product.price || (product.available === false ? 'Coming soon' : 'Price on request'));
+  const size = cleanText(product.size || '');
+  const notes = cleanText(product.notes || 'Scentivity favorite selected for sweet, confident moments.');
+  const image = normalizeImagePath(product.image || 'assets/scentivity-logo-fused.png');
+  const available = product.available !== false;
 
-  homepageProductSlides.style.transform = `translateX(-${showcaseIndex * 100}%)`;
+  homepageProductSlides.innerHTML = `
+    <article class="showcase-slide active" aria-label="${name}">
+      <div class="showcase-image-wrap">
+        <img src="${image}" alt="${name}" loading="lazy" onerror="this.onerror=null;this.src='assets/scentivity-logo-fused.png';" />
+        <span class="showcase-badge ${available ? 'available' : 'soon'}">${available ? 'Available now' : 'Coming soon'}</span>
+      </div>
+      <div class="showcase-copy">
+        <p class="eyebrow">${cleanText(product._slideStatus || (available ? 'Available now' : 'Coming soon'))} • ${showcaseIndex + 1} of ${slides.length}</p>
+        <h3>${name}</h3>
+        <div class="product-tags showcase-tags">
+          <span>${brand}</span>
+          <span>${mainCategory}</span>
+          <span>${subCategory}</span>
+          ${size ? `<span>${size}</span>` : ''}
+        </div>
+        <p>${notes}</p>
+        <div class="showcase-bottom">
+          <strong>${price}</strong>
+          ${available && product._key
+            ? `<button class="btn primary add-to-cart" type="button" data-product-key="${product._key}">Add to Cart</button>`
+            : `<a class="btn ghost" href="#preorder">Notify me</a>`
+          }
+        </div>
+      </div>
+    </article>
+  `;
+
+  homepageProductSlides.style.transform = 'translateX(0)';
 
   if (homepageProductDots) {
     homepageProductDots.innerHTML = slides.map((_, index) => `
@@ -1232,8 +1235,17 @@ function showTestimonial(index) {
   if (!testimonialSlides) return;
   const slides = [...testimonialSlides.children];
   if (!slides.length) return;
+
   testimonialIndex = (index + slides.length) % slides.length;
-  testimonialSlides.style.transform = `translateX(-${testimonialIndex * 100}%)`;
+  testimonialSlides.style.transform = 'translateX(0)';
+
+  slides.forEach((slide, slideIndex) => {
+    slide.classList.toggle('active', slideIndex === testimonialIndex);
+    slide.style.display = slideIndex === testimonialIndex ? 'grid' : 'none';
+    slide.style.opacity = slideIndex === testimonialIndex ? '1' : '0';
+    slide.style.visibility = slideIndex === testimonialIndex ? 'visible' : 'hidden';
+  });
+
   renderTestimonialDots();
 }
 
@@ -1437,5 +1449,28 @@ window.setTimeout(() => {
   renderHomepageShowcase();
   forceVisibleTestimonials();
 }, 500);
+
+
+// Robust modal button fallback for About and Contact buttons
+document.addEventListener('click', event => {
+  const aboutButton = event.target.closest('#openAboutButton');
+  const contactButton = event.target.closest('#openContactButton, #openPreorderButton, #mobileContactButton');
+  if (aboutButton) {
+    event.preventDefault();
+    document.querySelector('#aboutModal')?.classList.add('open');
+    document.querySelector('#aboutModal')?.setAttribute('aria-hidden', 'false');
+  }
+  if (contactButton) {
+    event.preventDefault();
+    document.querySelector('#contactModal')?.classList.add('open');
+    document.querySelector('#contactModal')?.setAttribute('aria-hidden', 'false');
+  }
+});
+
+// Re-render sliders after products load and mobile layout settles.
+window.setTimeout(() => {
+  renderHomepageShowcase();
+  showTestimonial(testimonialIndex || 0);
+}, 300);
 
 loadProducts();
