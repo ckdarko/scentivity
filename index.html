@@ -15,7 +15,7 @@
 
   <div class="top-promo" role="banner">
     <span>Delivery available across Ghana</span>
-    <span>Secure Card & MoMo checkout</span>
+    <span>Secure Card & MoMo checkout through Paystack</span>
     <span>Need help? WhatsApp Scentivity</span>
   </div>
   <header class="site-header" id="top">
@@ -48,13 +48,21 @@
           <span>Pickup, delivery & secure checkout options</span>
         </div>
       </div>
-      <div class="hero-card hero-deal-card" aria-label="Deal of the Week">
-        <img class="deal-week-image" src="assets/visuals/deal-of-week.svg" alt="Deal of the Week perfume combo" />
-        <div class="deal-week-content">
-          <p class="eyebrow">Deal of the Week</p>
-          <h2>Bundle your favorites and save.</h2>
-          <p>Shop selected combo deals for perfumes, body care, and gift-ready scents while the offer is available.</p>
-          <a class="btn primary" href="#comboDeals">Shop weekly deal</a>
+      <div class="hero-card" aria-label="Featured perfume display">
+        <div class="bottle-scene">
+          <div class="sparkle one"></div>
+          <div class="sparkle two"></div>
+          <div class="perfume-bottle logo-perfume-bottle">
+            <div class="bottle-cap"></div>
+            <div class="bottle-neck"></div>
+            <div class="bottle-body">
+              <img class="bottle-logo" src="assets/scentivity-logo-fused.png" alt="Scentivity business logo" />
+            </div>
+          </div>
+        </div>
+        <div class="feature-note">
+          <strong>Sweet scents</strong>
+          <span>Perfumes, oils, mists & gifts</span>
         </div>
       </div>
     </section>
@@ -62,25 +70,21 @@
 
     <section class="shop-shortcuts" aria-label="Popular Scentivity shopping shortcuts">
       <a href="#products" data-scroll-search="Fine Fragrance Mist">
-        <img src="assets/visuals/icon-fragrance-mist.svg" alt="Fragrance mist icon" />
         <span>01</span>
         <strong>Fragrance Mists</strong>
         <small>Sweet everyday freshness</small>
       </a>
       <a href="#products" data-scroll-search="Men's Body Care">
-        <img src="assets/visuals/icon-mens-picks.svg" alt="Men’s picks icon" />
         <span>02</span>
         <strong>Men’s Picks</strong>
         <small>Fresh, bold, confident</small>
       </a>
       <a href="#products" data-scroll-search="Scented Candles">
-        <img src="assets/visuals/icon-candles-home.svg" alt="Candles and home icon" />
         <span>03</span>
         <strong>Candles & Home</strong>
         <small>Make every room memorable</small>
       </a>
       <a href="#comboDeals">
-        <img src="assets/visuals/icon-gift-combos.svg" alt="Gift combos icon" />
         <span>04</span>
         <strong>Gift Combos</strong>
         <small>Discounted bundles</small>
@@ -99,31 +103,6 @@
         <h2>Build a sweet scent bundle.</h2>
         <p>Select combo deals with discount pricing, then choose pickup, delivery, Card, MoMo, or Pay on pickup at checkout.</p>
         <a class="btn primary" href="#comboDeals">View combos</a>
-      </article>
-    </section>
-
-
-    <section class="collection-visuals" aria-label="Featured Scentivity collections">
-      <article>
-        <img src="assets/visuals/model-victorias-secret.svg" alt="Model using Victoria’s Secret style fragrance" />
-        <div>
-          <p class="eyebrow">Victoria’s Secret Collection</p>
-          <h3>Sweet mists and body care favorites.</h3>
-        </div>
-      </article>
-      <article>
-        <img src="assets/visuals/model-bath-body.svg" alt="Model using Bath and Body Works style fragrance" />
-        <div>
-          <p class="eyebrow">Bath & Body Works Collection</p>
-          <h3>Fresh body care and home fragrance picks.</h3>
-        </div>
-      </article>
-      <article>
-        <img src="assets/visuals/model-luxury.svg" alt="Model using luxury fragrance" />
-        <div>
-          <p class="eyebrow">Designer & Luxury Fragrances</p>
-          <h3>Elegant scents for unforgettable moments.</h3>
-        </div>
       </article>
     </section>
 
@@ -210,7 +189,7 @@
         <div class="check-list">
           <p>✓ Perfumes, fragrance mists, body care essentials, home fragrances, candles, room sprays, and car fragrances</p>
           <p>✓ Product requests, WhatsApp support, and Instagram updates</p>
-          <p>✓ Easy cart checkout with pickup, delivery, combo discounts, card/MoMo payment, and pay on pickup</p>
+          <p>✓ Easy cart checkout with pickup, delivery, combo discounts, Paystack card/MoMo payment, and pay on pickup</p>
         </div>
       </div>
     </section>
@@ -251,36 +230,25 @@
           <p class="eyebrow">Customer love</p>
           <h2>Sweet scents, smooth ordering, and gift-ready picks.</h2>
         </div>
-        <div class="testimonial-controls" aria-label="Review slideshow controls">
-          <button class="testimonial-arrow" id="testimonialPrev" type="button" aria-label="Previous review">‹</button>
-          <button class="testimonial-arrow" id="testimonialNext" type="button" aria-label="Next review">›</button>
-        </div>
+        <a class="btn ghost" href="#contact">Ask for help choosing</a>
       </div>
-      <div class="testimonial-slider" aria-live="polite">
-        <div class="testimonial-track" id="testimonialSlides">
-          <article>
-            <div class="stars">★★★★★</div>
-            <p>“The scent recommendation was perfect and the ordering process was easy.”</p>
-            <span>Scentivity customer</span>
-          </article>
-          <article>
-            <div class="stars">★★★★★</div>
-            <p>“I love that I can request a fragrance, ask on WhatsApp, and checkout from my phone.”</p>
-            <span>Online buyer</span>
-          </article>
-          <article>
-            <div class="stars">★★★★★</div>
-            <p>“The combo deals make gifting simple and affordable.”</p>
-            <span>Gift shopper</span>
-          </article>
-          <article>
-            <div class="stars">★★★★★</div>
-            <p>“Pickup and delivery options make it convenient to order a gift quickly.”</p>
-            <span>Gift buyer</span>
-          </article>
-        </div>
+      <div class="testimonial-grid">
+        <article>
+          <div class="stars">★★★★★</div>
+          <p>“The scent recommendation was perfect and the ordering process was easy.”</p>
+          <span>Scentivity customer</span>
+        </article>
+        <article>
+          <div class="stars">★★★★★</div>
+          <p>“I love that I can request a fragrance, ask on WhatsApp, and checkout from my phone.”</p>
+          <span>Online buyer</span>
+        </article>
+        <article>
+          <div class="stars">★★★★★</div>
+          <p>“The combo deals make gifting simple and affordable.”</p>
+          <span>Gift shopper</span>
+        </article>
       </div>
-      <div class="testimonial-dots" id="testimonialDots" aria-label="Review slideshow pagination"></div>
     </section>
 
     <section class="section contact" id="contact">
@@ -422,7 +390,7 @@
 
   <button class="back-to-top" id="backToTop" type="button" aria-label="Move back to the top of the page">↑</button>
 
-  <script src="app-cacheproof-dealweek-visuals-reviews-20260601.js"></script>
+  <script src="app-cacheproof-perfumegh-inspired-20260601.js"></script>
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script>
     if (window.netlifyIdentity) {
