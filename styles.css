@@ -2509,3 +2509,545 @@ code { padding: 4px 8px; border-radius: 8px; background: rgba(125,45,71,.08); }
     width: 100%;
   }
 }
+
+
+/* Mobile perfume-shop style update inspired by perfumegh-style ecommerce layout */
+.mobile-bottom-nav {
+  display: none;
+}
+
+.mobile-shop-bar {
+  display: none;
+}
+
+.product-section-subtitle {
+  margin: 10px 0 18px;
+}
+
+.product-section-subtitle h3 {
+  margin: 0;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  line-height: 1;
+}
+
+@media (max-width: 760px) {
+  body {
+    padding-bottom: 76px;
+  }
+
+  .top-promo {
+    position: relative;
+    display: block !important;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 8px 0 !important;
+    font-size: .68rem !important;
+  }
+
+  .top-promo span {
+    display: inline-block !important;
+    width: auto !important;
+    padding: 0 18px;
+    animation: scentivityMarquee 18s linear infinite;
+  }
+
+  .top-promo span + span::before {
+    display: inline-block !important;
+    content: "•";
+    position: static !important;
+    margin-right: 18px;
+    color: var(--soft-pink);
+  }
+
+  @keyframes scentivityMarquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-35%); }
+  }
+
+  .site-header {
+    top: 0;
+    padding: 8px 12px !important;
+    border-bottom: 1px solid rgba(224,0,91,.12);
+  }
+
+  .brand img {
+    width: 136px !important;
+    height: 50px !important;
+    object-fit: contain;
+  }
+
+  .menu-toggle {
+    display: inline-grid !important;
+    place-items: center;
+    border: 1px solid rgba(224,0,91,.16);
+    background: rgba(255,242,246,.86);
+    color: var(--black);
+    font-weight: 900;
+  }
+
+  .nav-links.open {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .hero {
+    padding: 22px 14px 18px !important;
+    gap: 18px !important;
+  }
+
+  .hero-copy {
+    text-align: left;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.55rem, 13vw, 4.1rem) !important;
+    line-height: .92 !important;
+    margin-bottom: 12px !important;
+  }
+
+  .hero-text {
+    font-size: .96rem !important;
+    line-height: 1.65 !important;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+    min-height: 50px;
+  }
+
+  .trust-row {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    gap: 8px !important;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+
+  .trust-row span {
+    flex: 0 0 auto;
+    font-size: .76rem;
+  }
+
+  .hero-card {
+    border-radius: 24px !important;
+    box-shadow: 0 16px 36px rgba(61,18,36,.08) !important;
+  }
+
+  .deal-week-visual {
+    min-height: 180px !important;
+  }
+
+  .deal-week-content {
+    padding: 16px !important;
+  }
+
+  .deal-week-content h2 {
+    font-size: 2rem !important;
+  }
+
+  .shop-shortcuts {
+    margin-top: 14px !important;
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+
+  .shop-shortcuts a {
+    min-width: 68% !important;
+    min-height: 98px !important;
+    padding: 14px !important;
+    border-radius: 18px !important;
+  }
+
+  .feature-banners {
+    margin-top: 14px !important;
+    gap: 12px !important;
+  }
+
+  .feature-banner {
+    min-height: 210px !important;
+    padding: 20px !important;
+    border-radius: 22px !important;
+  }
+
+  .feature-banner h2 {
+    font-size: 2.25rem !important;
+  }
+
+  .homepage-showcase {
+    padding-top: 24px !important;
+  }
+
+  .showcase-window {
+    min-height: 260px !important;
+  }
+
+  .showcase-card,
+  .showcase-slide,
+  .showcase-item {
+    border-radius: 22px !important;
+  }
+
+  .stats {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+  }
+
+  .stats article {
+    padding: 12px 8px !important;
+    border-radius: 16px !important;
+  }
+
+  .stats strong {
+    font-size: 1.45rem !important;
+  }
+
+  .stats span {
+    font-size: .72rem !important;
+  }
+
+  .products-section {
+    padding-top: 34px !important;
+  }
+
+  .filter-panel {
+    position: sticky;
+    top: 72px;
+    z-index: 6;
+    background: rgba(255,250,252,.98);
+    border: 1px solid rgba(224,0,91,.13);
+    border-radius: 20px;
+    padding: 10px;
+    box-shadow: 0 12px 32px rgba(61,18,36,.08);
+  }
+
+  .filter-panel > div {
+    padding: 9px !important;
+    border-radius: 14px !important;
+  }
+
+  .product-search {
+    min-height: 46px;
+    font-size: .92rem;
+  }
+
+  .mobile-shop-bar {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    margin: 12px 0 16px;
+    padding-bottom: 4px;
+  }
+
+  .mobile-shop-bar button {
+    flex: 0 0 auto;
+    border: 1px solid rgba(224,0,91,.18);
+    border-radius: 999px;
+    background: white;
+    padding: 10px 13px;
+    color: var(--black);
+    font-weight: 900;
+    font-size: .78rem;
+  }
+
+  .product-section-subtitle {
+    display: block;
+    margin-top: 4px;
+  }
+
+  .product-section-subtitle h3 {
+    font-size: 2rem;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+
+  .product-card {
+    border-radius: 18px !important;
+  }
+
+  .product-card > img {
+    height: 170px !important;
+    padding: 8px !important;
+    border-radius: 16px !important;
+  }
+
+  .product-info {
+    padding: 12px !important;
+  }
+
+  .product-brand {
+    font-size: .64rem !important;
+  }
+
+  .product-info h3 {
+    font-size: .9rem !important;
+    line-height: 1.08 !important;
+  }
+
+  .product-info p {
+    display: none;
+  }
+
+  .product-tags {
+    gap: 5px !important;
+  }
+
+  .product-tags span {
+    font-size: .62rem !important;
+    padding: 5px 7px !important;
+  }
+
+  .price {
+    font-size: .95rem !important;
+  }
+
+  .product-info .btn,
+  .product-actions .btn {
+    min-height: 38px !important;
+    padding: 9px 10px !important;
+    font-size: .78rem !important;
+  }
+
+  .combo-deals {
+    padding: 12px !important;
+    border-radius: 22px !important;
+  }
+
+  .combo-heading h3 {
+    font-size: 1.85rem !important;
+  }
+
+  .combo-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+
+  .combo-card {
+    grid-template-rows: 110px auto !important;
+    border-radius: 18px !important;
+  }
+
+  .combo-image-wrap {
+    padding: 6px !important;
+  }
+
+  .combo-info {
+    padding: 10px !important;
+    gap: 6px !important;
+  }
+
+  .combo-info h3 {
+    font-size: .82rem !important;
+    line-height: 1.05 !important;
+  }
+
+  .combo-description {
+    display: block !important;
+    font-size: .68rem !important;
+    line-height: 1.28 !important;
+  }
+
+  .combo-contents-web {
+    display: grid !important;
+    visibility: visible !important;
+    font-size: .66rem !important;
+    line-height: 1.25 !important;
+    padding: 7px !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  .combo-prices {
+    display: grid !important;
+    grid-template-columns: 1fr;
+    gap: 4px !important;
+  }
+
+  .combo-old-price small,
+  .combo-new-price small {
+    font-size: .56rem !important;
+  }
+
+  .combo-new-price strong {
+    font-size: .92rem !important;
+  }
+
+  .combo-save-pill {
+    font-size: .62rem !important;
+    padding: 5px 7px !important;
+  }
+
+  .bundle-builder {
+    margin-top: 14px !important;
+    padding: 12px !important;
+    border-radius: 20px !important;
+  }
+
+  .bundle-builder-heading h3 {
+    font-size: 1.85rem !important;
+  }
+
+  .bundle-builder-grid {
+    grid-template-columns: 1fr !important;
+    max-height: 340px !important;
+  }
+
+  .bundle-product-option {
+    grid-template-columns: 46px 1fr !important;
+    padding: 9px !important;
+  }
+
+  .bundle-product-option img {
+    width: 46px !important;
+    height: 52px !important;
+  }
+
+  .about {
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
+    padding: 16px !important;
+    border-radius: 26px !important;
+  }
+
+  .about-image {
+    min-height: 250px !important;
+    padding: 18px !important;
+    border-radius: 22px !important;
+  }
+
+  .steps-grid {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+
+  .steps-grid article {
+    padding: 16px !important;
+    border-radius: 20px !important;
+  }
+
+  .testimonial-track article {
+    min-height: 210px !important;
+    padding: 22px !important;
+  }
+
+  .testimonial-track p {
+    font-size: 1.8rem !important;
+  }
+
+  .contact {
+    grid-template-columns: 1fr !important;
+    padding: 16px !important;
+    border-radius: 26px !important;
+  }
+
+  .cart-drawer {
+    width: 100% !important;
+    border-radius: 0 !important;
+    padding-bottom: 82px;
+  }
+
+  .checkout-form {
+    gap: 12px !important;
+  }
+
+  .fulfillment-choice-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .mobile-bottom-nav {
+    position: fixed;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    z-index: 80;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    padding: 8px;
+    border-radius: 24px;
+    background: rgba(255,255,255,.96);
+    border: 1px solid rgba(224,0,91,.16);
+    box-shadow: 0 18px 44px rgba(61,18,36,.18);
+    backdrop-filter: blur(14px);
+  }
+
+  .mobile-bottom-nav a,
+  .mobile-bottom-nav button {
+    position: relative;
+    display: grid;
+    place-items: center;
+    gap: 2px;
+    border: 0;
+    background: transparent;
+    color: var(--black);
+    font-weight: 900;
+    text-decoration: none;
+    padding: 5px 2px;
+    min-height: 48px;
+    cursor: pointer;
+  }
+
+  .mobile-bottom-nav span {
+    font-size: 1rem;
+    line-height: 1;
+  }
+
+  .mobile-bottom-nav small {
+    font-size: .66rem;
+  }
+
+  .mobile-bottom-nav b {
+    position: absolute;
+    top: 2px;
+    right: 16px;
+    min-width: 18px;
+    height: 18px;
+    border-radius: 99px;
+    display: grid;
+    place-items: center;
+    background: var(--hot-pink);
+    color: #fff;
+    font-size: .62rem;
+  }
+
+  #backToTop {
+    bottom: 86px !important;
+  }
+}
+
+@media (max-width: 390px) {
+  .product-grid,
+  .combo-grid {
+    gap: 8px !important;
+  }
+
+  .product-card > img {
+    height: 150px !important;
+  }
+
+  .combo-card {
+    grid-template-rows: 98px auto !important;
+  }
+
+  .combo-description {
+    display: none !important;
+  }
+
+  .combo-contents-web {
+    font-size: .62rem !important;
+  }
+
+  .product-info .btn,
+  .product-actions .btn {
+    font-size: .72rem !important;
+  }
+
+  .mobile-bottom-nav {
+    left: 6px;
+    right: 6px;
+    bottom: 6px;
+  }
+}

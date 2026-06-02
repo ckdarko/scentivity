@@ -1,3 +1,4 @@
+// SCENTIVITY_MOBILE_PERFUMEGH_STYLE_UPDATE_20260602
 // SCENTIVITY_MOBILE_COMBO_BUNDLE_UPDATE_20260601
 // SCENTIVITY_COMBO_VISIBLE_CONTENTS_UPDATE_20260601
 // SCENTIVITY_COMBO_CART_FIX_UPDATE_20260601
@@ -181,6 +182,8 @@ const cartToggle = document.querySelector('#cartToggle');
 const cartToggleFooter = document.querySelector('#cartToggleFooter');
 const cartCount = document.querySelector('#cartCount');
 const cartCountFooter = document.querySelector('#cartCountFooter');
+const mobileCartButton = document.querySelector('#mobileCartButton');
+const mobileCartCount = document.querySelector('#mobileCartCount');
 const cartOverlay = document.querySelector('#cartOverlay');
 const cartDrawer = document.querySelector('#cartDrawer');
 const closeCartButton = document.querySelector('#closeCart');
@@ -1135,6 +1138,7 @@ showcaseNext?.addEventListener('click', () => {
 
 cartToggle?.addEventListener('click', openCart);
 cartToggleFooter?.addEventListener('click', openCart);
+mobileCartButton?.addEventListener('click', openCart);
 closeCartButton?.addEventListener('click', closeCart);
 cartOverlay?.addEventListener('click', closeCart);
 
