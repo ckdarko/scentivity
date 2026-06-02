@@ -1,3 +1,4 @@
+// SCENTIVITY_MOBILE_UI_FIXES_UPDATE_20260602
 // SCENTIVITY_MOBILE_OVERFLOW_FIX_UPDATE_20260602
 // SCENTIVITY_MOBILE_PERFUMEGH_STYLE_UPDATE_20260602
 // SCENTIVITY_MOBILE_COMBO_BUNDLE_UPDATE_20260601
@@ -1267,5 +1268,47 @@ addBuiltBundleToCartButton?.addEventListener('click', addBuiltBundleToCart);
 
 
 document.documentElement.classList.add('scentivity-mobile-overflow-fixed');
+
+
+// Extra robust build-your-own-bundle handlers for mobile browsers and re-rendered bundle cards.
+document.addEventListener('change', event => {
+  const checkbox = event.target.closest('#bundleBuilderGrid input[type="checkbox"]');
+  if (!checkbox) return;
+
+  if (checkbox.checked) {
+    selectedBundleProductKeys.add(checkbox.value);
+  } else {
+    selectedBundleProductKeys.delete(checkbox.value);
+  }
+
+  updateBundleBuilderSummary();
+});
+
+document.addEventListener('click', event => {
+  const button = event.target.closest('#addBuiltBundleToCart');
+  if (!button) return;
+
+  event.preventDefault();
+
+  if (button.disabled && getBundleSelectedProducts().length >= 2) {
+    button.disabled = false;
+  }
+
+  addBuiltBundleToCart();
+});
+
+
+function syncMobileCartCountFix() {
+  const count = cart.reduce((sum, item) => sum + Number(item.quantity || 0), 0);
+  document.querySelectorAll('#mobileCartCount').forEach(node => {
+    node.textContent = count;
+  });
+}
+
+document.addEventListener('click', event => {
+  if (event.target.closest('[data-cart-action]') || event.target.closest('.add-to-cart') || event.target.closest('.add-combo-to-cart')) {
+    window.setTimeout(syncMobileCartCountFix, 60);
+  }
+});
 
 loadProducts();

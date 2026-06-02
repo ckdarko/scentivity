@@ -3253,3 +3253,220 @@ iframe {
     right: 6px !important;
   }
 }
+
+
+/* Mobile UI fixes: Deal label, shortcuts, filters, combo label, and bundle button */
+@media (max-width: 760px) {
+  /* 1. Deal of the Week label should not be covered by the bottle cap */
+  .hero-deal-card .deal-week-visual {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 10px !important;
+    padding-top: 16px !important;
+    min-height: 235px !important;
+    overflow: hidden !important;
+  }
+
+  .hero-deal-card .deal-tag {
+    position: static !important;
+    z-index: 5 !important;
+    align-self: flex-start !important;
+    width: auto !important;
+    max-width: calc(100% - 20px) !important;
+    white-space: nowrap !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    font-size: .68rem !important;
+    letter-spacing: .08em !important;
+    padding: 8px 12px !important;
+    margin-left: 0 !important;
+    line-height: 1 !important;
+  }
+
+  .hero-deal-card .deal-bottle-mini {
+    margin-top: 0 !important;
+    z-index: 1 !important;
+    transform: scale(.92) !important;
+    transform-origin: top center !important;
+  }
+
+  .hero-deal-card .deal-bottle-mini .bottle-cap {
+    z-index: 1 !important;
+  }
+
+  /* 2. Shortcut cards should not drag to the right */
+  .shop-shortcuts {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+    overflow: visible !important;
+    width: calc(100vw - 24px) !important;
+    max-width: calc(100vw - 24px) !important;
+  }
+
+  .shop-shortcuts a {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    scroll-snap-align: none !important;
+    overflow: hidden !important;
+  }
+
+  .shop-shortcuts strong,
+  .shop-shortcuts small {
+    display: block !important;
+    white-space: normal !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  /* 3. Search and filter buttons should wrap instead of overflowing right */
+  .filter-panel {
+    position: relative !important;
+    top: auto !important;
+    overflow: hidden !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .filter-panel > div {
+    overflow: hidden !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .product-search,
+  .filter-panel input,
+  .filter-panel textarea {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .filter-controls,
+  .main-category-controls,
+  .subcategory-controls {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+    overflow: visible !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    justify-content: stretch !important;
+  }
+
+  .main-category-controls {
+    grid-template-columns: 1fr !important;
+  }
+
+  .filter-controls button,
+  .filter {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    white-space: normal !important;
+    overflow-wrap: anywhere !important;
+    line-height: 1.15 !important;
+    text-align: center !important;
+    padding: 11px 9px !important;
+  }
+
+  /* 4. Combo label should not be covered by perfume image area */
+  .combo-card {
+    overflow: hidden !important;
+  }
+
+  .combo-image-wrap {
+    position: relative !important;
+    z-index: 1 !important;
+    overflow: hidden !important;
+  }
+
+  .combo-info {
+    position: relative !important;
+    z-index: 2 !important;
+    background: rgba(255,255,255,.98) !important;
+    border-top: 1px solid rgba(224,0,91,.10) !important;
+  }
+
+  .combo-info .product-brand {
+    display: inline-flex !important;
+    align-items: center !important;
+    width: max-content !important;
+    max-width: 100% !important;
+    padding: 5px 8px !important;
+    border-radius: 999px !important;
+    background: rgba(255,242,246,.95) !important;
+    color: var(--rose-dark) !important;
+    font-size: .62rem !important;
+    line-height: 1 !important;
+    letter-spacing: .12em !important;
+    white-space: nowrap !important;
+    margin: 0 0 2px !important;
+  }
+
+  .combo-info h3,
+  .combo-info p,
+  .combo-contents-web,
+  .combo-prices {
+    position: relative !important;
+    z-index: 3 !important;
+  }
+
+  /* 5. Built bundle button should be tappable and not blocked by mobile nav */
+  .bundle-builder {
+    margin-bottom: 96px !important;
+  }
+
+  .bundle-builder-summary {
+    position: sticky !important;
+    bottom: 78px !important;
+    z-index: 35 !important;
+    box-shadow: 0 14px 34px rgba(61,18,36,.12) !important;
+  }
+
+  #addBuiltBundleToCart {
+    pointer-events: auto !important;
+    touch-action: manipulation !important;
+  }
+
+  #addBuiltBundleToCart:not(:disabled) {
+    opacity: 1 !important;
+    cursor: pointer !important;
+  }
+
+  /* Extra guard against any right-side page drift */
+  main,
+  .hero,
+  .section,
+  .shop-shortcuts,
+  .feature-banners,
+  .filter-panel,
+  .combo-deals,
+  .bundle-builder {
+    transform: none !important;
+    translate: none !important;
+    max-width: calc(100vw - 24px) !important;
+  }
+}
+
+@media (max-width: 390px) {
+  .hero-deal-card .deal-tag {
+    font-size: .62rem !important;
+    padding: 7px 10px !important;
+  }
+
+  .filter-controls,
+  .subcategory-controls {
+    grid-template-columns: 1fr !important;
+  }
+
+  .shop-shortcuts {
+    grid-template-columns: 1fr !important;
+  }
+
+  .bundle-builder-summary {
+    bottom: 72px !important;
+  }
+}
