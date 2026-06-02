@@ -82,7 +82,8 @@
       "comboPrice": "GH₵430",
       "discountText": "Save GH₵40",
       "image": "assets/products/velvet-rose.svg",
-      "available": true
+      "available": true,
+      "dealOfWeek": true
     },
     {
       "name": "Home & Body Refresh Combo",

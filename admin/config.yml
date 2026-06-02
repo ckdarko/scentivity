@@ -69,3 +69,4 @@ collections:
               - { label: "Discount Text", name: "discountText", widget: "string", required: false, hint: "Example: Save GH₵40 or 10% off" }
               - { label: "Combo Photo", name: "image", widget: "image", required: false, hint: "Upload a photo of the combo or one main product photo." }
               - { label: "Available", name: "available", widget: "boolean", default: true, required: false }
+              - { label: "Feature as Deal of the Week", name: "dealOfWeek", widget: "boolean", default: false, required: false, hint: "Turn this on for the combo you want displayed in the homepage Deal of the Week card." }

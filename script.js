@@ -1,3 +1,4 @@
+// SCENTIVITY_DEAL_OF_WEEK_UPDATE_20260601
 // SCENTIVITY_COMBO_BUTTON_FIX_20260601
 // SCENTIVITY_COMBO_DEALS_UPDATE_20260601
 // SCENTIVITY_DELIVERY_FEE_NOTE_UPDATE_20260601
@@ -162,6 +163,7 @@ function buildWhatsAppLink(message) {
 
 const productGrid = document.querySelector('#productGrid');
 const comboGrid = document.querySelector('#comboGrid');
+const dealOfWeekCard = document.querySelector('#dealOfWeekCard');
 const mainCategoryFilters = document.querySelector('#mainCategoryFilters');
 const subCategoryFilters = document.querySelector('#subCategoryFilters');
 const productSearch = document.querySelector('#productSearch');
@@ -438,6 +440,60 @@ function renderCombos() {
       </article>
     `;
   }).join('');
+}
+
+
+
+function renderHeroDeal() {
+  if (!dealOfWeekCard) return;
+  const deal = combos.find(combo => combo.available !== false && combo.dealOfWeek === true)
+    || combos.find(combo => combo.available !== false);
+
+  if (!deal) {
+    dealOfWeekCard.innerHTML = `
+      <div class="deal-of-week-static">
+        <p class="eyebrow">Deal of the Week</p>
+        <h2>New deals coming soon.</h2>
+        <p>Check back soon for Scentivity’s next weekly combo discount.</p>
+        <a class="btn primary" href="#comboDeals">View combo deals</a>
+      </div>
+    `;
+    return;
+  }
+
+  const name = cleanText(deal.name || 'Scentivity Combo Deal');
+  const description = cleanText(deal.description || 'A curated Scentivity bundle at a discounted price.');
+  const includedItems = cleanText(deal.includedItems || 'Selected Scentivity products');
+  const originalPrice = cleanText(deal.originalPrice || '');
+  const comboPrice = cleanText(deal.comboPrice || deal.price || 'Price on request');
+  const discountText = cleanText(deal.discountText || '');
+  const image = normalizeImagePath(deal.image || 'assets/products/velvet-rose.svg');
+  const savings = comboSavings(deal);
+  const savingsLabel = discountText || (savings > 0 ? `Save ${formatGHS(savings)}` : 'Limited weekly deal');
+
+  dealOfWeekCard.innerHTML = `
+    <div class="weekly-deal-ribbon">Deal of the Week</div>
+    <div class="weekly-deal-content">
+      <div class="weekly-deal-copy">
+        <p class="eyebrow">Limited offer</p>
+        <h2>${name}</h2>
+        <p>${description}</p>
+        <div class="weekly-deal-includes"><strong>Includes:</strong> ${includedItems}</div>
+        <div class="weekly-deal-prices">
+          ${originalPrice ? `<span class="old-price">${originalPrice}</span>` : ''}
+          <strong>${comboPrice}</strong>
+          <em>${savingsLabel}</em>
+        </div>
+        <div class="weekly-deal-actions">
+          <button class="btn primary" type="button" data-combo-key="${deal._key}">Add Deal to Cart</button>
+          <a class="btn ghost" href="#comboDeals">See all combos</a>
+        </div>
+      </div>
+      <div class="weekly-deal-image">
+        <img src="${image}" alt="${name}" />
+      </div>
+    </div>
+  `;
 }
 
 
@@ -920,6 +976,7 @@ async function loadProducts() {
   }
   refreshShop();
   renderCombos();
+  renderHeroDeal();
   renderHomepageShowcase();
   startShowcaseAutoplay();
   renderCart();
