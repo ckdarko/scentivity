@@ -1,3 +1,4 @@
+// SCENTIVITY_COMBO_BUTTON_FIX_20260601
 // SCENTIVITY_COMBO_DEALS_UPDATE_20260601
 // SCENTIVITY_DELIVERY_FEE_NOTE_UPDATE_20260601
 // SCENTIVITY_CACHEPROOF_JS_FIX_20260601
@@ -702,7 +703,10 @@ function addToCart(productKey) {
 
 function addComboToCart(comboKey) {
   const combo = combos.find(item => item._key === comboKey);
-  if (!combo) return;
+  if (!combo) {
+    console.warn('Combo not found:', comboKey);
+    return;
+  }
   const existing = cart.find(item => item.key === comboKey);
   if (existing) {
     existing.quantity += 1;
@@ -951,6 +955,16 @@ if (subCategoryFilters) {
     renderProducts();
   });
 }
+
+
+// combo-button-fix delegated listener
+
+document.addEventListener('click', event => {
+  const comboButton = event.target.closest('[data-combo-key]');
+  if (!comboButton) return;
+  event.preventDefault();
+  addComboToCart(comboButton.dataset.comboKey);
+});
 
 if (productGrid) {
   productGrid.addEventListener('click', event => {
