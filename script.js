@@ -1,3 +1,4 @@
+// SCENTIVITY_COMBO_VISIBLE_CONTENTS_UPDATE_20260601
 // SCENTIVITY_COMBO_CART_FIX_UPDATE_20260601
 // SCENTIVITY_LIMITED_DEALWEEK_REVIEWS_UPDATE_20260601
 // SCENTIVITY_PERFUMEGH_INSPIRED_RESPONSIVE_UPDATE_20260601
@@ -438,11 +439,18 @@ function renderCombos() {
         <div class="combo-info">
           <span class="product-brand">Combo deal</span>
           <h3>${name}</h3>
-          <p>${description}</p>
+          <p class="combo-description">${description}</p>
+
+          <div class="combo-contents-web" aria-label="What this combo contains">
+            <strong>Contains:</strong>
+            <span>${includedItems}</span>
+          </div>
+
           <div class="combo-contains">
             <strong>What this combo contains:</strong>
             ${comboContainsListHtml(includedItems)}
           </div>
+
           <div class="combo-prices">
             ${originalPrice ? `<span class="combo-old-price"><small>Old price</small><s>${originalPrice}</s></span>` : ''}
             <span class="combo-new-price"><small>Combo price</small><strong>${comboPrice}</strong></span>
