@@ -1,3 +1,4 @@
+// SCENTIVITY_LIMITED_DEALWEEK_REVIEWS_UPDATE_20260601
 // SCENTIVITY_PERFUMEGH_INSPIRED_RESPONSIVE_UPDATE_20260601
 // SCENTIVITY_COMBO_DEALS_UPDATE_20260601
 // SCENTIVITY_DELIVERY_FEE_NOTE_UPDATE_20260601
@@ -1048,5 +1049,52 @@ document.querySelectorAll('[data-scroll-search]').forEach(shortcut => {
     }
   });
 });
+
+
+let testimonialIndex = 0;
+let testimonialTimer = null;
+
+function renderTestimonialDots() {
+  const testimonialSlides = document.querySelector('#testimonialSlides');
+  const testimonialDots = document.querySelector('#testimonialDots');
+  if (!testimonialSlides || !testimonialDots) return;
+  const slides = [...testimonialSlides.children];
+  testimonialDots.innerHTML = slides.map((_, index) => `<button type="button" class="${index === testimonialIndex ? 'active' : ''}" data-testimonial-index="${index}" aria-label="Show review ${index + 1}"></button>`).join('');
+}
+
+function showTestimonial(index) {
+  const testimonialSlides = document.querySelector('#testimonialSlides');
+  if (!testimonialSlides) return;
+  const slides = [...testimonialSlides.children];
+  if (!slides.length) return;
+  testimonialIndex = (index + slides.length) % slides.length;
+  testimonialSlides.style.transform = `translateX(-${testimonialIndex * 100}%)`;
+  renderTestimonialDots();
+}
+
+function startTestimonialAutoplay() {
+  window.clearInterval(testimonialTimer);
+  testimonialTimer = window.setInterval(() => showTestimonial(testimonialIndex + 1), 5500);
+}
+
+document.querySelector('#testimonialPrev')?.addEventListener('click', () => {
+  showTestimonial(testimonialIndex - 1);
+  startTestimonialAutoplay();
+});
+
+document.querySelector('#testimonialNext')?.addEventListener('click', () => {
+  showTestimonial(testimonialIndex + 1);
+  startTestimonialAutoplay();
+});
+
+document.querySelector('#testimonialDots')?.addEventListener('click', event => {
+  const dot = event.target.closest('[data-testimonial-index]');
+  if (!dot) return;
+  showTestimonial(Number(dot.dataset.testimonialIndex || 0));
+  startTestimonialAutoplay();
+});
+
+showTestimonial(0);
+startTestimonialAutoplay();
 
 loadProducts();
