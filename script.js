@@ -1,3 +1,5 @@
+// SCENTIVITY_COMBO_DEALS_UPDATE_20260601
+// SCENTIVITY_DELIVERY_FEE_NOTE_UPDATE_20260601
 // SCENTIVITY_CACHEPROOF_JS_FIX_20260601
 const MAIN_CATEGORY_VS = "Victoria's Secret Collection";
 const MAIN_CATEGORY_BBW = 'Bath & Body Works Collection';
@@ -99,7 +101,42 @@ const fallbackProducts = [
 ];
 
 
+const fallbackCombos = [
+  {
+    name: 'Sweet Starter Combo',
+    description: 'A simple pair for everyday freshness: one fragrance mist and one body care item.',
+    includedItems: 'Fragrance mist + body lotion or cream',
+    originalPrice: 'GH₵470',
+    comboPrice: 'GH₵430',
+    discountText: 'Save GH₵40',
+    image: 'assets/products/velvet-rose.svg',
+    available: true
+  },
+  {
+    name: 'Home & Body Refresh Combo',
+    description: 'A refreshing bundle for personal care and a sweet-smelling space.',
+    includedItems: 'Body care item + hand sanitizer + room spray or candle',
+    originalPrice: 'GH₵565',
+    comboPrice: 'GH₵510',
+    discountText: 'Save GH₵55',
+    image: 'assets/products/citrus-bloom.svg',
+    available: true
+  },
+  {
+    name: 'Luxury Gift Combo',
+    description: 'A gift-ready set for birthdays, surprises, appreciation packages, and special occasions.',
+    includedItems: 'Designer fragrance + fragrance mist/body care add-on',
+    originalPrice: 'GH₵700',
+    comboPrice: 'GH₵630',
+    discountText: 'Save GH₵70',
+    image: 'assets/products/amber-noir.svg',
+    available: true
+  }
+];
+
+
 let products = [];
+let combos = [];
 let activeMainCategory = 'all';
 let activeSubCategory = 'all';
 let activeSearchTerm = '';
@@ -123,6 +160,7 @@ function buildWhatsAppLink(message) {
 }
 
 const productGrid = document.querySelector('#productGrid');
+const comboGrid = document.querySelector('#comboGrid');
 const mainCategoryFilters = document.querySelector('#mainCategoryFilters');
 const subCategoryFilters = document.querySelector('#subCategoryFilters');
 const productSearch = document.querySelector('#productSearch');
@@ -141,13 +179,10 @@ const cartItemsContainer = document.querySelector('#cartItems');
 const cartEmptyMessage = document.querySelector('#cartEmptyMessage');
 const cartSubtotal = document.querySelector('#cartSubtotal');
 const cartTotal = document.querySelector('#cartTotal');
-const deliveryFeeAmount = document.querySelector('#deliveryFeeAmount');
-const deliveryFeeSummaryRow = document.querySelector('#deliveryFeeSummaryRow');
 const checkoutForm = document.querySelector('#checkoutForm');
 const fulfillmentRadios = document.querySelectorAll('input[name="fulfillment"]');
 const deliveryFields = document.querySelector('#deliveryFields');
 const pickupFields = document.querySelector('#pickupFields');
-const deliveryFeeInput = document.querySelector('#deliveryFeeInput');
 const paymentMethodSelect = document.querySelector('#paymentMethod');
 const paymentStatus = document.querySelector('#paymentStatus');
 const emailRequestForm = document.querySelector('#emailRequestForm');
@@ -282,6 +317,53 @@ function renderSubCategoryFilters() {
   ].join('');
 }
 
+
+function enrichCombos(items = []) {
+  return items.map((combo, index) => {
+    const name = cleanText(combo.name || `Scentivity Combo ${index + 1}`);
+    const originalUnitPrice = parseGHSPrice(combo.originalPrice);
+    const comboUnitPrice = parseGHSPrice(combo.comboPrice || combo.price);
+    return {
+      ...combo,
+      _key: `combo-${slugify(name)}-${index}`,
+      _unitPrice: comboUnitPrice,
+      _originalUnitPrice: originalUnitPrice,
+      itemType: 'combo'
+    };
+  });
+}
+
+function comboSavings(combo = {}) {
+  const original = Number(combo._originalUnitPrice || parseGHSPrice(combo.originalPrice));
+  const discounted = Number(combo._unitPrice || parseGHSPrice(combo.comboPrice || combo.price));
+  if (original > discounted && discounted > 0) return original - discounted;
+  return 0;
+}
+
+function comboWhatsAppMessage(combo = {}) {
+  const name = cleanText(combo.name || 'Scentivity combo');
+  const includedItems = cleanText(combo.includedItems || 'Combo items');
+  const price = cleanText(combo.comboPrice || combo.price || 'Price on request');
+  const discountText = cleanText(combo.discountText || '');
+  return `Hello Scentivity,
+
+I am interested in this combo deal:
+
+Combo: ${name}
+Includes: ${includedItems}
+Combo price: ${price}
+${discountText ? `Discount: ${discountText}` : ''}
+
+Please confirm availability.
+
+Customer name:
+Phone number:
+Pickup or delivery:
+Delivery address if needed:
+Quantity:`;
+}
+
+
 function getVisibleProducts() {
   const search = activeSearchTerm.toLowerCase();
   return products.filter(product => {
@@ -310,6 +392,53 @@ function productWhatsAppMessage(product) {
   const size = cleanText(product.size || 'Not specified');
   return `Hello Scentivity,\n\nI am interested in this product:\n\nProduct: ${name}\nBrand: ${brand}\nCategory: ${mainCategory} / ${subCategory}\nSize: ${size}\nPrice: ${price}\n\nPlease confirm availability.\n\nCustomer name:\nPhone number:\nPickup or delivery:\nDelivery address, if needed:\nQuantity:`;
 }
+
+
+function renderCombos() {
+  if (!comboGrid) return;
+  const visibleCombos = combos.filter(combo => combo.available !== false);
+  if (!visibleCombos.length) {
+    comboGrid.innerHTML = '<p class="empty-state">No combo deals are available right now. Check back soon or send a custom request.</p>';
+    return;
+  }
+
+  comboGrid.innerHTML = visibleCombos.map(combo => {
+    const name = cleanText(combo.name || 'Scentivity Combo');
+    const description = cleanText(combo.description || 'A curated Scentivity bundle at a discounted price.');
+    const includedItems = cleanText(combo.includedItems || 'Selected Scentivity products');
+    const originalPrice = cleanText(combo.originalPrice || '');
+    const comboPrice = cleanText(combo.comboPrice || combo.price || 'Price on request');
+    const discountText = cleanText(combo.discountText || '');
+    const image = normalizeImagePath(combo.image || 'assets/products/velvet-rose.svg');
+    const savings = comboSavings(combo);
+    const requestLink = buildWhatsAppLink(comboWhatsAppMessage(combo));
+    const savingsLabel = discountText || (savings > 0 ? `Save ${formatGHS(savings)}` : 'Discounted combo');
+
+    return `
+      <article class="combo-card">
+        <div class="combo-image-wrap">
+          <img src="${image}" alt="${name}" loading="lazy" />
+          <span class="combo-badge">${savingsLabel}</span>
+        </div>
+        <div class="combo-info">
+          <span class="product-brand">Combo deal</span>
+          <h3>${name}</h3>
+          <p>${description}</p>
+          <div class="combo-includes"><strong>Includes:</strong> ${includedItems}</div>
+          <div class="combo-prices">
+            ${originalPrice ? `<span class="old-price">${originalPrice}</span>` : ''}
+            <strong>${comboPrice}</strong>
+          </div>
+          <div class="product-actions">
+            <button class="btn primary add-combo-to-cart" type="button" data-combo-key="${combo._key}">Add Combo to Cart</button>
+            <a class="btn ghost" href="${requestLink}" target="_blank" rel="noreferrer">Ask about combo</a>
+          </div>
+        </div>
+      </article>
+    `;
+  }).join('');
+}
+
 
 function renderProducts() {
   if (!productGrid) return;
@@ -509,20 +638,10 @@ function getSelectedFulfillment() {
   return document.querySelector('input[name="fulfillment"]:checked')?.value || 'delivery';
 }
 
-function getDeliveryFee() {
-  if (getSelectedFulfillment() !== 'delivery') return 0;
-  const value = Number(deliveryFeeInput?.value || 0);
-  return Number.isFinite(value) && value > 0 ? value : 0;
-}
-
 function updateCartTotals() {
-  const subtotal = getCartTotal();
-  const deliveryFee = getDeliveryFee();
-  const total = subtotal + deliveryFee;
-  if (cartSubtotal) cartSubtotal.textContent = formatGHS(subtotal);
-  if (deliveryFeeAmount) deliveryFeeAmount.textContent = formatGHS(deliveryFee);
+  const total = getCartTotal();
+  if (cartSubtotal) cartSubtotal.textContent = formatGHS(total);
   if (cartTotal) cartTotal.textContent = formatGHS(total);
-  if (deliveryFeeSummaryRow) deliveryFeeSummaryRow.classList.toggle('hidden', getSelectedFulfillment() !== 'delivery');
 }
 
 function updateCartCount() {
@@ -545,6 +664,27 @@ function productSnapshot(product) {
   };
 }
 
+
+function comboSnapshot(combo) {
+  const comboPrice = cleanText(combo.comboPrice || combo.price || 'Price on request');
+  return {
+    key: combo._key,
+    itemType: 'combo',
+    name: cleanText(combo.name || 'Scentivity Combo'),
+    brand: 'Scentivity Combo Deal',
+    mainCategory: 'Combo Deal',
+    subCategory: 'Discounted Bundle',
+    size: cleanText(combo.includedItems || ''),
+    priceText: comboPrice,
+    originalPriceText: cleanText(combo.originalPrice || ''),
+    discountText: cleanText(combo.discountText || ''),
+    unitPrice: Number(combo._unitPrice || parseGHSPrice(comboPrice)),
+    image: normalizeImagePath(combo.image || 'assets/products/velvet-rose.svg'),
+    includedItems: cleanText(combo.includedItems || '')
+  };
+}
+
+
 function addToCart(productKey) {
   const product = products.find(item => item._key === productKey);
   if (!product) return;
@@ -558,6 +698,22 @@ function addToCart(productKey) {
   renderCart();
   openCart();
 }
+
+
+function addComboToCart(comboKey) {
+  const combo = combos.find(item => item._key === comboKey);
+  if (!combo) return;
+  const existing = cart.find(item => item.key === comboKey);
+  if (existing) {
+    existing.quantity += 1;
+  } else {
+    cart.push({ ...comboSnapshot(combo), quantity: 1 });
+  }
+  saveCart();
+  renderCart();
+  openCart();
+}
+
 
 function updateCartItem(key, action) {
   const item = cart.find(product => product.key === key);
@@ -584,12 +740,16 @@ function renderCart() {
   if (cartEmptyMessage) cartEmptyMessage.classList.add('hidden');
   if (checkoutForm) checkoutForm.classList.remove('checkout-disabled');
   cartItemsContainer.innerHTML = cart.map(item => `
-    <article class="cart-item">
+    <article class="cart-item ${item.itemType === 'combo' ? 'cart-combo-item' : ''}">
       <img src="${item.image}" alt="${item.name}" />
       <div>
         <strong>${item.name}</strong>
-        <small>${item.brand}${item.size ? ` • ${item.size}` : ''}</small>
-        <span>${item.priceText}</span>
+        <small>${item.itemType === 'combo' ? 'Combo deal' : item.brand}${item.size ? ` • ${item.size}` : ''}</small>
+        <span>
+          ${item.originalPriceText ? `<em>${item.originalPriceText}</em> ` : ''}
+          ${item.priceText}
+          ${item.discountText ? `<b class="cart-discount">${item.discountText}</b>` : ''}
+        </span>
         <div class="cart-qty" aria-label="Quantity controls for ${item.name}">
           <button type="button" data-cart-action="decrease" data-cart-key="${item.key}" aria-label="Decrease quantity">−</button>
           <b>${item.quantity}</b>
@@ -618,16 +778,32 @@ function updateFulfillmentFields() {
   const selected = getSelectedFulfillment();
   if (deliveryFields) deliveryFields.classList.toggle('hidden', selected !== 'delivery');
   if (pickupFields) pickupFields.classList.toggle('hidden', selected !== 'pickup');
-  if (deliveryFeeInput && selected !== 'delivery') deliveryFeeInput.value = '0';
   updateCartTotals();
 }
 
 function orderSummaryForMessage(order) {
   const itemLines = order.items
-    .map(item => `- ${item.name}${item.size ? ` (${item.size})` : ''} x ${item.quantity} — ${formatGHS(item.unitPrice * item.quantity)}`)
+    .map(item => `- ${item.itemType === 'combo' ? 'Combo: ' : ''}${item.name}${item.size ? ` (${item.size})` : ''} x ${item.quantity} — ${formatGHS(item.unitPrice * item.quantity)}${item.discountText ? ` [${item.discountText}]` : ''}`)
     .join('\n');
 
-  return `Hello Scentivity,\n\nI would like to place this order:\n\n${itemLines}\n\nSubtotal: ${formatGHS(order.subtotalGHS)}\nDelivery fee: ${formatGHS(order.deliveryFeeGHS || 0)}\nTotal: ${formatGHS(order.totalGHS)}\nFulfillment: ${order.fulfillment}\nDelivery address: ${order.deliveryAddress || 'N/A'}\nPickup note/location: ${order.pickupLocation || 'N/A'}\nPayment method: ${order.paymentMethodLabel}\n\nCustomer name: ${order.customer.name}\nPhone: ${order.customer.phone}\nAdditional notes: ${order.notes || 'N/A'}\n\nPlease confirm availability and payment/delivery details.`;
+  return `Hello Scentivity,
+
+I would like to place this order:
+
+${itemLines}
+
+Total before delivery: ${formatGHS(order.totalGHS)}
+Fulfillment: ${order.fulfillment}
+Delivery address: ${order.deliveryAddress || 'N/A'}
+Pickup note/location: ${order.pickupLocation || 'N/A'}
+Delivery fee note: Applies to delivery orders and will be determined after checkout based on location.
+Payment method: ${order.paymentMethodLabel}
+
+Customer name: ${order.customer.name}
+Phone: ${order.customer.phone}
+Additional notes: ${order.notes || 'N/A'}
+
+Please confirm availability and payment/delivery details.`;
 }
 
 function showPaymentStatus(message, type = 'info') {
@@ -642,7 +818,6 @@ function buildOrderFromForm() {
   const paymentMethod = formData.get('paymentMethod') || CHECKOUT_PAYMENT_METHOD_CARD;
   const paymentLabel = paymentMethodSelect?.selectedOptions?.[0]?.textContent?.trim() || paymentMethod;
   const subtotalGHS = getCartTotal();
-  const deliveryFeeGHS = fulfillment === 'delivery' ? getDeliveryFee() : 0;
 
   return {
     customer: {
@@ -652,7 +827,7 @@ function buildOrderFromForm() {
     fulfillment: fulfillment === 'pickup' ? 'Pickup' : 'Delivery',
     deliveryAddress: fulfillment === 'delivery' ? cleanText(formData.get('deliveryAddress') || '') : '',
     pickupLocation: fulfillment === 'pickup' ? cleanText(formData.get('pickupLocation') || '') : '',
-    deliveryFeeGHS,
+    deliveryFeeNote: 'Delivery fee applies to delivery orders and will be determined after checkout based on location.',
     paymentMethod,
     paymentMethodLabel: paymentLabel,
     notes: cleanText(formData.get('orderNotes') || ''),
@@ -664,10 +839,14 @@ function buildOrderFromForm() {
       unitPrice: item.unitPrice,
       priceText: item.priceText,
       mainCategory: item.mainCategory,
-      subCategory: item.subCategory
+      subCategory: item.subCategory,
+      itemType: item.itemType || 'product',
+      includedItems: item.includedItems || '',
+      originalPriceText: item.originalPriceText || '',
+      discountText: item.discountText || ''
     })),
     subtotalGHS,
-    totalGHS: subtotalGHS + deliveryFeeGHS,
+    totalGHS: subtotalGHS,
     currency: 'GHS'
   };
 }
@@ -721,6 +900,7 @@ async function handleCheckoutSubmit(event) {
 
 async function loadProducts() {
   products = enrichProducts(fallbackProducts);
+  combos = enrichCombos(fallbackCombos);
   try {
     const response = await fetch(`data/products.json?v=${Date.now()}`, { cache: 'no-store' });
     if (!response.ok) throw new Error('Could not load product data.');
@@ -728,10 +908,14 @@ async function loadProducts() {
     if (Array.isArray(data.products) && data.products.length) {
       products = enrichProducts(data.products);
     }
+    if (Array.isArray(data.combos) && data.combos.length) {
+      combos = enrichCombos(data.combos);
+    }
   } catch (error) {
     console.warn('Using fallback products:', error.message);
   }
   refreshShop();
+  renderCombos();
   renderHomepageShowcase();
   startShowcaseAutoplay();
   renderCart();
@@ -813,7 +997,6 @@ cartItemsContainer?.addEventListener('click', event => {
 });
 
 fulfillmentRadios.forEach(radio => radio.addEventListener('change', updateFulfillmentFields));
-deliveryFeeInput?.addEventListener('input', updateCartTotals);
 checkoutForm?.addEventListener('submit', handleCheckoutSubmit);
 
 if (menuToggle && navLinks) {

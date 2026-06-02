@@ -52,3 +52,20 @@ collections:
               - { label: "Optional Direct Payment Link / Checkout URL", name: "paymentLink", widget: "string", required: false, hint: "Optional: paste a Paystack, Flutterwave, Stripe, or other hosted checkout link for this individual product. The cart checkout can also use Paystack through the Netlify Function setup." }
               - { label: "Scent Notes / Description", name: "notes", widget: "text", required: false }
               - { label: "Available", name: "available", widget: "boolean", default: true, hint: "Turn this off to show the product as Coming Soon in the homepage slideshow and unavailable in the shop." }
+
+
+          - label: "Combo Deals"
+            name: "combos"
+            widget: "list"
+            summary: "{{fields.name}} — {{fields.comboPrice}}"
+            collapsed: false
+            hint: "Create discounted combo/bundle offers customers can add to cart."
+            fields:
+              - { label: "Combo Name", name: "name", widget: "string", hint: "Example: Sweet Starter Combo" }
+              - { label: "Description", name: "description", widget: "text", required: false, hint: "Short buyer-facing description of the combo." }
+              - { label: "Included Items", name: "includedItems", widget: "text", required: false, hint: "Example: Fragrance mist + body lotion + hand sanitizer" }
+              - { label: "Original Price", name: "originalPrice", widget: "string", required: false, hint: "Example: GH₵470" }
+              - { label: "Combo Discount Price", name: "comboPrice", widget: "string", hint: "Example: GH₵430" }
+              - { label: "Discount Text", name: "discountText", widget: "string", required: false, hint: "Example: Save GH₵40 or 10% off" }
+              - { label: "Combo Photo", name: "image", widget: "image", required: false, hint: "Upload a photo of the combo or one main product photo." }
+              - { label: "Available", name: "available", widget: "boolean", default: true, required: false }

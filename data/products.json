@@ -72,5 +72,37 @@
       "available": true,
       "paymentLink": ""
     }
+  ],
+  "combos": [
+    {
+      "name": "Sweet Starter Combo",
+      "description": "A simple pair for everyday freshness: one fragrance mist and one body care item.",
+      "includedItems": "Fragrance mist + body lotion or cream",
+      "originalPrice": "GH₵470",
+      "comboPrice": "GH₵430",
+      "discountText": "Save GH₵40",
+      "image": "assets/products/velvet-rose.svg",
+      "available": true
+    },
+    {
+      "name": "Home & Body Refresh Combo",
+      "description": "A refreshing bundle for personal care and a sweet-smelling space.",
+      "includedItems": "Body care item + hand sanitizer + room spray or candle",
+      "originalPrice": "GH₵565",
+      "comboPrice": "GH₵510",
+      "discountText": "Save GH₵55",
+      "image": "assets/products/citrus-bloom.svg",
+      "available": true
+    },
+    {
+      "name": "Luxury Gift Combo",
+      "description": "A gift-ready set for birthdays, surprises, appreciation packages, and special occasions.",
+      "includedItems": "Designer fragrance + fragrance mist/body care add-on",
+      "originalPrice": "GH₵700",
+      "comboPrice": "GH₵630",
+      "discountText": "Save GH₵70",
+      "image": "assets/products/amber-noir.svg",
+      "available": true
+    }
   ]
 }
