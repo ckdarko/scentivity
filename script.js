@@ -1,3 +1,4 @@
+// SCENTIVITY_MOBILE_OVERFLOW_FIX_UPDATE_20260602
 // SCENTIVITY_MOBILE_PERFUMEGH_STYLE_UPDATE_20260602
 // SCENTIVITY_MOBILE_COMBO_BUNDLE_UPDATE_20260601
 // SCENTIVITY_COMBO_VISIBLE_CONTENTS_UPDATE_20260601
@@ -1263,5 +1264,8 @@ if (bundleBuilderGrid) {
 
 addBuiltBundleToCartButton?.addEventListener('click', addBuiltBundleToCart);
 
+
+
+document.documentElement.classList.add('scentivity-mobile-overflow-fixed');
 
 loadProducts();
