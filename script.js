@@ -1,3 +1,4 @@
+// SCENTIVITY_MOBILE_COMBO_BUNDLE_UPDATE_20260601
 // SCENTIVITY_COMBO_VISIBLE_CONTENTS_UPDATE_20260601
 // SCENTIVITY_COMBO_CART_FIX_UPDATE_20260601
 // SCENTIVITY_LIMITED_DEALWEEK_REVIEWS_UPDATE_20260601
@@ -147,6 +148,7 @@ let activeSearchTerm = '';
 let showcaseIndex = 0;
 let showcaseTimer = null;
 let cart = loadCart();
+let selectedBundleProductKeys = new Set();
 
 const SCENTIVITY_EMAIL = 'scentivitygh@gmail.com';
 const SCENTIVITY_WHATSAPP = '233534584470';
@@ -165,6 +167,9 @@ function buildWhatsAppLink(message) {
 
 const productGrid = document.querySelector('#productGrid');
 const comboGrid = document.querySelector('#comboGrid');
+const bundleBuilderGrid = document.querySelector('#bundleBuilderGrid');
+const bundleBuilderSummary = document.querySelector('#bundleBuilderSummary');
+const addBuiltBundleToCartButton = document.querySelector('#addBuiltBundleToCart');
 const mainCategoryFilters = document.querySelector('#mainCategoryFilters');
 const subCategoryFilters = document.querySelector('#subCategoryFilters');
 const productSearch = document.querySelector('#productSearch');
@@ -440,17 +445,14 @@ function renderCombos() {
           <span class="product-brand">Combo deal</span>
           <h3>${name}</h3>
           <p class="combo-description">${description}</p>
-
           <div class="combo-contents-web" aria-label="What this combo contains">
             <strong>Contains:</strong>
             <span>${includedItems}</span>
           </div>
-
           <div class="combo-contains">
             <strong>What this combo contains:</strong>
             ${comboContainsListHtml(includedItems)}
           </div>
-
           <div class="combo-prices">
             ${originalPrice ? `<span class="combo-old-price"><small>Old price</small><s>${originalPrice}</s></span>` : ''}
             <span class="combo-new-price"><small>Combo price</small><strong>${comboPrice}</strong></span>
@@ -676,6 +678,106 @@ function updateCartCount() {
   if (cartCount) cartCount.textContent = quantity;
   if (cartCountFooter) cartCountFooter.textContent = quantity;
 }
+
+
+function getBundleSelectedProducts() {
+  return products.filter(product => selectedBundleProductKeys.has(product._key) && product.available !== false);
+}
+
+function getBundleDiscountRate(count) {
+  if (count >= 3) return 0.10;
+  if (count >= 2) return 0.05;
+  return 0;
+}
+
+function renderBundleBuilder() {
+  if (!bundleBuilderGrid) return;
+  const availableProducts = products
+    .filter(product => product.available !== false)
+    .filter(product => Number(product._unitPrice || parseGHSPrice(product.price)) > 0);
+
+  if (!availableProducts.length) {
+    bundleBuilderGrid.innerHTML = '<p class="empty-state">Add products with prices first, then customers can build their own bundle.</p>';
+    updateBundleBuilderSummary();
+    return;
+  }
+
+  bundleBuilderGrid.innerHTML = availableProducts.map(product => {
+    const key = product._key;
+    const name = cleanText(product.name || 'Untitled product');
+    const price = cleanText(product.price || 'Price on request');
+    const brand = cleanText(product.brand || 'Scentivity');
+    const image = normalizeImagePath(product.image);
+    const checked = selectedBundleProductKeys.has(key) ? 'checked' : '';
+    return `
+      <label class="bundle-product-option">
+        <input type="checkbox" value="${key}" ${checked} />
+        <img src="${image}" alt="${name}" loading="lazy" />
+        <span>
+          <strong>${name}</strong>
+          <small>${brand}</small>
+          <b>${price}</b>
+        </span>
+      </label>
+    `;
+  }).join('');
+
+  updateBundleBuilderSummary();
+}
+
+function updateBundleBuilderSummary() {
+  if (!bundleBuilderSummary) return;
+  const selected = getBundleSelectedProducts();
+  const originalTotal = selected.reduce((sum, product) => sum + Number(product._unitPrice || parseGHSPrice(product.price)), 0);
+  const discountRate = getBundleDiscountRate(selected.length);
+  const discountAmount = Math.round(originalTotal * discountRate);
+  const bundleTotal = Math.max(0, originalTotal - discountAmount);
+  const summaryText = selected.length < 2
+    ? 'Select 2 or more products to build a bundle.'
+    : `${selected.length} products selected • Original ${formatGHS(originalTotal)} • ${discountRate ? `${Math.round(discountRate * 100)}% off` : 'No discount yet'} • Bundle total ${formatGHS(bundleTotal)}`;
+
+  bundleBuilderSummary.querySelector('span').textContent = summaryText;
+  if (addBuiltBundleToCartButton) addBuiltBundleToCartButton.disabled = selected.length < 2;
+}
+
+function addBuiltBundleToCart() {
+  const selected = getBundleSelectedProducts();
+  if (selected.length < 2) {
+    alert('Please select at least 2 products to build a bundle.');
+    return;
+  }
+
+  const originalTotal = selected.reduce((sum, product) => sum + Number(product._unitPrice || parseGHSPrice(product.price)), 0);
+  const discountRate = getBundleDiscountRate(selected.length);
+  const discountAmount = Math.round(originalTotal * discountRate);
+  const bundleTotal = Math.max(0, originalTotal - discountAmount);
+  const includedItems = selected.map(product => cleanText(product.name || 'Scentivity product')).join(' + ');
+  const key = `custom-bundle-${Date.now()}`;
+
+  cart.push({
+    key,
+    itemType: 'combo',
+    name: 'Build Your Own Bundle',
+    brand: 'Scentivity Custom Bundle',
+    mainCategory: 'Custom Bundle',
+    subCategory: 'Build Your Own Bundle',
+    size: includedItems,
+    includedItems,
+    originalPriceText: formatGHS(originalTotal),
+    discountText: discountAmount > 0 ? `Save ${formatGHS(discountAmount)}` : 'Bundle deal',
+    priceText: formatGHS(bundleTotal),
+    unitPrice: bundleTotal,
+    image: normalizeImagePath(selected[0].image),
+    quantity: 1
+  });
+
+  selectedBundleProductKeys = new Set();
+  renderBundleBuilder();
+  saveCart();
+  renderCart();
+  openCart();
+}
+
 
 function productSnapshot(product) {
   return {
@@ -1140,5 +1242,22 @@ document.querySelector('#testimonialDots')?.addEventListener('click', event => {
 
 showTestimonial(0);
 startTestimonialAutoplay();
+
+
+if (bundleBuilderGrid) {
+  bundleBuilderGrid.addEventListener('change', event => {
+    const checkbox = event.target.closest('input[type="checkbox"]');
+    if (!checkbox) return;
+    if (checkbox.checked) {
+      selectedBundleProductKeys.add(checkbox.value);
+    } else {
+      selectedBundleProductKeys.delete(checkbox.value);
+    }
+    updateBundleBuilderSummary();
+  });
+}
+
+addBuiltBundleToCartButton?.addEventListener('click', addBuiltBundleToCart);
+
 
 loadProducts();
