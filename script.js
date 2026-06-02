@@ -1,3 +1,4 @@
+// SCENTIVITY_LOGO_SLIDESHOW_CONTACT_FIX_UPDATE_20260602
 // SCENTIVITY_LAYOUT_CLEANUP_UPDATE_20260602
 // SCENTIVITY_MOBILE_UI_FIXES_UPDATE_20260602
 // SCENTIVITY_MOBILE_OVERFLOW_FIX_UPDATE_20260602
@@ -566,7 +567,19 @@ function renderHomepageShowcase() {
   if (!homepageProductSlides) return;
   const slides = getHomepageSlides();
   if (!slides.length) {
-    homepageProductSlides.innerHTML = '<p class="empty-state">Add products in the admin dashboard to feature them here.</p>';
+    homepageProductSlides.innerHTML = `
+      <article class="showcase-slide fallback-showcase">
+        <div class="showcase-image-wrap">
+          <img src="assets/scentivity-logo-fused.png" alt="Scentivity logo" loading="lazy" />
+          <span class="showcase-badge soon">Coming soon</span>
+        </div>
+        <div class="showcase-copy">
+          <p class="eyebrow">Scentivity</p>
+          <h3>New scents coming soon</h3>
+          <p>Available products and incoming scents will appear here.</p>
+        </div>
+      </article>
+    `;
     if (homepageProductDots) homepageProductDots.innerHTML = '';
     return;
   }
@@ -581,7 +594,7 @@ function renderHomepageShowcase() {
     const price = cleanText(product.price || (product.available === false ? 'Coming soon' : 'Price on request'));
     const size = cleanText(product.size || '');
     const notes = cleanText(product.notes || 'Scentivity favorite selected for sweet, confident moments.');
-    const image = normalizeImagePath(product.image || 'assets/products/velvet-rose.svg');
+    const image = normalizeImagePath(product.image || 'assets/scentivity-logo-fused.png');
     const available = product.available !== false;
     return `
       <article class="showcase-slide" aria-label="${name}">
@@ -678,6 +691,10 @@ function updateCartCount() {
 
 
 function getBundleSelectedProducts() {
+  const checkedKeys = new Set([...document.querySelectorAll('#bundleBuilderGrid input[type="checkbox"]:checked')].map(input => input.value));
+  if (checkedKeys.size) {
+    selectedBundleProductKeys = checkedKeys;
+  }
   return products.filter(product => selectedBundleProductKeys.has(product._key) && product.available !== false);
 }
 
@@ -740,7 +757,10 @@ function updateBundleBuilderSummary() {
 function addBuiltBundleToCart() {
   const selected = getBundleSelectedProducts();
   if (selected.length < 2) {
-    alert('Please select at least 2 products to build a bundle.');
+    if (bundleBuilderSummary) {
+      const summarySpan = bundleBuilderSummary.querySelector('span');
+      if (summarySpan) summarySpan.textContent = 'Select at least 2 products to build a bundle.';
+    }
     return;
   }
 
@@ -1372,5 +1392,50 @@ aboutModal?.addEventListener('click', event => {
 document.addEventListener('keydown', event => {
   if (event.key === 'Escape') closeAboutModalFn();
 });
+
+
+// Scentivity contact modal controls
+const contactModal = document.querySelector('#contactModal');
+const openContactButton = document.querySelector('#openContactButton');
+const openPreorderButton = document.querySelector('#openPreorderButton');
+const mobileContactButton = document.querySelector('#mobileContactButton');
+const closeContactModal = document.querySelector('#closeContactModal');
+
+function openContactModal() {
+  if (!contactModal) return;
+  contactModal.classList.add('open');
+  contactModal.setAttribute('aria-hidden', 'false');
+}
+
+function closeContactModalFn() {
+  if (!contactModal) return;
+  contactModal.classList.remove('open');
+  contactModal.setAttribute('aria-hidden', 'true');
+}
+
+openContactButton?.addEventListener('click', openContactModal);
+openPreorderButton?.addEventListener('click', openContactModal);
+mobileContactButton?.addEventListener('click', openContactModal);
+closeContactModal?.addEventListener('click', closeContactModalFn);
+contactModal?.addEventListener('click', event => {
+  if (event.target === contactModal) closeContactModalFn();
+});
+
+// Make customer-love cards visible even if a mobile browser miscalculates the track.
+function forceVisibleTestimonials() {
+  const track = document.querySelector('#testimonialSlides');
+  if (!track) return;
+  track.querySelectorAll('article').forEach(article => {
+    article.style.visibility = 'visible';
+    article.style.opacity = '1';
+  });
+}
+
+forceVisibleTestimonials();
+window.setTimeout(forceVisibleTestimonials, 250);
+window.setTimeout(() => {
+  renderHomepageShowcase();
+  forceVisibleTestimonials();
+}, 500);
 
 loadProducts();

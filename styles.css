@@ -3848,3 +3848,255 @@ iframe {
     height: 160px !important;
   }
 }
+
+
+/* Logo, slideshow, contact-modal, and bundle-message fixes */
+.brand img,
+.about-modal-logo img,
+.about-modal img,
+.contact-modal img,
+.footer-logo {
+  object-fit: contain !important;
+}
+
+.nav-contact-button,
+.nav-preorder-button {
+  border: 0;
+  background: transparent;
+  color: var(--black);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 8px 10px;
+  border-radius: 999px;
+}
+
+.nav-contact-button:hover,
+.nav-preorder-button:hover {
+  color: var(--hot-pink);
+  background: rgba(240,4,103,.08);
+}
+
+/* Now Showing: prevent blank slides */
+.homepage-showcase .showcase-window {
+  min-height: 0 !important;
+  height: auto !important;
+  background:
+    radial-gradient(circle at 92% 12%, rgba(255,255,255,.96), transparent 9rem),
+    linear-gradient(135deg, rgba(255,255,255,.96), rgba(255,242,246,.84)) !important;
+}
+
+.homepage-showcase .showcase-track,
+#homepageProductSlides {
+  display: flex !important;
+  align-items: stretch !important;
+  min-height: 0 !important;
+}
+
+.homepage-showcase .showcase-slide {
+  flex: 0 0 100% !important;
+  min-width: 100% !important;
+  max-width: 100% !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: grid !important;
+  grid-template-columns: minmax(220px, .9fr) minmax(0, 1.1fr) !important;
+  gap: 22px !important;
+  min-height: 0 !important;
+  height: auto !important;
+}
+
+.homepage-showcase .showcase-image-wrap {
+  min-height: 250px !important;
+  height: auto !important;
+  background:
+    radial-gradient(circle at 80% 18%, rgba(255,255,255,.9), transparent 8rem),
+    linear-gradient(145deg, #fff, #fff1f6) !important;
+}
+
+.homepage-showcase .showcase-image-wrap img {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  width: 100% !important;
+  height: 240px !important;
+  max-height: 260px !important;
+  object-fit: contain !important;
+  padding: 14px !important;
+}
+
+.homepage-showcase .showcase-copy {
+  display: grid !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  align-content: center !important;
+  min-width: 0 !important;
+}
+
+/* Customer Love: prevent blank review cards */
+.testimonial-slider {
+  min-height: 0 !important;
+  height: auto !important;
+  background: transparent !important;
+}
+
+.testimonial-track {
+  display: flex !important;
+  align-items: stretch !important;
+  min-height: 0 !important;
+}
+
+.testimonial-track article {
+  display: grid !important;
+  align-content: center !important;
+  flex: 0 0 100% !important;
+  min-width: 100% !important;
+  max-width: 100% !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  color: var(--ink) !important;
+  background:
+    radial-gradient(circle at 90% 10%, rgba(255,255,255,.96), transparent 10rem),
+    linear-gradient(135deg, rgba(255,255,255,.98), rgba(255,242,246,.86)) !important;
+  min-height: 210px !important;
+}
+
+.testimonial-track .stars,
+.testimonial-track p,
+.testimonial-track span {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Contact as popup, not a main-page section */
+.contact-modal {
+  width: min(760px, 100%);
+  max-height: min(88vh, 820px);
+  overflow: auto;
+  padding: 24px;
+  border-radius: 30px;
+  background: linear-gradient(180deg, #fff, var(--blush));
+  box-shadow: 0 30px 90px rgba(0,0,0,.24);
+  position: relative;
+}
+
+.contact-modal-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  align-items: start;
+}
+
+.contact-modal .contact-copy,
+.contact-modal .preorder-card {
+  background: rgba(255,255,255,.72);
+  border: 1px solid rgba(224,0,91,.14);
+  border-radius: 24px;
+  padding: 18px;
+}
+
+.contact-modal .preorder-card {
+  align-self: stretch;
+}
+
+/* Hide any leftover main contact if browser cached older HTML */
+main > .contact {
+  display: none !important;
+}
+
+.mobile-bottom-nav button#mobileContactButton {
+  position: relative;
+  display: grid;
+  place-items: center;
+  gap: 2px;
+  border: 0;
+  background: transparent;
+  color: var(--black);
+  font-weight: 900;
+  text-decoration: none;
+  padding: 5px 2px;
+  min-height: 48px;
+  cursor: pointer;
+}
+
+@media (max-width: 760px) {
+  .nav-contact-button,
+  .nav-preorder-button {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    border: 1px solid rgba(224,0,91,.12);
+    background: rgba(255,242,246,.72);
+  }
+
+  .homepage-showcase .showcase-slide {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+    padding: 14px !important;
+  }
+
+  .homepage-showcase .showcase-image-wrap {
+    min-height: 190px !important;
+  }
+
+  .homepage-showcase .showcase-image-wrap img {
+    height: 170px !important;
+    max-height: 180px !important;
+  }
+
+  .homepage-showcase .showcase-copy {
+    gap: 8px !important;
+  }
+
+  .homepage-showcase .showcase-copy h3 {
+    font-size: 1.4rem !important;
+    line-height: 1.05 !important;
+  }
+
+  .homepage-showcase .showcase-copy p:not(.eyebrow) {
+    font-size: .82rem !important;
+    line-height: 1.35 !important;
+  }
+
+  .testimonial-track article {
+    min-height: 210px !important;
+    padding: 22px !important;
+  }
+
+  .testimonial-track p {
+    font-size: 1.7rem !important;
+    line-height: 1.06 !important;
+  }
+
+  .contact-modal {
+    padding: 16px;
+    border-radius: 24px;
+    width: min(100%, calc(100vw - 22px));
+    max-height: 82vh;
+  }
+
+  .contact-modal-content {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .contact-modal .contact-copy,
+  .contact-modal .preorder-card {
+    padding: 14px;
+    border-radius: 20px;
+  }
+
+  #addBuiltBundleToCart:disabled {
+    opacity: .65 !important;
+  }
+}
+
+@media (max-width: 390px) {
+  .homepage-showcase .showcase-image-wrap img {
+    height: 150px !important;
+  }
+
+  .testimonial-track article {
+    min-height: 190px !important;
+  }
+}
