@@ -1,3 +1,4 @@
+// SCENTIVITY_CATALOGUE_SHIPPING_UPDATE_20260602
 // SCENTIVITY_BUTTONS_SLIDES_FIX_UPDATE_20260602
 // SCENTIVITY_LOGO_SLIDESHOW_CONTACT_FIX_UPDATE_20260602
 // SCENTIVITY_LAYOUT_CLEANUP_UPDATE_20260602
@@ -15,6 +16,8 @@
 const MAIN_CATEGORY_VS = "Victoria's Secret Collection";
 const MAIN_CATEGORY_BBW = 'Bath & Body Works Collection';
 const MAIN_CATEGORY_DESIGNER = 'Designer and Luxury Fragrances';
+const CATALOGUE_GIFT_SETS = 'gift_sets';
+const CATALOGUE_COMBOS = 'combos';
 
 const SCENTIVITY_SUBCATEGORIES = [
   "Body Care",
@@ -306,16 +309,27 @@ function buttonMarkup(label, value, activeValue, dataName) {
 
 function renderMainCategoryFilters() {
   if (!mainCategoryFilters) return;
-  const productMainCategories = products.map(getMainCategory);
-  const taxonomyNames = productTaxonomy.map(item => item.name);
-  const categories = uniqueSorted([...taxonomyNames, ...productMainCategories]);
-  mainCategoryFilters.innerHTML = [
-    buttonMarkup('All', 'all', activeMainCategory, 'main'),
-    ...categories.map(category => buttonMarkup(category, category, activeMainCategory, 'main'))
-  ].join('');
+
+  const catalogueButtons = [
+    { label: 'ALL', value: 'all' },
+    { label: 'BBW', value: MAIN_CATEGORY_BBW },
+    { label: 'VICTORIA SECRET', value: MAIN_CATEGORY_VS },
+    { label: 'DESIGNER FRAGRANCE', value: MAIN_CATEGORY_DESIGNER },
+    { label: 'GIFT SETS', value: CATALOGUE_GIFT_SETS },
+    { label: 'COMBOS', value: CATALOGUE_COMBOS }
+  ];
+
+  mainCategoryFilters.innerHTML = catalogueButtons
+    .map(item => buttonMarkup(item.label, item.value, activeMainCategory, 'main'))
+    .join('');
 }
 
 function getSubcategoriesForActiveMain() {
+  if (activeMainCategory === CATALOGUE_COMBOS) return [];
+  if (activeMainCategory === CATALOGUE_GIFT_SETS) {
+    return ['Gift Sets', 'Fine Fragrance Mist', 'Body Care', 'Designer Fragrance'];
+  }
+
   const productSubs = products
     .filter(product => activeMainCategory === 'all' || getMainCategory(product) === activeMainCategory)
     .map(getSubCategory);
@@ -328,8 +342,12 @@ function getSubcategoriesForActiveMain() {
 function renderSubCategoryFilters() {
   if (!subCategoryFilters) return;
   const subcategories = getSubcategoriesForActiveMain();
+  if (!subcategories.length) {
+    subCategoryFilters.innerHTML = '<span class="catalogue-hint">Combos are shown in the Combo Deals section.</span>';
+    return;
+  }
   subCategoryFilters.innerHTML = [
-    buttonMarkup('All types', 'all', activeSubCategory, 'sub'),
+    buttonMarkup('ALL TYPES', 'all', activeSubCategory, 'sub'),
     ...subcategories.map(category => buttonMarkup(category, category, activeSubCategory, 'sub'))
   ].join('');
 }
@@ -382,10 +400,10 @@ Quantity:`;
 
 
 function getVisibleProducts() {
+  if (activeMainCategory === CATALOGUE_COMBOS) return [];
+
   const search = activeSearchTerm.toLowerCase();
   return products.filter(product => {
-    const matchesMain = activeMainCategory === 'all' || getMainCategory(product) === activeMainCategory;
-    const matchesSub = activeSubCategory === 'all' || getSubCategory(product) === activeSubCategory;
     const searchableText = [
       product.name,
       product.brand,
@@ -395,8 +413,17 @@ function getVisibleProducts() {
       product.notes,
       product.price
     ].join(' ').toLowerCase();
+
+    const isGiftSet = activeMainCategory === CATALOGUE_GIFT_SETS
+      ? searchableText.includes('gift') || searchableText.includes('set') || searchableText.includes('bundle')
+      : true;
+
+    const matchesMain = activeMainCategory === 'all'
+      || activeMainCategory === CATALOGUE_GIFT_SETS
+      || getMainCategory(product) === activeMainCategory;
+    const matchesSub = activeSubCategory === 'all' || getSubCategory(product) === activeSubCategory;
     const matchesSearch = !search || searchableText.includes(search);
-    return matchesMain && matchesSub && matchesSearch;
+    return matchesMain && matchesSub && matchesSearch && isGiftSet;
   });
 }
 
@@ -434,7 +461,6 @@ function renderCombos() {
   comboGrid.innerHTML = visibleCombos.map(combo => {
     const name = cleanText(combo.name || 'Scentivity Combo');
     const includedItems = cleanText(combo.includedItems || 'Selected Scentivity products');
-    const originalPrice = cleanText(combo.originalPrice || '');
     const comboPrice = cleanText(combo.comboPrice || combo.price || 'Price on request');
     const discountText = cleanText(combo.discountText || '');
     const image = normalizeImagePath(combo.image || 'assets/products/velvet-rose.svg');
@@ -452,7 +478,6 @@ function renderCombos() {
           <span class="product-brand">Combo deal</span>
           <h3>${name}</h3>
           <div class="combo-prices">
-            ${originalPrice ? `<span class="combo-old-price"><small>Old price</small><s>${originalPrice}</s></span>` : ''}
             <span class="combo-new-price"><small>Combo price</small><strong>${comboPrice}</strong></span>
             <span class="combo-save-pill">${savingsLabel}</span>
           </div>
@@ -825,7 +850,7 @@ function comboSnapshot(combo) {
     subCategory: 'Discounted Bundle',
     size: cleanText(combo.includedItems || ''),
     priceText: comboPrice,
-    originalPriceText: cleanText(combo.originalPrice || ''),
+    originalPriceText: '',
     discountText: cleanText(combo.discountText || ''),
     unitPrice: Number(combo._unitPrice || parseGHSPrice(comboPrice)),
     image: normalizeImagePath(combo.image || 'assets/products/velvet-rose.svg'),
@@ -933,7 +958,7 @@ function updateFulfillmentFields() {
 
 function orderSummaryForMessage(order) {
   const itemLines = order.items
-    .map(item => `- ${item.itemType === 'combo' ? 'Combo: ' : ''}${item.name}${item.size ? ` (${item.size})` : ''} x ${item.quantity} — ${formatGHS(item.unitPrice * item.quantity)}${item.originalPriceText ? ` (old price: ${item.originalPriceText})` : ''}${item.discountText ? ` [${item.discountText}]` : ''}${item.includedItems ? `\n  Contains: ${item.includedItems}` : ''}`)
+    .map(item => `- ${item.itemType === 'combo' ? 'Combo: ' : ''}${item.name}${item.size ? ` (${item.size})` : ''} x ${item.quantity} — ${formatGHS(item.unitPrice * item.quantity)}${item.itemType !== 'combo' && item.originalPriceText ? ` (old price: ${item.originalPriceText})` : ''}${item.discountText ? ` [${item.discountText}]` : ''}${item.includedItems ? `\n  Contains: ${item.includedItems}` : ''}`)
     .join('\n');
 
   return `Hello Scentivity,
@@ -944,7 +969,7 @@ ${itemLines}
 
 Total before delivery: ${formatGHS(order.totalGHS)}
 Fulfillment: ${order.fulfillment}
-Delivery address: ${order.deliveryAddress || 'N/A'}
+Shipping country: ${order.shippingCountry || 'Ghana'}\nDelivery address: ${order.deliveryAddress || 'N/A'}
 Pickup note/location: ${order.pickupLocation || 'N/A'}
 Delivery fee note: Applies to delivery orders and will be determined after checkout based on location.
 Payment method: ${order.paymentMethodLabel}
@@ -975,6 +1000,7 @@ function buildOrderFromForm() {
       phone: cleanText(formData.get('customerPhone') || '')
     },
     fulfillment: fulfillment === 'pickup' ? 'Pickup' : 'Delivery',
+    shippingCountry: fulfillment === 'delivery' ? 'Ghana' : '',
     deliveryAddress: fulfillment === 'delivery' ? cleanText(formData.get('deliveryAddress') || '') : '',
     pickupLocation: fulfillment === 'pickup' ? cleanText(formData.get('pickupLocation') || '') : '',
     deliveryFeeNote: 'Delivery fee applies to delivery orders and will be determined after checkout based on location.',
@@ -1076,9 +1102,19 @@ if (mainCategoryFilters) {
   mainCategoryFilters.addEventListener('click', event => {
     const button = event.target.closest('[data-main]');
     if (!button) return;
+
     activeMainCategory = button.dataset.main;
     activeSubCategory = 'all';
     refreshShop();
+
+    if (activeMainCategory === CATALOGUE_COMBOS) {
+      closeCatalogueModalFn();
+      document.querySelector('#comboDeals')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return;
+    }
+
+    closeCatalogueModalFn();
+    document.querySelector('#products')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 }
 
@@ -1100,6 +1136,8 @@ if (subCategoryFilters) {
     activeSubCategory = button.dataset.sub;
     renderSubCategoryFilters();
     renderProducts();
+    closeCatalogueModalFn();
+    document.querySelector('#products')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 }
 
@@ -1472,5 +1510,73 @@ window.setTimeout(() => {
   renderHomepageShowcase();
   showTestimonial(testimonialIndex || 0);
 }, 300);
+
+
+const catalogueModal = document.querySelector('#catalogueModal');
+const shippingModal = document.querySelector('#shippingModal');
+const openCatalogueButton = document.querySelector('#openCatalogueButton');
+const openCatalogueButtonQuick = document.querySelector('#openCatalogueButtonQuick');
+const closeCatalogueModal = document.querySelector('#closeCatalogueModal');
+const openShippingButton = document.querySelector('#openShippingButton');
+const openShippingButtonQuick = document.querySelector('#openShippingButtonQuick');
+const closeShippingModal = document.querySelector('#closeShippingModal');
+
+function openCatalogueModal() {
+  if (!catalogueModal) return;
+  catalogueModal.classList.add('open');
+  catalogueModal.setAttribute('aria-hidden', 'false');
+}
+
+function closeCatalogueModalFn() {
+  if (!catalogueModal) return;
+  catalogueModal.classList.remove('open');
+  catalogueModal.setAttribute('aria-hidden', 'true');
+}
+
+function openShippingModal() {
+  if (!shippingModal) return;
+  shippingModal.classList.add('open');
+  shippingModal.setAttribute('aria-hidden', 'false');
+}
+
+function closeShippingModalFn() {
+  if (!shippingModal) return;
+  shippingModal.classList.remove('open');
+  shippingModal.setAttribute('aria-hidden', 'true');
+}
+
+openCatalogueButton?.addEventListener('click', openCatalogueModal);
+openCatalogueButtonQuick?.addEventListener('click', openCatalogueModal);
+closeCatalogueModal?.addEventListener('click', closeCatalogueModalFn);
+catalogueModal?.addEventListener('click', event => {
+  if (event.target === catalogueModal) closeCatalogueModalFn();
+});
+
+openShippingButton?.addEventListener('click', openShippingModal);
+openShippingButtonQuick?.addEventListener('click', openShippingModal);
+closeShippingModal?.addEventListener('click', closeShippingModalFn);
+shippingModal?.addEventListener('click', event => {
+  if (event.target === shippingModal) closeShippingModalFn();
+});
+
+document.addEventListener('click', event => {
+  const catalogueButton = event.target.closest('#openCatalogueButton, #openCatalogueButtonQuick');
+  const shippingButton = event.target.closest('#openShippingButton, #openShippingButtonQuick, [data-open-shipping]');
+  if (catalogueButton) {
+    event.preventDefault();
+    openCatalogueModal();
+  }
+  if (shippingButton) {
+    event.preventDefault();
+    openShippingModal();
+  }
+});
+
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape') {
+    closeCatalogueModalFn();
+    closeShippingModalFn();
+  }
+});
 
 loadProducts();

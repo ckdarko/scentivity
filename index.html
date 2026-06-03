@@ -28,6 +28,8 @@
       <a href="#comboDeals">Combos</a>
       <button class="nav-preorder-button" id="openPreorderButton" type="button" onclick="document.getElementById('contactModal')?.classList.add('open');document.getElementById('contactModal')?.setAttribute('aria-hidden','false')">Preorder</button>
       <button class="nav-about-button" id="openAboutButton" type="button" onclick="document.getElementById('aboutModal')?.classList.add('open');document.getElementById('aboutModal')?.setAttribute('aria-hidden','false')">About</button>
+      <button class="nav-catalogue-button" id="openCatalogueButton" type="button" onclick="document.getElementById('catalogueModal')?.classList.add('open');document.getElementById('catalogueModal')?.setAttribute('aria-hidden','false')">Product Catalogue</button>
+      <button class="nav-shipping-button" id="openShippingButton" type="button" onclick="document.getElementById('shippingModal')?.classList.add('open');document.getElementById('shippingModal')?.setAttribute('aria-hidden','false')">Shipping Countries</button>
       <button class="nav-contact-button" id="openContactButton" type="button" onclick="document.getElementById('contactModal')?.classList.add('open');document.getElementById('contactModal')?.setAttribute('aria-hidden','false')">Contact</button>
       <button class="nav-search-button" id="navSearchButton" type="button">Search</button>
       <button class="cart-nav-button" id="cartToggle" type="button" aria-label="Open cart">Cart <span id="cartCount">0</span></button>
@@ -43,10 +45,10 @@
         <div class="hero-actions">
           <a class="btn primary" href="#products">Shop now</a>
         </div>
-        <div class="trust-row" aria-label="Business highlights">
+        <div class="trust-row floating-trust-row" aria-label="Business highlights">
           <span>Everything Sweet Scented</span>
-          <span>Victoria’s Secret, Bath & Body Works & luxury fragrances</span>
-          <span>Pickup, delivery & secure checkout options</span>
+          <span>Victoria’s Secret. Bath & Body Works. luxury fragrances</span>
+          <span>Pickup. delivery. secure checkout options.</span>
         </div>
       </div>
       <div class="hero-card hero-deal-card" aria-label="Deal of the Week">
@@ -71,21 +73,17 @@
 
 
 
-    <section class="section quick-shop-controls" id="quickShop" aria-label="Search and filter products">
-      <div class="filter-panel" aria-label="Product filters">
-          <div>
-            <span>Search</span>
-            <input class="product-search" id="productSearch" type="search" placeholder="Search perfume, mist, lotion, candle..." />
-          </div>
-          <div>
-            <span>Main Categories</span>
-            <div class="filter-controls" id="mainCategoryFilters"></div>
-          </div>
-          <div>
-            <span>Fragrance / care type</span>
-            <div class="filter-controls subcategory-controls" id="subCategoryFilters"></div>
-          </div>
+    <section class="section quick-shop-controls" id="quickShop" aria-label="Search products and open product catalogue">
+      <div class="filter-panel quick-search-only" aria-label="Product search">
+        <div>
+          <span>Search</span>
+          <input class="product-search" id="productSearch" type="search" placeholder="Search perfume, mist, lotion, candle..." />
         </div>
+        <div class="quick-action-buttons">
+          <button class="btn primary" id="openCatalogueButtonQuick" type="button" onclick="document.getElementById('catalogueModal')?.classList.add('open');document.getElementById('catalogueModal')?.setAttribute('aria-hidden','false')">Product Catalogue</button>
+          <button class="btn ghost" id="openShippingButtonQuick" type="button" onclick="document.getElementById('shippingModal')?.classList.add('open');document.getElementById('shippingModal')?.setAttribute('aria-hidden','false')">Shipping Countries</button>
+        </div>
+      </div>
     </section>
 <section class="section homepage-showcase" id="featured-products" aria-label="Available and coming soon products">
       <div class="section-heading split showcase-heading">
@@ -316,6 +314,69 @@
     </div>
   </div>
 
+
+  <div class="modal-overlay catalogue-modal-overlay" id="catalogueModal" aria-hidden="true">
+    <div class="catalogue-modal" role="dialog" aria-modal="true" aria-labelledby="catalogueModalTitle">
+      <button class="modal-close" id="closeCatalogueModal" type="button" aria-label="Close product catalogue" onclick="document.getElementById('catalogueModal')?.classList.remove('open');document.getElementById('catalogueModal')?.setAttribute('aria-hidden','true')">×</button>
+      <p class="eyebrow">Product Catalogue</p>
+      <h2 id="catalogueModalTitle">Browse Scentivity by collection and fragrance type.</h2>
+      <p class="catalogue-intro">Use the catalogue buttons to filter products. Combos opens the discount bundle section.</p>
+      <div class="catalogue-filter-panel">
+        <div>
+          <span>PRODUCT CATALOGUE</span>
+          <div class="filter-controls catalogue-category-controls" id="mainCategoryFilters"></div>
+        </div>
+        <div>
+          <span>FRAGRANCE / CARE TYPE</span>
+          <div class="filter-controls subcategory-controls catalogue-subcategory-controls" id="subCategoryFilters"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal-overlay shipping-modal-overlay" id="shippingModal" aria-hidden="true">
+    <div class="shipping-modal" role="dialog" aria-modal="true" aria-labelledby="shippingModalTitle">
+      <button class="modal-close" id="closeShippingModal" type="button" aria-label="Close shipping countries" onclick="document.getElementById('shippingModal')?.classList.remove('open');document.getElementById('shippingModal')?.setAttribute('aria-hidden','true')">×</button>
+      <p class="eyebrow">Shipping Countries</p>
+      <h2 id="shippingModalTitle">Where Scentivity can currently ship.</h2>
+      <p class="shipping-intro">For now, online delivery checkout is available only within Ghana. For other countries, leave your details through Contact and we will notify you when shipping becomes available.</p>
+      <div class="shipping-country-list">
+        <article class="available">
+          <strong>Ghana</strong>
+          <span>Available now</span>
+          <p>Delivery is currently available in Ghana. Delivery fee will be determined after checkout based on your location.</p>
+        </article>
+        <article>
+          <strong>Nigeria</strong>
+          <span>Not available yet</span>
+          <p>Sorry, we can’t ship to this country now. When available, we will notify you. Enter your details in Contact.</p>
+        </article>
+        <article>
+          <strong>United States</strong>
+          <span>Not available yet</span>
+          <p>Sorry, we can’t ship to this country now. When available, we will notify you. Enter your details in Contact.</p>
+        </article>
+        <article>
+          <strong>United Kingdom</strong>
+          <span>Not available yet</span>
+          <p>Sorry, we can’t ship to this country now. When available, we will notify you. Enter your details in Contact.</p>
+        </article>
+        <article>
+          <strong>Canada</strong>
+          <span>Not available yet</span>
+          <p>Sorry, we can’t ship to this country now. When available, we will notify you. Enter your details in Contact.</p>
+        </article>
+        <article>
+          <strong>Other countries</strong>
+          <span>Coming later</span>
+          <p>Sorry, we can’t ship outside Ghana now. When available, we will notify you. Enter your details in Contact.</p>
+        </article>
+      </div>
+      <button class="btn primary" type="button" onclick="document.getElementById('shippingModal')?.classList.remove('open');document.getElementById('shippingModal')?.setAttribute('aria-hidden','true');document.getElementById('contactModal')?.classList.add('open');document.getElementById('contactModal')?.setAttribute('aria-hidden','false')">Enter details in Contact</button>
+    </div>
+  </div>
+
   <div class="cart-overlay" id="cartOverlay" aria-hidden="true"></div>
   <aside class="cart-drawer" id="cartDrawer" aria-hidden="true" aria-label="Shopping cart and checkout">
     <div class="cart-header">
@@ -358,6 +419,13 @@
 
       <div id="deliveryFields" class="delivery-fields">
         <label>
+          Shipping country
+          <select name="shippingCountry" id="shippingCountry">
+            <option value="Ghana" selected>Ghana only for now</option>
+          </select>
+        </label>
+        <p class="cart-small-note shipping-country-note">Scentivity currently accepts delivery orders only within Ghana. Use the Shipping Countries button to see availability updates.</p>
+        <label>
           Delivery address
           <textarea name="deliveryAddress" rows="3" placeholder="Enter delivery address, area, landmark, city, and any useful directions"></textarea>
         </label>
@@ -398,6 +466,8 @@
       <a href="#comboDeals">Combos</a>
       <button class="nav-preorder-button" id="openPreorderButton" type="button" onclick="document.getElementById('contactModal')?.classList.add('open');document.getElementById('contactModal')?.setAttribute('aria-hidden','false')">Preorder</button>
       <button class="nav-about-button" id="openAboutButton" type="button" onclick="document.getElementById('aboutModal')?.classList.add('open');document.getElementById('aboutModal')?.setAttribute('aria-hidden','false')">About</button>
+      <button class="nav-catalogue-button" id="openCatalogueButton" type="button" onclick="document.getElementById('catalogueModal')?.classList.add('open');document.getElementById('catalogueModal')?.setAttribute('aria-hidden','false')">Product Catalogue</button>
+      <button class="nav-shipping-button" id="openShippingButton" type="button" onclick="document.getElementById('shippingModal')?.classList.add('open');document.getElementById('shippingModal')?.setAttribute('aria-hidden','false')">Shipping Countries</button>
       <button class="nav-contact-button" id="openContactButton" type="button" onclick="document.getElementById('contactModal')?.classList.add('open');document.getElementById('contactModal')?.setAttribute('aria-hidden','false')">Contact</button>
       <button class="cart-nav-button" id="cartToggleFooter" type="button" aria-label="Open cart">Cart <span id="cartCountFooter">0</span></button>
       <a href="mailto:scentivitygh@gmail.com">Email</a>
@@ -407,7 +477,7 @@
 
   <button class="back-to-top" id="backToTop" type="button" aria-label="Move back to the top of the page">↑</button>
 
-  <script src="app-cacheproof-buttons-slides-fix-20260602.js"></script>
+  <script src="app-cacheproof-catalogue-shipping-20260602.js"></script>
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script>
     if (window.netlifyIdentity) {
