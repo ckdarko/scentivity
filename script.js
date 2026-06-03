@@ -1,3 +1,4 @@
+// SCENTIVITY_REVIEWS_BUNDLE_TOGGLE_UPDATE_20260603
 // SCENTIVITY_DEAL_OF_WEEK_ADMIN_UPDATE_20260602
 // SCENTIVITY_CATALOGUE_SHIPPING_UPDATE_20260602
 // SCENTIVITY_BUTTONS_SLIDES_FIX_UPDATE_20260602
@@ -151,6 +152,15 @@ const fallbackCombos = [
 
 
 
+
+const fallbackBundleBuilderSettings = {
+  enabled: false,
+  discountTwoItems: 5,
+  discountThreeOrMore: 10,
+  note: ''
+};
+
+
 const fallbackDealOfWeek = {
   enabled: true,
   itemType: 'combo',
@@ -167,6 +177,8 @@ const fallbackDealOfWeek = {
 let products = [];
 let combos = [];
 let dealOfWeek = { ...fallbackDealOfWeek };
+let bundleBuilderSettings = { ...fallbackBundleBuilderSettings };
+let customerReviews = [];
 let activeMainCategory = 'all';
 let activeSubCategory = 'all';
 let activeSearchTerm = '';
@@ -193,6 +205,7 @@ function buildWhatsAppLink(message) {
 const dealOfWeekCard = document.querySelector('#dealOfWeekCard') || document.querySelector('.hero-deal-card');
 const productGrid = document.querySelector('#productGrid');
 const comboGrid = document.querySelector('#comboGrid');
+const bundleBuilderSection = document.querySelector('#bundleBuilder');
 const bundleBuilderGrid = document.querySelector('#bundleBuilderGrid');
 const bundleBuilderSummary = document.querySelector('#bundleBuilderSummary');
 const addBuiltBundleToCartButton = document.querySelector('#addBuiltBundleToCart');
@@ -845,13 +858,23 @@ function getBundleSelectedProducts() {
 }
 
 function getBundleDiscountRate(count) {
-  if (count >= 3) return 0.10;
-  if (count >= 2) return 0.05;
+  const twoItemDiscount = Math.max(0, Number(bundleBuilderSettings.discountTwoItems || 0)) / 100;
+  const threeItemDiscount = Math.max(0, Number(bundleBuilderSettings.discountThreeOrMore || 0)) / 100;
+  if (count >= 3) return threeItemDiscount;
+  if (count >= 2) return twoItemDiscount;
   return 0;
 }
 
 function renderBundleBuilder() {
   if (!bundleBuilderGrid) return;
+
+  if (bundleBuilderSettings.enabled !== true) {
+    if (bundleBuilderSection) bundleBuilderSection.classList.add('hidden');
+    bundleBuilderGrid.innerHTML = '';
+    return;
+  }
+
+  if (bundleBuilderSection) bundleBuilderSection.classList.remove('hidden');
   const availableProducts = products
     .filter(product => product.available !== false)
     .filter(product => Number(product._unitPrice || parseGHSPrice(product.price)) > 0);
@@ -1088,7 +1111,6 @@ ${itemLines}
 Total before delivery: ${formatGHS(order.totalGHS)}
 Fulfillment: ${order.fulfillment}
 Shipping country: ${order.shippingCountry || 'Ghana'}\nDelivery address: ${order.deliveryAddress || 'N/A'}
-Pickup note/location: ${order.pickupLocation || 'N/A'}
 Delivery fee note: Applies to delivery orders and will be determined after checkout based on location.
 Payment method: ${order.paymentMethodLabel}
 
@@ -1120,7 +1142,6 @@ function buildOrderFromForm() {
     fulfillment: fulfillment === 'pickup' ? 'Pickup' : 'Delivery',
     shippingCountry: fulfillment === 'delivery' ? 'Ghana' : '',
     deliveryAddress: fulfillment === 'delivery' ? cleanText(formData.get('deliveryAddress') || '') : '',
-    pickupLocation: fulfillment === 'pickup' ? cleanText(formData.get('pickupLocation') || '') : '',
     deliveryFeeNote: 'Delivery fee applies to delivery orders and will be determined after checkout based on location.',
     paymentMethod,
     paymentMethodLabel: paymentLabel,
@@ -1196,6 +1217,8 @@ async function loadProducts() {
   products = enrichProducts(fallbackProducts);
   combos = enrichCombos(fallbackCombos);
   dealOfWeek = { ...fallbackDealOfWeek };
+  bundleBuilderSettings = { ...fallbackBundleBuilderSettings };
+  customerReviews = [];
   try {
     const response = await fetch(`data/products.json?v=${Date.now()}`, { cache: 'no-store' });
     if (!response.ok) throw new Error('Could not load product data.');
@@ -1209,6 +1232,12 @@ async function loadProducts() {
     if (data.dealOfWeek && typeof data.dealOfWeek === 'object') {
       dealOfWeek = { ...fallbackDealOfWeek, ...data.dealOfWeek };
     }
+    if (data.bundleBuilder && typeof data.bundleBuilder === 'object') {
+      bundleBuilderSettings = { ...fallbackBundleBuilderSettings, ...data.bundleBuilder };
+    }
+    if (Array.isArray(data.customerReviews)) {
+      customerReviews = data.customerReviews;
+    }
   } catch (error) {
     console.warn('Using fallback products:', error.message);
   }
@@ -1216,6 +1245,7 @@ async function loadProducts() {
   renderDealOfWeek();
   renderCombos();
   renderBundleBuilder();
+  renderCustomerReviews();
   renderHomepageShowcase();
   startShowcaseAutoplay();
   renderCart();
@@ -1396,11 +1426,60 @@ document.querySelectorAll('[data-scroll-search]').forEach(shortcut => {
 let testimonialIndex = 0;
 let testimonialTimer = null;
 
-function renderTestimonialDots() {
+function approvedCustomerReviews() {
+  return customerReviews
+    .filter(review => review && review.approved === true)
+    .map(review => ({
+      name: cleanText(review.name || 'Scentivity customer'),
+      rating: Math.min(5, Math.max(1, Number(review.rating || 5))),
+      message: cleanText(review.message || ''),
+      date: cleanText(review.date || '')
+    }))
+    .filter(review => review.message);
+}
+
+function renderCustomerReviews() {
   const testimonialSlides = document.querySelector('#testimonialSlides');
   const testimonialDots = document.querySelector('#testimonialDots');
-  if (!testimonialSlides || !testimonialDots) return;
-  const slides = [...testimonialSlides.children];
+  const testimonialControls = document.querySelector('.testimonial-controls');
+  if (!testimonialSlides) return;
+
+  const reviews = approvedCustomerReviews();
+  if (!reviews.length) {
+    testimonialSlides.innerHTML = `
+      <article class="review-empty-state active">
+        <div class="stars">♡♡♡♡♡</div>
+        <p>No customer reviews have been posted yet.</p>
+        <span>Approved customer feedback will appear here.</span>
+      </article>
+    `;
+    if (testimonialDots) testimonialDots.innerHTML = '';
+    if (testimonialControls) testimonialControls.classList.add('hidden');
+    return;
+  }
+
+  if (testimonialControls) testimonialControls.classList.remove('hidden');
+  if (testimonialIndex >= reviews.length) testimonialIndex = 0;
+
+  testimonialSlides.innerHTML = reviews.map((review, index) => `
+    <article class="${index === testimonialIndex ? 'active' : ''}">
+      <div class="stars">${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}</div>
+      <p>“${review.message}”</p>
+      <span>${review.name}</span>
+    </article>
+  `).join('');
+
+  showTestimonial(testimonialIndex);
+}
+
+function renderTestimonialDots() {
+  const testimonialDots = document.querySelector('#testimonialDots');
+  const slides = [...document.querySelectorAll('#testimonialSlides > article')];
+  if (!testimonialDots) return;
+  if (slides.length <= 1 || slides[0]?.classList.contains('review-empty-state')) {
+    testimonialDots.innerHTML = '';
+    return;
+  }
   testimonialDots.innerHTML = slides.map((_, index) => `<button type="button" class="${index === testimonialIndex ? 'active' : ''}" data-testimonial-index="${index}" aria-label="Show review ${index + 1}"></button>`).join('');
 }
 
@@ -1425,6 +1504,8 @@ function showTestimonial(index) {
 
 function startTestimonialAutoplay() {
   window.clearInterval(testimonialTimer);
+  const slides = [...document.querySelectorAll('#testimonialSlides > article')];
+  if (slides.length <= 1 || slides[0]?.classList.contains('review-empty-state')) return;
   testimonialTimer = window.setInterval(() => showTestimonial(testimonialIndex + 1), 5500);
 }
 
@@ -1713,6 +1794,15 @@ document.addEventListener('keydown', event => {
     closeCatalogueModalFn();
     closeShippingModalFn();
   }
+});
+
+
+const customerFeedbackForm = document.querySelector('#customerFeedbackForm');
+customerFeedbackForm?.addEventListener('submit', () => {
+  window.setTimeout(() => {
+    const note = customerFeedbackForm.querySelector('.cart-small-note');
+    if (note) note.textContent = 'Thank you. Your feedback has been submitted for Scentivity approval.';
+  }, 50);
 });
 
 loadProducts();

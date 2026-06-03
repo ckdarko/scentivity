@@ -124,5 +124,12 @@
     "description": "This week’s highlighted Scentivity deal. Update this from the admin dashboard anytime.",
     "buttonText": "Add Deal to Cart",
     "image": ""
-  }
+  },
+  "bundleBuilder": {
+    "enabled": false,
+    "discountTwoItems": 5,
+    "discountThreeOrMore": 10,
+    "note": "Turn on to allow buyers to build custom discounted bundles."
+  },
+  "customerReviews": []
 }

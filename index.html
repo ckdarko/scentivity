@@ -102,29 +102,7 @@
       </div>
       <div class="showcase-dots" id="homepageProductDots" aria-label="Slideshow pagination"></div>
     </section>
-
-
-
-    <section class="section stats stats-slider" aria-label="Store highlights">
-      <div class="stats-track" id="statsSlides">
-        <article>
-          <strong>3</strong>
-          <span>Main collections</span>
-        </article>
-        <article>
-          <strong>11</strong>
-          <span>Fragrance & care types</span>
-        </article>
-        <article>
-          <strong>@scentivity</strong>
-          <span>Follow on Instagram</span>
-        </article>
-      </div>
-      <div class="stats-dots" id="statsDots" aria-label="Store highlight pagination"></div>
-    </section>
-
-
-    <section class="section products-section" id="products">
+<section class="section products-section" id="products">
 
 
       <div class="combo-deals" id="comboDeals" aria-label="Scentivity combo deals">
@@ -210,39 +188,52 @@
     <section class="section testimonials" id="testimonials">
       <div class="section-heading split">
         <div>
-          <p class="eyebrow">Customer love</p>
-          <h2>Sweet scents, smooth ordering, and gift-ready picks.</h2>
+          <p class="eyebrow">Customer Love</p>
+          <h2>Share your Scentivity experience.</h2>
+          <p>Customer feedback will appear here only after it has been reviewed and approved by Scentivity.</p>
         </div>
         <div class="testimonial-controls" aria-label="Review slideshow controls">
           <button class="testimonial-arrow" id="testimonialPrev" type="button" aria-label="Previous review">‹</button>
           <button class="testimonial-arrow" id="testimonialNext" type="button" aria-label="Next review">›</button>
         </div>
       </div>
+
       <div class="testimonial-slider" aria-live="polite">
-        <div class="testimonial-track" id="testimonialSlides">
-          <article>
-            <div class="stars">★★★★★</div>
-            <p>“The scent recommendation was perfect and the ordering process was easy.”</p>
-            <span>Scentivity customer</span>
-          </article>
-          <article>
-            <div class="stars">★★★★★</div>
-            <p>“I love that I can request a fragrance, ask on WhatsApp, and checkout from my phone.”</p>
-            <span>Online buyer</span>
-          </article>
-          <article>
-            <div class="stars">★★★★★</div>
-            <p>“The combo deals make gifting simple and affordable.”</p>
-            <span>Gift shopper</span>
-          </article>
-          <article>
-            <div class="stars">★★★★★</div>
-            <p>“Pickup and delivery options make it convenient to order a gift quickly.”</p>
-            <span>Gift buyer</span>
-          </article>
-        </div>
+        <div class="testimonial-track" id="testimonialSlides"></div>
       </div>
       <div class="testimonial-dots" id="testimonialDots" aria-label="Review slideshow pagination"></div>
+
+      <form class="feedback-form" name="customer-feedback" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="customerFeedbackForm">
+        <input type="hidden" name="form-name" value="customer-feedback" />
+        <p class="hidden">
+          <label>Do not fill this out if you are human: <input name="bot-field" /></label>
+        </p>
+        <div>
+          <p class="eyebrow">Write feedback</p>
+          <h3>Tell us what you think.</h3>
+          <p>Your feedback will be reviewed before it appears on the website.</p>
+        </div>
+        <label>
+          Name
+          <input type="text" name="name" placeholder="Your name" required />
+        </label>
+        <label>
+          Rating
+          <select name="rating" required>
+            <option value="5">★★★★★ 5 stars</option>
+            <option value="4">★★★★ 4 stars</option>
+            <option value="3">★★★ 3 stars</option>
+            <option value="2">★★ 2 stars</option>
+            <option value="1">★ 1 star</option>
+          </select>
+        </label>
+        <label>
+          Feedback
+          <textarea name="message" rows="4" placeholder="Write your feedback here..." required></textarea>
+        </label>
+        <button class="btn primary" type="submit">Submit Feedback</button>
+        <p class="cart-small-note">Reviews are not posted immediately. Scentivity will approve feedback before it appears on the website.</p>
+      </form>
     </section>
   </main>
 
@@ -430,12 +421,7 @@
           <textarea name="deliveryAddress" rows="3" placeholder="Enter delivery address, area, landmark, city, and any useful directions"></textarea>
         </label>
       </div>
-      <label id="pickupFields" class="hidden">
-        Pickup note / preferred pickup area
-        <textarea name="pickupLocation" rows="3" placeholder="Enter preferred pickup area or any pickup note"></textarea>
-      </label>
-
-      <label>
+<label>
         Payment method
         <select name="paymentMethod" id="paymentMethod" required>
           <option value="card">Card</option>
@@ -477,7 +463,7 @@
 
   <button class="back-to-top" id="backToTop" type="button" aria-label="Move back to the top of the page">↑</button>
 
-  <script src="app-cacheproof-deal-of-week-admin-20260602.js"></script>
+  <script src="app-cacheproof-reviews-bundle-toggle-20260603.js"></script>
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script>
     if (window.netlifyIdentity) {
