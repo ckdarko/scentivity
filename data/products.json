@@ -121,7 +121,7 @@
     "comboName": "Sweet Starter Combo",
     "badgeText": "Deal of the Week",
     "title": "Bundle your favorites and save.",
-    "description": "This week’s highlighted Scentivity deal. Update this from the admin dashboard anytime.",
+    "description": "Fresh picks. Sweet savings.",
     "buttonText": "Add Deal to Cart",
     "image": ""
   },
@@ -131,5 +131,60 @@
     "discountThreeOrMore": 10,
     "note": "Turn on to allow buyers to build custom discounted bundles."
   },
-  "customerReviews": []
+  "customerReviews": [],
+  "productCatalogue": [
+    {
+      "label": "BBW",
+      "categoryName": "Bath & Body Works Collection",
+      "subcategories": [
+        "Body Care",
+        "Body Lotions and Cream",
+        "Fine Fragrance Mist",
+        "Body Washes & Shower Gels",
+        "Hand Sanitizers",
+        "Home Fragrances",
+        "Scented Candles",
+        "Room Sprays",
+        "Car Fragrances",
+        "Wallflower Refills & Plugs"
+      ],
+      "showInCatalogue": true
+    },
+    {
+      "label": "VICTORIA SECRET",
+      "categoryName": "Victoria's Secret Collection",
+      "subcategories": [
+        "Body Care",
+        "Body Lotions and Cream",
+        "Fine Fragrance Mist",
+        "Body Washes & Shower Gels",
+        "Men's Body Care",
+        "Gift Sets"
+      ],
+      "showInCatalogue": true
+    },
+    {
+      "label": "DESIGNER FRAGRANCE",
+      "categoryName": "Designer and Luxury Fragrances",
+      "subcategories": [
+        "Designer Fragrance",
+        "Fine Fragrance Mist",
+        "Home Fragrances",
+        "Men's Body Care",
+        "Gift Sets"
+      ],
+      "showInCatalogue": true
+    },
+    {
+      "label": "GIFT SETS",
+      "categoryName": "gift_sets",
+      "subcategories": [
+        "Gift Sets",
+        "Fine Fragrance Mist",
+        "Body Care",
+        "Designer Fragrance"
+      ],
+      "showInCatalogue": true
+    }
+  ]
 }

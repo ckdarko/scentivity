@@ -35,7 +35,7 @@ collections:
               - { label: "Combo Name to Feature", name: "comboName", widget: "string", required: false, hint: "Use this only when Deal Type is Combo Deal. Must match the Combo Name exactly." }
               - { label: "Badge Text", name: "badgeText", widget: "string", required: false, default: "Deal of the Week" }
               - { label: "Deal Heading", name: "title", widget: "string", required: false, hint: "Example: Bundle your favorites and save." }
-              - { label: "Deal Description", name: "description", widget: "text", required: false, hint: "Short text buyers will see under the Deal of the Week heading." }
+              - { label: "Deal Description", name: "description", widget: "text", required: false, hint: "Short catchy text buyers will see under the Deal of the Week heading. Example: Fresh picks. Sweet savings." }
               - { label: "Button Text", name: "buttonText", widget: "string", required: false, default: "Add Deal to Cart" }
               - { label: "Optional Deal Image", name: "image", widget: "image", required: false, hint: "Optional. If empty, the selected product/combo image will be used." }
 
@@ -66,6 +66,23 @@ collections:
               - { label: "Review Date", name: "date", widget: "datetime", required: false }
               - { label: "Source", name: "source", widget: "hidden", default: "admin_added", required: false }
 
+
+          - label: "Product Catalogue / Categories"
+            name: "productCatalogue"
+            widget: "list"
+            summary: "{{fields.label}} — {{fields.categoryName}}"
+            collapsed: true
+            hint: "Add or edit catalogue names and their subcategories. Product Main Category must match the Category Name Used by Products."
+            fields:
+              - { label: "Catalogue Button Label", name: "label", widget: "string", hint: "Example: BBW, VICTORIA SECRET, DESIGNER FRAGRANCE, GIFT SETS" }
+              - { label: "Category Name Used by Products", name: "categoryName", widget: "string", hint: "Example: Bath & Body Works Collection. Use gift_sets for the Gift Sets special filter." }
+              - { label: "Show in Product Catalogue", name: "showInCatalogue", widget: "boolean", default: true, required: false }
+              - label: "Subcategories"
+                name: "subcategories"
+                widget: "list"
+                summary: "{{fields.name}}"
+                field: { label: "Subcategory Name", name: "name", widget: "string" }
+
           - label: "Products"
             name: "products"
             widget: "list"
@@ -74,28 +91,8 @@ collections:
             fields:
               - { label: "Product Name", name: "name", widget: "string" }
               - { label: "Brand", name: "brand", widget: "string", required: false, hint: "Example: Scentivity, Victoria's Secret, Bath & Body Works" }
-              - label: "Main Category"
-                name: "mainCategory"
-                widget: "select"
-                options:
-                  - "Victoria's Secret Collection"
-                  - "Bath & Body Works Collection"
-                  - "Designer and Luxury Fragrances"
-              - label: "Fragrance / Care Type"
-                name: "subCategory"
-                widget: "select"
-                options:
-                  - "Body Care"
-                  - "Body Lotions and Cream"
-                  - "Fine Fragrance Mist"
-                  - "Body Washes & Shower Gels"
-                  - "Hand Sanitizers"
-                  - "Men's Body Care"
-                  - "Home Fragrances"
-                  - "Scented Candles"
-                  - "Room Sprays"
-                  - "Car Fragrances"
-                  - "Wallflower Refills & Plugs"
+              - { label: "Main Category", name: "mainCategory", widget: "string", hint: "Type the exact Category Name Used by Products from Product Catalogue / Categories. Example: Bath & Body Works Collection" }
+              - { label: "Fragrance / Care Type", name: "subCategory", widget: "string", hint: "Type or add any subcategory. Example: Fine Fragrance Mist, Gift Sets, Body Care, Scented Candles" }
               - { label: "Price", name: "price", widget: "string", hint: "Example: GH₵250" }
               - { label: "Size", name: "size", widget: "string", required: false, hint: "Example: 50 mL, 236 mL, 8 oz, 3-wick candle, Gift set" }
               - { label: "Product Photo", name: "image", widget: "image", required: false }

@@ -4577,3 +4577,169 @@ main > .contact {
     font-size: 1.55rem !important;
   }
 }
+
+
+/* Search moved under Combo Deals update */
+.products-section > .quick-shop-controls {
+  margin-top: 22px !important;
+  margin-bottom: 28px !important;
+}
+
+.homepage-showcase .section-heading p:not(.eyebrow) {
+  display: none !important;
+}
+
+@media (max-width: 760px) {
+  .products-section > .quick-shop-controls {
+    margin-top: 16px !important;
+    margin-bottom: 22px !important;
+  }
+}
+
+
+/* Hero highlights marquee + admin-editable catalogue update */
+.hero-highlights-marquee {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden !important;
+  border-radius: 999px;
+  border: 1px solid rgba(224,0,91,.14);
+  background: rgba(255,255,255,.62);
+  padding: 6px !important;
+  margin-top: 24px !important;
+  mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
+}
+
+.hero-highlights-track {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: max-content;
+  animation: scentivityHeroHighlightsMarquee 34s linear infinite;
+  will-change: transform;
+}
+
+.hero-highlights-track span {
+  flex: 0 0 auto !important;
+  white-space: nowrap !important;
+  padding: 10px 16px !important;
+  border-radius: 999px;
+  background: rgba(255,255,255,.9);
+  border: 1px solid rgba(224,0,91,.16);
+  box-shadow: 0 10px 26px rgba(61,18,36,.06);
+  color: #6e4c5c;
+  font-size: .88rem;
+  font-weight: 850;
+}
+
+.hero-highlights-marquee:hover .hero-highlights-track {
+  animation-play-state: paused;
+}
+
+@keyframes scentivityHeroHighlightsMarquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.catalogue-modal .catalogue-intro::after {
+  content: " Add more catalogue names and subcategories from the admin page.";
+}
+
+@media (max-width: 760px) {
+  .hero-highlights-marquee {
+    margin-top: 16px !important;
+    padding: 5px !important;
+  }
+
+  .hero-highlights-track {
+    animation-duration: 28s;
+  }
+
+  .hero-highlights-track span {
+    font-size: .76rem;
+    padding: 9px 13px !important;
+  }
+}
+
+
+/* Footer visibility + feedback text cleanup update */
+.site-footer,
+footer.site-footer {
+  color: rgba(255,255,255,.92) !important;
+}
+
+.site-footer a,
+.site-footer button,
+.site-footer .nav-preorder-button,
+.site-footer .nav-about-button,
+.site-footer .nav-catalogue-button,
+.site-footer .nav-shipping-button,
+.site-footer .nav-contact-button,
+.site-footer .cart-nav-button {
+  color: #ffffff !important;
+  opacity: 1 !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,.28);
+}
+
+.site-footer .footer-links a,
+.site-footer .footer-links button,
+.site-footer nav a,
+.site-footer nav button {
+  color: #ffffff !important;
+  background: rgba(255,255,255,.08) !important;
+  border: 1px solid rgba(255,255,255,.20) !important;
+  border-radius: 999px !important;
+  padding: 8px 12px !important;
+}
+
+.site-footer .footer-links a:hover,
+.site-footer .footer-links button:hover,
+.site-footer nav a:hover,
+.site-footer nav button:hover {
+  background: rgba(255,255,255,.18) !important;
+  color: #ffffff !important;
+  transform: translateY(-1px);
+}
+
+.site-footer .cart-nav-button {
+  background: rgba(255,255,255,.90) !important;
+  color: var(--black) !important;
+  text-shadow: none !important;
+}
+
+.site-footer .cart-nav-button span,
+.site-footer #cartCountFooter {
+  background: var(--black) !important;
+  color: #ffffff !important;
+}
+
+.site-footer small,
+.site-footer p,
+.site-footer strong,
+.site-footer span {
+  color: rgba(255,255,255,.92) !important;
+}
+
+.site-footer .footer-contact a,
+.site-footer .footer-contact button {
+  color: #ffffff !important;
+}
+
+@media (max-width: 760px) {
+  .site-footer .footer-links,
+  .site-footer nav {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+  }
+
+  .site-footer .footer-links a,
+  .site-footer .footer-links button,
+  .site-footer nav a,
+  .site-footer nav button {
+    width: 100% !important;
+    text-align: center !important;
+    justify-content: center !important;
+  }
+}

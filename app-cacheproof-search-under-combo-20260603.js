@@ -1,3 +1,4 @@
+// SCENTIVITY_CATALOGUE_ADMIN_MARQUEE_UPDATE_20260603
 // SCENTIVITY_SEARCH_UNDER_COMBO_UPDATE_20260603
 // SCENTIVITY_REVIEWS_BUNDLE_TOGGLE_UPDATE_20260603
 // SCENTIVITY_DEAL_OF_WEEK_ADMIN_UPDATE_20260602
@@ -36,11 +37,14 @@ const SCENTIVITY_SUBCATEGORIES = [
   "Wallflower Refills & Plugs"
 ];
 
-const productTaxonomy = [
-  { name: MAIN_CATEGORY_VS, subcategories: SCENTIVITY_SUBCATEGORIES },
-  { name: MAIN_CATEGORY_BBW, subcategories: SCENTIVITY_SUBCATEGORIES },
-  { name: MAIN_CATEGORY_DESIGNER, subcategories: SCENTIVITY_SUBCATEGORIES }
+const defaultProductCatalogue = [
+  { label: 'BBW', name: MAIN_CATEGORY_BBW, categoryName: MAIN_CATEGORY_BBW, subcategories: SCENTIVITY_SUBCATEGORIES, showInCatalogue: true },
+  { label: 'VICTORIA SECRET', name: MAIN_CATEGORY_VS, categoryName: MAIN_CATEGORY_VS, subcategories: SCENTIVITY_SUBCATEGORIES, showInCatalogue: true },
+  { label: 'DESIGNER FRAGRANCE', name: MAIN_CATEGORY_DESIGNER, categoryName: MAIN_CATEGORY_DESIGNER, subcategories: SCENTIVITY_SUBCATEGORIES, showInCatalogue: true },
+  { label: 'GIFT SETS', name: CATALOGUE_GIFT_SETS, categoryName: CATALOGUE_GIFT_SETS, subcategories: ['Gift Sets', 'Fine Fragrance Mist', 'Body Care', 'Designer Fragrance'], showInCatalogue: true }
 ];
+
+let productCatalogue = [...defaultProductCatalogue];
 
 const fallbackProducts = [
   {
@@ -255,13 +259,66 @@ function normalizeImagePath(path) {
   return path.startsWith('/') ? path.slice(1) : path;
 }
 
+
+function normalizeCatalogueSubcategoryList(subcategories = []) {
+  if (!Array.isArray(subcategories)) return [];
+  return subcategories
+    .map(item => typeof item === 'string' ? item : (item?.name || item?.label || item?.value || ''))
+    .map(cleanText)
+    .filter(Boolean);
+}
+
+function normalizeCatalogueItem(item = {}) {
+  const label = cleanText(item.label || item.buttonLabel || item.name || item.categoryName || item.value || '');
+  const categoryName = cleanText(item.categoryName || item.name || item.value || label);
+  return {
+    label: label || categoryName || 'Catalogue',
+    name: categoryName,
+    categoryName,
+    subcategories: normalizeCatalogueSubcategoryList(item.subcategories),
+    showInCatalogue: item.showInCatalogue !== false && item.enabled !== false
+  };
+}
+
+function normalizeProductCatalogue(items = []) {
+  const source = Array.isArray(items) && items.length ? items : defaultProductCatalogue;
+  const merged = [...defaultProductCatalogue, ...source]
+    .map(normalizeCatalogueItem)
+    .filter(item => item.name);
+  const seen = new Set();
+  return merged.filter(item => {
+    const key = item.name.toLowerCase();
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+function findCatalogueByName(name = '') {
+  const target = cleanText(name).toLowerCase();
+  if (!target) return null;
+  return productCatalogue.find(item =>
+    cleanText(item.name).toLowerCase() === target ||
+    cleanText(item.categoryName).toLowerCase() === target ||
+    cleanText(item.label).toLowerCase() === target
+  ) || null;
+}
+
+
 function normalizeMainCategory(product = {}) {
-  const main = cleanText(product.mainCategory || product.category || '').toLowerCase();
+  const mainRaw = cleanText(product.mainCategory || product.category || '');
+  const main = mainRaw.toLowerCase();
   const brand = cleanText(product.brand || '').toLowerCase();
   const combined = `${main} ${brand}`;
 
+  const catalogueMatch = findCatalogueByName(mainRaw);
+  if (catalogueMatch) return catalogueMatch.name;
+
   if (combined.includes('victoria')) return MAIN_CATEGORY_VS;
   if (combined.includes('bath') || main.includes('body care') || main.includes('home fragrance')) return MAIN_CATEGORY_BBW;
+  if (main.includes('gift')) return CATALOGUE_GIFT_SETS;
+  if (mainRaw) return mainRaw;
+
   return MAIN_CATEGORY_DESIGNER;
 }
 
@@ -343,10 +400,9 @@ function renderMainCategoryFilters() {
 
   const catalogueButtons = [
     { label: 'ALL', value: 'all' },
-    { label: 'BBW', value: MAIN_CATEGORY_BBW },
-    { label: 'VICTORIA SECRET', value: MAIN_CATEGORY_VS },
-    { label: 'DESIGNER FRAGRANCE', value: MAIN_CATEGORY_DESIGNER },
-    { label: 'GIFT SETS', value: CATALOGUE_GIFT_SETS },
+    ...productCatalogue
+      .filter(item => item.showInCatalogue !== false)
+      .map(item => ({ label: item.label || item.name, value: item.name })),
     { label: 'COMBOS', value: CATALOGUE_COMBOS }
   ];
 
@@ -357,16 +413,15 @@ function renderMainCategoryFilters() {
 
 function getSubcategoriesForActiveMain() {
   if (activeMainCategory === CATALOGUE_COMBOS) return [];
-  if (activeMainCategory === CATALOGUE_GIFT_SETS) {
-    return ['Gift Sets', 'Fine Fragrance Mist', 'Body Care', 'Designer Fragrance'];
-  }
 
   const productSubs = products
     .filter(product => activeMainCategory === 'all' || getMainCategory(product) === activeMainCategory)
     .map(getSubCategory);
+
   const taxonomySubs = activeMainCategory === 'all'
-    ? productTaxonomy.flatMap(item => item.subcategories)
-    : (productTaxonomy.find(item => item.name === activeMainCategory)?.subcategories || []);
+    ? productCatalogue.flatMap(item => item.subcategories || [])
+    : (findCatalogueByName(activeMainCategory)?.subcategories || []);
+
   return uniqueSorted([...taxonomySubs, ...productSubs]);
 }
 
@@ -435,11 +490,13 @@ function getVisibleProducts() {
 
   const search = activeSearchTerm.toLowerCase();
   return products.filter(product => {
+    const mainCategory = getMainCategory(product);
+    const subCategory = getSubCategory(product);
     const searchableText = [
       product.name,
       product.brand,
-      getMainCategory(product),
-      getSubCategory(product),
+      mainCategory,
+      subCategory,
       product.size,
       product.notes,
       product.price
@@ -451,8 +508,8 @@ function getVisibleProducts() {
 
     const matchesMain = activeMainCategory === 'all'
       || activeMainCategory === CATALOGUE_GIFT_SETS
-      || getMainCategory(product) === activeMainCategory;
-    const matchesSub = activeSubCategory === 'all' || getSubCategory(product) === activeSubCategory;
+      || mainCategory === activeMainCategory;
+    const matchesSub = activeSubCategory === 'all' || subCategory === activeSubCategory;
     const matchesSearch = !search || searchableText.includes(search);
     return matchesMain && matchesSub && matchesSearch && isGiftSet;
   });
@@ -1220,10 +1277,14 @@ async function loadProducts() {
   dealOfWeek = { ...fallbackDealOfWeek };
   bundleBuilderSettings = { ...fallbackBundleBuilderSettings };
   customerReviews = [];
+  productCatalogue = normalizeProductCatalogue(defaultProductCatalogue);
   try {
     const response = await fetch(`data/products.json?v=${Date.now()}`, { cache: 'no-store' });
     if (!response.ok) throw new Error('Could not load product data.');
     const data = await response.json();
+    if (Array.isArray(data.productCatalogue) && data.productCatalogue.length) {
+      productCatalogue = normalizeProductCatalogue(data.productCatalogue);
+    }
     if (Array.isArray(data.products) && data.products.length) {
       products = enrichProducts(data.products);
     }

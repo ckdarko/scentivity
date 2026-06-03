@@ -45,10 +45,15 @@
         <div class="hero-actions">
           <a class="btn primary" href="#products">Shop now</a>
         </div>
-        <div class="trust-row floating-trust-row" aria-label="Business highlights">
-          <span>Everything Sweet Scented</span>
-          <span>Victoria’s Secret. Bath & Body Works. luxury fragrances</span>
-          <span>Pickup. delivery. secure checkout options.</span>
+        <div class="trust-row floating-trust-row hero-highlights-marquee" aria-label="Business highlights">
+          <div class="hero-highlights-track">
+            <span>Everything Sweet Scented</span>
+            <span>Victoria’s Secret. Bath & Body Works. luxury fragrances</span>
+            <span>Pickup. delivery. secure checkout options.</span>
+            <span>Everything Sweet Scented</span>
+            <span>Victoria’s Secret. Bath & Body Works. luxury fragrances</span>
+            <span>Pickup. delivery. secure checkout options.</span>
+          </div>
         </div>
       </div>
       <div class="hero-card hero-deal-card" id="dealOfWeekCard" aria-label="Deal of the Week">
@@ -65,7 +70,7 @@
         <div class="deal-week-content">
           <p class="eyebrow">Limited offer</p>
           <h2>Bundle your favorites and save.</h2>
-          <p>Choose selected combo deals for perfumes, mists, body care, and gift-ready scents while the weekly offer lasts.</p>
+          <p>Fresh picks. Sweet savings.</p>
           <a class="btn primary" href="#comboDeals">Shop deal</a>
         </div>
       </div>
@@ -73,24 +78,13 @@
 
 
 
-    <section class="section quick-shop-controls" id="quickShop" aria-label="Search products and open product catalogue">
-      <div class="filter-panel quick-search-only" aria-label="Product search">
-        <div>
-          <span>Search</span>
-          <input class="product-search" id="productSearch" type="search" placeholder="Search perfume, mist, lotion, candle..." />
-        </div>
-        <div class="quick-action-buttons">
-          <button class="btn primary" id="openCatalogueButtonQuick" type="button" onclick="document.getElementById('catalogueModal')?.classList.add('open');document.getElementById('catalogueModal')?.setAttribute('aria-hidden','false')">Product Catalogue</button>
-          <button class="btn ghost" id="openShippingButtonQuick" type="button" onclick="document.getElementById('shippingModal')?.classList.add('open');document.getElementById('shippingModal')?.setAttribute('aria-hidden','false')">Shipping Countries</button>
-        </div>
-      </div>
-    </section>
+    
+
 <section class="section homepage-showcase" id="featured-products" aria-label="Available and coming soon products">
       <div class="section-heading split showcase-heading">
         <div>
           <p class="eyebrow">Now showing</p>
           <h2>Available favorites and coming-soon scents.</h2>
-          <p>Swipe through selected favorites and incoming scents. Add available products to your cart or request a notification for coming-soon items.</p>
         </div>
         <div class="showcase-controls" aria-label="Slideshow controls">
           <button class="showcase-arrow" id="showcasePrev" type="button" aria-label="Previous product">‹</button>
@@ -135,6 +129,20 @@
         </div>
 
       </div>
+
+<section class="section quick-shop-controls" id="quickShop" aria-label="Search products and open product catalogue">
+      <div class="filter-panel quick-search-only" aria-label="Product search">
+        <div>
+          <span>Search</span>
+          <input class="product-search" id="productSearch" type="search" placeholder="Search perfume, mist, lotion, candle..." />
+        </div>
+        <div class="quick-action-buttons">
+          <button class="btn primary" id="openCatalogueButtonQuick" type="button" onclick="document.getElementById('catalogueModal')?.classList.add('open');document.getElementById('catalogueModal')?.setAttribute('aria-hidden','false')">Product Catalogue</button>
+          <button class="btn ghost" id="openShippingButtonQuick" type="button" onclick="document.getElementById('shippingModal')?.classList.add('open');document.getElementById('shippingModal')?.setAttribute('aria-hidden','false')">Shipping Countries</button>
+        </div>
+      </div>
+    </section>
+
 
 
       <div class="mobile-shop-bar" aria-label="Mobile shop search">
@@ -211,7 +219,7 @@
         <div>
           <p class="eyebrow">Write feedback</p>
           <h3>Tell us what you think.</h3>
-          <p>Your feedback will be reviewed before it appears on the website.</p>
+          <p></p>
         </div>
         <label>
           Name
@@ -232,7 +240,6 @@
           <textarea name="message" rows="4" placeholder="Write your feedback here..." required></textarea>
         </label>
         <button class="btn primary" type="submit">Submit Feedback</button>
-        <p class="cart-small-note">Reviews are not posted immediately. Scentivity will approve feedback before it appears on the website.</p>
       </form>
     </section>
   </main>
@@ -463,7 +470,7 @@
 
   <button class="back-to-top" id="backToTop" type="button" aria-label="Move back to the top of the page">↑</button>
 
-  <script src="app-cacheproof-reviews-bundle-toggle-20260603.js"></script>
+  <script src="app-cacheproof-footer-feedback-fix-20260603.js"></script>
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script>
     if (window.netlifyIdentity) {
