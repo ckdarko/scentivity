@@ -1,3 +1,4 @@
+// SCENTIVITY_DEAL_OF_WEEK_ADMIN_UPDATE_20260602
 // SCENTIVITY_CATALOGUE_SHIPPING_UPDATE_20260602
 // SCENTIVITY_BUTTONS_SLIDES_FIX_UPDATE_20260602
 // SCENTIVITY_LOGO_SLIDESHOW_CONTACT_FIX_UPDATE_20260602
@@ -149,8 +150,23 @@ const fallbackCombos = [
 ];
 
 
+
+const fallbackDealOfWeek = {
+  enabled: true,
+  itemType: 'combo',
+  productName: '',
+  comboName: 'Sweet Starter Combo',
+  badgeText: 'Deal of the Week',
+  title: 'Bundle your favorites and save.',
+  description: 'This week’s highlighted Scentivity deal. Update it from the admin dashboard anytime.',
+  buttonText: 'Add Deal to Cart',
+  image: ''
+};
+
+
 let products = [];
 let combos = [];
+let dealOfWeek = { ...fallbackDealOfWeek };
 let activeMainCategory = 'all';
 let activeSubCategory = 'all';
 let activeSearchTerm = '';
@@ -174,6 +190,7 @@ function buildWhatsAppLink(message) {
   return `https://wa.me/${SCENTIVITY_WHATSAPP}?text=${encodeURIComponent(message)}`;
 }
 
+const dealOfWeekCard = document.querySelector('#dealOfWeekCard') || document.querySelector('.hero-deal-card');
 const productGrid = document.querySelector('#productGrid');
 const comboGrid = document.querySelector('#comboGrid');
 const bundleBuilderGrid = document.querySelector('#bundleBuilderGrid');
@@ -449,6 +466,107 @@ function comboContainsListHtml(includedItems = '') {
 
   return `<ul class="combo-contains-list">${items.map(item => `<li>${item}</li>`).join('')}</ul>`;
 }
+
+
+function findItemByName(items = [], name = '') {
+  const target = cleanText(name).toLowerCase();
+  if (!target) return null;
+  return items.find(item => cleanText(item.name || '').toLowerCase() === target) || null;
+}
+
+function getDealOfWeekSelection() {
+  const config = dealOfWeek || fallbackDealOfWeek;
+  const explicitType = cleanText(config.itemType || config.type || '').toLowerCase();
+  const wantsCombo = explicitType.includes('combo');
+  const wantsProduct = explicitType.includes('product');
+
+  let item = null;
+  let itemType = wantsProduct ? 'product' : 'combo';
+
+  if (wantsProduct) {
+    item = findItemByName(products, config.productName) || products.find(product => product.isDealOfWeek && product.available !== false);
+    itemType = 'product';
+  } else if (wantsCombo) {
+    item = findItemByName(combos, config.comboName) || combos.find(combo => combo.isDealOfWeek && combo.available !== false);
+    itemType = 'combo';
+  }
+
+  if (!item) {
+    const flaggedCombo = combos.find(combo => combo.isDealOfWeek && combo.available !== false);
+    const flaggedProduct = products.find(product => product.isDealOfWeek && product.available !== false);
+    if (flaggedCombo) {
+      item = flaggedCombo;
+      itemType = 'combo';
+    } else if (flaggedProduct) {
+      item = flaggedProduct;
+      itemType = 'product';
+    }
+  }
+
+  if (!item) {
+    const firstCombo = combos.find(combo => combo.available !== false);
+    const firstProduct = products.find(product => product.available !== false);
+    if (firstCombo) {
+      item = firstCombo;
+      itemType = 'combo';
+    } else if (firstProduct) {
+      item = firstProduct;
+      itemType = 'product';
+    }
+  }
+
+  return { item, itemType, config };
+}
+
+function renderDealOfWeek() {
+  if (!dealOfWeekCard) return;
+  const config = dealOfWeek || fallbackDealOfWeek;
+  if (config.enabled === false) {
+    dealOfWeekCard.classList.add('hidden');
+    return;
+  }
+
+  const { item, itemType } = getDealOfWeekSelection();
+  if (!item) return;
+
+  dealOfWeekCard.classList.remove('hidden');
+
+  const isCombo = itemType === 'combo';
+  const name = cleanText(item.name || 'Scentivity deal');
+  const image = normalizeImagePath(config.image || item.image || 'assets/scentivity-logo-fused.png');
+  const badge = cleanText(config.badgeText || 'Deal of the Week');
+  const title = cleanText(config.title || (isCombo ? name : `This week’s featured scent: ${name}`));
+  const description = cleanText(config.description || item.description || item.notes || item.includedItems || 'Shop this highlighted Scentivity deal while it is available.');
+  const price = cleanText(isCombo ? (item.comboPrice || item.price || 'Price on request') : (item.price || 'Price on request'));
+  const savings = isCombo ? cleanText(item.discountText || '') : '';
+  const buttonText = cleanText(config.buttonText || (isCombo ? 'Add Deal Combo to Cart' : 'Add Deal to Cart'));
+  const subText = isCombo ? cleanText(item.includedItems || 'Combo deal') : [cleanText(item.brand || 'Scentivity'), cleanText(item.size || ''), getSubCategory(item)].filter(Boolean).join(' • ');
+  const dataAttribute = isCombo ? `data-deal-combo-key="${item._key}"` : `data-deal-product-key="${item._key}"`;
+
+  dealOfWeekCard.innerHTML = `
+    <div class="deal-week-visual">
+      <span class="deal-tag">${badge}</span>
+      <div class="deal-week-product-frame">
+        <img src="${image}" alt="${name}" loading="lazy" onerror="this.onerror=null;this.src='assets/scentivity-logo-fused.png';" />
+      </div>
+    </div>
+    <div class="deal-week-content">
+      <p class="eyebrow">${isCombo ? 'Featured combo' : 'Featured product'}</p>
+      <h2>${title}</h2>
+      <p>${description}</p>
+      <div class="deal-week-meta">
+        <strong>${price}</strong>
+        ${savings ? `<span>${savings}</span>` : ''}
+      </div>
+      <p class="deal-week-includes">${subText}</p>
+      <div class="deal-week-actions">
+        <button class="btn primary" type="button" ${dataAttribute}>${buttonText}</button>
+        <a class="btn ghost" href="${buildWhatsAppLink(`Hello Scentivity,%0A%0AI am interested in the Deal of the Week:%0A${name}%0A%0APlease confirm availability.`)}" target="_blank" rel="noreferrer">Ask about deal</a>
+      </div>
+    </div>
+  `;
+}
+
 
 function renderCombos() {
   if (!comboGrid) return;
@@ -1077,6 +1195,7 @@ async function handleCheckoutSubmit(event) {
 async function loadProducts() {
   products = enrichProducts(fallbackProducts);
   combos = enrichCombos(fallbackCombos);
+  dealOfWeek = { ...fallbackDealOfWeek };
   try {
     const response = await fetch(`data/products.json?v=${Date.now()}`, { cache: 'no-store' });
     if (!response.ok) throw new Error('Could not load product data.');
@@ -1087,10 +1206,14 @@ async function loadProducts() {
     if (Array.isArray(data.combos) && data.combos.length) {
       combos = enrichCombos(data.combos);
     }
+    if (data.dealOfWeek && typeof data.dealOfWeek === 'object') {
+      dealOfWeek = { ...fallbackDealOfWeek, ...data.dealOfWeek };
+    }
   } catch (error) {
     console.warn('Using fallback products:', error.message);
   }
   refreshShop();
+  renderDealOfWeek();
   renderCombos();
   renderBundleBuilder();
   renderHomepageShowcase();
@@ -1140,6 +1263,19 @@ if (subCategoryFilters) {
     document.querySelector('#products')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 }
+
+
+
+document.addEventListener('click', event => {
+  const productDealButton = event.target.closest('[data-deal-product-key]');
+  const comboDealButton = event.target.closest('[data-deal-combo-key]');
+  if (productDealButton) {
+    addToCart(productDealButton.dataset.dealProductKey);
+  }
+  if (comboDealButton) {
+    addComboToCart(comboDealButton.dataset.dealComboKey);
+  }
+});
 
 
 if (comboGrid) {

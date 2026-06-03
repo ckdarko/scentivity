@@ -4411,3 +4411,88 @@ main > .contact {
     width: 100%;
   }
 }
+
+
+/* Admin-controlled Deal of the Week update */
+.hero-deal-card.hidden {
+  display: none !important;
+}
+
+.deal-week-product-frame {
+  width: min(260px, 78%);
+  height: 250px;
+  display: grid;
+  place-items: center;
+  border-radius: 44px;
+  background:
+    radial-gradient(circle at 25% 18%, rgba(255,255,255,.96), transparent 8rem),
+    linear-gradient(145deg, rgba(255,255,255,.98), rgba(255,227,236,.86));
+  border: 1px solid rgba(224,0,91,.12);
+  box-shadow: 14px 16px 0 rgba(17,17,17,.12);
+  overflow: hidden;
+}
+
+.deal-week-product-frame img {
+  width: 100%;
+  height: 100%;
+  max-height: 230px;
+  object-fit: contain;
+  padding: 18px;
+}
+
+.deal-week-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.deal-week-meta strong {
+  color: var(--rose-dark);
+  font-size: 1.25rem;
+}
+
+.deal-week-meta span {
+  display: inline-flex;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(224,0,91,.1);
+  color: var(--rose-dark);
+  font-size: .78rem;
+  font-weight: 900;
+}
+
+.deal-week-includes {
+  font-size: .9rem;
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.deal-week-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.deal-week-actions .btn {
+  flex: 1 1 160px;
+}
+
+@media (max-width: 760px) {
+  .deal-week-product-frame {
+    width: min(220px, 78%);
+    height: 190px;
+    border-radius: 34px;
+    box-shadow: 10px 12px 0 rgba(17,17,17,.1);
+  }
+
+  .deal-week-product-frame img {
+    max-height: 176px;
+    padding: 12px;
+  }
+
+  .deal-week-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+}

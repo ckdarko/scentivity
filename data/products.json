@@ -10,7 +10,8 @@
       "notes": "A bright, feminine mist profile for daily wear. Add exact notes and stock details in the admin dashboard.",
       "size": "236 mL",
       "available": true,
-      "paymentLink": ""
+      "paymentLink": "",
+      "isDealOfWeek": false
     },
     {
       "name": "Bath & Body Works Body Cream",
@@ -22,7 +23,8 @@
       "notes": "Moisturizing body cream options from popular sweet, floral, fresh, and warm scent families.",
       "size": "226 g / 8 oz",
       "available": true,
-      "paymentLink": ""
+      "paymentLink": "",
+      "isDealOfWeek": false
     },
     {
       "name": "Sweet Signature Eau de Parfum",
@@ -34,7 +36,8 @@
       "notes": "A polished sweet scent profile with soft florals, vanilla, amber, and clean musk.",
       "size": "50 mL",
       "available": true,
-      "paymentLink": ""
+      "paymentLink": "",
+      "isDealOfWeek": false
     },
     {
       "name": "Men’s Fresh Body Spray",
@@ -46,7 +49,8 @@
       "notes": "Fresh, confident masculine scent profile for everyday use and gifting.",
       "size": "100 mL",
       "available": true,
-      "paymentLink": ""
+      "paymentLink": "",
+      "isDealOfWeek": false
     },
     {
       "name": "Scented 3-Wick Candle",
@@ -58,7 +62,8 @@
       "notes": "Home fragrance candle options for bedrooms, bathrooms, gifts, and cozy spaces.",
       "size": "3-wick candle",
       "available": true,
-      "paymentLink": ""
+      "paymentLink": "",
+      "isDealOfWeek": false
     },
     {
       "name": "Pocket Hand Sanitizer",
@@ -70,7 +75,8 @@
       "notes": "Portable scented sanitizer options for bags, cars, school, work, and gifting.",
       "size": "Travel size",
       "available": true,
-      "paymentLink": ""
+      "paymentLink": "",
+      "isDealOfWeek": false
     }
   ],
   "combos": [
@@ -82,7 +88,8 @@
       "comboPrice": "GH₵430",
       "discountText": "Save GH₵40",
       "image": "assets/products/velvet-rose.svg",
-      "available": true
+      "available": true,
+      "isDealOfWeek": true
     },
     {
       "name": "Home & Body Refresh Combo",
@@ -92,7 +99,8 @@
       "comboPrice": "GH₵510",
       "discountText": "Save GH₵55",
       "image": "assets/products/citrus-bloom.svg",
-      "available": true
+      "available": true,
+      "isDealOfWeek": false
     },
     {
       "name": "Luxury Gift Combo",
@@ -102,7 +110,19 @@
       "comboPrice": "GH₵630",
       "discountText": "Save GH₵70",
       "image": "assets/products/amber-noir.svg",
-      "available": true
+      "available": true,
+      "isDealOfWeek": false
     }
-  ]
+  ],
+  "dealOfWeek": {
+    "enabled": true,
+    "itemType": "combo",
+    "productName": "",
+    "comboName": "Sweet Starter Combo",
+    "badgeText": "Deal of the Week",
+    "title": "Bundle your favorites and save.",
+    "description": "This week’s highlighted Scentivity deal. Update this from the admin dashboard anytime.",
+    "buttonText": "Add Deal to Cart",
+    "image": ""
+  }
 }
