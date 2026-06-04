@@ -4824,3 +4824,70 @@ footer.site-footer {
 .hero-highlights-track span {
   letter-spacing: .01em;
 }
+
+
+/* Highlight spacing + combo before How To Order update */
+.hero-highlights-section {
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.hero-highlights-section .hero-highlights-marquee,
+.hero-highlights-marquee {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.hero-highlights-track span {
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
+}
+
+.combo-before-order-section {
+  padding-top: clamp(24px, 5vw, 54px) !important;
+  padding-bottom: clamp(18px, 4vw, 40px) !important;
+}
+
+.combo-before-order-section .combo-deals {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.products-section {
+  padding-bottom: clamp(18px, 4vw, 40px) !important;
+}
+
+@media (max-width: 760px) {
+  .hero-highlights-section {
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
+  }
+
+  .hero-highlights-marquee {
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
+  }
+
+  .hero-highlights-track span {
+    padding-top: 7px !important;
+    padding-bottom: 7px !important;
+  }
+
+  .combo-before-order-section {
+    padding-top: 22px !important;
+    padding-bottom: 18px !important;
+  }
+
+  .order-slider-section {
+    padding-top: 18px !important;
+  }
+}
+
+@media (max-width: 390px) {
+  .hero-highlights-section {
+    padding-top: 2px !important;
+    padding-bottom: 2px !important;
+  }
+}
