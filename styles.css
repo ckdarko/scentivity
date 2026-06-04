@@ -4955,3 +4955,67 @@ footer.site-footer {
     margin-bottom: -28px !important;
   }
 }
+
+
+/* Highlight overlap fix: keep Now Showing below highlight pills */
+.hero-highlights-section {
+  padding-top: 4px !important;
+  padding-bottom: 6px !important;
+  margin-top: 0 !important;
+  margin-bottom: 8px !important;
+}
+
+.hero-highlights-section + .homepage-showcase {
+  padding-top: 10px !important;
+  margin-top: 0 !important;
+  clear: both !important;
+}
+
+.hero-highlights-section + .homepage-showcase .section-heading {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+.hero-highlights-section .hero-highlights-marquee,
+.hero-highlights-marquee {
+  padding-top: 3px !important;
+  padding-bottom: 3px !important;
+  margin-bottom: 0 !important;
+}
+
+.hero-highlights-track span {
+  padding-top: 6px !important;
+  padding-bottom: 6px !important;
+}
+
+@media (max-width: 760px) {
+  .hero-highlights-section {
+    padding-top: 3px !important;
+    padding-bottom: 5px !important;
+    margin-bottom: 10px !important;
+  }
+
+  .hero-highlights-section + .homepage-showcase {
+    padding-top: 12px !important;
+  }
+
+  .homepage-showcase .section-heading {
+    position: relative !important;
+    z-index: 1 !important;
+  }
+
+  .hero-highlights-marquee {
+    position: relative !important;
+    z-index: 2 !important;
+  }
+}
+
+@media (max-width: 390px) {
+  .hero-highlights-section {
+    margin-bottom: 8px !important;
+  }
+
+  .hero-highlights-section + .homepage-showcase {
+    padding-top: 10px !important;
+  }
+}
