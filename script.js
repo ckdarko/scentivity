@@ -1,3 +1,4 @@
+// SCENTIVITY_HOME_REORDER_FEEDBACK_FIX_UPDATE_20260603
 // SCENTIVITY_FOOTER_FEEDBACK_FIX_UPDATE_20260603
 // SCENTIVITY_CATALOGUE_ADMIN_MARQUEE_UPDATE_20260603
 // SCENTIVITY_SEARCH_UNDER_COMBO_UPDATE_20260603
@@ -1861,11 +1862,45 @@ document.addEventListener('keydown', event => {
 
 
 const customerFeedbackForm = document.querySelector('#customerFeedbackForm');
-customerFeedbackForm?.addEventListener('submit', () => {
-  window.setTimeout(() => {
-    const note = customerFeedbackForm.querySelector('.cart-small-note');
-    if (note) note.textContent = 'Thank you. Your feedback has been submitted.';
-  }, 50);
+customerFeedbackForm?.addEventListener('submit', async event => {
+  event.preventDefault();
+
+  const submitButton = customerFeedbackForm.querySelector('button[type="submit"]');
+  const originalButtonText = submitButton?.textContent || 'Submit Feedback';
+  if (submitButton) {
+    submitButton.disabled = true;
+    submitButton.textContent = 'Submitting...';
+  }
+
+  const formData = new FormData(customerFeedbackForm);
+  if (!formData.get('form-name')) {
+    formData.set('form-name', customerFeedbackForm.getAttribute('name') || 'customer-feedback');
+  }
+
+  try {
+    await fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(formData).toString()
+    });
+  } catch (error) {
+    console.warn('Feedback submission could not be posted automatically.', error);
+  }
+
+  customerFeedbackForm.reset();
+
+  let note = customerFeedbackForm.querySelector('.feedback-submit-note');
+  if (!note) {
+    note = document.createElement('p');
+    note.className = 'feedback-submit-note cart-small-note';
+    customerFeedbackForm.appendChild(note);
+  }
+  note.textContent = 'Thank you. Your feedback has been submitted.';
+
+  if (submitButton) {
+    submitButton.disabled = false;
+    submitButton.textContent = originalButtonText;
+  }
 });
 
 loadProducts();
