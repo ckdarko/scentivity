@@ -5037,3 +5037,14 @@ footer.site-footer {
 .review-empty-state span:empty {
   display: none !important;
 }
+
+
+/* Preorder WhatsApp + promo text update */
+.preorder-whatsapp-note {
+  text-align: center;
+  margin-top: -4px !important;
+}
+
+.top-promo span {
+  white-space: nowrap;
+}
