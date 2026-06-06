@@ -1,3 +1,13 @@
 {
-  "pendingFeedback": []
+  "pendingFeedback": [
+    {
+      "id": "feedback-1780722445720",
+      "name": "c",
+      "rating": 5,
+      "message": "love",
+      "approved": false,
+      "date": "2026-06-06T05:07:25.720Z",
+      "source": "customer_submission"
+    }
+  ]
 }
