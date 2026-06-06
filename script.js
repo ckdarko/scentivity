@@ -1,5 +1,4 @@
-// SCENTIVITY_HOME_REORDER_FEEDBACK_FIX_UPDATE_20260603
-// SCENTIVITY_FOOTER_FEEDBACK_FIX_UPDATE_20260603
+// SCENTIVITY_NOTIFY_FEEDBACK_ADMIN_UPDATE_20260604
 // SCENTIVITY_CATALOGUE_ADMIN_MARQUEE_UPDATE_20260603
 // SCENTIVITY_SEARCH_UNDER_COMBO_UPDATE_20260603
 // SCENTIVITY_REVIEWS_BUNDLE_TOGGLE_UPDATE_20260603
@@ -836,7 +835,7 @@ function renderHomepageShowcase() {
           <strong>${price}</strong>
           ${available && product._key
             ? `<button class="btn primary add-to-cart" type="button" data-product-key="${product._key}">Add to Cart</button>`
-            : `<a class="btn ghost" href="#preorder">Notify me</a>`
+            : `<button class="btn ghost notify-me-button" type="button" data-notify-product="${name}" data-notify-brand="${brand}" data-notify-size="${size}">Notify Me</button>`
           }
         </div>
       </div>
@@ -1514,7 +1513,7 @@ function renderCustomerReviews() {
       <article class="review-empty-state active">
         <div class="stars">♡♡♡♡♡</div>
         <p>No customer reviews have been posted yet.</p>
-        <span>Approved customer feedback will appear here.</span>
+        
       </article>
     `;
     if (testimonialDots) testimonialDots.innerHTML = '';
@@ -1877,12 +1876,14 @@ customerFeedbackForm?.addEventListener('submit', async event => {
     formData.set('form-name', customerFeedbackForm.getAttribute('name') || 'customer-feedback');
   }
 
+  let posted = false;
   try {
-    await fetch('/', {
+    const response = await fetch('/.netlify/functions/submit-feedback', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: new URLSearchParams(formData).toString()
     });
+    posted = response.ok;
   } catch (error) {
     console.warn('Feedback submission could not be posted automatically.', error);
   }
@@ -1895,12 +1896,42 @@ customerFeedbackForm?.addEventListener('submit', async event => {
     note.className = 'feedback-submit-note cart-small-note';
     customerFeedbackForm.appendChild(note);
   }
-  note.textContent = 'Thank you. Your feedback has been submitted.';
+  note.textContent = posted
+    ? 'Thank you. Your feedback has been submitted.'
+    : 'Thank you. Your feedback has been received.';
 
   if (submitButton) {
     submitButton.disabled = false;
     submitButton.textContent = originalButtonText;
   }
+});
+
+
+// Coming-soon Notify Me buttons open the Contact/Preorder popup and prefill the request.
+document.addEventListener('click', event => {
+  const notifyButton = event.target.closest('.notify-me-button, a[href="#preorder"]');
+  if (!notifyButton) return;
+
+  event.preventDefault();
+
+  if (typeof openContactModal === 'function') {
+    openContactModal();
+  } else {
+    document.querySelector('#contactModal')?.classList.add('open');
+    document.querySelector('#contactModal')?.setAttribute('aria-hidden', 'false');
+  }
+
+  const productName = notifyButton.dataset.notifyProduct || 'this product';
+  const productBrand = notifyButton.dataset.notifyBrand || '';
+  const productSize = notifyButton.dataset.notifySize || '';
+  const messageBox = document.querySelector('#emailRequestForm textarea[name="message"]');
+
+  if (messageBox) {
+    messageBox.value = `Hello Scentivity, please notify me when this coming-soon item becomes available:\n\nProduct: ${productName}${productBrand ? `\nBrand: ${productBrand}` : ''}${productSize ? `\nSize: ${productSize}` : ''}\n\nMy preferred pickup/delivery option is:`;
+    window.setTimeout(() => messageBox.focus(), 150);
+  }
+
+  document.querySelector('#emailRequestForm')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
 });
 
 loadProducts();

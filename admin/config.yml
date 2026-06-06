@@ -117,3 +117,28 @@ collections:
               - { label: "Discount Text", name: "discountText", widget: "string", required: false, hint: "Example: Save GH₵40 or 10% off" }
               - { label: "Combo Photo", name: "image", widget: "image", required: false, hint: "Upload a photo of the combo or one main product photo." }
               - { label: "Available", name: "available", widget: "boolean", default: true, required: false }
+
+
+  - name: "pending_feedback"
+    label: "Pending Customer Feedback"
+    files:
+      - name: "pendingFeedback"
+        label: "Pending Customer Feedback"
+        file: "data/pending-feedback.json"
+        format: "json"
+        fields:
+          - label: "Pending Feedback"
+            name: "pendingFeedback"
+            widget: "list"
+            summary: "{{fields.name}} — {{fields.rating}} stars — Approved: {{fields.approved}}"
+            collapsed: false
+            hint: "Customer-submitted feedback appears here if the feedback function is connected to GitHub. Set Approved to true, then copy approved reviews into Scentivity Store → Products → Customer Reviews if you want them displayed."
+            fields:
+              - { label: "Submission ID", name: "id", widget: "string", required: false }
+              - { label: "Customer Name", name: "name", widget: "string" }
+              - { label: "Rating", name: "rating", widget: "number", default: 5, value_type: "int", min: 1, max: 5 }
+              - { label: "Review Message", name: "message", widget: "text" }
+              - { label: "Approved", name: "approved", widget: "boolean", default: false, required: false }
+              - { label: "Submitted At", name: "date", widget: "datetime", required: false }
+              - { label: "Source", name: "source", widget: "string", default: "customer_submission", required: false }
+

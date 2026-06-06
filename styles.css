@@ -5019,3 +5019,21 @@ footer.site-footer {
     padding-top: 10px !important;
   }
 }
+
+
+/* Notify Me + pending feedback admin update */
+.notify-me-button {
+  cursor: pointer;
+}
+
+.feedback-submit-note {
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(224,0,91,.08);
+  color: var(--rose-dark) !important;
+  font-weight: 900 !important;
+}
+
+.review-empty-state span:empty {
+  display: none !important;
+}
