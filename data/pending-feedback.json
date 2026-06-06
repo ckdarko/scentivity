@@ -5,7 +5,7 @@
       "name": "CD",
       "rating": 5,
       "message": "Love it!!",
-      "approved": false,
+      "approved": true,
       "date": "2026-06-06T05:09:15.528Z",
       "source": "customer_submission"
     },
