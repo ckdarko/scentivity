@@ -1,6 +1,15 @@
 {
   "pendingFeedback": [
     {
+      "id": "feedback-1780723500173",
+      "name": "CD",
+      "rating": 5,
+      "message": "Love it!",
+      "approved": false,
+      "date": "2026-06-06T05:25:00.173Z",
+      "source": "customer_submission"
+    },
+    {
       "id": "feedback-1780722555528",
       "name": "CD",
       "rating": 5,
