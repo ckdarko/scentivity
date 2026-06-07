@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=video-text-intro-off-fixed-20260607" />
+  <link rel="stylesheet" href="styles.css?v=medium-menu-front-dom-fix-20260607" />
 </head>
 <body>
 
@@ -44,10 +44,10 @@
 
         <nav class="nav-links perfume-style-menu" aria-label="Main navigation">
           <a href="#products">SHOP</a>
-          <button class="nav-preorder-button" id="openPreorderButton" type="button" onclick="window.scentivityCloseHeaderMenu?.();document.getElementById('contactModal')?.classList.add('open');document.getElementById('contactModal')?.setAttribute('aria-hidden','false')">PREORDER</button>
-          <button class="nav-catalogue-button" id="openCatalogueButton" type="button" onclick="window.scentivityCloseHeaderMenu?.();document.getElementById('catalogueModal')?.classList.add('open');document.getElementById('catalogueModal')?.setAttribute('aria-hidden','false')">PRODUCT CATALOGUE</button>
-          <button class="nav-about-button" id="openAboutButton" type="button" onclick="window.scentivityCloseHeaderMenu?.();document.getElementById('aboutModal')?.classList.add('open');document.getElementById('aboutModal')?.setAttribute('aria-hidden','false')">ABOUT US</button>
-          <button class="cart-nav-button" id="cartToggle" type="button" aria-label="Open cart" onclick="window.scentivityCloseHeaderMenu?.();document.getElementById('cartOverlay')?.classList.add('visible');document.getElementById('cartOverlay')?.setAttribute('aria-hidden','false');document.getElementById('cartDrawer')?.classList.add('open');document.getElementById('cartDrawer')?.setAttribute('aria-hidden','false')">CART <span id="cartCount">0</span></button>
+          <button class="nav-preorder-button" id="openPreorderButton" type="button" onclick="document.getElementById('contactModal')?.classList.add('open');document.getElementById('contactModal')?.setAttribute('aria-hidden','false')">PREORDER</button>
+          <button class="nav-catalogue-button" id="openCatalogueButton" type="button" onclick="document.getElementById('catalogueModal')?.classList.add('open');document.getElementById('catalogueModal')?.setAttribute('aria-hidden','false')">PRODUCT CATALOGUE</button>
+          <button class="nav-about-button" id="openAboutButton" type="button" onclick="document.getElementById('aboutModal')?.classList.add('open');document.getElementById('aboutModal')?.setAttribute('aria-hidden','false')">ABOUT US</button>
+          <button class="cart-nav-button" id="cartToggle" type="button" aria-label="Open cart">CART <span id="cartCount">0</span></button>
         </nav>
       </div>
     </div>
@@ -78,13 +78,16 @@
 
     <section class="section homepage-video-section" id="homepageVideoSection" aria-label="Scentivity homepage video">
       <div class="homepage-video-card">
-        <video id="homepageVideo" class="homepage-video" autoplay muted loop playsinline webkit-playsinline preload="auto" poster="assets/scentivity-video-poster.svg">
+        <video id="homepageVideo" class="homepage-video" autoplay muted loop playsinline preload="metadata" poster="assets/scentivity-video-poster.svg">
           <source src="assets/scentivity-homepage-video.mp4" type="video/mp4" />
         </video>
         <div class="homepage-video-fallback" aria-hidden="true">
           <div class="video-fallback-bottle"><span>S</span></div>
         </div>
         <div class="homepage-video-overlay">
+          <p class="eyebrow">Scentivity in motion</p>
+          <h2>Sweet scents, beautiful moments.</h2>
+          <p>Discover fragrance mists, body care, luxury scents, and gift-ready deals.</p>
           <a class="btn primary" href="#products">Shop the collection</a>
         </div>
       </div>
@@ -196,8 +199,13 @@
       </div>
     </section>
 
-
-
+<section class="section brand-intro-section" id="scentivity-intro" aria-label="Scentivity introduction">
+      <div class="hero-copy">
+        <p class="eyebrow">Everything Sweet Scented</p>
+        <h1>Wear Confidence, Embrace Elegance. Leave a lasting impression.</h1>
+        <p class="hero-text">At Scentivity, we bring together your favorite perfumes, fragrance mists, body care essentials, and home fragrances to help you look, feel, and smell amazing every day.</p>
+</div>
+    </section>
 
 <section class="section order order-slider-section" id="order">
       <div class="section-heading split">
@@ -621,51 +629,6 @@
         }
         closeMenu();
         document.getElementById('products')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      });
-    })();
-  </script>
-
-
-  <script>
-    (() => {
-      const panel = document.getElementById('headerMenuPanel');
-      const toggle = document.getElementById('headerMenuToggle');
-
-      window.scentivityCloseHeaderMenu = () => {
-        panel?.classList.remove('open');
-        panel?.setAttribute('aria-hidden', 'true');
-        toggle?.setAttribute('aria-expanded', 'false');
-        document.body.classList.remove('header-menu-open');
-      };
-
-      const closeModal = (modalId) => {
-        const modal = document.getElementById(modalId);
-        modal?.classList.remove('open');
-        modal?.setAttribute('aria-hidden', 'true');
-      };
-
-      const closeCart = () => {
-        document.getElementById('cartOverlay')?.classList.remove('visible');
-        document.getElementById('cartOverlay')?.setAttribute('aria-hidden', 'true');
-        document.getElementById('cartDrawer')?.classList.remove('open');
-        document.getElementById('cartDrawer')?.setAttribute('aria-hidden', 'true');
-      };
-
-      document.getElementById('closeAboutModal')?.addEventListener('click', () => closeModal('aboutModal'));
-      document.getElementById('closeContactModal')?.addEventListener('click', () => closeModal('contactModal'));
-      document.getElementById('closeCatalogueModal')?.addEventListener('click', () => closeModal('catalogueModal'));
-      document.getElementById('closeShippingModal')?.addEventListener('click', () => closeModal('shippingModal'));
-      document.getElementById('closeCart')?.addEventListener('click', closeCart);
-      document.getElementById('cartOverlay')?.addEventListener('click', closeCart);
-
-      document.addEventListener('keydown', (event) => {
-        if (event.key !== 'Escape') return;
-        window.scentivityCloseHeaderMenu?.();
-        closeModal('aboutModal');
-        closeModal('contactModal');
-        closeModal('catalogueModal');
-        closeModal('shippingModal');
-        closeCart();
       });
     })();
   </script>
