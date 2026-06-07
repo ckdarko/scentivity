@@ -17,6 +17,21 @@ collections:
         format: "json"
         fields:
 
+
+          - label: "Homepage Video"
+            name: "homepageVideo"
+            widget: "object"
+            collapsed: false
+            hint: "Controls the autoplay video banner on the homepage. Upload an MP4 video for best results. Videos autoplay muted on mobile."
+            fields:
+              - { label: "Enable Homepage Video", name: "enabled", widget: "boolean", default: true, required: false }
+              - { label: "Video File", name: "videoFile", widget: "file", required: false, hint: "Upload an MP4 video. Recommended: short muted product video." }
+              - { label: "Poster Image", name: "posterImage", widget: "image", required: false, hint: "Image shown while the video loads." }
+              - { label: "Headline", name: "headline", widget: "string", required: false, default: "Sweet scents in motion." }
+              - { label: "Subheading", name: "subheading", widget: "text", required: false, default: "Explore fragrance mists, body care, luxury picks, and gift-ready bundles." }
+              - { label: "Button Text", name: "buttonText", widget: "string", required: false, default: "Shop Scentivity" }
+              - { label: "Button Link", name: "buttonLink", widget: "string", required: false, default: "#products" }
+
           - label: "Deal of the Week"
             name: "dealOfWeek"
             widget: "object"
@@ -61,6 +76,7 @@ collections:
             fields:
               - { label: "Customer Name", name: "name", widget: "string" }
               - { label: "Rating", name: "rating", widget: "number", default: 5, value_type: "int", min: 1, max: 5 }
+              - { label: "Products Purchased", name: "productsPurchased", widget: "text", required: false, hint: "Products or combo the customer purchased." }
               - { label: "Review Message", name: "message", widget: "text" }
               - { label: "Approved for Website", name: "approved", widget: "boolean", default: false, required: false }
               - { label: "Review Date", name: "date", widget: "datetime", required: false }
@@ -137,6 +153,7 @@ collections:
               - { label: "Submission ID", name: "id", widget: "string", required: false }
               - { label: "Customer Name", name: "name", widget: "string" }
               - { label: "Rating", name: "rating", widget: "number", default: 5, value_type: "int", min: 1, max: 5 }
+              - { label: "Products Purchased", name: "productsPurchased", widget: "text", required: false, hint: "Products or combo the customer says they purchased." }
               - { label: "Review Message", name: "message", widget: "text" }
               - { label: "Approved", name: "approved", widget: "boolean", default: false, required: false }
               - { label: "Submitted At", name: "date", widget: "datetime", required: false }

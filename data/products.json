@@ -186,5 +186,14 @@
       ],
       "showInCatalogue": true
     }
-  ]
+  ],
+  "homepageVideo": {
+    "enabled": true,
+    "videoFile": "assets/scentivity-homepage-video.mp4",
+    "posterImage": "assets/scentivity-video-poster.svg",
+    "headline": "Sweet scents in motion.",
+    "subheading": "Discover fragrance mists, body care, luxury scents, and gift-ready deals.",
+    "buttonText": "Shop the collection",
+    "buttonLink": "#products"
+  }
 }

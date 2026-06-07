@@ -1,3 +1,4 @@
+// SCENTIVITY_INTRO_FEEDBACK_MARGIN_FIX_UPDATE_20260607
 // SCENTIVITY_NOTIFY_ADMIN_BASE_PREORDER_WHATSAPP_UPDATE_20260606
 // SCENTIVITY_NOTIFY_FEEDBACK_ADMIN_UPDATE_20260604
 // SCENTIVITY_CATALOGUE_ADMIN_MARQUEE_UPDATE_20260603
@@ -1518,6 +1519,7 @@ function approvedCustomerReviews() {
       name: cleanText(review.name || 'Scentivity customer'),
       rating: Math.min(5, Math.max(1, Number(review.rating || 5))),
       message: cleanText(review.message || ''),
+      productsPurchased: cleanText(review.productsPurchased || review.product || review.products || ''),
       date: cleanText(review.date || '')
     }))
     .filter(review => review.message);
@@ -1549,6 +1551,7 @@ function renderCustomerReviews() {
   testimonialSlides.innerHTML = reviews.map((review, index) => `
     <article class="${index === testimonialIndex ? 'active' : ''}">
       <div class="stars">${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}</div>
+      ${review.productsPurchased ? `<small class="review-product">Purchased: ${review.productsPurchased}</small>` : ''}
       <p>“${review.message}”</p>
       <span>${review.name}</span>
     </article>
@@ -1894,6 +1897,15 @@ customerFeedbackForm?.addEventListener('submit', async event => {
   }
 
   const formData = new FormData(customerFeedbackForm);
+  const productsPurchased = cleanText(formData.get('productsPurchased') || '');
+  if (!productsPurchased) {
+    alert('Please enter the product(s) you purchased before submitting feedback.');
+    if (submitButton) {
+      submitButton.disabled = false;
+      submitButton.textContent = originalButtonText;
+    }
+    return;
+  }
   if (!formData.get('form-name')) {
     formData.set('form-name', customerFeedbackForm.getAttribute('name') || 'customer-feedback');
   }

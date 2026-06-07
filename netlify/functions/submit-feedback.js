@@ -43,6 +43,7 @@ exports.handler = async function handler(event) {
     const body = parseBody(event);
     const name = cleanText(body.name);
     const message = cleanText(body.message);
+    const productsPurchased = cleanText(body.productsPurchased || body.product || body.products || '');
     const rating = Math.min(5, Math.max(1, Number(body.rating || 5)));
 
     if (!name || !message) {
@@ -57,6 +58,7 @@ exports.handler = async function handler(event) {
       id: `feedback-${Date.now()}`,
       name,
       rating,
+      productsPurchased,
       message,
       approved: false,
       date: new Date().toISOString(),

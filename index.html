@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=notify-admin-base-preorder-whatsapp-20260606" />
+  <link rel="stylesheet" href="styles.css?v=homepage-video-20260607" />
 </head>
 <body>
 
@@ -58,6 +58,24 @@
         </div>
       </div>
     </section>
+
+    <section class="section homepage-video-section" id="homepageVideoSection" aria-label="Scentivity homepage video">
+      <div class="homepage-video-card">
+        <video id="homepageVideo" class="homepage-video" autoplay muted loop playsinline preload="metadata" poster="assets/scentivity-video-poster.svg">
+          <source src="assets/scentivity-homepage-video.mp4" type="video/mp4" />
+        </video>
+        <div class="homepage-video-fallback" aria-hidden="true">
+          <div class="video-fallback-bottle"><span>S</span></div>
+        </div>
+        <div class="homepage-video-overlay">
+          <p class="eyebrow">Scentivity in motion</p>
+          <h2>Sweet scents, beautiful moments.</h2>
+          <p>Discover fragrance mists, body care, luxury scents, and gift-ready deals.</p>
+          <a class="btn primary" href="#products">Shop the collection</a>
+        </div>
+      </div>
+    </section>
+
 
     
 
@@ -164,6 +182,14 @@
       </div>
     </section>
 
+<section class="section brand-intro-section" id="scentivity-intro" aria-label="Scentivity introduction">
+      <div class="hero-copy">
+        <p class="eyebrow">Everything Sweet Scented</p>
+        <h1>Wear Confidence, Embrace Elegance. Leave a lasting impression.</h1>
+        <p class="hero-text">At Scentivity, we bring together your favorite perfumes, fragrance mists, body care essentials, and home fragrances to help you look, feel, and smell amazing every day.</p>
+</div>
+    </section>
+
 <section class="section order order-slider-section" id="order">
       <div class="section-heading split">
         <div>
@@ -204,13 +230,8 @@
 
 
     
-    <section class="section brand-intro-section" id="scentivity-intro" aria-label="Scentivity introduction">
-      <div class="hero-copy">
-        <p class="eyebrow">Everything Sweet Scented</p>
-        <h1>Wear Confidence, Embrace Elegance. Leave a lasting impression.</h1>
-        <p class="hero-text">At Scentivity, we bring together your favorite perfumes, fragrance mists, body care essentials, and home fragrances to help you look, feel, and smell amazing every day.</p>
-</div>
-    </section>
+    
+
 
 <section class="section testimonials" id="testimonials">
       <div class="section-heading split">
@@ -252,6 +273,10 @@
             <option value="2">★★ 2 stars</option>
             <option value="1">★ 1 star</option>
           </select>
+        </label>
+        <label>
+          Products purchased
+          <textarea name="productsPurchased" rows="3" placeholder="Example: Pure Wonder mist, body cream, combo deal, etc." required></textarea>
         </label>
         <label>
           Feedback
@@ -487,7 +512,7 @@
 
   <button class="back-to-top" id="backToTop" type="button" aria-label="Move back to the top of the page">↑</button>
 
-  <script src="app-cacheproof-notify-admin-base-preorder-whatsapp-20260606.js"></script>
+  <script src="app-cacheproof-homepage-video-20260607.js"></script>
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script>
     if (window.netlifyIdentity) {
