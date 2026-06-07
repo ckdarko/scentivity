@@ -1,129 +1,129 @@
 {
   "products": [
     {
-      "paymentLink": "",
-      "size": "236 mL",
-      "isDealOfWeek": false,
-      "notes": "A bright, feminine mist profile for daily wear. Add exact notes and stock details in the admin dashboard.",
-      "brand": "Victoria's Secret",
-      "price": "GH₵250",
-      "available": true,
       "name": "Victoria's Secret Pure Wonder Fragrance Mist",
+      "brand": "Victoria's Secret",
       "mainCategory": "Victoria's Secret Collection",
+      "subCategory": "Fine Fragrance Mist",
+      "price": "GH₵250",
       "image": "assets/products/citrus-bloom.svg",
-      "subCategory": "Fine Fragrance Mist"
+      "notes": "A bright, feminine mist profile for daily wear. Add exact notes and stock details in the admin dashboard.",
+      "size": "236 mL",
+      "available": true,
+      "paymentLink": "",
+      "isDealOfWeek": false
     },
     {
-      "paymentLink": "",
-      "size": "226 g / 8 oz",
-      "isDealOfWeek": false,
-      "notes": "Moisturizing body cream options from popular sweet, floral, fresh, and warm scent families.",
-      "brand": "Bath & Body Works",
-      "price": "GH₵220",
-      "available": true,
       "name": "Bath & Body Works Body Cream",
+      "brand": "Bath & Body Works",
       "mainCategory": "Bath & Body Works Collection",
+      "subCategory": "Body Lotions and Cream",
+      "price": "GH₵220",
       "image": "assets/products/velvet-rose.svg",
-      "subCategory": "Body Lotions and Cream"
+      "notes": "Moisturizing body cream options from popular sweet, floral, fresh, and warm scent families.",
+      "size": "226 g / 8 oz",
+      "available": true,
+      "paymentLink": "",
+      "isDealOfWeek": false
     },
     {
-      "paymentLink": "",
-      "size": "50 mL",
-      "isDealOfWeek": false,
-      "notes": "A polished sweet scent profile with soft florals, vanilla, amber, and clean musk.",
-      "brand": "Scentivity",
-      "price": "GH₵450",
-      "available": true,
       "name": "Sweet Signature Eau de Parfum",
+      "brand": "Scentivity",
       "mainCategory": "Designer and Luxury Fragrances",
+      "subCategory": "Home Fragrances",
+      "price": "GH₵450",
       "image": "assets/products/amber-noir.svg",
-      "subCategory": "Home Fragrances"
+      "notes": "A polished sweet scent profile with soft florals, vanilla, amber, and clean musk.",
+      "size": "50 mL",
+      "available": true,
+      "paymentLink": "",
+      "isDealOfWeek": false
     },
     {
-      "paymentLink": "",
-      "size": "100 mL",
-      "isDealOfWeek": false,
-      "notes": "Fresh, confident masculine scent profile for everyday use and gifting.",
-      "brand": "Scentivity",
-      "price": "GH₵180",
-      "available": true,
       "name": "Men’s Fresh Body Spray",
+      "brand": "Scentivity",
       "mainCategory": "Designer and Luxury Fragrances",
+      "subCategory": "Men's Body Care",
+      "price": "GH₵180",
       "image": "assets/products/oud-muse.svg",
-      "subCategory": "Men's Body Care"
+      "notes": "Fresh, confident masculine scent profile for everyday use and gifting.",
+      "size": "100 mL",
+      "available": true,
+      "paymentLink": "",
+      "isDealOfWeek": false
     },
     {
-      "paymentLink": "",
-      "size": "3-wick candle",
-      "isDealOfWeek": false,
-      "notes": "Home fragrance candle options for bedrooms, bathrooms, gifts, and cozy spaces.",
-      "brand": "Scentivity",
-      "price": "GH₵300",
-      "available": true,
       "name": "Scented 3-Wick Candle",
+      "brand": "Scentivity",
       "mainCategory": "Bath & Body Works Collection",
+      "subCategory": "Scented Candles",
+      "price": "GH₵300",
       "image": "assets/products/velvet-rose.svg",
-      "subCategory": "Scented Candles"
+      "notes": "Home fragrance candle options for bedrooms, bathrooms, gifts, and cozy spaces.",
+      "size": "3-wick candle",
+      "available": true,
+      "paymentLink": "",
+      "isDealOfWeek": false
     },
     {
-      "paymentLink": "",
-      "size": "Travel size",
-      "isDealOfWeek": false,
-      "notes": "Portable scented sanitizer options for bags, cars, school, work, and gifting.",
-      "brand": "Scentivity",
-      "price": "GH₵45",
-      "available": true,
       "name": "Pocket Hand Sanitizer",
+      "brand": "Scentivity",
       "mainCategory": "Bath & Body Works Collection",
+      "subCategory": "Hand Sanitizers",
+      "price": "GH₵45",
       "image": "assets/products/citrus-bloom.svg",
-      "subCategory": "Hand Sanitizers"
+      "notes": "Portable scented sanitizer options for bags, cars, school, work, and gifting.",
+      "size": "Travel size",
+      "available": true,
+      "paymentLink": "",
+      "isDealOfWeek": false
     }
   ],
   "combos": [
     {
-      "isDealOfWeek": true,
-      "includedItems": "1 Fine Fragrance Mist (236 mL) + 1 Body Lotion/Cream (226 g or 8 oz)",
-      "available": true,
       "name": "Sweet Starter Combo",
-      "discountText": "Save GH₵40",
+      "description": "A simple everyday freshness bundle for someone starting with sweet Scentivity favorites.",
+      "includedItems": "1 Fine Fragrance Mist (236 mL) + 1 Body Lotion/Cream (226 g or 8 oz)",
       "originalPrice": "GH₵470",
       "comboPrice": "GH₵430",
+      "discountText": "Save GH₵40",
       "image": "assets/products/velvet-rose.svg",
-      "description": "A simple everyday freshness bundle for someone starting with sweet Scentivity favorites."
+      "available": true,
+      "isDealOfWeek": true
     },
     {
-      "isDealOfWeek": false,
-      "includedItems": "1 Body Care Item + 1 Hand Sanitizer + 1 Room Spray or Scented Candle",
-      "available": true,
       "name": "Home & Body Refresh Combo",
-      "discountText": "Save GH₵55",
+      "description": "A balanced personal-care and room-refresh bundle for a sweet-smelling body and space.",
+      "includedItems": "1 Body Care Item + 1 Hand Sanitizer + 1 Room Spray or Scented Candle",
       "originalPrice": "GH₵565",
       "comboPrice": "GH₵510",
+      "discountText": "Save GH₵55",
       "image": "assets/products/citrus-bloom.svg",
-      "description": "A balanced personal-care and room-refresh bundle for a sweet-smelling body and space."
+      "available": true,
+      "isDealOfWeek": false
     },
     {
-      "isDealOfWeek": false,
-      "includedItems": "1 Designer/Luxury Fragrance + 1 Fragrance Mist or Body Care Add-on + Gift-ready packaging note",
-      "available": true,
       "name": "Luxury Gift Combo",
-      "discountText": "Save GH₵70",
+      "description": "A gift-ready combo for birthdays, appreciation packages, surprises, and special occasions.",
+      "includedItems": "1 Designer/Luxury Fragrance + 1 Fragrance Mist or Body Care Add-on + Gift-ready packaging note",
       "originalPrice": "GH₵700",
       "comboPrice": "GH₵630",
+      "discountText": "Save GH₵70",
       "image": "assets/products/amber-noir.svg",
-      "description": "A gift-ready combo for birthdays, appreciation packages, surprises, and special occasions."
+      "available": true,
+      "isDealOfWeek": false
     }
   ],
   "dealOfWeek": {
     "enabled": true,
     "itemType": "combo",
+    "productName": "",
+    "comboName": "Sweet Starter Combo",
     "badgeText": "Deal of the Week",
     "title": "Bundle your favorites and save.",
-    "comboName": "Sweet Starter Combo",
-    "productName": "",
-    "image": "",
     "description": "Fresh picks. Sweet savings.",
-    "buttonText": "Add Deal to Cart"
+    "buttonText": "Add Deal to Cart",
+    "image": ""
   },
   "bundleBuilder": {
     "enabled": false,
@@ -131,16 +131,7 @@
     "discountThreeOrMore": 10,
     "note": "Turn on to allow buyers to build custom discounted bundles."
   },
-  "customerReviews": [
-    {
-      "rating": 5,
-      "approved": true,
-      "source": "admin_added",
-      "name": "CD",
-      "message": "Love it!!\n",
-      "date": "2026-06-06T01:29:00.000-04:00"
-    }
-  ],
+  "customerReviews": [],
   "productCatalogue": [
     {
       "label": "BBW",
