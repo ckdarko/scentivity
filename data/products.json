@@ -29,7 +29,7 @@
     {
       "paymentLink": "",
       "size": "50 mL",
-      "isDealOfWeek": false,
+      "isDealOfWeek": true,
       "notes": "A polished sweet scent profile with soft florals, vanilla, amber, and clean musk.",
       "brand": "Scentivity",
       "price": "GH₵450",
@@ -115,7 +115,7 @@
     }
   ],
   "dealOfWeek": {
-    "enabled": true,
+    "enabled": false,
     "itemType": "product",
     "badgeText": "Deal of the Week",
     "title": "",
