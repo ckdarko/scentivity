@@ -195,5 +195,10 @@
     "subheading": "Discover fragrance mists, body care, luxury scents, and gift-ready deals.",
     "buttonText": "Shop the collection",
     "buttonLink": "#products"
+  },
+  "comboDealsSettings": {
+    "enabled": true,
+    "heading": "Save more with curated scent bundles.",
+    "description": "Pick a discounted combo, add it to cart, and checkout the same way as regular products."
   }
 }

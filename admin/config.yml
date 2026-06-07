@@ -55,6 +55,17 @@ collections:
               - { label: "Optional Deal Image", name: "image", widget: "image", required: false, hint: "Optional. If empty, the selected product/combo image will be used." }
 
 
+
+          - label: "Combo Deals Section"
+            name: "comboDealsSettings"
+            widget: "object"
+            collapsed: false
+            hint: "Turn the Combo Deals section on or off and edit the heading text."
+            fields:
+              - { label: "Show Combo Deals Section", name: "enabled", widget: "boolean", default: true, required: false }
+              - { label: "Heading", name: "heading", widget: "string", required: false, default: "Save more with curated scent bundles." }
+              - { label: "Description", name: "description", widget: "text", required: false, default: "Pick a discounted combo, add it to cart, and checkout the same way as regular products." }
+
           - label: "Build Your Own Bundle"
             name: "bundleBuilder"
             widget: "object"
