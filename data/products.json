@@ -116,10 +116,10 @@
   ],
   "dealOfWeek": {
     "enabled": true,
-    "itemType": "combo",
+    "itemType": "product",
     "badgeText": "Deal of the Week",
-    "title": "Bundle your favorites and save.",
-    "comboName": "Sweet Starter Combo",
+    "title": "",
+    "comboName": "Sweet Starter ",
     "productName": "",
     "image": "",
     "description": "Fresh picks. Sweet savings.",
@@ -189,7 +189,7 @@
   ],
   "homepageVideo": {
     "enabled": true,
-    "videoFile": "assets/products/uploads/fragrance-collection-showcase.mp4",
+    "videoFile": "assets/products/uploads/fragrance-collection-showcase-main.mp4",
     "posterImage": "assets/products/uploads/image-may-28-2026-07_51_40-pm-2-.png",
     "headline": "Sweet scents in motion.",
     "subheading": "Discover fragrance mists, body care, luxury scents, and gift-ready deals.",
