@@ -6412,3 +6412,45 @@ body.header-menu-open {
     font-size: .82rem !important;
   }
 }
+
+
+/* Medium menu DOM/front-layer fix: keep popup above the video */
+.header-menu-panel {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 2147483000 !important;
+  isolation: isolate !important;
+  pointer-events: none !important;
+  overflow: visible !important;
+}
+
+.header-menu-panel.open {
+  z-index: 2147483000 !important;
+  pointer-events: auto !important;
+}
+
+.header-menu-card {
+  z-index: 2147483001 !important;
+  position: absolute !important;
+  isolation: isolate !important;
+  pointer-events: auto !important;
+}
+
+.header-menu-card,
+.header-menu-card * {
+  transform-style: flat !important;
+}
+
+.site-header {
+  z-index: 2147482000 !important;
+  overflow: visible !important;
+}
+
+body.header-menu-open .homepage-video-section,
+body.header-menu-open .homepage-video-card,
+body.header-menu-open .homepage-video,
+body.header-menu-open .homepage-video-overlay,
+body.header-menu-open .homepage-video-card::after {
+  z-index: 0 !important;
+  pointer-events: none !important;
+}
