@@ -6454,3 +6454,88 @@ body.header-menu-open .homepage-video-card::after {
   z-index: 0 !important;
   pointer-events: none !important;
 }
+
+
+/* Modal/cart close button and menu stacking fix */
+.modal-overlay,
+.modal-overlay.open {
+  z-index: 2147483500 !important;
+}
+
+.about-modal,
+.contact-modal,
+.catalogue-modal,
+.shipping-modal {
+  position: relative !important;
+  z-index: 2147483501 !important;
+  overflow: auto !important;
+}
+
+.modal-close,
+.cart-close {
+  z-index: 2147483600 !important;
+  pointer-events: auto !important;
+  display: grid !important;
+  place-items: center !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.modal-close {
+  position: sticky !important;
+  top: 8px !important;
+  margin-left: auto !important;
+  margin-bottom: 8px !important;
+}
+
+.cart-overlay,
+.cart-overlay.visible {
+  z-index: 2147483400 !important;
+}
+
+.cart-drawer,
+.cart-drawer.open {
+  z-index: 2147483500 !important;
+}
+
+.cart-header {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 2147483502 !important;
+  background: linear-gradient(180deg, #ffffff, rgba(255, 246, 250, .96)) !important;
+  padding-top: 4px !important;
+}
+
+.header-menu-panel.open {
+  z-index: 2147483000 !important;
+}
+
+body.header-menu-open .modal-overlay.open,
+body.header-menu-open .cart-drawer.open,
+body.header-menu-open .cart-overlay.visible {
+  z-index: 2147483500 !important;
+}
+
+body.header-menu-open .modal-close,
+body.header-menu-open .cart-close {
+  z-index: 2147483600 !important;
+}
+
+@media (max-width: 760px) {
+  .modal-overlay {
+    padding: 10px !important;
+  }
+
+  .about-modal,
+  .contact-modal,
+  .catalogue-modal,
+  .shipping-modal {
+    max-height: 88vh !important;
+  }
+
+  .modal-close {
+    top: 4px !important;
+    width: 44px !important;
+    height: 44px !important;
+  }
+}
