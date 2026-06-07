@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=slide-menu-fix-20260607" />
+  <link rel="stylesheet" href="styles.css?v=fullscreen-menu-style-20260607" />
 </head>
 <body>
 
@@ -31,16 +31,19 @@
 
     <div class="header-menu-panel" id="headerMenuPanel" aria-hidden="true">
       <div class="header-menu-card">
-        <div class="header-menu-top">
-          <img src="assets/scentivity-logo-fused.png" alt="Scentivity logo" />
-          <button class="header-menu-close" id="headerMenuClose" type="button" aria-label="Close menu">×</button>
+        <button class="header-menu-close perfume-menu-close" id="headerMenuClose" type="button" aria-label="Close menu">×</button>
+
+        <div class="menu-search-wrap">
+          <span aria-hidden="true">⌕</span>
+          <input id="menuSearchInput" type="search" placeholder="search store....." aria-label="Search Scentivity store" />
         </div>
-        <nav class="nav-links" aria-label="Main navigation">
-          <a href="#products">Shop</a>
-          <button class="nav-preorder-button" id="openPreorderButton" type="button" onclick="document.getElementById('contactModal')?.classList.add('open');document.getElementById('contactModal')?.setAttribute('aria-hidden','false')">Preorder</button>
-          <button class="nav-catalogue-button" id="openCatalogueButton" type="button" onclick="document.getElementById('catalogueModal')?.classList.add('open');document.getElementById('catalogueModal')?.setAttribute('aria-hidden','false')">Product Catalogue</button>
-          <button class="nav-about-button" id="openAboutButton" type="button" onclick="document.getElementById('aboutModal')?.classList.add('open');document.getElementById('aboutModal')?.setAttribute('aria-hidden','false')">About</button>
-          <button class="cart-nav-button" id="cartToggle" type="button" aria-label="Open cart">Cart <span id="cartCount">0</span></button>
+
+        <nav class="nav-links perfume-style-menu" aria-label="Main navigation">
+          <a href="#products">SHOP</a>
+          <button class="nav-preorder-button" id="openPreorderButton" type="button" onclick="document.getElementById('contactModal')?.classList.add('open');document.getElementById('contactModal')?.setAttribute('aria-hidden','false')">PREORDER</button>
+          <button class="nav-catalogue-button" id="openCatalogueButton" type="button" onclick="document.getElementById('catalogueModal')?.classList.add('open');document.getElementById('catalogueModal')?.setAttribute('aria-hidden','false')">PRODUCT CATALOGUE</button>
+          <button class="nav-about-button" id="openAboutButton" type="button" onclick="document.getElementById('aboutModal')?.classList.add('open');document.getElementById('aboutModal')?.setAttribute('aria-hidden','false')">ABOUT US 🇬🇭</button>
+          <button class="cart-nav-button" id="cartToggle" type="button" aria-label="Open cart">CART <span id="cartCount">0</span></button>
         </nav>
       </div>
     </div>
@@ -594,6 +597,34 @@
       });
       document.addEventListener('keydown', (event) => {
         if (event.key === 'Escape') setMenuOpen(false);
+      });
+    })();
+  </script>
+
+
+  <script>
+    (() => {
+      const menuSearchInput = document.getElementById('menuSearchInput');
+      const panel = document.getElementById('headerMenuPanel');
+      const toggle = document.getElementById('headerMenuToggle');
+
+      const closeMenu = () => {
+        panel?.classList.remove('open');
+        panel?.setAttribute('aria-hidden', 'true');
+        toggle?.setAttribute('aria-expanded', 'false');
+        document.body.classList.remove('header-menu-open');
+      };
+
+      menuSearchInput?.addEventListener('keydown', (event) => {
+        if (event.key !== 'Enter') return;
+        const value = menuSearchInput.value.trim();
+        const productSearch = document.getElementById('productSearch');
+        if (productSearch && value) {
+          productSearch.value = value;
+          productSearch.dispatchEvent(new Event('input', { bubbles: true }));
+        }
+        closeMenu();
+        document.getElementById('products')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
     })();
   </script>
