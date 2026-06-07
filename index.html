@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=header-nav-visible-fix-20260607" />
+  <link rel="stylesheet" href="styles.css?v=slide-menu-fix-20260607" />
 </head>
 <body>
 
@@ -22,13 +22,28 @@
     <a href="#top" class="brand" aria-label="Scentivity homepage">
       <img src="assets/scentivity-logo-fused.png" alt="Scentivity logo" />
     </a>
-    <nav class="nav-links" aria-label="Main navigation">
-      <a href="#products">Shop</a>
-      <button class="nav-preorder-button" id="openPreorderButton" type="button" onclick="document.getElementById('contactModal')?.classList.add('open');document.getElementById('contactModal')?.setAttribute('aria-hidden','false')">Preorder</button>
-      <button class="nav-catalogue-button" id="openCatalogueButton" type="button" onclick="document.getElementById('catalogueModal')?.classList.add('open');document.getElementById('catalogueModal')?.setAttribute('aria-hidden','false')">Product Catalogue</button>
-      <button class="nav-about-button" id="openAboutButton" type="button" onclick="document.getElementById('aboutModal')?.classList.add('open');document.getElementById('aboutModal')?.setAttribute('aria-hidden','false')">About</button>
-      <button class="cart-nav-button" id="cartToggle" type="button" aria-label="Open cart">Cart <span id="cartCount">0</span></button>
-    </nav>
+
+    <button class="header-menu-toggle" id="headerMenuToggle" type="button" aria-label="Open menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <div class="header-menu-panel" id="headerMenuPanel" aria-hidden="true">
+      <div class="header-menu-card">
+        <div class="header-menu-top">
+          <img src="assets/scentivity-logo-fused.png" alt="Scentivity logo" />
+          <button class="header-menu-close" id="headerMenuClose" type="button" aria-label="Close menu">×</button>
+        </div>
+        <nav class="nav-links" aria-label="Main navigation">
+          <a href="#products">Shop</a>
+          <button class="nav-preorder-button" id="openPreorderButton" type="button" onclick="document.getElementById('contactModal')?.classList.add('open');document.getElementById('contactModal')?.setAttribute('aria-hidden','false')">Preorder</button>
+          <button class="nav-catalogue-button" id="openCatalogueButton" type="button" onclick="document.getElementById('catalogueModal')?.classList.add('open');document.getElementById('catalogueModal')?.setAttribute('aria-hidden','false')">Product Catalogue</button>
+          <button class="nav-about-button" id="openAboutButton" type="button" onclick="document.getElementById('aboutModal')?.classList.add('open');document.getElementById('aboutModal')?.setAttribute('aria-hidden','false')">About</button>
+          <button class="cart-nav-button" id="cartToggle" type="button" aria-label="Open cart">Cart <span id="cartCount">0</span></button>
+        </nav>
+      </div>
+    </div>
   </header>
 
   <main>
@@ -553,6 +568,35 @@
     </button>
     <button type="button" id="mobileContactButton" aria-label="Contact Scentivity" onclick="document.getElementById('contactModal')?.classList.add('open');document.getElementById('contactModal')?.setAttribute('aria-hidden','false')"><span>☎</span><small>Contact</small></button>
   </nav>
+
+
+  <script>
+    (() => {
+      const panel = document.getElementById('headerMenuPanel');
+      const toggle = document.getElementById('headerMenuToggle');
+      const closeButton = document.getElementById('headerMenuClose');
+
+      const setMenuOpen = (isOpen) => {
+        if (!panel || !toggle) return;
+        panel.classList.toggle('open', isOpen);
+        panel.setAttribute('aria-hidden', String(!isOpen));
+        toggle.setAttribute('aria-expanded', String(isOpen));
+        document.body.classList.toggle('header-menu-open', isOpen);
+      };
+
+      toggle?.addEventListener('click', () => setMenuOpen(true));
+      closeButton?.addEventListener('click', () => setMenuOpen(false));
+      panel?.addEventListener('click', (event) => {
+        if (event.target === panel) setMenuOpen(false);
+      });
+      panel?.querySelectorAll('a, button:not(#headerMenuClose)').forEach((item) => {
+        item.addEventListener('click', () => setMenuOpen(false));
+      });
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') setMenuOpen(false);
+      });
+    })();
+  </script>
 
 </body>
 </html>
