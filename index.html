@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=homepage-products-restore-20260608" />
+  <link rel="stylesheet" href="styles.css?v=products-shop-feedback-fix-20260608" />
 </head>
 <body>
 
@@ -86,7 +86,7 @@
           <div class="video-fallback-bottle"><span>S</span></div>
         </div>
         <div class="homepage-video-overlay">
-          <a class="btn primary" href="#products">Shop the collection</a>
+          <a class="btn primary" href="#products" data-shop-collection="true" onclick="event.preventDefault();event.stopPropagation();document.querySelector(\'#products\')?.scrollIntoView({behavior:\'smooth\',block:\'start\'});">Shop the collection</a>
         </div>
       </div>
     </section>
@@ -108,7 +108,23 @@
         </div>
       </div>
       <div class="showcase-window">
-        <div class="showcase-track" id="homepageProductSlides"></div>
+        <div class="showcase-track" id="homepageProductSlides">
+<article class="showcase-slide active compact-showcase-slide product-link-card" data-product-url="product.html?product=victoria-s-secret-pure-wonder-fragrance-mist-0" tabindex="0">
+          <div class="showcase-image-wrap">
+            <img src="assets/products/citrus-bloom.svg" alt="Victoria&#x27;s Secret Pure Wonder Fragrance Mist" loading="lazy" onerror="this.onerror=null;this.src='assets/scentivity-logo-fused.png';" />
+            <span class="showcase-badge available">Available now</span>
+          </div>
+          <div class="showcase-copy">
+            <p class="eyebrow">Available now • 1 of 6</p>
+            <h3>Victoria&#x27;s Secret Pure Wonder Fragrance Mist</h3>
+            <div class="compact-product-meta showcase-quick-meta"><span class="star-rating-symbol">★</span><span>4.9</span></div>
+            <div class="showcase-bottom">
+              <strong>GH₵250</strong>
+              <button class="btn primary add-to-cart" type="button" data-product-key="victoria-s-secret-pure-wonder-fragrance-mist-0">Add to Cart</button>
+            </div>
+          </div>
+        </article>
+      </div>
       </div>
       <div class="showcase-dots" id="homepageProductDots" aria-label="Slideshow pagination"></div>
     </section>
@@ -159,7 +175,98 @@
         <button type="button" data-scroll-search="Bath">Bath & Body Works</button>
         <button type="button" data-scroll-search="Luxury">Luxury</button>
       </div>
-<div class="product-grid" id="productGrid" aria-live="polite"></div>
+<div class="product-grid" id="productGrid" aria-live="polite">
+<article class="product-card compact-product-card product-link-card " data-product-url="product.html?product=victoria-s-secret-pure-wonder-fragrance-mist-0" tabindex="0" aria-label="View details for Victoria&#x27;s Secret Pure Wonder Fragrance Mist">
+      <div class="compact-product-image">
+        <img src="assets/products/citrus-bloom.svg" alt="Victoria&#x27;s Secret Pure Wonder Fragrance Mist" loading="lazy" onerror="this.onerror=null;this.src='assets/scentivity-logo-fused.png';" />
+        <span class="compact-product-badge">Available</span>
+      </div>
+      <div class="compact-product-info">
+        <small>Victoria&#x27;s Secret</small>
+        <h3>Victoria&#x27;s Secret Pure Wonder Fragrance Mist</h3>
+        <div class="compact-product-meta"><span class="star-rating-symbol">★</span><span>4.9</span><span>| 20 reviews</span><span>| 8 bought</span></div>
+        <div class="compact-product-bottom">
+          <strong>GH₵250</strong>
+          <button class="compact-cart-button add-to-cart" type="button" data-product-key="victoria-s-secret-pure-wonder-fragrance-mist-0" aria-label="Add Victoria&#x27;s Secret Pure Wonder Fragrance Mist to cart">🛒</button>
+        </div>
+      </div>
+    </article>
+<article class="product-card compact-product-card product-link-card " data-product-url="product.html?product=bath-and-body-works-body-cream-1" tabindex="0" aria-label="View details for Bath &amp; Body Works Body Cream">
+      <div class="compact-product-image">
+        <img src="assets/products/velvet-rose.svg" alt="Bath &amp; Body Works Body Cream" loading="lazy" onerror="this.onerror=null;this.src='assets/scentivity-logo-fused.png';" />
+        <span class="compact-product-badge">Available</span>
+      </div>
+      <div class="compact-product-info">
+        <small>Bath &amp; Body Works</small>
+        <h3>Bath &amp; Body Works Body Cream</h3>
+        <div class="compact-product-meta"><span class="star-rating-symbol">★</span><span>4.8</span><span>| 29 reviews</span><span>| 13 bought</span></div>
+        <div class="compact-product-bottom">
+          <strong>GH₵220</strong>
+          <button class="compact-cart-button add-to-cart" type="button" data-product-key="bath-and-body-works-body-cream-1" aria-label="Add Bath &amp; Body Works Body Cream to cart">🛒</button>
+        </div>
+      </div>
+    </article>
+<article class="product-card compact-product-card product-link-card " data-product-url="product.html?product=sweet-signature-eau-de-parfum-2" tabindex="0" aria-label="View details for Sweet Signature Eau de Parfum">
+      <div class="compact-product-image">
+        <img src="assets/products/amber-noir.svg" alt="Sweet Signature Eau de Parfum" loading="lazy" onerror="this.onerror=null;this.src='assets/scentivity-logo-fused.png';" />
+        <span class="compact-product-badge">Available</span>
+      </div>
+      <div class="compact-product-info">
+        <small>Scentivity</small>
+        <h3>Sweet Signature Eau de Parfum</h3>
+        <div class="compact-product-meta"><span class="star-rating-symbol">★</span><span>4.9</span><span>| 38 reviews</span><span>| 18 bought</span></div>
+        <div class="compact-product-bottom">
+          <strong>GH₵450</strong>
+          <button class="compact-cart-button add-to-cart" type="button" data-product-key="sweet-signature-eau-de-parfum-2" aria-label="Add Sweet Signature Eau de Parfum to cart">🛒</button>
+        </div>
+      </div>
+    </article>
+<article class="product-card compact-product-card product-link-card " data-product-url="product.html?product=men-s-fresh-body-spray-3" tabindex="0" aria-label="View details for Men’s Fresh Body Spray">
+      <div class="compact-product-image">
+        <img src="assets/products/oud-muse.svg" alt="Men’s Fresh Body Spray" loading="lazy" onerror="this.onerror=null;this.src='assets/scentivity-logo-fused.png';" />
+        <span class="compact-product-badge">Available</span>
+      </div>
+      <div class="compact-product-info">
+        <small>Scentivity</small>
+        <h3>Men’s Fresh Body Spray</h3>
+        <div class="compact-product-meta"><span class="star-rating-symbol">★</span><span>4.8</span><span>| 47 reviews</span><span>| 23 bought</span></div>
+        <div class="compact-product-bottom">
+          <strong>GH₵180</strong>
+          <button class="compact-cart-button add-to-cart" type="button" data-product-key="men-s-fresh-body-spray-3" aria-label="Add Men’s Fresh Body Spray to cart">🛒</button>
+        </div>
+      </div>
+    </article>
+<article class="product-card compact-product-card product-link-card " data-product-url="product.html?product=scented-3-wick-candle-4" tabindex="0" aria-label="View details for Scented 3-Wick Candle">
+      <div class="compact-product-image">
+        <img src="assets/products/velvet-rose.svg" alt="Scented 3-Wick Candle" loading="lazy" onerror="this.onerror=null;this.src='assets/scentivity-logo-fused.png';" />
+        <span class="compact-product-badge">Available</span>
+      </div>
+      <div class="compact-product-info">
+        <small>Scentivity</small>
+        <h3>Scented 3-Wick Candle</h3>
+        <div class="compact-product-meta"><span class="star-rating-symbol">★</span><span>4.9</span><span>| 56 reviews</span><span>| 28 bought</span></div>
+        <div class="compact-product-bottom">
+          <strong>GH₵300</strong>
+          <button class="compact-cart-button add-to-cart" type="button" data-product-key="scented-3-wick-candle-4" aria-label="Add Scented 3-Wick Candle to cart">🛒</button>
+        </div>
+      </div>
+    </article>
+<article class="product-card compact-product-card product-link-card " data-product-url="product.html?product=pocket-hand-sanitizer-5" tabindex="0" aria-label="View details for Pocket Hand Sanitizer">
+      <div class="compact-product-image">
+        <img src="assets/products/citrus-bloom.svg" alt="Pocket Hand Sanitizer" loading="lazy" onerror="this.onerror=null;this.src='assets/scentivity-logo-fused.png';" />
+        <span class="compact-product-badge">Available</span>
+      </div>
+      <div class="compact-product-info">
+        <small>Scentivity</small>
+        <h3>Pocket Hand Sanitizer</h3>
+        <div class="compact-product-meta"><span class="star-rating-symbol">★</span><span>4.8</span><span>| 65 reviews</span><span>| 33 bought</span></div>
+        <div class="compact-product-bottom">
+          <strong>GH₵45</strong>
+          <button class="compact-cart-button add-to-cart" type="button" data-product-key="pocket-hand-sanitizer-5" aria-label="Add Pocket Hand Sanitizer to cart">🛒</button>
+        </div>
+      </div>
+    </article>
+</div>
     </section>
 
     
@@ -266,11 +373,7 @@
   </main>
 
   
-  
-  
-
-
-<div class="modal-overlay" id="feedbackModal" aria-hidden="true">
+  <div class="modal-overlay" id="feedbackModal" aria-hidden="true">
     <div class="feedback-modal" role="dialog" aria-modal="true" aria-labelledby="feedbackModalTitle">
       <button class="modal-close" id="closeFeedbackModal" type="button" aria-label="Close feedback form">×</button>
       <div class="modal-heading">
@@ -543,7 +646,7 @@
 
   <button class="back-to-top" id="backToTop" type="button" aria-label="Move back to the top of the page">↑</button>
 
-  <script src="app-cacheproof-homepage-products-restore-20260608.js"></script>
+  <script src="script.js?v=products-shop-feedback-fix-20260608"></script>
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script>
     if (window.netlifyIdentity) {

@@ -83,7 +83,7 @@ collections:
             widget: "list"
             summary: "{{fields.name}} — {{fields.rating}} stars — Approved: {{fields.approved}}"
             collapsed: true
-            hint: "Only reviews marked Approved will show on the website. Customer-submitted reviews should be checked first, then added here or approved here."
+            hint: "Only reviews marked Approved will show on the website. Approved items here and approved items in Pending Customer Feedback can display on the website."
             fields:
               - { label: "Customer Name", name: "name", widget: "string" }
               - { label: "Rating", name: "rating", widget: "number", default: 5, value_type: "int", min: 1, max: 5 }
@@ -125,18 +125,17 @@ collections:
               - { label: "Product Photo", name: "image", widget: "image", required: false }
               - { label: "Optional Direct Payment Link / Checkout URL", name: "paymentLink", widget: "string", required: false, hint: "Optional: paste a Paystack, Flutterwave, Stripe, or other hosted checkout link for this individual product. The cart checkout can also use Paystack through the Netlify Function setup." }
               - { label: "Scent Notes / Description", name: "notes", widget: "text", required: false }
-              - { label: "Available Quantity / Stock", name: "availableQuantity", widget: "number", required: false, value_type: "int", min: 0, hint: "Number of this product currently available. Used on the product detail page and quantity controls." }
-              - { label: "Star Rating", name: "rating", widget: "number", required: false, value_type: "float", min: 1, max: 5, step: 0.1, hint: "Example: 4.8" }
+              - { label: "Available Quantity / Stock", name: "availableQuantity", widget: "number", required: false, value_type: "int", min: 0, hint: "Number of this product currently available." }
+              - { label: "Star Rating", name: "rating", widget: "number", required: false, value_type: "float", min: 1, max: 5, step: 0.1 }
               - { label: "Number of Reviews", name: "reviewCount", widget: "number", required: false, value_type: "int", min: 0 }
               - { label: "Number Purchased / Bought", name: "purchaseCount", widget: "number", required: false, value_type: "int", min: 0 }
-              - { label: "Product Details / Overview", name: "productDetails", widget: "text", required: false, hint: "Longer product information shown after a buyer clicks the product." }
-              - { label: "Fragrance Notes", name: "fragranceNotes", widget: "text", required: false, hint: "Example: vanilla, amber, jasmine, sandalwood." }
+              - { label: "Product Details / Overview", name: "productDetails", widget: "text", required: false }
+              - { label: "Fragrance Notes", name: "fragranceNotes", widget: "text", required: false }
               - { label: "Ingredients", name: "ingredients", widget: "text", required: false }
-              - { label: "Returns & Exchanges Info", name: "returnPolicy", widget: "text", required: false }
 
               - { label: "Set as Deal of the Week", name: "isDealOfWeek", widget: "boolean", default: false, required: false, hint: "Optional shortcut. If more than one item is selected, the first matching item will be used." }
               - { label: "Show Product on Website", name: "showOnWebsite", widget: "boolean", default: true, required: false, hint: "Turn this off to hide the product from the homepage, shop, and product page completely." }
-              - { label: "Available / In Stock", name: "available", widget: "boolean", default: true, required: false, hint: "Turn this off when the product is out of stock. If Show Product on Website is still on, the product can still show on the site but buyers cannot add it to cart." }
+              - { label: "Available / In Stock", name: "available", widget: "boolean", default: true, required: false, hint: "Turn this off when the product is out of stock. If Show Product on Website is still on, the product can show on the site but buyers cannot add it to cart." }
 
 
           - label: "Combo Deals"
@@ -169,7 +168,7 @@ collections:
             widget: "list"
             summary: "{{fields.name}} — {{fields.rating}} stars — Approved: {{fields.approved}}"
             collapsed: false
-            hint: "Customer-submitted feedback appears here if the feedback function is connected to GitHub. Set Approved to true, then copy approved reviews into Scentivity Store → Products → Customer Reviews if you want them displayed."
+            hint: "Customer-submitted feedback appears here if the feedback function is connected to GitHub. Set Approved to true and it will show on the website automatically after the file is saved/deployed."
             fields:
               - { label: "Submission ID", name: "id", widget: "string", required: false }
               - { label: "Customer Name", name: "name", widget: "string" }
