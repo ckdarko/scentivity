@@ -70,7 +70,7 @@
   </div>
 
   <header class="site-header product-page-header">
-    <a href="index.html" class="brand" aria-label="Scentivity homepage">
+    <a href="index.html" class="brand" aria-label="Scentivity homepage" data-home-logo="true">
       <img src="assets/scentivity-logo-fused.png" alt="Scentivity logo" />
     </a>
     <nav class="product-page-top-links" aria-label="Product page navigation">
@@ -89,5 +89,15 @@
   </main>
 
   <script src="product-page-css-final-fix-20260608.js"></script>
+
+<script>
+document.addEventListener('click', function(event) {
+  const logo = event.target.closest('[data-home-logo], .brand');
+  if (!logo) return;
+  event.preventDefault();
+  window.location.href = 'index.html?home=' + Date.now();
+}, true);
+</script>
+
 </body>
 </html>

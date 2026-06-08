@@ -9,9 +9,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=homepage-cleanup-requests-20260608" />
+  <link rel="stylesheet" href="styles.css?v=homepage-click-filters-cleanup-20260608" />
 </head>
-<body>
+<body id="top">
 
   <div class="top-promo" role="banner">
     <span>Delivery within 24 hrs</span>
@@ -19,7 +19,7 @@
     <span>Great Deals Weekly</span>
   </div>
   <header class="site-header" id="top">
-    <a href="#top" class="brand" aria-label="Scentivity homepage">
+    <a href="#top" class="brand" aria-label="Scentivity homepage" data-home-logo="true">
       <img src="assets/scentivity-logo-fused.png" alt="Scentivity logo" />
     </a>
 
@@ -130,22 +130,22 @@
     </section>
 
     <section class="section deal-of-week-section" id="deal-of-week">
-      <div class="hero-card hero-deal-card" id="dealOfWeekCard" aria-label="Deal of the Week">
-        <div class="deal-week-visual">
+      <div class="hero-card hero-deal-card product-link-card" id="dealOfWeekCard" aria-label="Deal of the Week" data-product-url="product.html?product=victoria-s-secret-pure-wonder-fragrance-mist-0&slug=victoria-s-secret-pure-wonder-fragrance-mist&name=Victoria&#x27;s Secret Pure Wonder Fragrance Mist" tabindex="0">
+        <div class="deal-week-visual product-link-card" data-product-url="product.html?product=victoria-s-secret-pure-wonder-fragrance-mist-0&slug=victoria-s-secret-pure-wonder-fragrance-mist&name=Victoria&#x27;s Secret Pure Wonder Fragrance Mist" tabindex="0" aria-label="View details for Victoria&#x27;s Secret Pure Wonder Fragrance Mist">
           <span class="deal-tag">Deal of the Week</span>
-          <div class="deal-bottle-mini">
-            <div class="bottle-cap"></div>
-            <div class="bottle-neck"></div>
-            <div class="bottle-body">
-              <img class="bottle-logo" src="assets/scentivity-logo-fused.png" alt="Scentivity business logo" />
-            </div>
+          <div class="deal-week-product-frame">
+            <img src="assets/products/citrus-bloom.svg" alt="Victoria&#x27;s Secret Pure Wonder Fragrance Mist" loading="lazy" onerror="this.onerror=null;this.src='assets/scentivity-logo-fused.png';" />
           </div>
         </div>
         <div class="deal-week-content">
-          <p class="eyebrow">Limited offer</p>
-          <h2>Bundle your favorites and save.</h2>
-          <p>Fresh picks. Sweet savings.</p>
-          <a class="btn primary" href="#comboDeals">Shop deal</a>
+          <p class="eyebrow">Featured product</p>
+          <h2>This week’s featured scent: Victoria&#x27;s Secret Pure Wonder Fragrance Mist</h2>
+          <p>Fresh pick. Sweet savings.</p>
+          <div class="deal-week-meta"><strong>GH₵250</strong></div>
+          <div class="deal-week-actions">
+            <button class="btn primary add-to-cart" type="button" data-product-key="victoria-s-secret-pure-wonder-fragrance-mist-0">Add Deal to Cart</button>
+            <a class="btn ghost" href="product.html?product=victoria-s-secret-pure-wonder-fragrance-mist-0&slug=victoria-s-secret-pure-wonder-fragrance-mist&name=Victoria&#x27;s Secret Pure Wonder Fragrance Mist">View product</a>
+          </div>
         </div>
       </div>
     </section>
@@ -157,14 +157,19 @@
       
 
 
-<section class="section quick-shop-controls" id="quickShop" aria-label="Search products and open product catalogue">
-      <div class="filter-panel quick-search-only" aria-label="Product search">
-        <div>
+<section class="section quick-shop-controls product-filter-section" id="quickShop" aria-label="Search and filter products">
+      <div class="filter-panel product-filter-panel" aria-label="Product search and filters">
+        <div class="filter-search-row">
           <span>Search</span>
           <input class="product-search" id="productSearch" type="search" placeholder="Search perfume, mist, lotion, candle..." />
         </div>
-        <div class="quick-action-buttons">
-          <button class="btn primary" id="openCatalogueButtonQuick" type="button" onclick="document.getElementById('catalogueModal')?.classList.add('open');document.getElementById('catalogueModal')?.setAttribute('aria-hidden','false')">Product Catalogue</button>
+        <div class="filter-group">
+          <span>Product catalogue</span>
+          <div class="filter-controls" id="mainCategoryFilters" aria-label="Product catalogue filters"></div>
+        </div>
+        <div class="filter-group">
+          <span>Fragrance / care type</span>
+          <div class="subcategory-controls" id="subCategoryFilters" aria-label="Fragrance and care type filters"></div>
         </div>
       </div>
     </section>
@@ -348,39 +353,6 @@
 </div>
     </section>
 
-    
-    <section class="section combo-before-order-section hidden" aria-label="Combo deals before how to order">
-      <div class="combo-deals" id="comboDeals" aria-label="Scentivity combo deals">
-        <div class="combo-heading">
-          <div>
-            <p class="eyebrow">Combo deals</p>
-            <h3>Save more with curated scent bundles.</h3>
-            <p>Pick a discounted combo, add it to cart, and checkout the same way as regular products.</p>
-          </div>
-        </div>
-        <div class="combo-grid" id="comboGrid" aria-live="polite"></div>
-
-        <div class="bundle-builder" id="bundleBuilder" aria-label="Build your own Scentivity bundle">
-          <div class="bundle-builder-heading">
-            <div>
-              <p class="eyebrow">Build your own bundle</p>
-              <h3>Create your own discounted combo.</h3>
-              <p>Select at least two available products, then add your custom bundle to cart. The discount is applied automatically.</p>
-            </div>
-            <div class="bundle-discount-note">
-              <strong>Bundle discount</strong>
-              <span>2 items: 5% off • 3+ items: 10% off</span>
-            </div>
-          </div>
-          <div class="bundle-builder-grid" id="bundleBuilderGrid" aria-live="polite"></div>
-          <div class="bundle-builder-summary" id="bundleBuilderSummary">
-            <span>Select 2 or more products to build a bundle.</span>
-            <button class="btn primary" id="addBuiltBundleToCart" type="button" disabled>Add Built Bundle to Cart</button>
-          </div>
-        </div>
-
-      </div>
-    </section>
 
 
 
@@ -430,10 +402,6 @@
           <p class="eyebrow">Customer Love</p>
           <h2>Share your Scentivity experience.</h2>
           
-        </div>
-        <div class="testimonial-controls" aria-label="Review slideshow controls">
-          <button class="testimonial-arrow" id="testimonialPrev" type="button" aria-label="Previous review">‹</button>
-          <button class="testimonial-arrow" id="testimonialNext" type="button" aria-label="Next review">›</button>
         </div>
       </div>
 
@@ -702,7 +670,7 @@
 
   <footer class="site-footer">
     <div class="footer-brand">
-      <img src="assets/scentivity-logo-fused.png" alt="Scentivity logo" />
+      <a href="index.html" data-home-logo="true" class="footer-logo-link"><img src="assets/scentivity-logo-fused.png" alt="Scentivity logo" /></a>
       <p>Everything Sweet Scented — perfumes, fragrance mists, body care essentials, home fragrances, and gift-ready products.</p>
     </div>
     <nav class="footer-nav" aria-label="Footer navigation">
@@ -721,7 +689,7 @@
 
   <button class="back-to-top" id="backToTop" type="button" aria-label="Move back to the top of the page">↑</button>
 
-  <script src="script.js?v=homepage-cleanup-requests-20260608"></script>
+  <script src="script.js?v=homepage-click-filters-cleanup-20260608"></script>
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script>
     if (window.netlifyIdentity) {
