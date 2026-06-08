@@ -7247,3 +7247,31 @@ body.cart-open {
     padding: 14px;
   }
 }
+
+
+/* Homepage product restore + in-stock visibility behavior */
+.compact-product-card.is-unavailable {
+  opacity: .9;
+}
+
+.compact-product-badge.coming,
+.showcase-badge.soon {
+  background: rgba(40, 40, 40, .12) !important;
+  color: #3d2430 !important;
+}
+
+.btn[disabled],
+button[disabled] {
+  cursor: not-allowed !important;
+  opacity: .65 !important;
+}
+
+.product-grid:empty::before {
+  content: "Products will appear here after they are added in the admin page.";
+  display: block;
+  padding: 24px;
+  border: 1px solid rgba(224,0,91,.16);
+  border-radius: 20px;
+  background: rgba(255,255,255,.7);
+  font-weight: 800;
+}
