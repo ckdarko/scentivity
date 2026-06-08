@@ -7162,3 +7162,52 @@ body.cart-open {
   .compact-product-meta { font-size: .76rem; gap: 4px; }
   .compact-cart-button { width: 40px; height: 40px; }
 }
+
+
+/* Homepage cleanup requested: no duplicate available label, no shipping quick button, moving order steps */
+#openShippingButtonQuick,
+.mobile-shop-bar,
+.order-controls {
+  display: none !important;
+}
+
+.homepage-showcase .showcase-track > .showcase-copy,
+.homepage-showcase .showcase-track > article + .showcase-copy,
+.homepage-showcase .showcase-track > article + article {
+  display: none !important;
+}
+
+.order-slider {
+  overflow: hidden;
+}
+
+.order-track {
+  display: flex;
+  transition: transform .55s ease;
+  will-change: transform;
+}
+
+.order-track > article {
+  min-width: 100%;
+}
+
+.order-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.order-dots button {
+  width: 10px;
+  height: 10px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(224,0,91,.22);
+  padding: 0;
+}
+
+.order-dots button.active {
+  width: 30px;
+  background: var(--hot-pink);
+}
