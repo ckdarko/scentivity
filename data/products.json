@@ -19,7 +19,8 @@
       "productDetails": "A bright, feminine fragrance mist made for sweet everyday confidence.",
       "fragranceNotes": "Fresh florals, clean musk, and soft sweetness.",
       "ingredients": "Fragrance mist ingredients/details may vary by batch. Please check product packaging.",
-      "returnPolicy": "Contact Scentivity within 24 hours of delivery for issues with the received item."
+      "returnPolicy": "Contact Scentivity within 24 hours of delivery for issues with the received item.",
+      "showOnWebsite": true
     },
     {
       "name": "Bath & Body Works Body Cream",
@@ -40,7 +41,8 @@
       "productDetails": "Rich body care for soft, hydrated skin and a polished daily scent routine.",
       "fragranceNotes": "Creamy vanilla, soft florals, and warm body-care notes.",
       "ingredients": "Body care ingredients/details may vary by batch. Please check product packaging.",
-      "returnPolicy": "Unopened products may be reviewed for exchange support when reported promptly."
+      "returnPolicy": "Unopened products may be reviewed for exchange support when reported promptly.",
+      "showOnWebsite": true
     },
     {
       "name": "Sweet Signature Eau de Parfum",
@@ -61,7 +63,8 @@
       "productDetails": "A polished perfume profile with soft florals, vanilla, amber, and clean musk.",
       "fragranceNotes": "Soft florals, vanilla, amber, and clean musk.",
       "ingredients": "Perfume ingredients/details may vary by batch. Please check product packaging.",
-      "returnPolicy": "Contact Scentivity for support if the item arrives damaged."
+      "returnPolicy": "Contact Scentivity for support if the item arrives damaged.",
+      "showOnWebsite": true
     },
     {
       "name": "Men’s Fresh Body Spray",
@@ -82,7 +85,8 @@
       "productDetails": "Fresh, bold men’s fragrance made for confident everyday wear.",
       "fragranceNotes": "Clean oceanic freshness, soft woods, and masculine musk.",
       "ingredients": "Product ingredients/details may vary by batch. Please check product packaging.",
-      "returnPolicy": "Contact Scentivity quickly for delivery or product concerns."
+      "returnPolicy": "Contact Scentivity quickly for delivery or product concerns.",
+      "showOnWebsite": true
     },
     {
       "name": "Scented 3-Wick Candle",
@@ -103,7 +107,8 @@
       "productDetails": "A cozy home-fragrance pick for bedrooms, gifts, and relaxing spaces.",
       "fragranceNotes": "Warm sweetness, soft woods, and room-filling comfort.",
       "ingredients": "Candle ingredients/details may vary by batch. Please check product packaging.",
-      "returnPolicy": "Unburned candles may be reviewed for exchange support if reported promptly."
+      "returnPolicy": "Unburned candles may be reviewed for exchange support if reported promptly.",
+      "showOnWebsite": true
     },
     {
       "name": "Pocket Hand Sanitizer",
@@ -124,7 +129,8 @@
       "productDetails": "A portable scented essential for bags, cars, school, work, and gifting.",
       "fragranceNotes": "Sweet clean scent with convenient on-the-go freshness.",
       "ingredients": "Sanitizer ingredients/details may vary by batch. Please check product packaging.",
-      "returnPolicy": "Contact Scentivity for product concerns after delivery."
+      "returnPolicy": "Contact Scentivity for product concerns after delivery.",
+      "showOnWebsite": true
     }
   ],
   "combos": [

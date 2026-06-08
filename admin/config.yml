@@ -135,7 +135,8 @@ collections:
               - { label: "Returns & Exchanges Info", name: "returnPolicy", widget: "text", required: false }
 
               - { label: "Set as Deal of the Week", name: "isDealOfWeek", widget: "boolean", default: false, required: false, hint: "Optional shortcut. If more than one item is selected, the first matching item will be used." }
-              - { label: "Available", name: "available", widget: "boolean", default: true, hint: "Turn this off to show the product as Coming Soon in the homepage slideshow and unavailable in the shop." }
+              - { label: "Show Product on Website", name: "showOnWebsite", widget: "boolean", default: true, required: false, hint: "Turn this off to hide the product from the website completely." }
+              - { label: "Available / In Stock", name: "available", widget: "boolean", default: true, required: false, hint: "Turn this off when the product is not in stock. Products that are not available will be hidden from the website unless Show Product on Website is intentionally used for a future coming-soon display." }
 
 
           - label: "Combo Deals"
