@@ -11,7 +11,15 @@
       "size": "236 mL",
       "available": true,
       "paymentLink": "",
-      "isDealOfWeek": false
+      "isDealOfWeek": false,
+      "rating": 4.9,
+      "reviewCount": 36,
+      "purchaseCount": 12,
+      "availableQuantity": 10,
+      "productDetails": "A bright, feminine fragrance mist made for sweet everyday confidence.",
+      "fragranceNotes": "Fresh florals, clean musk, and soft sweetness.",
+      "ingredients": "Fragrance mist ingredients/details may vary by batch. Please check product packaging.",
+      "returnPolicy": "Contact Scentivity within 24 hours of delivery for issues with the received item."
     },
     {
       "name": "Bath & Body Works Body Cream",
@@ -24,7 +32,15 @@
       "size": "226 g / 8 oz",
       "available": true,
       "paymentLink": "",
-      "isDealOfWeek": false
+      "isDealOfWeek": false,
+      "rating": 4.8,
+      "reviewCount": 53,
+      "purchaseCount": 21,
+      "availableQuantity": 13,
+      "productDetails": "Rich body care for soft, hydrated skin and a polished daily scent routine.",
+      "fragranceNotes": "Creamy vanilla, soft florals, and warm body-care notes.",
+      "ingredients": "Body care ingredients/details may vary by batch. Please check product packaging.",
+      "returnPolicy": "Unopened products may be reviewed for exchange support when reported promptly."
     },
     {
       "name": "Sweet Signature Eau de Parfum",
@@ -37,7 +53,15 @@
       "size": "50 mL",
       "available": true,
       "paymentLink": "",
-      "isDealOfWeek": false
+      "isDealOfWeek": false,
+      "rating": 4.8,
+      "reviewCount": 70,
+      "purchaseCount": 30,
+      "availableQuantity": 16,
+      "productDetails": "A polished perfume profile with soft florals, vanilla, amber, and clean musk.",
+      "fragranceNotes": "Soft florals, vanilla, amber, and clean musk.",
+      "ingredients": "Perfume ingredients/details may vary by batch. Please check product packaging.",
+      "returnPolicy": "Contact Scentivity for support if the item arrives damaged."
     },
     {
       "name": "Men’s Fresh Body Spray",
@@ -50,7 +74,15 @@
       "size": "100 mL",
       "available": true,
       "paymentLink": "",
-      "isDealOfWeek": false
+      "isDealOfWeek": false,
+      "rating": 4.9,
+      "reviewCount": 87,
+      "purchaseCount": 39,
+      "availableQuantity": 19,
+      "productDetails": "Fresh, bold men’s fragrance made for confident everyday wear.",
+      "fragranceNotes": "Clean oceanic freshness, soft woods, and masculine musk.",
+      "ingredients": "Product ingredients/details may vary by batch. Please check product packaging.",
+      "returnPolicy": "Contact Scentivity quickly for delivery or product concerns."
     },
     {
       "name": "Scented 3-Wick Candle",
@@ -63,7 +95,15 @@
       "size": "3-wick candle",
       "available": true,
       "paymentLink": "",
-      "isDealOfWeek": false
+      "isDealOfWeek": false,
+      "rating": 4.8,
+      "reviewCount": 104,
+      "purchaseCount": 48,
+      "availableQuantity": 22,
+      "productDetails": "A cozy home-fragrance pick for bedrooms, gifts, and relaxing spaces.",
+      "fragranceNotes": "Warm sweetness, soft woods, and room-filling comfort.",
+      "ingredients": "Candle ingredients/details may vary by batch. Please check product packaging.",
+      "returnPolicy": "Unburned candles may be reviewed for exchange support if reported promptly."
     },
     {
       "name": "Pocket Hand Sanitizer",
@@ -76,7 +116,15 @@
       "size": "Travel size",
       "available": true,
       "paymentLink": "",
-      "isDealOfWeek": false
+      "isDealOfWeek": false,
+      "rating": 4.8,
+      "reviewCount": 121,
+      "purchaseCount": 57,
+      "availableQuantity": 25,
+      "productDetails": "A portable scented essential for bags, cars, school, work, and gifting.",
+      "fragranceNotes": "Sweet clean scent with convenient on-the-go freshness.",
+      "ingredients": "Sanitizer ingredients/details may vary by batch. Please check product packaging.",
+      "returnPolicy": "Contact Scentivity for product concerns after delivery."
     }
   ],
   "combos": [
