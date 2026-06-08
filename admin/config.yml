@@ -36,18 +36,18 @@ collections:
             name: "dealOfWeek"
             widget: "object"
             collapsed: false
-            hint: "Choose the product or combo to feature in the Deal of the Week section. Type the exact Product Name or Combo Name."
+            hint: "Choose the single product to feature in the Deal of the Week section. Type the exact Product Name."
             fields:
               - { label: "Enable Deal of the Week", name: "enabled", widget: "boolean", default: true, required: false }
               - label: "Deal Type"
                 name: "itemType"
                 widget: "select"
-                default: "combo"
+                default: "product"
                 options:
                   - { label: "Single Product", value: "product" }
                   - { label: "Combo Deal", value: "combo" }
               - { label: "Product Name to Feature", name: "productName", widget: "string", required: false, hint: "Use this only when Deal Type is Single Product. Must match the Product Name exactly." }
-              - { label: "Combo Name to Feature", name: "comboName", widget: "string", required: false, hint: "Use this only when Deal Type is Combo Deal. Must match the Combo Name exactly." }
+              - { label: "Combo Name to Feature", name: "comboName", widget: "string", required: false, hint: "Leave blank unless you intentionally change the deal type to Combo Deal." }
               - { label: "Badge Text", name: "badgeText", widget: "string", required: false, default: "Deal of the Week" }
               - { label: "Deal Heading", name: "title", widget: "string", required: false, hint: "Example: Bundle your favorites and save." }
               - { label: "Deal Description", name: "description", widget: "text", required: false, hint: "Short catchy text buyers will see under the Deal of the Week heading. Example: Fresh picks. Sweet savings." }

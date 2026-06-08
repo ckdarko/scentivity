@@ -6584,3 +6584,76 @@ body.header-menu-open .cart-close {
 .brand-intro-section {
   display: none !important;
 }
+
+
+/* Cart reliability, touch, and bottom-nav overlap fixes */
+button,
+a,
+.btn,
+.mobile-bottom-nav button,
+.mobile-bottom-nav a,
+.header-menu-toggle {
+  touch-action: manipulation;
+}
+
+.cart-overlay.visible {
+  pointer-events: auto !important;
+}
+
+.cart-drawer.open {
+  pointer-events: auto !important;
+}
+
+body.cart-open {
+  overflow: hidden;
+}
+
+.add-to-cart,
+.add-combo-to-cart,
+[data-deal-product-key],
+[data-deal-combo-key],
+#mobileCartButton,
+.cart-nav-button {
+  position: relative;
+  z-index: 20;
+  pointer-events: auto !important;
+}
+
+.homepage-showcase,
+.deal-of-week-section,
+.products-section,
+.combo-before-order-section,
+.combo-deals {
+  scroll-margin-bottom: 130px;
+}
+
+@media (max-width: 760px) {
+  main {
+    padding-bottom: 130px !important;
+  }
+
+  .showcase-bottom,
+  .deal-week-actions,
+  .product-actions,
+  .combo-info .product-actions {
+    position: relative;
+    z-index: 30;
+    padding-bottom: 10px;
+  }
+
+  .showcase-slide,
+  .product-card,
+  .combo-card,
+  .hero-deal-card {
+    margin-bottom: 18px;
+  }
+
+  .mobile-bottom-nav {
+    z-index: 1500 !important;
+  }
+
+  .cart-drawer.open,
+  .cart-overlay.visible {
+    z-index: 2147483500 !important;
+  }
+}
