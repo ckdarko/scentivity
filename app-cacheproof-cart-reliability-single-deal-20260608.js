@@ -1,3 +1,4 @@
+// SCENTIVITY_FEEDBACK_MENU_COMBO_OFF_CART_COUNT_20260608
 // SCENTIVITY_CART_RELIABILITY_SINGLE_DEAL_20260608
 // SCENTIVITY_HEADER_FOOTER_FEEDBACK_SELECT_UPDATE_20260607
 // SCENTIVITY_VIDEO_NAV_COMBO_FEEDBACK_UPDATE_20260607
@@ -167,7 +168,7 @@ const fallbackCombos = [
 
 
 const fallbackComboDealsSettings = {
-  enabled: true,
+  enabled: false,
   heading: 'Save more with curated scent bundles.',
   description: 'Pick a discounted combo, add it to cart, and checkout the same way as regular products.'
 };
@@ -1023,11 +1024,21 @@ function updateCartTotals() {
 }
 
 function updateCartCount() {
-  const quantity = String(getCartQuantity());
-  if (cartCount) cartCount.textContent = quantity;
-  if (cartCountFooter) cartCountFooter.textContent = quantity;
-}
+  const quantityNumber = getCartQuantity();
+  const quantity = String(quantityNumber);
 
+  [cartCount, cartCountFooter, mobileCartCount].forEach(target => {
+    if (target) target.textContent = quantity;
+  });
+
+  document.querySelectorAll('[data-cart-count], #cartCount, #cartCountFooter, #mobileCartCount').forEach(target => {
+    target.textContent = quantity;
+  });
+
+  mobileCartButton?.classList.toggle('has-items', quantityNumber > 0);
+  cartToggle?.classList.toggle('has-items', quantityNumber > 0);
+  cartToggleFooter?.classList.toggle('has-items', quantityNumber > 0);
+}
 
 function getBundleSelectedProducts() {
   const checkedKeys = new Set([...document.querySelectorAll('#bundleBuilderGrid input[type="checkbox"]:checked')].map(input => input.value));
@@ -2233,4 +2244,6 @@ document.addEventListener('click', event => {
   document.querySelector('#emailRequestForm')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
 });
 
+updateCartCount();
+document.addEventListener('DOMContentLoaded', () => updateCartCount());
 loadProducts();

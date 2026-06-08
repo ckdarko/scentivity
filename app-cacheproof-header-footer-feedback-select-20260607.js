@@ -1,3 +1,4 @@
+// SCENTIVITY_CART_RELIABILITY_SINGLE_DEAL_20260608
 // SCENTIVITY_HEADER_FOOTER_FEEDBACK_SELECT_UPDATE_20260607
 // SCENTIVITY_VIDEO_NAV_COMBO_FEEDBACK_UPDATE_20260607
 // SCENTIVITY_HOMEPAGE_VIDEO_UPDATE_20260607
@@ -182,12 +183,12 @@ const fallbackBundleBuilderSettings = {
 
 const fallbackDealOfWeek = {
   enabled: true,
-  itemType: 'combo',
+  itemType: 'product',
   productName: '',
-  comboName: 'Sweet Starter Combo',
+  comboName: '',
   badgeText: 'Deal of the Week',
-  title: 'Bundle your favorites and save.',
-  description: 'Fresh picks. Sweet savings.',
+  title: 'This week’s featured scent.',
+  description: 'A highlighted Scentivity favorite available this week.',
   buttonText: 'Add Deal to Cart',
   image: ''
 };
@@ -205,12 +206,13 @@ let activeSubCategory = 'all';
 let activeSearchTerm = '';
 let showcaseIndex = 0;
 let showcaseTimer = null;
-let cart = loadCart();
+let cart = [];
 let selectedBundleProductKeys = new Set();
 
 const SCENTIVITY_EMAIL = 'scentivitygh@gmail.com';
 const SCENTIVITY_WHATSAPP = '233534584470';
 const CART_STORAGE_KEY = 'scentivityCartV1';
+cart = loadCart();
 const CHECKOUT_PAYMENT_METHOD_CARD = 'card';
 const CHECKOUT_PAYMENT_METHOD_MOMO = 'momo';
 const CHECKOUT_PAYMENT_METHOD_PICKUP = 'pay_on_pickup';
@@ -589,48 +591,43 @@ function findItemByName(items = [], name = '') {
 
 function getDealOfWeekSelection() {
   const config = dealOfWeek || fallbackDealOfWeek;
-  const explicitType = cleanText(config.itemType || config.type || '').toLowerCase();
-  const wantsCombo = explicitType.includes('combo');
-  const wantsProduct = explicitType.includes('product');
+  const explicitType = cleanText(config.itemType || config.type || 'product').toLowerCase();
 
   let item = null;
-  let itemType = wantsProduct ? 'product' : 'combo';
+  let itemType = 'product';
 
-  if (wantsProduct) {
-    item = findItemByName(products, config.productName) || products.find(product => product.isDealOfWeek && product.available !== false);
-    itemType = 'product';
-  } else if (wantsCombo) {
+  if (explicitType.includes('combo')) {
     item = findItemByName(combos, config.comboName) || combos.find(combo => combo.isDealOfWeek && combo.available !== false);
     itemType = 'combo';
+  } else {
+    item = findItemByName(products, config.productName) || products.find(product => product.isDealOfWeek && product.available !== false);
+    itemType = 'product';
   }
 
   if (!item) {
-    const flaggedCombo = combos.find(combo => combo.isDealOfWeek && combo.available !== false);
     const flaggedProduct = products.find(product => product.isDealOfWeek && product.available !== false);
-    if (flaggedCombo) {
-      item = flaggedCombo;
-      itemType = 'combo';
-    } else if (flaggedProduct) {
+    const firstProduct = products.find(product => product.available !== false);
+    if (flaggedProduct) {
       item = flaggedProduct;
       itemType = 'product';
-    }
-  }
-
-  if (!item) {
-    const firstCombo = combos.find(combo => combo.available !== false);
-    const firstProduct = products.find(product => product.available !== false);
-    if (firstCombo) {
-      item = firstCombo;
-      itemType = 'combo';
     } else if (firstProduct) {
       item = firstProduct;
       itemType = 'product';
     }
   }
 
+  // Only fall back to a combo if there is no available product at all.
+  if (!item) {
+    const flaggedCombo = combos.find(combo => combo.isDealOfWeek && combo.available !== false);
+    const firstCombo = combos.find(combo => combo.available !== false);
+    if (flaggedCombo || firstCombo) {
+      item = flaggedCombo || firstCombo;
+      itemType = 'combo';
+    }
+  }
+
   return { item, itemType, config };
 }
-
 
 function normalizeHomepageVideoSettings(settings = {}) {
   return {
@@ -702,7 +699,7 @@ function renderDealOfWeek() {
   const description = cleanText(config.description || item.description || item.notes || item.includedItems || 'Shop this highlighted Scentivity deal while it is available.');
   const price = cleanText(isCombo ? (item.comboPrice || item.price || 'Price on request') : (item.price || 'Price on request'));
   const savings = isCombo ? cleanText(item.discountText || '') : '';
-  const buttonText = cleanText(config.buttonText || (isCombo ? 'Add Deal Combo to Cart' : 'Add Deal to Cart'));
+  const buttonText = cleanText(config.buttonText || 'Add Deal to Cart');
   const subText = isCombo ? cleanText(item.includedItems || 'Combo deal') : [cleanText(item.brand || 'Scentivity'), cleanText(item.size || ''), getSubCategory(item)].filter(Boolean).join(' • ');
   const dataAttribute = isCombo ? `data-deal-combo-key="${item._key}"` : `data-deal-product-key="${item._key}"`;
 
@@ -982,15 +979,29 @@ function refreshShop() {
 
 function loadCart() {
   try {
-    const parsed = JSON.parse(localStorage.getItem(CART_STORAGE_KEY) || '[]');
-    return Array.isArray(parsed) ? parsed : [];
-  } catch (_) {
+    const stored = window.localStorage.getItem(CART_STORAGE_KEY);
+    if (!stored) return [];
+    const parsed = JSON.parse(stored);
+    if (!Array.isArray(parsed)) return [];
+    return parsed
+      .filter(item => item && item.key && item.name && Number(item.quantity || 0) > 0)
+      .map(item => ({
+        ...item,
+        quantity: Number(item.quantity || 1),
+        unitPrice: Number(item.unitPrice || 0)
+      }));
+  } catch (error) {
+    console.warn('Could not load Scentivity cart from storage.', error);
     return [];
   }
 }
 
 function saveCart() {
-  localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
+  try {
+    window.localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
+  } catch (error) {
+    console.warn('Could not save Scentivity cart.', error);
+  }
 }
 
 function getCartQuantity() {
@@ -1247,16 +1258,23 @@ function renderCart() {
 }
 
 function openCart() {
+  if (typeof window.scentivityCloseHeaderMenu === 'function') {
+    window.scentivityCloseHeaderMenu();
+  }
   renderCart();
   cartDrawer?.classList.add('open');
   cartOverlay?.classList.add('visible');
   cartDrawer?.setAttribute('aria-hidden', 'false');
+  cartOverlay?.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('cart-open');
 }
 
 function closeCart() {
   cartDrawer?.classList.remove('open');
   cartOverlay?.classList.remove('visible');
   cartDrawer?.setAttribute('aria-hidden', 'true');
+  cartOverlay?.setAttribute('aria-hidden', 'true');
+  document.body.classList.remove('cart-open');
 }
 
 function updateFulfillmentFields() {
@@ -1483,6 +1501,53 @@ if (subCategoryFilters) {
 }
 
 
+
+
+function openCartFromAnyButton(event) {
+  event?.preventDefault?.();
+  event?.stopPropagation?.();
+  event?.stopImmediatePropagation?.();
+  openCart();
+}
+
+function addProductToCartFromButton(button, event) {
+  const key = button?.dataset?.productKey || button?.dataset?.dealProductKey;
+  if (!key) return;
+  event?.preventDefault?.();
+  event?.stopPropagation?.();
+  event?.stopImmediatePropagation?.();
+  addToCart(key);
+}
+
+function addComboToCartFromButton(button, event) {
+  const key = button?.dataset?.comboKey || button?.dataset?.dealComboKey;
+  if (!key) return;
+  event?.preventDefault?.();
+  event?.stopPropagation?.();
+  event?.stopImmediatePropagation?.();
+  addComboToCart(key);
+}
+
+// High-priority mobile/desktop fix:
+// prevents Add to Cart taps from bubbling into Contact/Preorder/menu handlers.
+document.addEventListener('click', event => {
+  const addProductButton = event.target.closest('.add-to-cart[data-product-key], [data-deal-product-key]');
+  if (addProductButton) {
+    addProductToCartFromButton(addProductButton, event);
+    return;
+  }
+
+  const addComboButton = event.target.closest('.add-combo-to-cart[data-combo-key], [data-deal-combo-key]');
+  if (addComboButton) {
+    addComboToCartFromButton(addComboButton, event);
+    return;
+  }
+
+  const cartButton = event.target.closest('#mobileCartButton, #cartToggle, #cartToggleFooter, .cart-nav-button, [data-open-cart]');
+  if (cartButton) {
+    openCartFromAnyButton(event);
+  }
+}, true);
 
 document.addEventListener('click', event => {
   const productDealButton = event.target.closest('[data-deal-product-key]');

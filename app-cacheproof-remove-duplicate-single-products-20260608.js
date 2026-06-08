@@ -1,3 +1,12 @@
+// SCENTIVITY_REMOVE_DUPLICATE_SINGLE_PRODUCTS_20260608
+// SCENTIVITY_REMOVE_SINGLE_PRODUCT_SECTIONS_20260608
+// SCENTIVITY_TWO_PRODUCTS_PER_ROW_FINAL_20260608
+// SCENTIVITY_HOME_CLICK_FILTER_FOOTER_FIX_20260608
+// SCENTIVITY_HOMEPAGE_CLEANUP_REQUESTS_20260608
+// SCENTIVITY_PRODUCT_PAGE_CSS_FINAL_FIX_20260608
+// SCENTIVITY_PRODUCTS_SHOP_FEEDBACK_FIX_20260608
+// SCENTIVITY_FEEDBACK_MENU_COMBO_OFF_CART_COUNT_20260608
+// SCENTIVITY_CART_RELIABILITY_SINGLE_DEAL_20260608
 // SCENTIVITY_HEADER_FOOTER_FEEDBACK_SELECT_UPDATE_20260607
 // SCENTIVITY_VIDEO_NAV_COMBO_FEEDBACK_UPDATE_20260607
 // SCENTIVITY_HOMEPAGE_VIDEO_UPDATE_20260607
@@ -166,7 +175,7 @@ const fallbackCombos = [
 
 
 const fallbackComboDealsSettings = {
-  enabled: true,
+  enabled: false,
   heading: 'Save more with curated scent bundles.',
   description: 'Pick a discounted combo, add it to cart, and checkout the same way as regular products.'
 };
@@ -182,12 +191,12 @@ const fallbackBundleBuilderSettings = {
 
 const fallbackDealOfWeek = {
   enabled: true,
-  itemType: 'combo',
+  itemType: 'product',
   productName: '',
-  comboName: 'Sweet Starter Combo',
+  comboName: '',
   badgeText: 'Deal of the Week',
-  title: 'Bundle your favorites and save.',
-  description: 'Fresh picks. Sweet savings.',
+  title: 'This week’s featured scent.',
+  description: 'A highlighted Scentivity favorite available this week.',
   buttonText: 'Add Deal to Cart',
   image: ''
 };
@@ -205,12 +214,13 @@ let activeSubCategory = 'all';
 let activeSearchTerm = '';
 let showcaseIndex = 0;
 let showcaseTimer = null;
-let cart = loadCart();
+let cart = [];
 let selectedBundleProductKeys = new Set();
 
 const SCENTIVITY_EMAIL = 'scentivitygh@gmail.com';
 const SCENTIVITY_WHATSAPP = '233534584470';
 const CART_STORAGE_KEY = 'scentivityCartV1';
+cart = loadCart();
 const CHECKOUT_PAYMENT_METHOD_CARD = 'card';
 const CHECKOUT_PAYMENT_METHOD_MOMO = 'momo';
 const CHECKOUT_PAYMENT_METHOD_PICKUP = 'pay_on_pickup';
@@ -527,11 +537,64 @@ Quantity:`;
 }
 
 
+
+function isProductPublished(product = {}) {
+  return product.showOnWebsite !== false &&
+    product.hideFromWebsite !== true &&
+    product.hidden !== true;
+}
+
+function productPageUrl(productOrKey = '', productName = '', productSlug = '') {
+  if (productOrKey && typeof productOrKey === 'object') {
+    const key = cleanText(productOrKey._key || productOrKey.id || '');
+    const name = cleanText(productOrKey.name || '');
+    const slug = cleanText(productOrKey.slug || slugify(name));
+    return `product.html?product=${encodeURIComponent(key)}&slug=${encodeURIComponent(slug)}&name=${encodeURIComponent(name)}`;
+  }
+  const key = cleanText(productOrKey || '');
+  const name = cleanText(productName || '');
+  const slug = cleanText(productSlug || slugify(name || key));
+  return `product.html?product=${encodeURIComponent(key)}&slug=${encodeURIComponent(slug)}&name=${encodeURIComponent(name)}`;
+}
+
+function productRating(product = {}) {
+  const value = Number(product.rating || product.averageRating || product.stars || 4.8);
+  if (!Number.isFinite(value)) return 4.8;
+  return Math.max(1, Math.min(5, value));
+}
+
+function productReviewCount(product = {}) {
+  const value = Number(product.reviewCount || product.reviewsCount || product.numberOfReviews || 0);
+  if (!Number.isFinite(value) || value < 0) return 0;
+  return Math.round(value);
+}
+
+function productPurchaseCount(product = {}) {
+  const value = Number(product.purchaseCount || product.numberPurchased || product.purchases || product.soldCount || 0);
+  if (!Number.isFinite(value) || value < 0) return 0;
+  return Math.round(value);
+}
+
+function productAvailableQuantity(product = {}) {
+  const value = Number(product.availableQuantity || product.stockQuantity || product.quantityAvailable || product.stock || 0);
+  if (!Number.isFinite(value) || value < 0) return 0;
+  return Math.round(value);
+}
+
+function formatCompactCount(value = 0) {
+  const number = Number(value || 0);
+  if (!Number.isFinite(number) || number <= 0) return '0';
+  if (number >= 1000) return `${(number / 1000).toFixed(number >= 10000 ? 0 : 1).replace('.0', '')}k`;
+  return String(Math.round(number));
+}
+
 function getVisibleProducts() {
   if (activeMainCategory === CATALOGUE_COMBOS) return [];
 
   const search = activeSearchTerm.toLowerCase();
-  return products.filter(product => {
+  const visible = products.filter(product => isProductPublished(product));
+
+  const filtered = visible.filter(product => {
     const mainCategory = getMainCategory(product);
     const subCategory = getSubCategory(product);
     const searchableText = [
@@ -555,6 +618,12 @@ function getVisibleProducts() {
     const matchesSearch = !search || searchableText.includes(search);
     return matchesMain && matchesSub && matchesSearch && isGiftSet;
   });
+
+  if (!filtered.length && !search && activeMainCategory !== CATALOGUE_COMBOS) {
+    return visible;
+  }
+
+  return filtered;
 }
 
 function productWhatsAppMessage(product) {
@@ -589,48 +658,43 @@ function findItemByName(items = [], name = '') {
 
 function getDealOfWeekSelection() {
   const config = dealOfWeek || fallbackDealOfWeek;
-  const explicitType = cleanText(config.itemType || config.type || '').toLowerCase();
-  const wantsCombo = explicitType.includes('combo');
-  const wantsProduct = explicitType.includes('product');
+  const explicitType = cleanText(config.itemType || config.type || 'product').toLowerCase();
 
   let item = null;
-  let itemType = wantsProduct ? 'product' : 'combo';
+  let itemType = 'product';
 
-  if (wantsProduct) {
-    item = findItemByName(products, config.productName) || products.find(product => product.isDealOfWeek && product.available !== false);
-    itemType = 'product';
-  } else if (wantsCombo) {
+  if (explicitType.includes('combo')) {
     item = findItemByName(combos, config.comboName) || combos.find(combo => combo.isDealOfWeek && combo.available !== false);
     itemType = 'combo';
+  } else {
+    item = findItemByName(products, config.productName) || products.find(product => product.isDealOfWeek && product.available !== false);
+    itemType = 'product';
   }
 
   if (!item) {
-    const flaggedCombo = combos.find(combo => combo.isDealOfWeek && combo.available !== false);
-    const flaggedProduct = products.find(product => product.isDealOfWeek && product.available !== false);
-    if (flaggedCombo) {
-      item = flaggedCombo;
-      itemType = 'combo';
-    } else if (flaggedProduct) {
+    const flaggedProduct = products.find(product => product.isDealOfWeek && isProductPublished(product) && product.available !== false);
+    const firstProduct = products.find(product => isProductPublished(product) && product.available !== false);
+    if (flaggedProduct) {
       item = flaggedProduct;
       itemType = 'product';
-    }
-  }
-
-  if (!item) {
-    const firstCombo = combos.find(combo => combo.available !== false);
-    const firstProduct = products.find(product => product.available !== false);
-    if (firstCombo) {
-      item = firstCombo;
-      itemType = 'combo';
     } else if (firstProduct) {
       item = firstProduct;
       itemType = 'product';
     }
   }
 
+  // Only fall back to a combo if there is no available product at all.
+  if (!item) {
+    const flaggedCombo = combos.find(combo => combo.isDealOfWeek && combo.available !== false);
+    const firstCombo = combos.find(combo => combo.available !== false);
+    if (flaggedCombo || firstCombo) {
+      item = flaggedCombo || firstCombo;
+      itemType = 'combo';
+    }
+  }
+
   return { item, itemType, config };
 }
-
 
 function normalizeHomepageVideoSettings(settings = {}) {
   return {
@@ -702,12 +766,17 @@ function renderDealOfWeek() {
   const description = cleanText(config.description || item.description || item.notes || item.includedItems || 'Shop this highlighted Scentivity deal while it is available.');
   const price = cleanText(isCombo ? (item.comboPrice || item.price || 'Price on request') : (item.price || 'Price on request'));
   const savings = isCombo ? cleanText(item.discountText || '') : '';
-  const buttonText = cleanText(config.buttonText || (isCombo ? 'Add Deal Combo to Cart' : 'Add Deal to Cart'));
+  const buttonText = cleanText(config.buttonText || 'Add Deal to Cart');
   const subText = isCombo ? cleanText(item.includedItems || 'Combo deal') : [cleanText(item.brand || 'Scentivity'), cleanText(item.size || ''), getSubCategory(item)].filter(Boolean).join(' • ');
   const dataAttribute = isCombo ? `data-deal-combo-key="${item._key}"` : `data-deal-product-key="${item._key}"`;
+  const itemUrl = isCombo ? '#comboDeals' : productPageUrl(item);
+
+  dealOfWeekCard.dataset.productUrl = itemUrl;
+  dealOfWeekCard.classList.toggle('product-link-card', !isCombo);
+  dealOfWeekCard.setAttribute('tabindex', '0');
 
   dealOfWeekCard.innerHTML = `
-    <div class="deal-week-visual">
+    <div class="deal-week-visual ${isCombo ? '' : 'product-link-card'}" ${isCombo ? '' : `data-product-url="${itemUrl}" tabindex="0"`}>
       <span class="deal-tag">${badge}</span>
       <div class="deal-week-product-frame">
         <img src="${image}" alt="${name}" loading="lazy" onerror="this.onerror=null;this.src='assets/scentivity-logo-fused.png';" />
@@ -724,7 +793,10 @@ function renderDealOfWeek() {
       <p class="deal-week-includes">${subText}</p>
       <div class="deal-week-actions">
         <button class="btn primary" type="button" ${dataAttribute}>${buttonText}</button>
-        <a class="btn ghost" href="${buildWhatsAppLink(`Hello Scentivity,%0A%0AI am interested in the Deal of the Week:%0A${name}%0A%0APlease confirm availability.`)}" target="_blank" rel="noreferrer">Ask about deal</a>
+        ${isCombo
+          ? `<a class="btn ghost" href="${buildWhatsAppLink(`Hello Scentivity,%0A%0AI am interested in the Deal of the Week:%0A${name}%0A%0APlease confirm availability.`)}" target="_blank" rel="noreferrer">Ask about deal</a>`
+          : `<a class="btn ghost" href="${itemUrl}">View product</a>`
+        }
       </div>
     </div>
   `;
@@ -791,174 +863,75 @@ function renderCombos() {
   }).join('');
 }
 
-function renderProducts() {
-  if (!productGrid) return;
-  const visibleProducts = getVisibleProducts();
-  if (!visibleProducts.length) {
-    productGrid.innerHTML = '<p class="empty-state">No products match this selection yet. Try a different category, clear the search, or add the product from the Scentivity admin page.</p>';
-    return;
-  }
-  productGrid.innerHTML = visibleProducts.map(product => {
-    const name = cleanText(product.name || 'Untitled product');
-    const brand = cleanText(product.brand || 'Scentivity');
-    const mainCategory = getMainCategory(product);
-    const subCategory = getSubCategory(product);
-    const price = cleanText(product.price || 'Price on request');
-    const size = cleanText(product.size || '');
-    const notes = cleanText(product.notes || 'Add product details and scent notes in the admin dashboard.');
-    const available = product.available !== false;
-    const image = normalizeImagePath(product.image);
-    const paymentLink = cleanText(product.paymentLink || '');
-    const requestLink = buildWhatsAppLink(productWhatsAppMessage(product));
-    const directBuyButton = paymentLink
-      ? `<a class="btn ghost" href="${paymentLink}" target="_blank" rel="noreferrer">Direct payment link</a>`
-      : '';
-    return `
-      <article class="product-card ${available ? '' : 'is-unavailable'}">
-        <img src="${image}" alt="${name}" loading="lazy" />
-        <div class="product-info">
-          <div class="product-top">
-            <div>
-              <span class="product-brand">${brand}</span>
-              <div class="product-tags">
-                <span>${mainCategory}</span>
-                <span>${subCategory}</span>
-                ${size ? `<span>${size}</span>` : ''}
-              </div>
-              <h3>${name}</h3>
-            </div>
-            <span class="price">${price}</span>
-          </div>
-          <p>${notes}</p>
-          ${available
-            ? `<div class="product-actions">
-                <button class="btn primary add-to-cart" type="button" data-product-key="${product._key}">Add to Cart</button>
-                <a class="btn ghost" href="${requestLink}" target="_blank" rel="noreferrer">Request on WhatsApp</a>
-                ${directBuyButton}
-              </div>`
-            : `<span class="sold-out">Currently unavailable</span>`
-          }
-        </div>
-      </article>
-    `;
-  }).join('');
-}
-
-
-function getHomepageSlides() {
-  const availableSlides = products
-    .filter(product => product.available !== false)
-    .slice(0, 6)
-    .map(product => ({ ...product, _slideStatus: 'Available now', _slideType: 'available' }));
-
-  const incomingSlides = products
-    .filter(product => product.available === false)
-    .slice(0, 3)
-    .map(product => ({ ...product, _slideStatus: 'Coming soon', _slideType: 'coming-soon' }));
-
-  const fallbackIncoming = [
-    {
-      name: 'New fragrance drops',
-      brand: 'Scentivity',
-      mainCategory: MAIN_CATEGORY_DESIGNER,
-      subCategory: 'Fine Fragrance Mist',
-      price: 'Coming soon',
-      size: 'New arrivals',
-      notes: 'Fresh perfume, mist, and luxury fragrance picks will be added soon.',
-      image: 'assets/scentivity-logo-fused.png',
-      available: false,
-      _slideStatus: 'Coming soon',
-      _slideType: 'coming-soon'
-    },
-    {
-      name: 'More body care essentials',
-      brand: 'Scentivity',
-      mainCategory: MAIN_CATEGORY_BBW,
-      subCategory: 'Body Care',
-      price: 'Coming soon',
-      size: 'Body care',
-      notes: 'Watch this space for lotions, creams, washes, candles, and home fragrance items.',
-      image: 'assets/scentivity-product-photo-background.png',
-      available: false,
-      _slideStatus: 'Coming soon',
-      _slideType: 'coming-soon'
-    }
-  ];
-
-  const incoming = incomingSlides.length ? incomingSlides : fallbackIncoming;
-  const slides = [...availableSlides, ...incoming];
-
-  return slides.length ? slides.slice(0, 8) : fallbackIncoming;
-}
-
-function renderHomepageShowcase() {
-  if (!homepageProductSlides) return;
-  const slides = getHomepageSlides();
-  if (!slides.length) {
-    homepageProductSlides.innerHTML = `
-      <article class="showcase-slide active fallback-showcase">
-        <div class="showcase-image-wrap">
-          <img src="assets/scentivity-logo-fused.png" alt="Scentivity logo" loading="lazy" />
-          <span class="showcase-badge soon">Coming soon</span>
-        </div>
-        <div class="showcase-copy">
-          <p class="eyebrow">Scentivity</p>
-          <h3>New scents coming soon</h3>
-          <p>Available products and incoming scents will appear here.</p>
-        </div>
-      </article>
-    `;
-    if (homepageProductDots) homepageProductDots.innerHTML = '';
-    return;
-  }
-
-  showcaseIndex = ((showcaseIndex % slides.length) + slides.length) % slides.length;
-  const product = slides[showcaseIndex];
-
-  const name = cleanText(product.name || 'Scentivity product');
+function compactProductCard(product = {}) {
+  const name = cleanText(product.name || 'Untitled product');
   const brand = cleanText(product.brand || 'Scentivity');
-  const mainCategory = getMainCategory(product);
-  const subCategory = getSubCategory(product);
-  const price = cleanText(product.price || (product.available === false ? 'Coming soon' : 'Price on request'));
-  const size = cleanText(product.size || '');
-  const notes = cleanText(product.notes || 'Scentivity favorite selected for sweet, confident moments.');
-  const image = normalizeImagePath(product.image || 'assets/scentivity-logo-fused.png');
+  const price = cleanText(product.price || 'Price on request');
+  const image = normalizeImagePath(product.image);
   const available = product.available !== false;
-
-  homepageProductSlides.innerHTML = `
-    <article class="showcase-slide active" aria-label="${name}">
-      <div class="showcase-image-wrap">
+  const key = cleanText(product._key || '');
+  const rating = productRating(product);
+  const reviews = productReviewCount(product);
+  const purchased = productPurchaseCount(product);
+  return `
+    <article class="product-card compact-product-card product-link-card ${available ? '' : 'is-unavailable'}" data-product-url="${productPageUrl(product)}" tabindex="0" aria-label="View details for ${name}">
+      <div class="compact-product-image">
         <img src="${image}" alt="${name}" loading="lazy" onerror="this.onerror=null;this.src='assets/scentivity-logo-fused.png';" />
-        <span class="showcase-badge ${available ? 'available' : 'soon'}">${available ? 'Available now' : 'Coming soon'}</span>
+        <span class="compact-product-badge ${available ? '' : 'coming'}">${available ? 'Available' : 'Out of stock'}</span>
       </div>
-      <div class="showcase-copy">
-        <p class="eyebrow">${cleanText(product._slideStatus || (available ? 'Available now' : 'Coming soon'))} • ${showcaseIndex + 1} of ${slides.length}</p>
+      <div class="compact-product-info">
+        <small>${brand}</small>
         <h3>${name}</h3>
-        <div class="product-tags showcase-tags">
-          <span>${brand}</span>
-          <span>${mainCategory}</span>
-          <span>${subCategory}</span>
-          ${size ? `<span>${size}</span>` : ''}
+        <div class="compact-product-meta">
+          <span class="star-rating-symbol">★</span>
+          <span>${rating.toFixed(1)}</span>
+          ${reviews ? `<span>| ${formatCompactCount(reviews)} reviews</span>` : ''}
+          ${purchased ? `<span>| ${formatCompactCount(purchased)} bought</span>` : ''}
         </div>
-        <p>${notes}</p>
-        <div class="showcase-bottom">
+        <div class="compact-product-bottom">
           <strong>${price}</strong>
-          ${available && product._key
-            ? `<button class="btn primary add-to-cart" type="button" data-product-key="${product._key}">Add to Cart</button>`
-            : `<button class="btn ghost notify-me-button" type="button" data-notify-product="${name}" data-notify-brand="${brand}" data-notify-size="${size}">Notify Me</button>`
+          ${available
+            ? `<button class="compact-cart-button add-to-cart" type="button" data-product-key="${key}" aria-label="Add ${name} to cart">🛒</button>`
+            : `<button class="compact-cart-button notify-me-button" type="button" data-notify-product="${name}" data-notify-brand="${brand}" data-notify-size="${cleanText(product.size || '')}" aria-label="Notify me about ${name}">🔔</button>`
           }
         </div>
       </div>
     </article>
   `;
+}
 
-  homepageProductSlides.style.transform = 'translateX(0)';
+function renderProducts() {
+  if (!productGrid) return;
+  const visibleProducts = getVisibleProducts();
 
-  if (homepageProductDots) {
-    homepageProductDots.innerHTML = slides.map((_, index) => `
-      <button type="button" class="showcase-dot ${index === showcaseIndex ? 'active' : ''}" data-slide-index="${index}" aria-label="Show slide ${index + 1}"></button>
-    `).join('');
+  productGrid.classList.add('two-product-mobile-grid');
+  productGrid.innerHTML = '';
+
+  if (!visibleProducts.length) {
+    productGrid.innerHTML = '<p class="empty-state">No products match this selection yet. Try a different category, clear the search, or add the product from the Scentivity admin page.</p>';
+    return;
   }
+
+  productGrid.innerHTML = visibleProducts.map(product => compactProductCard(product)).join('');
+  dedupeAndNormalizeProductGrid();
+}
+
+function getHomepageSlides() {
+  return products
+    .filter(product => isProductPublished(product))
+    .slice(0, 8)
+    .map(product => ({
+      ...product,
+      _slideStatus: product.available === false ? 'Out of stock' : 'Available now',
+      _slideType: product.available === false ? 'coming-soon' : 'available'
+    }));
+}
+
+function renderHomepageShowcase() {
+  document.querySelectorAll('#featured-products, .homepage-showcase, .showcase-window, #homepageProductSlides, #homepageProductDots').forEach(el => {
+    const section = el.closest('section') || el;
+    section.remove();
+  });
 }
 
 function moveShowcase(direction = 1) {
@@ -982,15 +955,29 @@ function refreshShop() {
 
 function loadCart() {
   try {
-    const parsed = JSON.parse(localStorage.getItem(CART_STORAGE_KEY) || '[]');
-    return Array.isArray(parsed) ? parsed : [];
-  } catch (_) {
+    const stored = window.localStorage.getItem(CART_STORAGE_KEY);
+    if (!stored) return [];
+    const parsed = JSON.parse(stored);
+    if (!Array.isArray(parsed)) return [];
+    return parsed
+      .filter(item => item && item.key && item.name && Number(item.quantity || 0) > 0)
+      .map(item => ({
+        ...item,
+        quantity: Number(item.quantity || 1),
+        unitPrice: Number(item.unitPrice || 0)
+      }));
+  } catch (error) {
+    console.warn('Could not load Scentivity cart from storage.', error);
     return [];
   }
 }
 
 function saveCart() {
-  localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
+  try {
+    window.localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
+  } catch (error) {
+    console.warn('Could not save Scentivity cart.', error);
+  }
 }
 
 function getCartQuantity() {
@@ -1012,11 +999,21 @@ function updateCartTotals() {
 }
 
 function updateCartCount() {
-  const quantity = String(getCartQuantity());
-  if (cartCount) cartCount.textContent = quantity;
-  if (cartCountFooter) cartCountFooter.textContent = quantity;
-}
+  const quantityNumber = getCartQuantity();
+  const quantity = String(quantityNumber);
 
+  [cartCount, cartCountFooter, mobileCartCount].forEach(target => {
+    if (target) target.textContent = quantity;
+  });
+
+  document.querySelectorAll('[data-cart-count], #cartCount, #cartCountFooter, #mobileCartCount').forEach(target => {
+    target.textContent = quantity;
+  });
+
+  mobileCartButton?.classList.toggle('has-items', quantityNumber > 0);
+  cartToggle?.classList.toggle('has-items', quantityNumber > 0);
+  cartToggleFooter?.classList.toggle('has-items', quantityNumber > 0);
+}
 
 function getBundleSelectedProducts() {
   const checkedKeys = new Set([...document.querySelectorAll('#bundleBuilderGrid input[type="checkbox"]:checked')].map(input => input.value));
@@ -1247,16 +1244,23 @@ function renderCart() {
 }
 
 function openCart() {
+  if (typeof window.scentivityCloseHeaderMenu === 'function') {
+    window.scentivityCloseHeaderMenu();
+  }
   renderCart();
   cartDrawer?.classList.add('open');
   cartOverlay?.classList.add('visible');
   cartDrawer?.setAttribute('aria-hidden', 'false');
+  cartOverlay?.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('cart-open');
 }
 
 function closeCart() {
   cartDrawer?.classList.remove('open');
   cartOverlay?.classList.remove('visible');
   cartDrawer?.setAttribute('aria-hidden', 'true');
+  cartOverlay?.setAttribute('aria-hidden', 'true');
+  document.body.classList.remove('cart-open');
 }
 
 function updateFulfillmentFields() {
@@ -1415,7 +1419,26 @@ async function loadProducts() {
     }
     if (Array.isArray(data.customerReviews)) {
       customerReviews = data.customerReviews;
+    } else if (Array.isArray(data.reviews)) {
+      customerReviews = data.reviews;
+    } else if (Array.isArray(data.testimonials)) {
+      customerReviews = data.testimonials;
     }
+    
+    try {
+      const pendingResponse = await fetch(`data/pending-feedback.json?v=${Date.now()}`, { cache: 'no-store' });
+      if (pendingResponse.ok) {
+        const pendingData = await pendingResponse.json();
+        const pendingList = Array.isArray(pendingData.pendingFeedback) ? pendingData.pendingFeedback : [];
+        const approvedPending = pendingList.filter(item => item && isApprovedReview(item));
+        if (approvedPending.length) {
+          customerReviews = [...customerReviews, ...approvedPending];
+        }
+      }
+    } catch (feedbackError) {
+      console.warn('Could not load pending feedback:', feedbackError.message);
+    }
+
     if (data.homepageVideo && typeof data.homepageVideo === 'object') {
       homepageVideoSettings = normalizeHomepageVideoSettings(data.homepageVideo);
     }
@@ -1483,6 +1506,130 @@ if (subCategoryFilters) {
 }
 
 
+
+
+function openCartFromAnyButton(event) {
+  event?.preventDefault?.();
+  event?.stopPropagation?.();
+  event?.stopImmediatePropagation?.();
+  openCart();
+}
+
+function addProductToCartFromButton(button, event) {
+  const key = button?.dataset?.productKey || button?.dataset?.dealProductKey;
+  if (!key) return;
+  event?.preventDefault?.();
+  event?.stopPropagation?.();
+  event?.stopImmediatePropagation?.();
+  addToCart(key);
+}
+
+function addComboToCartFromButton(button, event) {
+  const key = button?.dataset?.comboKey || button?.dataset?.dealComboKey;
+  if (!key) return;
+  event?.preventDefault?.();
+  event?.stopPropagation?.();
+  event?.stopImmediatePropagation?.();
+  addComboToCart(key);
+}
+
+
+function goToShopProducts(event) {
+  event?.preventDefault?.();
+  event?.stopPropagation?.();
+  event?.stopImmediatePropagation?.();
+
+  document.querySelectorAll('.modal-overlay.open, .modal-overlay.visible').forEach(modal => {
+    modal.classList.remove('open', 'visible');
+    modal.setAttribute('aria-hidden', 'true');
+  });
+  if (typeof window.scentivityCloseHeaderMenu === 'function') {
+    window.scentivityCloseHeaderMenu();
+  }
+
+  const target = document.querySelector('#products') || document.querySelector('#productGrid');
+  if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+document.addEventListener('click', event => {
+  const shopButton = event.target.closest('[data-shop-collection], .homepage-video-overlay .btn[href="#products"], a[href="#products"]');
+  if (!shopButton) return;
+  goToShopProducts(event);
+}, true);
+
+document.addEventListener('click', event => {
+  const productCard = event.target.closest('[data-product-url]');
+  if (!productCard) return;
+  if (event.target.closest('button, a, input, select, textarea, label')) return;
+  event.preventDefault();
+  event.stopPropagation();
+  event.stopImmediatePropagation();
+  window.location.href = productCard.dataset.productUrl;
+}, true);
+
+
+// Homepage/product click cleanup: logo reloads top, cards open product page, only cart icons add to cart.
+(function scentivityClickCleanup() {
+  function closeOpenModals() {
+    document.querySelectorAll('.modal-overlay.open, .modal-overlay.visible').forEach(modal => {
+      modal.classList.remove('open', 'visible');
+      modal.setAttribute('aria-hidden', 'true');
+    });
+  }
+
+  document.addEventListener('click', event => {
+    const logo = event.target.closest('[data-home-logo], .brand');
+    if (!logo) return;
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+    window.scrollTo(0, 0);
+    const homeUrl = `${window.location.origin}${window.location.pathname.replace(/\/[^/]*$/, '/')}index.html`;
+    if (/\/index\.html$|\/$/.test(window.location.pathname)) {
+      window.location.href = `${homeUrl}?home=${Date.now()}`;
+    } else {
+      window.location.href = homeUrl;
+    }
+  }, true);
+
+  document.addEventListener('click', event => {
+    const addButton = event.target.closest('.add-to-cart[data-product-key], [data-deal-product-key], .add-combo-to-cart[data-combo-key], [data-deal-combo-key]');
+    if (addButton) return;
+
+    const productCard = event.target.closest('[data-product-url]');
+    if (!productCard) return;
+    if (event.target.closest('button, a, input, select, textarea, label')) return;
+
+    const url = productCard.dataset.productUrl;
+    if (!url || url === '#comboDeals') return;
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+    closeOpenModals();
+    window.location.href = url;
+  }, true);
+})();
+
+// High-priority mobile/desktop fix:
+// prevents Add to Cart taps from bubbling into Contact/Preorder/menu handlers.
+document.addEventListener('click', event => {
+  const addProductButton = event.target.closest('.add-to-cart[data-product-key], [data-deal-product-key]');
+  if (addProductButton) {
+    addProductToCartFromButton(addProductButton, event);
+    return;
+  }
+
+  const addComboButton = event.target.closest('.add-combo-to-cart[data-combo-key], [data-deal-combo-key]');
+  if (addComboButton) {
+    addComboToCartFromButton(addComboButton, event);
+    return;
+  }
+
+  const cartButton = event.target.closest('#mobileCartButton, #cartToggle, #cartToggleFooter, .cart-nav-button, [data-open-cart]');
+  if (cartButton) {
+    openCartFromAnyButton(event);
+  }
+}, true);
 
 document.addEventListener('click', event => {
   const productDealButton = event.target.closest('[data-deal-product-key]');
@@ -1706,16 +1853,31 @@ document.addEventListener('input', event => {
 let testimonialIndex = 0;
 let testimonialTimer = null;
 
+
+function isApprovedReview(review = {}) {
+  const value = review.approved ?? review.isApproved ?? review.showOnWebsite ?? review.published ?? review.status;
+  if (value === true) return true;
+  if (typeof value === 'string') {
+    const normalized = value.trim().toLowerCase();
+    return ['true', 'yes', 'approved', 'publish', 'published', 'show'].includes(normalized);
+  }
+  return false;
+}
+
+function normalizeReviewItem(review = {}) {
+  return {
+    name: cleanText(review.name || review.customerName || 'Scentivity customer'),
+    rating: Math.min(5, Math.max(1, Number(review.rating || 5))),
+    message: cleanText(review.message || review.feedback || review.review || review.comment || ''),
+    productsPurchased: cleanText(review.productsPurchased || review.product || review.products || ''),
+    date: cleanText(review.date || review.submittedAt || '')
+  };
+}
+
 function approvedCustomerReviews() {
-  return customerReviews
-    .filter(review => review && review.approved === true)
-    .map(review => ({
-      name: cleanText(review.name || 'Scentivity customer'),
-      rating: Math.min(5, Math.max(1, Number(review.rating || 5))),
-      message: cleanText(review.message || ''),
-      productsPurchased: cleanText(review.productsPurchased || review.product || review.products || ''),
-      date: cleanText(review.date || '')
-    }))
+  return (customerReviews || [])
+    .filter(review => review && isApprovedReview(review))
+    .map(normalizeReviewItem)
     .filter(review => review.message);
 }
 
@@ -1915,6 +2077,7 @@ document.querySelector('#statsDots')?.addEventListener('click', event => {
 
 showOrderSlide(0);
 showStatsSlide(0);
+window.setInterval(() => showOrderSlide(orderSlideIndex + 1), 4200);
 window.setInterval(() => showStatsSlide(statsSlideIndex + 1), 4500);
 
 const aboutModal = document.querySelector('#aboutModal');
@@ -2168,4 +2331,110 @@ document.addEventListener('click', event => {
   document.querySelector('#emailRequestForm')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
 });
 
+updateCartCount();
+document.addEventListener('DOMContentLoaded', () => updateCartCount());
 loadProducts();
+
+
+// FINAL MOBILE PRODUCT GRID FIX: keep Products section in compact two-column mode.
+(function scentivityTwoProductGridFix() {
+  function applyTwoProductGridFix() {
+    const grid = document.querySelector('#products .product-grid, #productGrid');
+    if (!grid) return;
+    grid.classList.add('two-product-mobile-grid');
+    grid.querySelectorAll('.product-card').forEach(card => {
+      card.classList.add('two-product-card');
+      card.style.float = 'none';
+      card.style.clear = 'none';
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', applyTwoProductGridFix);
+  window.addEventListener('load', applyTwoProductGridFix);
+  window.setTimeout(applyTwoProductGridFix, 250);
+  window.setTimeout(applyTwoProductGridFix, 900);
+
+  const originalRenderProducts = window.renderProducts;
+  if (typeof originalRenderProducts === 'function') {
+    window.renderProducts = function patchedRenderProducts() {
+      const result = originalRenderProducts.apply(this, arguments);
+      applyTwoProductGridFix();
+      return result;
+    };
+  }
+})();
+
+
+// Remove single-product sections and keep only the 2-column Products grid.
+(function scentivityRemoveSingleProductSections() {
+  function cleanupSingleProductSections() {
+    document.querySelectorAll('#featured-products, .homepage-showcase').forEach(section => section.remove());
+
+    const productsSection = document.querySelector('#products');
+    const productGrid = document.querySelector('#productGrid');
+    if (productsSection && productGrid) {
+      productGrid.classList.add('two-product-mobile-grid');
+      productGrid.querySelectorAll('.product-card').forEach(card => {
+        card.classList.add('two-product-card');
+        card.style.float = 'none';
+        card.style.clear = 'none';
+      });
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', cleanupSingleProductSections);
+  window.addEventListener('load', cleanupSingleProductSections);
+  window.setTimeout(cleanupSingleProductSections, 250);
+  window.setTimeout(cleanupSingleProductSections, 900);
+})();
+
+
+// FINAL FIX: remove duplicate/single product sections and keep only the 2-column product grid.
+function dedupeAndNormalizeProductGrid() {
+  const productGrid = document.querySelector('#productGrid');
+  if (!productGrid) return;
+
+  productGrid.classList.add('two-product-mobile-grid');
+
+  // Remove product cards outside the official Products grid.
+  document.querySelectorAll('main .product-card, #products .product-card').forEach(card => {
+    if (!productGrid.contains(card)) {
+      card.remove();
+    }
+  });
+
+  // Remove duplicate cards inside the official Products grid.
+  const seen = new Set();
+  productGrid.querySelectorAll('.product-card').forEach(card => {
+    const key =
+      card.getAttribute('data-product-url') ||
+      card.querySelector('[data-product-key]')?.getAttribute('data-product-key') ||
+      card.textContent.trim().toLowerCase();
+
+    if (seen.has(key)) {
+      card.remove();
+      return;
+    }
+
+    seen.add(key);
+    card.classList.add('compact-product-card', 'two-product-card');
+    card.style.float = 'none';
+    card.style.clear = 'none';
+    card.style.width = '';
+    card.style.maxWidth = '';
+  });
+
+  // Remove single-product slideshow/showcase blocks if cached markup or old JS recreates them.
+  document.querySelectorAll('#featured-products, .homepage-showcase, .showcase-window, #homepageProductSlides, #homepageProductDots').forEach(el => {
+    const section = el.closest('section') || el;
+    section.remove();
+  });
+}
+
+(function scentivityRemoveDuplicateSingleProducts() {
+  document.addEventListener('DOMContentLoaded', dedupeAndNormalizeProductGrid);
+  window.addEventListener('load', dedupeAndNormalizeProductGrid);
+  window.setTimeout(dedupeAndNormalizeProductGrid, 150);
+  window.setTimeout(dedupeAndNormalizeProductGrid, 600);
+  window.setTimeout(dedupeAndNormalizeProductGrid, 1400);
+})();
