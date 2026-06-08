@@ -11,7 +11,16 @@
       "size": "236 mL",
       "available": true,
       "paymentLink": "",
-      "isDealOfWeek": false
+      "isDealOfWeek": false,
+      "id": "victoria-s-secret-pure-wonder-fragrance-mist-0",
+      "rating": 4.9,
+      "reviewCount": 20,
+      "purchaseCount": 8,
+      "availableQuantity": 10,
+      "productDetails": "A bright, feminine mist profile for daily wear. Add exact notes and stock details in the admin dashboard.",
+      "fragranceNotes": "A bright, feminine mist profile for daily wear. Add exact notes and stock details in the admin dashboard.",
+      "ingredients": "Ingredients/details may vary by batch. Please check the product packaging.",
+      "showOnWebsite": true
     },
     {
       "name": "Bath & Body Works Body Cream",
@@ -24,7 +33,16 @@
       "size": "226 g / 8 oz",
       "available": true,
       "paymentLink": "",
-      "isDealOfWeek": false
+      "isDealOfWeek": false,
+      "id": "bath-and-body-works-body-cream-1",
+      "rating": 4.8,
+      "reviewCount": 29,
+      "purchaseCount": 13,
+      "availableQuantity": 11,
+      "productDetails": "Moisturizing body cream options from popular sweet, floral, fresh, and warm scent families.",
+      "fragranceNotes": "Moisturizing body cream options from popular sweet, floral, fresh, and warm scent families.",
+      "ingredients": "Ingredients/details may vary by batch. Please check the product packaging.",
+      "showOnWebsite": true
     },
     {
       "name": "Sweet Signature Eau de Parfum",
@@ -37,7 +55,16 @@
       "size": "50 mL",
       "available": true,
       "paymentLink": "",
-      "isDealOfWeek": false
+      "isDealOfWeek": false,
+      "id": "sweet-signature-eau-de-parfum-2",
+      "rating": 4.9,
+      "reviewCount": 38,
+      "purchaseCount": 18,
+      "availableQuantity": 12,
+      "productDetails": "A polished sweet scent profile with soft florals, vanilla, amber, and clean musk.",
+      "fragranceNotes": "A polished sweet scent profile with soft florals, vanilla, amber, and clean musk.",
+      "ingredients": "Ingredients/details may vary by batch. Please check the product packaging.",
+      "showOnWebsite": true
     },
     {
       "name": "Men’s Fresh Body Spray",
@@ -50,7 +77,16 @@
       "size": "100 mL",
       "available": true,
       "paymentLink": "",
-      "isDealOfWeek": false
+      "isDealOfWeek": false,
+      "id": "men-s-fresh-body-spray-3",
+      "rating": 4.8,
+      "reviewCount": 47,
+      "purchaseCount": 23,
+      "availableQuantity": 13,
+      "productDetails": "Fresh, confident masculine scent profile for everyday use and gifting.",
+      "fragranceNotes": "Fresh, confident masculine scent profile for everyday use and gifting.",
+      "ingredients": "Ingredients/details may vary by batch. Please check the product packaging.",
+      "showOnWebsite": true
     },
     {
       "name": "Scented 3-Wick Candle",
@@ -63,7 +99,16 @@
       "size": "3-wick candle",
       "available": true,
       "paymentLink": "",
-      "isDealOfWeek": false
+      "isDealOfWeek": false,
+      "id": "scented-3-wick-candle-4",
+      "rating": 4.9,
+      "reviewCount": 56,
+      "purchaseCount": 28,
+      "availableQuantity": 14,
+      "productDetails": "Home fragrance candle options for bedrooms, bathrooms, gifts, and cozy spaces.",
+      "fragranceNotes": "Home fragrance candle options for bedrooms, bathrooms, gifts, and cozy spaces.",
+      "ingredients": "Ingredients/details may vary by batch. Please check the product packaging.",
+      "showOnWebsite": true
     },
     {
       "name": "Pocket Hand Sanitizer",
@@ -76,7 +121,16 @@
       "size": "Travel size",
       "available": true,
       "paymentLink": "",
-      "isDealOfWeek": false
+      "isDealOfWeek": false,
+      "id": "pocket-hand-sanitizer-5",
+      "rating": 4.8,
+      "reviewCount": 65,
+      "purchaseCount": 33,
+      "availableQuantity": 15,
+      "productDetails": "Portable scented sanitizer options for bags, cars, school, work, and gifting.",
+      "fragranceNotes": "Portable scented sanitizer options for bags, cars, school, work, and gifting.",
+      "ingredients": "Ingredients/details may vary by batch. Please check the product packaging.",
+      "showOnWebsite": true
     }
   ],
   "combos": [
