@@ -8,11 +8,61 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=products-shop-feedback-fix-20260608" />
+  <link rel="stylesheet" href="styles.css?v=product-page-css-final-fix-20260608" />
+  
+<style>
+  .product-page-body{margin:0;background:linear-gradient(180deg,#fff,#fff5f9 55%,#fff);font-family:Inter,Arial,sans-serif;color:#12080d}
+  .product-page-body .promo-bar{background:#111;color:#fff;overflow:hidden;border-bottom:5px solid #e7005c}
+  .product-page-body .promo-marquee{display:flex;gap:38px;white-space:nowrap;padding:9px 0;font-weight:900;animation:scentivityMarquee 24s linear infinite}
+  @keyframes scentivityMarquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  .product-page-header{position:sticky;top:0;z-index:1200;background:#fff;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:12px min(5vw,54px);border-bottom:1px solid #ffe1ec}
+  .product-page-header .brand img{width:76px;height:76px;object-fit:contain}
+  .product-page-top-links{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+  .product-page-top-links a{border:1px solid rgba(224,0,91,.18);border-radius:999px;padding:10px 16px;color:#111;text-decoration:none;font-weight:900;background:#fff}
+  .product-page-cart-link span{display:inline-grid;place-items:center;min-width:24px;height:24px;border-radius:50%;background:#e7005c;color:#fff;margin-left:4px}
+  .product-page-main{width:min(1160px,calc(100% - 28px));margin:26px auto 70px}
+  .back-link{display:inline-flex;margin-bottom:20px;color:#e7005c;text-decoration:none;font-weight:900}
+  .product-page-content{display:grid;gap:24px}
+  .product-page-detail{display:grid;grid-template-columns:minmax(280px,.9fr) minmax(0,1.1fr);gap:clamp(18px,4vw,42px);background:rgba(255,255,255,.94);border:1px solid rgba(224,0,91,.14);border-radius:30px;padding:clamp(16px,4vw,34px);box-shadow:0 22px 70px rgba(61,18,36,.10)}
+  .product-detail-media{border-radius:26px;background:linear-gradient(135deg,#fff4f8,#ffe0ea);display:grid;place-items:center;min-height:340px;overflow:hidden}
+  .product-detail-media img{width:100%;height:100%;max-height:520px;object-fit:contain;padding:20px}
+  .product-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+  .product-tags span{border:1px solid #ffc7da;border-radius:999px;padding:8px 12px;color:#6a4052;font-weight:900;background:#fff8fb}
+  .product-detail-main h1{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(2.4rem,7vw,5.2rem);line-height:.9;margin:12px 0}
+  .product-detail-rating-line{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-weight:900;color:#6a4052;margin:10px 0}
+  .product-detail-rating-line span,.review-list article>span{color:#0b64a0;letter-spacing:.03em}
+  .product-detail-price{display:block;font-size:clamp(2rem,6vw,4rem);margin:14px 0;color:#111}
+  .stock-note{font-weight:900;color:#6a4052}
+  .product-detail-actions{display:grid;grid-template-columns:180px 1fr;gap:14px;margin:18px 0 22px}
+  .detail-qty-control{display:grid;grid-template-columns:1fr 1fr 1fr;border:2px solid #111;border-radius:16px;overflow:hidden;background:#fff}
+  .detail-qty-control button{border:0;background:#fff;font-size:2rem;font-weight:900}
+  .detail-qty-control b{display:grid;place-items:center;font-size:1.25rem}
+  .btn.primary{border:0;border-radius:999px;padding:16px 22px;color:#fff;background:linear-gradient(135deg,#e7005c,#ff4e6a);font-weight:900;text-decoration:none;text-align:center}
+  .btn.ghost{border:1px solid #ffc7da;border-radius:999px;padding:16px 22px;background:#fff;font-weight:900}
+  .product-detail-section{background:rgba(255,255,255,.86);border:1px solid rgba(224,0,91,.11);border-radius:22px;padding:18px;margin-top:12px}
+  .product-detail-section h3{margin:0 0 8px;font-size:1.35rem}
+  .rating-snapshot{display:grid;gap:10px;max-width:560px;margin:18px 0}
+  .rating-row{display:grid;grid-template-columns:76px 1fr 48px;gap:12px;align-items:center;color:#6a4052;font-weight:800}
+  .rating-row b{height:16px;background:#d7d7d7;border-radius:999px;overflow:hidden}
+  .rating-row b i{display:block;height:100%;background:#0b64a0}
+  .overall-rating-box{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .overall-rating-box strong{font-size:3rem}
+  .review-list{display:grid;gap:14px}
+  .review-list article{padding:16px;border:1px solid #ffe1ec;border-radius:18px;background:#fff}
+  .review-product{display:block;margin:6px 0;color:#e7005c;font-weight:900}
+  .related-products-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+  .related-product-card{display:grid;gap:8px;border:1px solid #ffe1ec;border-radius:18px;padding:12px;background:#fff;color:inherit;text-decoration:none}
+  .related-product-card img{width:100%;aspect-ratio:1/1;object-fit:contain;background:#fff5f9;border-radius:14px;padding:8px}
+  @media(max-width:760px){.product-page-header{padding:10px 12px}.product-page-header .brand img{width:58px;height:58px}.product-page-top-links a{padding:8px 10px;font-size:.82rem}.product-page-detail{grid-template-columns:1fr;border-radius:24px}.product-detail-actions{grid-template-columns:1fr}.related-products-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.product-detail-media{min-height:260px}}
+</style>
+
 </head>
 <body class="product-page-body">
   <div class="promo-bar" aria-label="Scentivity highlights">
     <div class="promo-marquee">
+      <span>Delivery within 24 hrs</span>
+      <span>Secure Card and MoMo Payment</span>
+      <span>Great Deals Weekly</span>
       <span>Delivery within 24 hrs</span>
       <span>Secure Card and MoMo Payment</span>
       <span>Great Deals Weekly</span>
@@ -38,6 +88,6 @@
     </section>
   </main>
 
-  <script src="product-page-products-shop-feedback-fix-20260608.js"></script>
+  <script src="product-page-css-final-fix-20260608.js"></script>
 </body>
 </html>

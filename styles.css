@@ -7040,3 +7040,125 @@ body.cart-open {
     padding: 14px;
   }
 }
+
+
+/* Final product page / homepage product click fix */
+.product-link-card { cursor: pointer; }
+.product-link-card button, .product-link-card a { cursor: pointer; }
+
+.homepage-video-overlay,
+.homepage-video-overlay .btn,
+[data-shop-collection] {
+  pointer-events: auto !important;
+  position: relative;
+  z-index: 50;
+}
+
+.compact-product-card {
+  cursor: pointer;
+  display: grid !important;
+  grid-template-rows: auto 1fr;
+  overflow: hidden;
+  padding: 0 !important;
+}
+
+.compact-product-image {
+  position: relative;
+  aspect-ratio: 1 / 1.04;
+  background: linear-gradient(135deg, #fff4f8, #ffe0ea);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.compact-product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 14px;
+}
+
+.compact-product-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  border-radius: 999px;
+  padding: 7px 10px;
+  background: rgba(224, 0, 91, .12);
+  color: var(--rose-dark);
+  font-size: .72rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+.compact-product-badge.coming,
+.showcase-badge.soon {
+  background: rgba(40, 40, 40, .12) !important;
+  color: #3d2430 !important;
+}
+
+.compact-product-info {
+  padding: 14px;
+  display: grid;
+  gap: 8px;
+}
+
+.compact-product-info small {
+  color: var(--muted);
+  font-weight: 900;
+}
+
+.compact-product-info h3 {
+  margin: 0;
+  font-size: clamp(1rem, 3vw, 1.35rem);
+  line-height: 1.02;
+}
+
+.compact-product-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+  font-size: .88rem;
+  font-weight: 800;
+}
+
+.star-rating-symbol { color: #0b64a0; font-weight: 900; }
+
+.compact-product-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.compact-product-bottom strong {
+  font-size: 1.05rem;
+  color: var(--hot-pink);
+}
+
+.compact-cart-button {
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--black);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-size: 1.1rem;
+  cursor: pointer;
+  box-shadow: 0 14px 28px rgba(61, 18, 36, .14);
+}
+
+@media (max-width: 760px) {
+  .product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+  }
+  .compact-product-info { padding: 11px; }
+  .compact-product-meta { font-size: .76rem; gap: 4px; }
+  .compact-cart-button { width: 40px; height: 40px; }
+}
