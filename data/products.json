@@ -197,7 +197,7 @@
     "buttonLink": "#products"
   },
   "comboDealsSettings": {
-    "enabled": true,
+    "enabled": false,
     "heading": "Save more with curated scent bundles.",
     "description": "Pick a discounted combo, add it to cart, and checkout the same way as regular products."
   }

@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=cart-reliability-single-deal-20260608" />
+  <link rel="stylesheet" href="styles.css?v=feedback-menu-combo-off-cart-count-20260608" />
 </head>
 <body>
 
@@ -47,7 +47,8 @@
           <button class="nav-preorder-button" id="openPreorderButton" type="button" onclick="window.scentivityCloseHeaderMenu?.();document.getElementById('contactModal')?.classList.add('open');document.getElementById('contactModal')?.setAttribute('aria-hidden','false')">PREORDER</button>
           <button class="nav-catalogue-button" id="openCatalogueButton" type="button" onclick="window.scentivityCloseHeaderMenu?.();document.getElementById('catalogueModal')?.classList.add('open');document.getElementById('catalogueModal')?.setAttribute('aria-hidden','false')">PRODUCT CATALOGUE</button>
           <button class="nav-about-button" id="openAboutButton" type="button" onclick="window.scentivityCloseHeaderMenu?.();document.getElementById('aboutModal')?.classList.add('open');document.getElementById('aboutModal')?.setAttribute('aria-hidden','false')">ABOUT US</button>
-          <button class="cart-nav-button" id="cartToggle" data-open-cart="true" type="button" aria-label="Open cart" onclick="window.scentivityCloseHeaderMenu?.();document.getElementById('cartOverlay')?.classList.add('visible');document.getElementById('cartOverlay')?.setAttribute('aria-hidden','false');document.getElementById('cartDrawer')?.classList.add('open');document.getElementById('cartDrawer')?.setAttribute('aria-hidden','false')">CART <span id="cartCount">0</span></button>
+                    <button class="nav-feedback-button" id="openFeedbackButton" type="button" onclick="window.scentivityCloseHeaderMenu?.();document.getElementById('feedbackModal')?.classList.add('open');document.getElementById('feedbackModal')?.setAttribute('aria-hidden','false')">WRITE FEEDBACK</button>
+<button class="cart-nav-button" id="cartToggle" data-open-cart="true" type="button" aria-label="Open cart" onclick="window.scentivityCloseHeaderMenu?.();document.getElementById('cartOverlay')?.classList.add('visible');document.getElementById('cartOverlay')?.setAttribute('aria-hidden','false');document.getElementById('cartDrawer')?.classList.add('open');document.getElementById('cartDrawer')?.setAttribute('aria-hidden','false')">CART <span id="cartCount" data-cart-count>0</span></button>
         </nav>
       </div>
     </div>
@@ -157,13 +158,12 @@
         <button type="button" data-scroll-search="Victoria">Victoria’s Secret</button>
         <button type="button" data-scroll-search="Bath">Bath & Body Works</button>
         <button type="button" data-scroll-search="Luxury">Luxury</button>
-        <button type="button" data-scroll-search="Combo">Combos</button>
       </div>
 <div class="product-grid" id="productGrid" aria-live="polite"></div>
     </section>
 
     
-    <section class="section combo-before-order-section" aria-label="Combo deals before how to order">
+    <section class="section combo-before-order-section hidden" aria-label="Combo deals before how to order">
       <div class="combo-deals" id="comboDeals" aria-label="Scentivity combo deals">
         <div class="combo-heading">
           <div>
@@ -260,16 +260,25 @@
       </div>
       <div class="testimonial-dots" id="testimonialDots" aria-label="Review slideshow pagination"></div>
 
+      
+
+    </section>
+  </main>
+
+  
+  <div class="modal-overlay" id="feedbackModal" aria-hidden="true">
+    <div class="feedback-modal" role="dialog" aria-modal="true" aria-labelledby="feedbackModalTitle">
+      <button class="modal-close" id="closeFeedbackModal" type="button" aria-label="Close feedback form">×</button>
+      <div class="modal-heading">
+        <p class="eyebrow">Write feedback</p>
+        <h2 id="feedbackModalTitle">Tell us what you think.</h2>
+      </div>
       <form class="feedback-form" name="customer-feedback" method="POST" action="/.netlify/functions/submit-feedback" data-netlify="true" netlify-honeypot="bot-field" id="customerFeedbackForm">
         <input type="hidden" name="form-name" value="customer-feedback" />
         <p class="hidden">
           <label>Do not fill this out if you are human: <input name="bot-field" /></label>
         </p>
-        <div>
-          <p class="eyebrow">Write feedback</p>
-          <h3>Tell us what you think.</h3>
-        </div>
-        <label>
+<label>
           Name
           <input type="text" name="name" placeholder="Your name" required />
         </label>
@@ -302,10 +311,10 @@
         </label>
         <button class="btn primary" type="submit">Submit Feedback</button>
       </form>
-    </section>
-  </main>
+    </div>
+  </div>
 
-  <div class="modal-overlay" id="aboutModal" aria-hidden="true">
+<div class="modal-overlay" id="aboutModal" aria-hidden="true">
     <div class="about-modal" role="dialog" aria-modal="true" aria-labelledby="aboutModalTitle">
       <button class="modal-close" id="closeAboutModal" type="button" aria-label="Close about Scentivity" onclick="document.getElementById('aboutModal')?.classList.remove('open');document.getElementById('aboutModal')?.setAttribute('aria-hidden','true')">×</button>
       <div class="about-modal-logo">
@@ -519,7 +528,7 @@
       <button class="nav-preorder-button" type="button" onclick="document.getElementById('contactModal')?.classList.add('open');document.getElementById('contactModal')?.setAttribute('aria-hidden','false')">Preorder</button>
       <button class="nav-catalogue-button" type="button" onclick="document.getElementById('catalogueModal')?.classList.add('open');document.getElementById('catalogueModal')?.setAttribute('aria-hidden','false')">Product Catalogue</button>
       <button class="nav-about-button" type="button" onclick="document.getElementById('aboutModal')?.classList.add('open');document.getElementById('aboutModal')?.setAttribute('aria-hidden','false')">About</button>
-      <button class="cart-nav-button" id="cartToggleFooter" data-open-cart="true" type="button" aria-label="Open cart">Cart <span id="cartCountFooter">0</span></button>
+      <button class="cart-nav-button" id="cartToggleFooter" data-open-cart="true" type="button" aria-label="Open cart">Cart <span id="cartCountFooter" data-cart-count>0</span></button>
     </nav>
     <div class="footer-contact">
       <h3>Contact</h3>
@@ -530,7 +539,7 @@
 
   <button class="back-to-top" id="backToTop" type="button" aria-label="Move back to the top of the page">↑</button>
 
-  <script src="app-cacheproof-cart-reliability-single-deal-20260608.js"></script>
+  <script src="app-cacheproof-feedback-menu-combo-off-cart-count-20260608.js"></script>
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script>
     if (window.netlifyIdentity) {
@@ -563,7 +572,7 @@
     <button type="button" id="mobileCartButton" data-open-cart="true" aria-label="Open cart">
       <span>🛒</span>
       <small>Cart</small>
-      <b id="mobileCartCount">0</b>
+      <b id="mobileCartCount" data-cart-count>0</b>
     </button>
     <button type="button" id="mobileContactButton" aria-label="Contact Scentivity" onclick="document.getElementById('contactModal')?.classList.add('open');document.getElementById('contactModal')?.setAttribute('aria-hidden','false')"><span>☎</span><small>Contact</small></button>
   </nav>
@@ -690,6 +699,32 @@
 
       menuButton.addEventListener('pointerup', openMenuFast, { passive: false });
       menuButton.addEventListener('touchend', openMenuFast, { passive: false });
+    })();
+  </script>
+
+
+  <script>
+    (() => {
+      const feedbackModal = document.getElementById('feedbackModal');
+      const closeFeedback = () => {
+        feedbackModal?.classList.remove('open');
+        feedbackModal?.setAttribute('aria-hidden', 'true');
+      };
+
+      document.getElementById('openFeedbackButton')?.addEventListener('click', () => {
+        window.scentivityCloseHeaderMenu?.();
+        feedbackModal?.classList.add('open');
+        feedbackModal?.setAttribute('aria-hidden', 'false');
+      });
+
+      document.getElementById('closeFeedbackModal')?.addEventListener('click', closeFeedback);
+      feedbackModal?.addEventListener('click', (event) => {
+        if (event.target === feedbackModal) closeFeedback();
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') closeFeedback();
+      });
     })();
   </script>
 
