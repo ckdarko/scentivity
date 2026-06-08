@@ -20,7 +20,8 @@
       "productDetails": "A bright, feminine mist profile for daily wear. Add exact notes and stock details in the admin dashboard.",
       "fragranceNotes": "A bright, feminine mist profile for daily wear. Add exact notes and stock details in the admin dashboard.",
       "ingredients": "Ingredients/details may vary by batch. Please check the product packaging.",
-      "showOnWebsite": true
+      "showOnWebsite": true,
+      "slug": "victoria-s-secret-pure-wonder-fragrance-mist"
     },
     {
       "name": "Bath & Body Works Body Cream",
@@ -42,7 +43,8 @@
       "productDetails": "Moisturizing body cream options from popular sweet, floral, fresh, and warm scent families.",
       "fragranceNotes": "Moisturizing body cream options from popular sweet, floral, fresh, and warm scent families.",
       "ingredients": "Ingredients/details may vary by batch. Please check the product packaging.",
-      "showOnWebsite": true
+      "showOnWebsite": true,
+      "slug": "bath-and-body-works-body-cream"
     },
     {
       "name": "Sweet Signature Eau de Parfum",
@@ -64,7 +66,8 @@
       "productDetails": "A polished sweet scent profile with soft florals, vanilla, amber, and clean musk.",
       "fragranceNotes": "A polished sweet scent profile with soft florals, vanilla, amber, and clean musk.",
       "ingredients": "Ingredients/details may vary by batch. Please check the product packaging.",
-      "showOnWebsite": true
+      "showOnWebsite": true,
+      "slug": "sweet-signature-eau-de-parfum"
     },
     {
       "name": "Men’s Fresh Body Spray",
@@ -86,7 +89,8 @@
       "productDetails": "Fresh, confident masculine scent profile for everyday use and gifting.",
       "fragranceNotes": "Fresh, confident masculine scent profile for everyday use and gifting.",
       "ingredients": "Ingredients/details may vary by batch. Please check the product packaging.",
-      "showOnWebsite": true
+      "showOnWebsite": true,
+      "slug": "men-s-fresh-body-spray"
     },
     {
       "name": "Scented 3-Wick Candle",
@@ -108,7 +112,8 @@
       "productDetails": "Home fragrance candle options for bedrooms, bathrooms, gifts, and cozy spaces.",
       "fragranceNotes": "Home fragrance candle options for bedrooms, bathrooms, gifts, and cozy spaces.",
       "ingredients": "Ingredients/details may vary by batch. Please check the product packaging.",
-      "showOnWebsite": true
+      "showOnWebsite": true,
+      "slug": "scented-3-wick-candle"
     },
     {
       "name": "Pocket Hand Sanitizer",
@@ -130,7 +135,8 @@
       "productDetails": "Portable scented sanitizer options for bags, cars, school, work, and gifting.",
       "fragranceNotes": "Portable scented sanitizer options for bags, cars, school, work, and gifting.",
       "ingredients": "Ingredients/details may vary by batch. Please check the product packaging.",
-      "showOnWebsite": true
+      "showOnWebsite": true,
+      "slug": "pocket-hand-sanitizer"
     }
   ],
   "combos": [
