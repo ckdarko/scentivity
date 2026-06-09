@@ -7227,3 +7227,83 @@ body.cart-open {
     display: none;
   }
 }
+
+
+/* Homepage spacing + review/shipping cleanup */
+#deal-of-week {
+  margin-bottom: 18px !important;
+  padding-bottom: 0 !important;
+}
+
+#deal-of-week + #products,
+#products {
+  margin-top: 18px !important;
+  padding-top: 0 !important;
+}
+
+#quickShop,
+.quick-shop-controls,
+.product-filter-section {
+  margin-top: 10px !important;
+  padding-top: 0 !important;
+}
+
+#testimonials {
+  margin-bottom: 10px !important;
+  padding-bottom: 0 !important;
+}
+
+#testimonials .testimonial-controls,
+#testimonials .testimonial-arrow,
+#openShippingButtonQuick,
+#shippingModal,
+.shipping-modal-overlay,
+.shipping-country-note,
+#shippingCountry {
+  display: none !important;
+}
+
+#testimonials .testimonial-track,
+#testimonials .testimonial-track article,
+#testimonials .testimonial-slider {
+  cursor: default !important;
+}
+
+.site-footer {
+  margin-top: 12px !important;
+}
+
+#productGrid .product-card,
+#productGrid .product-card * {
+  touch-action: manipulation;
+}
+
+#productGrid .product-card {
+  position: relative;
+  z-index: 1;
+  cursor: pointer;
+}
+
+#productGrid .compact-cart-button,
+#productGrid .add-to-cart {
+  position: relative;
+  z-index: 4;
+}
+
+@media (max-width: 760px) {
+  #deal-of-week {
+    margin-bottom: 12px !important;
+  }
+
+  #products {
+    margin-top: 12px !important;
+  }
+
+  #testimonials {
+    margin-bottom: 6px !important;
+  }
+
+  .site-footer {
+    margin-top: 8px !important;
+  }
+}

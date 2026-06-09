@@ -1,34 +1,3 @@
 {
-  "pendingFeedback": [
-    {
-      "id": "feedback-1780965778819",
-      "name": "Robertlaw",
-      "rating": 3,
-      "productsPurchased": "",
-      "message": "Прывітанне, я хацеў даведацца Ваш прайс.",
-      "approved": false,
-      "date": "2026-06-09T00:42:58.819Z",
-      "source": "customer_submission"
-    },
-    {
-      "id": "feedback-1780964778805",
-      "name": "Robertlaw",
-      "rating": 1,
-      "productsPurchased": "",
-      "message": "Прывітанне, я хацеў даведацца Ваш прайс.",
-      "approved": false,
-      "date": "2026-06-09T00:26:18.805Z",
-      "source": "customer_submission"
-    },
-    {
-      "id": "feedback-1780964621213",
-      "name": "CD",
-      "rating": 5,
-      "productsPurchased": "Victoria's Secret Pure Wonder Fragrance Mist • Victoria's Secret • 236 mL • GH₵250",
-      "message": "Lovely",
-      "approved": true,
-      "date": "2026-06-09T00:23:41.213Z",
-      "source": "customer_submission"
-    }
-  ]
+  "pendingFeedback": []
 }
