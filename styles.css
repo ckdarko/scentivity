@@ -7322,3 +7322,99 @@ body.cart-open {
     margin-top: 6px !important;
   }
 }
+
+
+/* RIGHT-SIDE BLANK CLICK FIX
+   Empty space must not trigger Contact, Catalogue, Cart, or other menus. */
+html,
+body {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+body,
+main,
+.site-header,
+.section,
+.product-page-main,
+.site-footer {
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.header-menu-panel:not(.open),
+.modal-overlay:not(.open):not(.visible),
+.cart-overlay:not(.visible),
+.product-detail-modal-overlay:not(.open):not(.visible) {
+  pointer-events: none !important;
+  visibility: hidden !important;
+}
+
+.header-menu-panel.open,
+.modal-overlay.open,
+.modal-overlay.visible,
+.cart-overlay.visible {
+  pointer-events: auto !important;
+  visibility: visible !important;
+}
+
+/* Only the actual menu card should accept menu clicks. The shaded/blank side is inert. */
+.header-menu-panel {
+  pointer-events: none !important;
+}
+
+.header-menu-panel.open .header-menu-card {
+  pointer-events: auto !important;
+}
+
+/* The bottom nav should respond only on its actual buttons/links, not on empty rounded space. */
+.mobile-bottom-nav {
+  pointer-events: none !important;
+}
+
+.mobile-bottom-nav a,
+.mobile-bottom-nav button,
+.mobile-bottom-nav [role="button"] {
+  pointer-events: auto !important;
+}
+
+/* Product cards/buttons remain clickable, but blank columns/outer gaps do not act like buttons. */
+#productGrid,
+.product-grid,
+.products-section,
+.quick-shop-controls,
+.testimonials,
+#testimonials {
+  pointer-events: auto !important;
+}
+
+#productGrid .product-card,
+#productGrid .product-card *,
+.product-click-card,
+.product-click-card *,
+.compact-cart-button,
+.add-to-cart,
+#openCatalogueButtonQuick,
+#openCatalogueButton,
+#openPreorderButton,
+#openContactButton,
+#cartToggle,
+#cartToggleFooter,
+#mobileCartButton {
+  pointer-events: auto !important;
+}
+
+@media (max-width: 760px) {
+  .header-menu-card {
+    max-width: min(88vw, 390px) !important;
+  }
+
+  .site-header,
+  .hero,
+  .section,
+  .site-footer,
+  .product-page-main {
+    width: min(100%, calc(100vw - 16px)) !important;
+  }
+}

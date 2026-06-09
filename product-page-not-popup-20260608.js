@@ -1,4 +1,28 @@
-// SCENTIVITY_PRODUCT_PAGE_MENU_FIX_20260608
+// SCENTIVITY_PRODUCT_PAGE_RIGHT_SIDE_BLANK_CLICK_FIX_20260608
+
+
+// RIGHT-SIDE BLANK CLICK FIX for product page
+(function scentivityProductPageBlankClickFix() {
+  const safeInteractiveSelector = [
+    'a[href]',
+    'button',
+    'input',
+    'select',
+    'textarea',
+    'label',
+    '[role="button"]',
+    '.product-page-detail',
+    '.product-detail-section',
+    '.related-product-card'
+  ].join(',');
+
+  document.addEventListener('click', event => {
+    if (event.target.closest(safeInteractiveSelector)) return;
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+  }, true);
+})();
+
 
 const CART_STORAGE_KEY = 'scentivityCartV1';
 const DATA_URL = 'data/products.json';
@@ -353,7 +377,7 @@ function renderProductPage() {
                 <p>${cleanText(review.message || review.feedback || review.review || '')}</p>
               </article>
             `).join('')
-          : ''
+          : `<p class="cart-small-note">Approved customer reviews for this product will appear here.</p>`
         }
       </div>
     </section>
@@ -405,15 +429,3 @@ async function initProductPage() {
 }
 
 initProductPage();
-
-
-// Product page Contact/Cart menu fixes
-(function scentivityProductPageMenuFixes() {
-  document.addEventListener('click', event => {
-    const cartLink = event.target.closest('#productPageCartButton, .cart-nav-button');
-    if (cartLink) {
-      event.preventDefault();
-      window.location.href = 'index.html?openCart=true#cart';
-    }
-  }, true);
-})();
