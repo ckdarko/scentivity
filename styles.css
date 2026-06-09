@@ -7227,3 +7227,98 @@ body.cart-open {
     display: none;
   }
 }
+
+
+/* FINAL HOMEPAGE GAP REDUCTION — requested from screenshots */
+#deal-of-week,
+.section.deal-of-week-section {
+  margin-bottom: 8px !important;
+  padding-bottom: 0 !important;
+}
+
+#deal-of-week + #products,
+.section.products-section,
+#products {
+  margin-top: 8px !important;
+  padding-top: 0 !important;
+}
+
+#quickShop,
+.quick-shop-controls {
+  margin-top: 0 !important;
+  margin-bottom: 10px !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Remove extra empty gap after the customer review card */
+#testimonials,
+.section.testimonials {
+  margin-bottom: 8px !important;
+  padding-bottom: 0 !important;
+}
+
+#testimonials .section-heading {
+  margin-bottom: 12px !important;
+}
+
+#testimonials .testimonial-slider {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+  min-height: 0 !important;
+}
+
+#testimonials .testimonial-track {
+  min-height: 0 !important;
+}
+
+#testimonials .testimonial-track article {
+  min-height: 150px !important;
+  padding: clamp(22px, 5vw, 34px) !important;
+}
+
+#testimonials .testimonial-dots {
+  margin-top: 8px !important;
+  margin-bottom: 0 !important;
+}
+
+.site-footer {
+  margin-top: 10px !important;
+}
+
+/* Tighten mobile spacing even more */
+@media (max-width: 760px) {
+  #deal-of-week,
+  .section.deal-of-week-section {
+    margin-bottom: 4px !important;
+    padding-bottom: 0 !important;
+  }
+
+  #deal-of-week + #products,
+  .section.products-section,
+  #products {
+    margin-top: 4px !important;
+    padding-top: 0 !important;
+  }
+
+  #quickShop,
+  .quick-shop-controls {
+    margin-top: 0 !important;
+    margin-bottom: 6px !important;
+  }
+
+  #testimonials,
+  .section.testimonials {
+    margin-bottom: 4px !important;
+    padding-bottom: 0 !important;
+  }
+
+  #testimonials .testimonial-track article {
+    min-height: 132px !important;
+    padding: 22px 18px !important;
+  }
+
+  .site-footer {
+    margin-top: 6px !important;
+  }
+}
