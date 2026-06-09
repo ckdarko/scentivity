@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=undo-incoming-showcase-top-buttons-20260608" />
+  <link rel="stylesheet" href="styles.css?v=showcase-productpage-bottomnav-footer-fix-20260609" />
 </head>
 <body id="top">
 
@@ -108,7 +108,28 @@
         </div>
       </div>
       <div class="showcase-window">
-        <div class="showcase-track" id="homepageProductSlides"></div>
+        <div class="showcase-track" id="homepageProductSlides">
+          <article class="showcase-slide active simplified-showcase-slide product-click-card" data-product-key="victoria-s-secret-pure-wonder-fragrance-mist-0" tabindex="0" aria-label="View details for Victoria&#x27;s Secret Pure Wonder Fragrance Mist">
+            <div class="showcase-image-wrap">
+              <img src="assets/products/citrus-bloom.svg" alt="Victoria&#x27;s Secret Pure Wonder Fragrance Mist" loading="lazy" onerror="this.onerror=null;this.src='assets/scentivity-logo-fused.png';" />
+              <span class="showcase-badge available">Available now</span>
+            </div>
+            <div class="showcase-copy">
+              <p class="eyebrow">Available now • 1 of 1</p>
+              <h3>Victoria&#x27;s Secret Pure Wonder Fragrance Mist</h3>
+              <div class="compact-product-meta showcase-quick-meta">
+                <span class="star-rating-symbol">★</span>
+                <span>4.9</span>
+                <span>| 20 reviews</span>
+                <span>| 8 bought</span>
+              </div>
+              <div class="showcase-bottom">
+                <strong>GH₵250</strong>
+                <button class="btn primary add-to-cart" type="button" data-product-key="victoria-s-secret-pure-wonder-fragrance-mist-0">Add to Cart</button>
+              </div>
+            </div>
+          </article>
+        </div>
       </div>
       <div class="showcase-dots" id="homepageProductDots" aria-label="Slideshow pagination"></div>
     </section>
@@ -348,7 +369,7 @@
             </span>
             <span><strong>WhatsApp orders</strong><small>053 458 4470</small></span>
           </a>
-          <a class="contact-card" href="mailto:scentivitygh@gmail.com">
+          <a class="contact-card" href="#">
             <span class="contact-icon">✉</span>
             <span><strong>Email</strong><small>scentivitygh@gmail.com</small></span>
           </a>
@@ -529,16 +550,13 @@
       <button class="nav-about-button" type="button" onclick="document.getElementById('aboutModal')?.classList.add('open');document.getElementById('aboutModal')?.setAttribute('aria-hidden','false')">About</button>
       <button class="cart-nav-button" id="cartToggleFooter" data-open-cart="true" type="button" aria-label="Open cart">Cart <span id="cartCountFooter" data-cart-count>0</span></button>
     </nav>
-    <div class="footer-contact">
-      <h3>Contact</h3>
-      <a href="mailto:scentivitygh@gmail.com">scentivitygh@gmail.com</a>
-    </div>
     <p class="copyright">© <span id="year"></span> Scentivity. All rights reserved.</p>
   </footer>
 
   <button class="back-to-top" id="backToTop" type="button" aria-label="Move back to the top of the page">↑</button>
 
-  <script src="script.js?v=undo-incoming-showcase-top-buttons-20260608"></script>
+  <script src="script.js?v=showcase-productpage-bottomnav-footer-fix-20260609"></script>
+  <script src="scentivity-showcase-rescue-20260609.js?v=showcase-productpage-bottomnav-footer-fix-20260609"></script>
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script>
     if (window.netlifyIdentity) {
