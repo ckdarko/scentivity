@@ -1,3 +1,14 @@
 {
-  "pendingFeedback": []
+  "pendingFeedback": [
+    {
+      "id": "feedback-1780973871297",
+      "name": "CD",
+      "rating": 5,
+      "productsPurchased": "Victoria's Secret Pure Wonder Fragrance Mist • Victoria's Secret • 236 mL • GH₵250; Bath & Body Works Body Cream • Bath & Body Works • 226 g / 8 oz • GH₵220",
+      "message": "Lovely!!",
+      "approved": false,
+      "date": "2026-06-09T02:57:51.297Z",
+      "source": "customer_submission"
+    }
+  ]
 }
