@@ -3,13 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Scentivity product details, scent notes, stock, reviews, and cart checkout." />
+  <meta name="description" content="Scentivity product details, scent notes, stock, ratings, and cart checkout." />
   <title>Scentivity Product</title>
-  <link rel="stylesheet" href="styles.css?v=right-side-blank-click-fix-20260608" />
+  <link rel="stylesheet" href="styles.css?v=product-menu-rating-incoming-20260608" />
 </head>
 <body class="product-page-body" id="top">
-  <div class="promo-bar" aria-label="Scentivity highlights">
-    <div class="promo-marquee">
+  <div class="promo-bar product-page-promo-bar" aria-label="Scentivity highlights">
+    <div class="promo-marquee product-page-promo-marquee">
+      <span>Delivery within 24 hrs</span>
+      <span>Secure Card and MoMo Payment</span>
+      <span>Great Deals Weekly</span>
       <span>Delivery within 24 hrs</span>
       <span>Secure Card and MoMo Payment</span>
       <span>Great Deals Weekly</span>
@@ -20,15 +23,36 @@
     <a class="brand" href="index.html?home=top" data-home-logo="true" aria-label="Scentivity homepage">
       <img src="assets/scentivity-logo-fused.png" alt="Scentivity logo" />
     </a>
+
+    <button class="header-menu-toggle product-page-menu-toggle" id="headerMenuToggle" type="button" aria-label="Open menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
     <nav class="desktop-nav product-page-nav" aria-label="Product page navigation">
       <a href="index.html#products">Shop</a>
-      <a href="index.html#preorder">Preorder</a>
-      <a href="index.html#quickShop">Product Catalogue</a>
+      <a href="https://wa.me/233534584470?text=Hello%20Scentivity%2C%20I%20want%20to%20preorder%20a%20product." target="_blank" rel="noreferrer">Preorder</a>
+      <a href="index.html?openCatalogue=true#quickShop">Product Catalogue</a>
       <a href="index.html#about">About</a>
-      <a href="index.html#contact">Contact</a>
-      <a class="cart-nav-button" href="index.html#cart" id="productPageCartButton">Cart <span id="cartCount">0</span></a>
+      <a href="https://wa.me/233534584470?text=Hello%20Scentivity%2C%20I%20need%20help%20with%20a%20product." target="_blank" rel="noreferrer">Contact</a>
+      <a class="cart-nav-button" href="index.html?openCart=true#cart" id="productPageCartButton">Cart <span id="cartCount">0</span></a>
     </nav>
   </header>
+
+    <div class="header-menu-panel product-page-menu-panel" id="headerMenuPanel" aria-hidden="true">
+    <div class="header-menu-card">
+      <button class="header-menu-close perfume-menu-close" id="headerMenuClose" type="button" aria-label="Close menu">×</button>
+      <nav class="nav-links perfume-style-menu product-page-menu-links" aria-label="Product page mobile navigation">
+        <a href="index.html#products">SHOP</a>
+        <a href="https://wa.me/233534584470?text=Hello%20Scentivity%2C%20I%20want%20to%20preorder%20a%20product." target="_blank" rel="noreferrer">PREORDER</a>
+        <a href="index.html?openCatalogue=true#quickShop">PRODUCT CATALOGUE</a>
+        <a href="index.html#about">ABOUT</a>
+        <a href="https://wa.me/233534584470?text=Hello%20Scentivity%2C%20I%20need%20help%20with%20a%20product." target="_blank" rel="noreferrer">CONTACT</a>
+        <a class="cart-nav-button" href="index.html?openCart=true#cart" id="productPageMenuCartButton">CART <span id="cartCountMenu">0</span></a>
+      </nav>
+    </div>
+  </div>
 
   <main class="product-page-main">
     <a class="back-to-shop" href="index.html#products">← Back to shop</a>
@@ -37,6 +61,6 @@
     </div>
   </main>
 
-  <script src="product-page-not-popup-20260608.js?v=right-side-blank-click-fix-20260608"></script>
+  <script src="product-page-not-popup-20260608.js?v=product-menu-rating-incoming-20260608"></script>
 </body>
 </html>

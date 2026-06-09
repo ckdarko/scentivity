@@ -1,3 +1,5 @@
+// SCENTIVITY_PRODUCT_PAGE_MENU_RATING_FIX_20260608
+// SCENTIVITY_PRODUCT_PAGE_PROMO_MENU_SECTIONS_FIX_20260608
 // SCENTIVITY_PRODUCT_PAGE_RIGHT_SIDE_BLANK_CLICK_FIX_20260608
 
 
@@ -344,11 +346,11 @@ function renderProductPage() {
           }
         </div>
         <section class="product-detail-section">
-          <h2>Fragrance / Description</h2>
+          <h2>Fragrance</h2>
           <p>${notes}</p>
         </section>
         <section class="product-detail-section">
-          <h2>Overview / Product information</h2>
+          <h2>Overview</h2>
           <p>${details}</p>
         </section>
         <section class="product-detail-section">
@@ -359,27 +361,13 @@ function renderProductPage() {
     </section>
 
     <section class="product-detail-section product-detail-reviews">
-      <h2>Reviews / Rating snapshot</h2>
+      <h2>Rating</h2>
       <div class="overall-rating-box">
         <strong>${rating.toFixed(1)}</strong>
         <span>${ratingStars(rating)}</span>
         <em>${formatCompactCount(reviewCount)} reviews</em>
       </div>
       ${ratingSnapshotHtml(product)}
-      <div class="review-list">
-        ${reviews.length
-          ? reviews.map(review => `
-              <article>
-                <span>${ratingStars(Number(review.rating || 5))}</span>
-                <h3>${cleanText(review.title || review.name || 'Scentivity customer')}</h3>
-                <small>${cleanText(review.name || 'Verified customer')}</small>
-                ${cleanText(review.productsPurchased || '') ? `<small class="review-product">Purchased: ${cleanText(review.productsPurchased)}</small>` : ''}
-                <p>${cleanText(review.message || review.feedback || review.review || '')}</p>
-              </article>
-            `).join('')
-          : `<p class="cart-small-note">Approved customer reviews for this product will appear here.</p>`
-        }
-      </div>
     </section>
 
     <section class="product-detail-section">
@@ -429,3 +417,137 @@ async function initProductPage() {
 }
 
 initProductPage();
+
+
+// Product page promo/menu fixes
+(function scentivityProductPagePromoMenuFix() {
+  function updateBothCartCounts() {
+    try {
+      const cart = JSON.parse(window.localStorage.getItem(CART_STORAGE_KEY) || '[]');
+      const count = Array.isArray(cart) ? cart.reduce((sum, item) => sum + Number(item.quantity || 0), 0) : 0;
+      document.querySelectorAll('#cartCount, #cartCountMenu').forEach(el => { el.textContent = String(count); });
+    } catch {
+      document.querySelectorAll('#cartCount, #cartCountMenu').forEach(el => { el.textContent = '0'; });
+    }
+  }
+
+  function closeMenu() {
+    const panel = document.querySelector('#headerMenuPanel');
+    const toggle = document.querySelector('#headerMenuToggle');
+    if (!panel) return;
+    panel.classList.remove('open');
+    panel.setAttribute('aria-hidden', 'true');
+    toggle?.setAttribute('aria-expanded', 'false');
+  }
+
+  function openMenu() {
+    const panel = document.querySelector('#headerMenuPanel');
+    const toggle = document.querySelector('#headerMenuToggle');
+    if (!panel) return;
+    panel.classList.add('open');
+    panel.setAttribute('aria-hidden', 'false');
+    toggle?.setAttribute('aria-expanded', 'true');
+  }
+
+  document.addEventListener('click', event => {
+    const toggle = event.target.closest('#headerMenuToggle');
+    if (toggle) {
+      event.preventDefault();
+      event.stopPropagation();
+      const panel = document.querySelector('#headerMenuPanel');
+      if (panel?.classList.contains('open')) closeMenu();
+      else openMenu();
+      return;
+    }
+
+    if (event.target.closest('#headerMenuClose')) {
+      event.preventDefault();
+      closeMenu();
+      return;
+    }
+
+    if (event.target === document.querySelector('#headerMenuPanel')) {
+      closeMenu();
+      return;
+    }
+
+    const cartLink = event.target.closest('#productPageCartButton, #productPageMenuCartButton, .cart-nav-button[href*="openCart"]');
+    if (cartLink) {
+      event.preventDefault();
+      window.location.href = 'index.html?openCart=true#cart';
+    }
+  }, true);
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') closeMenu();
+  });
+
+  document.addEventListener('DOMContentLoaded', updateBothCartCounts);
+  window.addEventListener('load', updateBothCartCounts);
+})();
+
+
+// Product page menu button fixes: show and run mobile menu + cart counts
+(function scentivityProductPageRequiredMenuFix() {
+  function updateMenuCartCount() {
+    try {
+      const cart = JSON.parse(window.localStorage.getItem(CART_STORAGE_KEY) || '[]');
+      const count = Array.isArray(cart) ? cart.reduce((sum, item) => sum + Number(item.quantity || 0), 0) : 0;
+      document.querySelectorAll('#cartCount, #cartCountMenu').forEach(el => { el.textContent = String(count); });
+    } catch {
+      document.querySelectorAll('#cartCount, #cartCountMenu').forEach(el => { el.textContent = '0'; });
+    }
+  }
+
+  function closeProductMenu() {
+    const panel = document.querySelector('#headerMenuPanel');
+    const toggle = document.querySelector('#headerMenuToggle');
+    panel?.classList.remove('open');
+    panel?.setAttribute('aria-hidden', 'true');
+    toggle?.setAttribute('aria-expanded', 'false');
+  }
+
+  function openProductMenu() {
+    const panel = document.querySelector('#headerMenuPanel');
+    const toggle = document.querySelector('#headerMenuToggle');
+    panel?.classList.add('open');
+    panel?.setAttribute('aria-hidden', 'false');
+    toggle?.setAttribute('aria-expanded', 'true');
+  }
+
+  document.addEventListener('click', event => {
+    const toggle = event.target.closest('#headerMenuToggle');
+    if (toggle) {
+      event.preventDefault();
+      event.stopPropagation();
+      const panel = document.querySelector('#headerMenuPanel');
+      if (panel?.classList.contains('open')) closeProductMenu();
+      else openProductMenu();
+      return;
+    }
+
+    if (event.target.closest('#headerMenuClose')) {
+      event.preventDefault();
+      closeProductMenu();
+      return;
+    }
+
+    if (event.target === document.querySelector('#headerMenuPanel')) {
+      closeProductMenu();
+      return;
+    }
+
+    const cartLink = event.target.closest('#productPageCartButton, #productPageMenuCartButton, .cart-nav-button[href*="openCart"]');
+    if (cartLink) {
+      event.preventDefault();
+      window.location.href = 'index.html?openCart=true#cart';
+    }
+  }, true);
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') closeProductMenu();
+  });
+
+  document.addEventListener('DOMContentLoaded', updateMenuCartCount);
+  window.addEventListener('load', updateMenuCartCount);
+})();
