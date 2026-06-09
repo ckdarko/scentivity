@@ -7723,3 +7723,109 @@ main,
     height: 40px !important;
   }
 }
+
+
+/* FINAL PRODUCT PAGE HAMBURGER FORCE FIX */
+.product-page-body .desktop-nav,
+.product-page-body .product-page-nav {
+  display: none !important;
+}
+
+.product-page-body #headerMenuToggle.header-menu-toggle {
+  display: inline-grid !important;
+  place-content: center !important;
+  pointer-events: auto !important;
+  width: 58px !important;
+  height: 58px !important;
+  border: 1px solid rgba(224,0,91,.18) !important;
+  border-radius: 50% !important;
+  background: rgba(255,255,255,.92) !important;
+  box-shadow: 0 16px 38px rgba(61,18,36,.10) !important;
+  gap: 6px !important;
+  cursor: pointer !important;
+  position: relative !important;
+  z-index: 3001 !important;
+}
+
+.product-page-body #headerMenuToggle.header-menu-toggle span {
+  display: block !important;
+  width: 26px !important;
+  height: 3px !important;
+  border-radius: 999px !important;
+  background: var(--black) !important;
+  pointer-events: none !important;
+}
+
+.product-page-body #headerMenuPanel.header-menu-panel {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 3000 !important;
+  display: flex !important;
+  justify-content: flex-end !important;
+  background: rgba(15, 3, 9, .35) !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transition: opacity .24s ease !important;
+}
+
+.product-page-body #headerMenuPanel.header-menu-panel.open,
+.product-page-body #headerMenuPanel.header-menu-panel.force-open {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+.product-page-body #headerMenuPanel.header-menu-panel .header-menu-card {
+  width: min(88vw, 390px) !important;
+  height: 100% !important;
+  overflow-y: auto !important;
+  background: linear-gradient(180deg, #fff, #fff3f8) !important;
+  box-shadow: -22px 0 60px rgba(61,18,36,.18) !important;
+  padding: 22px !important;
+  transform: translateX(110%) !important;
+  transition: transform .28s ease !important;
+  pointer-events: auto !important;
+}
+
+.product-page-body #headerMenuPanel.header-menu-panel.open .header-menu-card,
+.product-page-body #headerMenuPanel.header-menu-panel.force-open .header-menu-card {
+  transform: translateX(0) !important;
+}
+
+.product-page-body .header-menu-card .nav-links,
+.product-page-body .header-menu-card .perfume-style-menu {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 18px !important;
+  align-items: stretch !important;
+}
+
+.product-page-body .header-menu-card .nav-links a,
+.product-page-body .header-menu-card .nav-links button {
+  width: 100% !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  padding: 15px 18px !important;
+  border-radius: 18px !important;
+  background: #fff !important;
+  color: var(--black) !important;
+  border: 1px solid rgba(224,0,91,.14) !important;
+  font-weight: 900 !important;
+  text-decoration: none !important;
+  pointer-events: auto !important;
+}
+
+/* Keep single-line product-page promo from wrapping */
+.product-page-body .promo-bar {
+  height: 40px !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+}
+
+.product-page-body .promo-marquee {
+  display: inline-flex !important;
+  flex-wrap: nowrap !important;
+  width: max-content !important;
+  white-space: nowrap !important;
+}
