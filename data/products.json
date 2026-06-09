@@ -191,7 +191,17 @@
     "discountThreeOrMore": 10,
     "note": "Turn on to allow buyers to build custom discounted bundles."
   },
-  "customerReviews": [],
+  "customerReviews": [
+    {
+      "rating": 5,
+      "approved": true,
+      "source": "admin_added",
+      "productsPurchased": "Lovely!!\n",
+      "name": "CD",
+      "message": "Lovely",
+      "date": "2026-06-08T19:27:00.000-05:00"
+    }
+  ],
   "productCatalogue": [
     {
       "label": "BBW",
