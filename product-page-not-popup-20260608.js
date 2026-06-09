@@ -1,3 +1,4 @@
+// SCENTIVITY_PRODUCT_PAGE_STATUS_RATING_BARS_20260609
 // SCENTIVITY_PRODUCTPAGE_EXACT_HOMEPAGE_MENU_WORKING_20260609
 // SCENTIVITY_PRODUCTPAGE_EXACT_INDEX_HAMBURGER_SINGLE_PROMO_20260609
 // SCENTIVITY_PRODUCTPAGE_BOTTOMNAV_MENU_FIX_20260609
@@ -431,3 +432,220 @@ initProductPage();
 // Product page exact index-style hamburger menu + single promo support
 
 
+
+
+// PRODUCT PAGE STATUS + RATING BAR COUNTS OVERRIDE 20260609
+function normalizeProductStatus(product = {}) {
+  const rawStatus = cleanText(product.productStatus || product.status || '').toLowerCase().replace(/[_-]+/g, ' ').trim();
+  if (['available', 'in stock', 'active'].includes(rawStatus)) return 'Available';
+  if (['incoming', 'coming soon', 'preorder', 'pre order'].includes(rawStatus)) return 'Incoming';
+  if (['out of stock', 'outofstock', 'sold out', 'unavailable'].includes(rawStatus)) return 'Out of Stock';
+  if (product.available === false) return 'Incoming';
+  return 'Available';
+}
+
+function isProductAvailable(product = {}) {
+  return normalizeProductStatus(product) === 'Available';
+}
+
+function isProductIncoming(product = {}) {
+  return normalizeProductStatus(product) === 'Incoming';
+}
+
+function productStatusLabel(product = {}) {
+  return normalizeProductStatus(product);
+}
+
+function productRatingBarCounts(product = {}) {
+  const values = [
+    Number(product.rating5Count ?? product.fiveStarCount ?? product.star5Count ?? product.rating5 ?? 0),
+    Number(product.rating4Count ?? product.fourStarCount ?? product.star4Count ?? product.rating4 ?? 0),
+    Number(product.rating3Count ?? product.threeStarCount ?? product.star3Count ?? product.rating3 ?? 0),
+    Number(product.rating2Count ?? product.twoStarCount ?? product.star2Count ?? product.rating2 ?? 0),
+    Number(product.rating1Count ?? product.oneStarCount ?? product.star1Count ?? product.rating1 ?? 0)
+  ].map(value => Number.isFinite(value) && value >= 0 ? Math.round(value) : 0);
+
+  return {
+    five: values[0],
+    four: values[1],
+    three: values[2],
+    two: values[3],
+    one: values[4],
+    total: values.reduce((sum, value) => sum + value, 0)
+  };
+}
+
+function enrichProducts(list = []) {
+  return list.map((product, index) => {
+    const productStatus = normalizeProductStatus(product);
+    const bars = productRatingBarCounts(product);
+    return {
+      ...product,
+      productStatus,
+      available: productStatus === 'Available',
+      _key: product.id || product.slug || makeProductKey(product, index),
+      slug: product.slug || slugify(product.name || product.id || makeProductKey(product, index)),
+      _unitPrice: parseGHSPrice(product.price),
+      rating: product.rating ?? product.averageRating ?? 4.8,
+      reviewCount: product.reviewCount ?? product.reviewsCount ?? product.numberOfReviews ?? bars.total ?? 0,
+      purchaseCount: product.purchaseCount ?? product.numberPurchased ?? product.purchases ?? product.soldCount ?? 0,
+      availableQuantity: product.availableQuantity ?? product.stockQuantity ?? product.quantityAvailable ?? product.stock ?? 0,
+      rating5Count: bars.five,
+      rating4Count: bars.four,
+      rating3Count: bars.three,
+      rating2Count: bars.two,
+      rating1Count: bars.one,
+      productDetails: product.productDetails || product.description || product.details || product.notes || '',
+      fragranceNotes: product.fragranceNotes || product.scentNotes || product.notes || '',
+      ingredients: product.ingredients || '',
+      showOnWebsite: product.showOnWebsite !== false
+    };
+  });
+}
+
+function productReviewCount(product = {}) {
+  const direct = Number(product.reviewCount ?? product.reviewsCount ?? product.numberOfReviews ?? 0);
+  if (Number.isFinite(direct) && direct > 0) return Math.round(direct);
+  const bars = productRatingBarCounts(product);
+  return bars.total > 0 ? bars.total : 0;
+}
+
+function ratingSnapshotHtml(product = {}) {
+  const manual = productRatingBarCounts(product);
+  let rows = [['5 stars', manual.five], ['4 stars', manual.four], ['3 stars', manual.three], ['2 stars', manual.two], ['1 star', manual.one]];
+
+  if (manual.total <= 0) {
+    const reviews = Math.max(productReviewCount(product), 1);
+    const rating = productRating(product);
+    const five = Math.round(reviews * Math.min(0.85, rating / 5 * 0.9));
+    const four = Math.round(reviews * 0.09);
+    const three = Math.round(reviews * 0.03);
+    const two = Math.round(reviews * 0.015);
+    const one = Math.max(0, reviews - five - four - three - two);
+    rows = [['5 stars', five], ['4 stars', four], ['3 stars', three], ['2 stars', two], ['1 star', one]];
+  }
+
+  const max = Math.max(...rows.map(row => row[1]), 1);
+  return `
+    <div class="rating-snapshot">
+      ${rows.map(([label, count]) => `
+        <div class="rating-row">
+          <span>${label}</span>
+          <b><i style="width:${count > 0 ? Math.max(4, (count / max) * 100) : 0}%"></i></b>
+          <em>${count}</em>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+function renderProductPage() {
+  const product = findProduct();
+
+  if (!product || !isProductPublished(product)) {
+    productPageContent.innerHTML = `
+      <section class="product-unavailable">
+        <h1>Product unavailable</h1>
+        <p>This product is not currently available on the website.</p>
+        <a class="btn primary" href="index.html#products">Back to shop</a>
+      </section>
+    `;
+    document.title = 'Product unavailable | Scentivity';
+    return;
+  }
+
+  const name = cleanText(product.name || 'Scentivity product');
+  const brand = cleanText(product.brand || 'Scentivity');
+  const mainCategory = getMainCategory(product);
+  const subCategory = getSubCategory(product);
+  const price = cleanText(product.price || (isProductIncoming(product) ? 'Coming soon' : 'Price on request'));
+  const size = cleanText(product.size || '');
+  const image = normalizeImagePath(product.image || 'assets/scentivity-logo-fused.png');
+  const rating = productRating(product);
+  const reviewCount = productReviewCount(product);
+  const bought = productPurchaseCount(product);
+  const stock = productAvailableQuantity(product);
+  const statusLabel = productStatusLabel(product);
+  const available = isProductAvailable(product);
+  const incoming = isProductIncoming(product);
+  const details = cleanText(product.productDetails || product.description || product.details || product.notes || 'Sweet, elegant scent selected by Scentivity.');
+  const notes = cleanText(product.fragranceNotes || product.scentNotes || product.notes || 'Add fragrance notes in the admin dashboard.');
+  const ingredients = cleanText(product.ingredients || 'Ingredients/details may vary by batch. Please check product packaging.');
+
+  document.title = `${name} | Scentivity`;
+
+  productPageContent.innerHTML = `
+    <section class="product-page-detail">
+      <div class="product-page-gallery">
+        <img src="${image}" alt="${name}" onerror="this.onerror=null;this.src='assets/scentivity-logo-fused.png';" />
+      </div>
+      <div class="product-page-summary">
+        <div class="product-tags">
+          <span>${brand}</span>
+          <span>${mainCategory}</span>
+          <span>${subCategory}</span>
+          ${size ? `<span>${size}</span>` : ''}
+          <span>${statusLabel}</span>
+        </div>
+        <h1>${name}</h1>
+        <div class="product-detail-rating-line">
+          <span>${ratingStars(rating)}</span>
+          <b>${rating.toFixed(1)}</b>
+          ${reviewCount ? `<em>${formatCompactCount(reviewCount)} reviews</em>` : '<em>No reviews yet</em>'}
+          ${bought ? `<em>${formatCompactCount(bought)} bought</em>` : ''}
+        </div>
+        <strong class="product-detail-price">${price}</strong>
+        <p class="stock-note">${available ? (stock ? `${stock} available` : 'Available') : statusLabel}</p>
+        <div class="product-detail-actions">
+          <div class="detail-qty-control" aria-label="Quantity selector">
+            <button type="button" id="qtyMinus" aria-label="Decrease quantity">−</button>
+            <b id="qtyValue">1</b>
+            <button type="button" id="qtyPlus" aria-label="Increase quantity">+</button>
+          </div>
+          ${available
+            ? `<button class="btn primary" id="productPageAddToCart" type="button">Add to Cart</button>`
+            : `<button class="btn ghost" type="button" disabled>${incoming ? 'Incoming' : 'Out of Stock'}</button>`
+          }
+        </div>
+        <section class="product-detail-section">
+          <h2>Fragrance</h2>
+          <p>${notes}</p>
+        </section>
+        <section class="product-detail-section">
+          <h2>Overview</h2>
+          <p>${details}</p>
+        </section>
+        <section class="product-detail-section">
+          <h2>Ingredients</h2>
+          <p>${ingredients}</p>
+        </section>
+      </div>
+    </section>
+
+    <section class="product-detail-section product-detail-reviews">
+      <h2>Rating</h2>
+      <div class="overall-rating-box">
+        <strong>${rating.toFixed(1)}</strong>
+        <span>${ratingStars(rating)}</span>
+        <em>${formatCompactCount(reviewCount)} reviews</em>
+      </div>
+      ${ratingSnapshotHtml(product)}
+    </section>
+
+    <section class="product-detail-section">
+      <h2>Other available products</h2>
+      ${relatedProductsHtml(product._key)}
+    </section>
+  `;
+
+  let quantity = 1;
+  const maxQty = stock || 99;
+  const qtyValue = document.querySelector('#qtyValue');
+  const setQty = value => {
+    quantity = Math.max(1, Math.min(maxQty, value));
+    qtyValue.textContent = String(quantity);
+  };
+  document.querySelector('#qtyMinus')?.addEventListener('click', () => setQty(quantity - 1));
+  document.querySelector('#qtyPlus')?.addEventListener('click', () => setQty(quantity + 1));
+  document.querySelector('#productPageAddToCart')?.addEventListener('click', () => addProductToCart(product, quantity));
+}

@@ -21,7 +21,13 @@
       "fragranceNotes": "A bright, feminine mist profile for daily wear. Add exact notes and stock details in the admin dashboard.",
       "ingredients": "Ingredients/details may vary by batch. Please check the product packaging.",
       "showOnWebsite": true,
-      "slug": "victoria-s-secret-pure-wonder-fragrance-mist"
+      "slug": "victoria-s-secret-pure-wonder-fragrance-mist",
+      "productStatus": "Available",
+      "rating5Count": 17,
+      "rating4Count": 2,
+      "rating3Count": 1,
+      "rating2Count": 0,
+      "rating1Count": 0
     },
     {
       "name": "Bath & Body Works Body Cream",
@@ -44,7 +50,13 @@
       "fragranceNotes": "Moisturizing body cream options from popular sweet, floral, fresh, and warm scent families.",
       "ingredients": "Ingredients/details may vary by batch. Please check the product packaging.",
       "showOnWebsite": true,
-      "slug": "bath-and-body-works-body-cream"
+      "slug": "bath-and-body-works-body-cream",
+      "productStatus": "Available",
+      "rating5Count": 25,
+      "rating4Count": 3,
+      "rating3Count": 1,
+      "rating2Count": 0,
+      "rating1Count": 0
     },
     {
       "name": "Sweet Signature Eau de Parfum",
@@ -67,7 +79,13 @@
       "fragranceNotes": "A polished sweet scent profile with soft florals, vanilla, amber, and clean musk.",
       "ingredients": "Ingredients/details may vary by batch. Please check the product packaging.",
       "showOnWebsite": true,
-      "slug": "sweet-signature-eau-de-parfum"
+      "slug": "sweet-signature-eau-de-parfum",
+      "productStatus": "Available",
+      "rating5Count": 32,
+      "rating4Count": 3,
+      "rating3Count": 1,
+      "rating2Count": 1,
+      "rating1Count": 1
     },
     {
       "name": "Men’s Fresh Body Spray",
@@ -90,7 +108,13 @@
       "fragranceNotes": "Fresh, confident masculine scent profile for everyday use and gifting.",
       "ingredients": "Ingredients/details may vary by batch. Please check the product packaging.",
       "showOnWebsite": true,
-      "slug": "men-s-fresh-body-spray"
+      "slug": "men-s-fresh-body-spray",
+      "productStatus": "Available",
+      "rating5Count": 40,
+      "rating4Count": 4,
+      "rating3Count": 1,
+      "rating2Count": 1,
+      "rating1Count": 1
     },
     {
       "name": "Scented 3-Wick Candle",
@@ -113,7 +137,13 @@
       "fragranceNotes": "Home fragrance candle options for bedrooms, bathrooms, gifts, and cozy spaces.",
       "ingredients": "Ingredients/details may vary by batch. Please check the product packaging.",
       "showOnWebsite": true,
-      "slug": "scented-3-wick-candle"
+      "slug": "scented-3-wick-candle",
+      "productStatus": "Available",
+      "rating5Count": 48,
+      "rating4Count": 5,
+      "rating3Count": 2,
+      "rating2Count": 1,
+      "rating1Count": 0
     },
     {
       "name": "Pocket Hand Sanitizer",
@@ -136,7 +166,13 @@
       "fragranceNotes": "Portable scented sanitizer options for bags, cars, school, work, and gifting.",
       "ingredients": "Ingredients/details may vary by batch. Please check the product packaging.",
       "showOnWebsite": true,
-      "slug": "pocket-hand-sanitizer"
+      "slug": "pocket-hand-sanitizer",
+      "productStatus": "Available",
+      "rating5Count": 55,
+      "rating4Count": 6,
+      "rating3Count": 2,
+      "rating2Count": 1,
+      "rating1Count": 1
     }
   ],
   "combos": [

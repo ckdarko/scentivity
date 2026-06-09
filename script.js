@@ -1,3 +1,4 @@
+// SCENTIVITY_ADMIN_PRODUCT_STATUS_RATING_BARS_20260609
 // SCENTIVITY_HOME_PRODUCTPAGE_RETURN_SUPPORT_20260609
 // SCENTIVITY_SHOWCASE_PRODUCTPAGE_BOTTOMNAV_FOOTER_FIX_20260609
 // SCENTIVITY_RIGHT_SIDE_BLANK_CLICK_FIX_20260608
@@ -2630,3 +2631,192 @@ loadProducts();
   document.addEventListener('DOMContentLoaded', openRequestedPanel);
   window.addEventListener('load', openRequestedPanel);
 })();
+
+
+// ADMIN PRODUCT STATUS + RATING BAR COUNTS OVERRIDE 20260609
+function normalizeProductStatus(product = {}) {
+  const rawStatus = cleanText(product.productStatus || product.status || '').toLowerCase().replace(/[_-]+/g, ' ').trim();
+  if (['available', 'in stock', 'active'].includes(rawStatus)) return 'Available';
+  if (['incoming', 'coming soon', 'preorder', 'pre order'].includes(rawStatus)) return 'Incoming';
+  if (['out of stock', 'outofstock', 'sold out', 'unavailable'].includes(rawStatus)) return 'Out of Stock';
+  if (product.available === false) return 'Incoming';
+  return 'Available';
+}
+
+function isProductAvailable(product = {}) {
+  return normalizeProductStatus(product) === 'Available';
+}
+
+function isProductIncoming(product = {}) {
+  return normalizeProductStatus(product) === 'Incoming';
+}
+
+function productStatusLabel(product = {}) {
+  return normalizeProductStatus(product);
+}
+
+function productRatingBarCounts(product = {}) {
+  const values = [
+    Number(product.rating5Count ?? product.fiveStarCount ?? product.star5Count ?? product.rating5 ?? 0),
+    Number(product.rating4Count ?? product.fourStarCount ?? product.star4Count ?? product.rating4 ?? 0),
+    Number(product.rating3Count ?? product.threeStarCount ?? product.star3Count ?? product.rating3 ?? 0),
+    Number(product.rating2Count ?? product.twoStarCount ?? product.star2Count ?? product.rating2 ?? 0),
+    Number(product.rating1Count ?? product.oneStarCount ?? product.star1Count ?? product.rating1 ?? 0)
+  ].map(value => Number.isFinite(value) && value >= 0 ? Math.round(value) : 0);
+
+  return {
+    five: values[0],
+    four: values[1],
+    three: values[2],
+    two: values[3],
+    one: values[4],
+    total: values.reduce((sum, value) => sum + value, 0)
+  };
+}
+
+function enrichProducts(list) {
+  return list.map((product, index) => {
+    const productStatus = normalizeProductStatus(product);
+    const bars = productRatingBarCounts(product);
+    return {
+      ...product,
+      productStatus,
+      available: productStatus === 'Available',
+      _key: product.id || product.slug || makeProductKey(product, index),
+      _unitPrice: parseGHSPrice(product.price),
+      rating: product.rating ?? product.averageRating ?? 4.8,
+      reviewCount: product.reviewCount ?? product.reviewsCount ?? product.numberOfReviews ?? bars.total ?? 0,
+      purchaseCount: product.purchaseCount ?? product.numberPurchased ?? product.purchases ?? product.soldCount ?? 0,
+      availableQuantity: product.availableQuantity ?? product.stockQuantity ?? product.quantityAvailable ?? product.stock ?? 0,
+      rating5Count: bars.five,
+      rating4Count: bars.four,
+      rating3Count: bars.three,
+      rating2Count: bars.two,
+      rating1Count: bars.one,
+      productDetails: product.productDetails || product.description || product.details || product.notes || '',
+      fragranceNotes: product.fragranceNotes || product.scentNotes || product.notes || '',
+      ingredients: product.ingredients || '',
+      showOnWebsite: product.showOnWebsite !== false
+    };
+  });
+}
+
+function productReviewCount(product = {}) {
+  const direct = Number(product.reviewCount ?? product.reviewsCount ?? product.numberOfReviews ?? 0);
+  if (Number.isFinite(direct) && direct > 0) return Math.round(direct);
+  const bars = productRatingBarCounts(product);
+  return bars.total > 0 ? bars.total : 0;
+}
+
+function compactProductCard(product = {}) {
+  const name = cleanText(product.name || 'Untitled product');
+  const brand = cleanText(product.brand || 'Scentivity');
+  const statusLabel = productStatusLabel(product);
+  const available = isProductAvailable(product);
+  const incoming = isProductIncoming(product);
+  const price = cleanText(product.price || (incoming ? 'Coming soon' : 'Price on request'));
+  const image = normalizeImagePath(product.image || 'assets/scentivity-logo-fused.png');
+  const key = cleanText(product._key || '');
+  const meta = productDetailMeta(product);
+  return `
+    <article class="product-card compact-product-card product-click-card ${available ? '' : 'is-unavailable'}" data-product-key="${key}" tabindex="0" aria-label="View details for ${name}">
+      <div class="compact-product-image">
+        <img src="${image}" alt="${name}" loading="lazy" onerror="this.onerror=null;this.src='assets/scentivity-logo-fused.png';" />
+        <span class="compact-product-badge ${available ? '' : 'coming'}">${statusLabel}</span>
+      </div>
+      <div class="compact-product-info">
+        <small>${brand}</small>
+        <h3>${name}</h3>
+        <div class="compact-product-meta">
+          <span class="star-rating-symbol">★</span>
+          <span>${meta.rating.toFixed(1)}</span>
+          ${meta.reviews ? `<span>| ${formatCompactCount(meta.reviews)} reviews</span>` : ''}
+          ${meta.bought ? `<span>| ${formatCompactCount(meta.bought)} bought</span>` : ''}
+        </div>
+        <div class="compact-product-bottom">
+          <strong>${price}</strong>
+          ${available
+            ? `<button class="compact-cart-button add-to-cart" type="button" data-product-key="${key}" aria-label="Add ${name} to cart">🛒</button>`
+            : `<button class="compact-cart-button notify-me-button" type="button" data-notify-product="${name}" data-notify-brand="${brand}" data-notify-size="${cleanText(product.size || '')}" aria-label="Notify me about ${name}">🔔</button>`
+          }
+        </div>
+      </div>
+    </article>
+  `;
+}
+
+function getHomepageSlides() {
+  const publishedProducts = products.filter(product => isProductPublished(product));
+  const availableSlides = publishedProducts
+    .filter(product => isProductAvailable(product))
+    .slice(0, 8)
+    .map(product => ({ ...product, _slideStatus: 'Available now', _slideType: 'available' }));
+
+  const incomingSlides = publishedProducts
+    .filter(product => isProductIncoming(product))
+    .slice(0, 4)
+    .map(product => ({ ...product, _slideStatus: 'Incoming', _slideType: 'coming-soon' }));
+
+  return [...availableSlides, ...incomingSlides].slice(0, 10);
+}
+
+function renderHomepageShowcase() {
+  if (!homepageProductSlides) return;
+  const slides = getHomepageSlides();
+  if (!slides.length) {
+    homepageProductSlides.innerHTML = `
+      <article class="showcase-slide active fallback-showcase">
+        <div class="showcase-image-wrap">
+          <img src="assets/scentivity-logo-fused.png" alt="Scentivity logo" loading="lazy" />
+          <span class="showcase-badge soon">No products yet</span>
+        </div>
+        <div class="showcase-copy">
+          <p class="eyebrow">Scentivity</p>
+          <h3>Products will appear here</h3>
+          <p>Turn on Show Product on Website for products in the admin page.</p>
+        </div>
+      </article>
+    `;
+    if (homepageProductDots) homepageProductDots.innerHTML = '';
+    return;
+  }
+
+  showcaseIndex = ((showcaseIndex % slides.length) + slides.length) % slides.length;
+  const product = slides[showcaseIndex];
+  const name = cleanText(product.name || 'Scentivity product');
+  const price = cleanText(product.price || (isProductIncoming(product) ? 'Coming soon' : 'Price on request'));
+  const image = normalizeImagePath(product.image || 'assets/scentivity-logo-fused.png');
+  const available = isProductAvailable(product);
+  const key = cleanText(product._key || '');
+  const meta = productDetailMeta(product);
+  const statusLabel = cleanText(product._slideStatus || productStatusLabel(product));
+
+  homepageProductSlides.innerHTML = `
+    <article class="showcase-slide active simplified-showcase-slide product-click-card" data-product-key="${key}" tabindex="0" aria-label="View details for ${name}">
+      <div class="showcase-image-wrap">
+        <img src="${image}" alt="${name}" loading="lazy" onerror="this.onerror=null;this.src='assets/scentivity-logo-fused.png';" />
+        <span class="showcase-badge ${available ? 'available' : 'soon'}">${statusLabel}</span>
+      </div>
+      <div class="showcase-copy">
+        <p class="eyebrow">${statusLabel} • ${showcaseIndex + 1} of ${slides.length}</p>
+        <h3>${name}</h3>
+        <div class="compact-product-meta showcase-quick-meta">
+          <span class="star-rating-symbol">★</span>
+          <span>${meta.rating.toFixed(1)}</span>
+          ${meta.reviews ? `<span>| ${formatCompactCount(meta.reviews)} reviews</span>` : ''}
+          ${meta.bought ? `<span>| ${formatCompactCount(meta.bought)} bought</span>` : ''}
+        </div>
+        <div class="showcase-bottom">
+          <strong>${price}</strong>
+          ${available
+            ? `<button class="btn primary add-to-cart" type="button" data-product-key="${key}">Add to Cart</button>`
+            : `<button class="btn ghost" type="button" disabled>${isProductIncoming(product) ? 'Coming Soon' : 'Out of Stock'}</button>`
+          }
+        </div>
+      </div>
+    </article>
+  `;
+  if (homepageProductDots) {
+    homepageProductDots.innerHTML = slides.map((_, index) => `<button type="button" class="showcase-dot ${index === showcaseIndex ? 'active' : ''}" data-slide-index="${index}" aria-label="Show product ${index + 1}"></button>`).join('');
+  }
+}
