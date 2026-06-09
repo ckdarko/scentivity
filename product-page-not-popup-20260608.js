@@ -1,5 +1,6 @@
-// SCENTIVITY_PRODUCT_PAGE_MENU_RATING_FIX_20260608
-// SCENTIVITY_PRODUCT_PAGE_PROMO_MENU_SECTIONS_FIX_20260608
+// SCENTIVITY_PRODUCTPAGE_EXACT_HOMEPAGE_MENU_WORKING_20260609
+// SCENTIVITY_PRODUCTPAGE_EXACT_INDEX_HAMBURGER_SINGLE_PROMO_20260609
+// SCENTIVITY_PRODUCTPAGE_BOTTOMNAV_MENU_FIX_20260609
 // SCENTIVITY_PRODUCT_PAGE_RIGHT_SIDE_BLANK_CLICK_FIX_20260608
 
 
@@ -13,6 +14,9 @@
     'textarea',
     'label',
     '[role="button"]',
+    '.header-menu-panel',
+    '.header-menu-card',
+    '#headerMenuToggle',
     '.product-page-detail',
     '.product-detail-section',
     '.related-product-card'
@@ -419,135 +423,11 @@ async function initProductPage() {
 initProductPage();
 
 
-// Product page promo/menu fixes
-(function scentivityProductPagePromoMenuFix() {
-  function updateBothCartCounts() {
-    try {
-      const cart = JSON.parse(window.localStorage.getItem(CART_STORAGE_KEY) || '[]');
-      const count = Array.isArray(cart) ? cart.reduce((sum, item) => sum + Number(item.quantity || 0), 0) : 0;
-      document.querySelectorAll('#cartCount, #cartCountMenu').forEach(el => { el.textContent = String(count); });
-    } catch {
-      document.querySelectorAll('#cartCount, #cartCountMenu').forEach(el => { el.textContent = '0'; });
-    }
-  }
-
-  function closeMenu() {
-    const panel = document.querySelector('#headerMenuPanel');
-    const toggle = document.querySelector('#headerMenuToggle');
-    if (!panel) return;
-    panel.classList.remove('open');
-    panel.setAttribute('aria-hidden', 'true');
-    toggle?.setAttribute('aria-expanded', 'false');
-  }
-
-  function openMenu() {
-    const panel = document.querySelector('#headerMenuPanel');
-    const toggle = document.querySelector('#headerMenuToggle');
-    if (!panel) return;
-    panel.classList.add('open');
-    panel.setAttribute('aria-hidden', 'false');
-    toggle?.setAttribute('aria-expanded', 'true');
-  }
-
-  document.addEventListener('click', event => {
-    const toggle = event.target.closest('#headerMenuToggle');
-    if (toggle) {
-      event.preventDefault();
-      event.stopPropagation();
-      const panel = document.querySelector('#headerMenuPanel');
-      if (panel?.classList.contains('open')) closeMenu();
-      else openMenu();
-      return;
-    }
-
-    if (event.target.closest('#headerMenuClose')) {
-      event.preventDefault();
-      closeMenu();
-      return;
-    }
-
-    if (event.target === document.querySelector('#headerMenuPanel')) {
-      closeMenu();
-      return;
-    }
-
-    const cartLink = event.target.closest('#productPageCartButton, #productPageMenuCartButton, .cart-nav-button[href*="openCart"]');
-    if (cartLink) {
-      event.preventDefault();
-      window.location.href = 'index.html?openCart=true#cart';
-    }
-  }, true);
-
-  document.addEventListener('keydown', event => {
-    if (event.key === 'Escape') closeMenu();
-  });
-
-  document.addEventListener('DOMContentLoaded', updateBothCartCounts);
-  window.addEventListener('load', updateBothCartCounts);
-})();
+// Product page working menu + bottom nav
 
 
-// Product page menu button fixes: show and run mobile menu + cart counts
-(function scentivityProductPageRequiredMenuFix() {
-  function updateMenuCartCount() {
-    try {
-      const cart = JSON.parse(window.localStorage.getItem(CART_STORAGE_KEY) || '[]');
-      const count = Array.isArray(cart) ? cart.reduce((sum, item) => sum + Number(item.quantity || 0), 0) : 0;
-      document.querySelectorAll('#cartCount, #cartCountMenu').forEach(el => { el.textContent = String(count); });
-    } catch {
-      document.querySelectorAll('#cartCount, #cartCountMenu').forEach(el => { el.textContent = '0'; });
-    }
-  }
 
-  function closeProductMenu() {
-    const panel = document.querySelector('#headerMenuPanel');
-    const toggle = document.querySelector('#headerMenuToggle');
-    panel?.classList.remove('open');
-    panel?.setAttribute('aria-hidden', 'true');
-    toggle?.setAttribute('aria-expanded', 'false');
-  }
 
-  function openProductMenu() {
-    const panel = document.querySelector('#headerMenuPanel');
-    const toggle = document.querySelector('#headerMenuToggle');
-    panel?.classList.add('open');
-    panel?.setAttribute('aria-hidden', 'false');
-    toggle?.setAttribute('aria-expanded', 'true');
-  }
+// Product page exact index-style hamburger menu + single promo support
 
-  document.addEventListener('click', event => {
-    const toggle = event.target.closest('#headerMenuToggle');
-    if (toggle) {
-      event.preventDefault();
-      event.stopPropagation();
-      const panel = document.querySelector('#headerMenuPanel');
-      if (panel?.classList.contains('open')) closeProductMenu();
-      else openProductMenu();
-      return;
-    }
 
-    if (event.target.closest('#headerMenuClose')) {
-      event.preventDefault();
-      closeProductMenu();
-      return;
-    }
-
-    if (event.target === document.querySelector('#headerMenuPanel')) {
-      closeProductMenu();
-      return;
-    }
-
-    const cartLink = event.target.closest('#productPageCartButton, #productPageMenuCartButton, .cart-nav-button[href*="openCart"]');
-    if (cartLink) {
-      event.preventDefault();
-      window.location.href = 'index.html?openCart=true#cart';
-    }
-  }, true);
-
-  document.addEventListener('keydown', event => {
-    if (event.key === 'Escape') closeProductMenu();
-  });
-
-  document.addEventListener('DOMContentLoaded', updateMenuCartCount);
-  window.addEventListener('load', updateMenuCartCount);
-})();

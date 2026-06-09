@@ -1,5 +1,5 @@
-// SCENTIVITY_PRODUCT_MENU_RATING_INCOMING_20260608
-// SCENTIVITY_HOMEPAGE_OPEN_PARAMS_FROM_PRODUCT_PAGE_20260608
+// SCENTIVITY_HOME_PRODUCTPAGE_RETURN_SUPPORT_20260609
+// SCENTIVITY_SHOWCASE_PRODUCTPAGE_BOTTOMNAV_FOOTER_FIX_20260609
 // SCENTIVITY_RIGHT_SIDE_BLANK_CLICK_FIX_20260608
 
 
@@ -982,53 +982,18 @@ function renderProducts() {
 }
 
 function getHomepageSlides() {
-  const availableSlides = products
-    .filter(product => isProductPublished(product))
+  const publishedProducts = products.filter(product => isProductPublished(product));
+  const availableSlides = publishedProducts
     .filter(product => product.available !== false)
     .slice(0, 8)
     .map(product => ({ ...product, _slideStatus: 'Available now', _slideType: 'available' }));
 
-  const adminIncomingSlides = products
-    .filter(product => isProductPublished(product))
+  const comingSoonSlides = publishedProducts
     .filter(product => product.available === false)
     .slice(0, 4)
     .map(product => ({ ...product, _slideStatus: 'Coming soon', _slideType: 'coming-soon' }));
 
-  const extraIncomingSlides = [
-    {
-      _key: '',
-      name: 'Victoria’s Secret New Arrival Mist',
-      brand: 'Victoria’s Secret',
-      mainCategory: MAIN_CATEGORY_VICTORIA,
-      subCategory: 'Fine Fragrance Mist',
-      price: 'Coming soon',
-      size: '236 mL',
-      notes: 'A new sweet scented mist arriving soon at Scentivity.',
-      image: 'assets/products/velvet-rose.svg',
-      available: false,
-      showOnWebsite: true,
-      _slideStatus: 'Coming soon',
-      _slideType: 'coming-soon'
-    },
-    {
-      _key: '',
-      name: 'Bath & Body Works Body Care Drop',
-      brand: 'Bath & Body Works',
-      mainCategory: MAIN_CATEGORY_BBW,
-      subCategory: 'Body Care',
-      price: 'Coming soon',
-      size: 'Body care',
-      notes: 'More body care favorites are coming soon.',
-      image: 'assets/products/amber-noir.svg',
-      available: false,
-      showOnWebsite: true,
-      _slideStatus: 'Coming soon',
-      _slideType: 'coming-soon'
-    }
-  ];
-
-  const incomingSlides = [...adminIncomingSlides, ...extraIncomingSlides].slice(0, 6);
-  return [...availableSlides, ...incomingSlides].slice(0, 12);
+  return [...availableSlides, ...comingSoonSlides].slice(0, 10);
 }
 
 function renderHomepageShowcase() {
@@ -1056,7 +1021,7 @@ function renderHomepageShowcase() {
   const product = slides[showcaseIndex];
   const name = cleanText(product.name || 'Scentivity product');
   const brand = cleanText(product.brand || 'Scentivity');
-  const price = cleanText(product.price || (product.available === false ? 'Coming soon' : 'Price on request'));
+  const price = cleanText(product.price || (product.available === false ? 'Out of stock' : 'Price on request'));
   const image = normalizeImagePath(product.image || 'assets/scentivity-logo-fused.png');
   const available = product.available !== false;
   const key = cleanText(product._key || '');
@@ -1066,10 +1031,10 @@ function renderHomepageShowcase() {
     <article class="showcase-slide active simplified-showcase-slide product-click-card" data-product-key="${key}" tabindex="0" aria-label="View details for ${name}">
       <div class="showcase-image-wrap">
         <img src="${image}" alt="${name}" loading="lazy" onerror="this.onerror=null;this.src='assets/scentivity-logo-fused.png';" />
-        <span class="showcase-badge ${available ? 'available' : 'soon'}">${cleanText(product._slideStatus || (available ? 'Available now' : 'Coming soon'))}</span>
+        <span class="showcase-badge ${available ? 'available' : 'soon'}">${available ? 'Available now' : 'Out of stock'}</span>
       </div>
       <div class="showcase-copy">
-        <p class="eyebrow">${cleanText(product._slideStatus || (available ? 'Available now' : 'Coming soon'))} • ${showcaseIndex + 1} of ${slides.length}</p>
+        <p class="eyebrow">${available ? 'Available now' : 'Out of stock'} • ${showcaseIndex + 1} of ${slides.length}</p>
         <h3>${name}</h3>
         <div class="compact-product-meta showcase-quick-meta">
           <span class="star-rating-symbol">★</span>
@@ -2629,8 +2594,8 @@ document.addEventListener('DOMContentLoaded', () => updateCartCount());
 loadProducts();
 
 
-// Opens correct homepage panels when arriving from product page menu links.
-(function scentivityHomepageOpenParamsFromProductPage() {
+// Product page bottom-nav landing support
+(function scentivityProductPageBottomNavLanding() {
   function openRequestedPanel() {
     const params = new URLSearchParams(window.location.search);
     if (params.get('openCart') === 'true' || window.location.hash === '#cart') {
@@ -2640,13 +2605,6 @@ loadProducts();
           document.querySelector('#cartOverlay')?.classList.add('visible');
           document.querySelector('#cartDrawer')?.classList.add('open');
         }
-      }, 350);
-    }
-    if (params.get('openCatalogue') === 'true') {
-      window.setTimeout(() => {
-        const modal = document.querySelector('#catalogueModal');
-        modal?.classList.add('open');
-        modal?.setAttribute('aria-hidden', 'false');
       }, 350);
     }
   }
@@ -2655,8 +2613,8 @@ loadProducts();
 })();
 
 
-// Product-page menu landing support: open cart/catalogue after returning to homepage
-(function scentivityHomepageMenuLandingSupport() {
+// Product page menu/cart return support
+(function scentivityHomeProductPageReturnSupport() {
   function openRequestedPanel() {
     const params = new URLSearchParams(window.location.search);
     if (params.get('openCart') === 'true' || window.location.hash === '#cart') {
@@ -2668,16 +2626,7 @@ loadProducts();
         }
       }, 350);
     }
-
-    if (params.get('openCatalogue') === 'true') {
-      window.setTimeout(() => {
-        const modal = document.querySelector('#catalogueModal');
-        modal?.classList.add('open');
-        modal?.setAttribute('aria-hidden', 'false');
-      }, 350);
-    }
   }
-
   document.addEventListener('DOMContentLoaded', openRequestedPanel);
   window.addEventListener('load', openRequestedPanel);
 })();
