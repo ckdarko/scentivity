@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=product-page-not-popup-20260608" />
+  <link rel="stylesheet" href="styles.css?v=home-productpage-menu-spacing-fix-20260608" />
 </head>
 <body id="top">
 
@@ -149,7 +149,6 @@
         </div>
         <div class="quick-action-buttons">
           <button class="btn primary" id="openCatalogueButtonQuick" type="button" onclick="document.getElementById('catalogueModal')?.classList.add('open');document.getElementById('catalogueModal')?.setAttribute('aria-hidden','false')">Product Catalogue</button>
-          <button class="btn ghost" id="openShippingButtonQuick" type="button" onclick="document.getElementById('shippingModal')?.classList.add('open');document.getElementById('shippingModal')?.setAttribute('aria-hidden','false')">Shipping Countries</button>
         </div>
       </div>
     </section>
@@ -248,10 +247,6 @@
           <p class="eyebrow">Customer Love</p>
           <h2>Share your Scentivity experience.</h2>
           
-        </div>
-        <div class="testimonial-controls" aria-label="Review slideshow controls">
-          <button class="testimonial-arrow" id="testimonialPrev" type="button" aria-label="Previous review">‹</button>
-          <button class="testimonial-arrow" id="testimonialNext" type="button" aria-label="Next review">›</button>
         </div>
       </div>
 
@@ -402,47 +397,9 @@
   </div>
 
 
-  <div class="modal-overlay shipping-modal-overlay" id="shippingModal" aria-hidden="true">
-    <div class="shipping-modal" role="dialog" aria-modal="true" aria-labelledby="shippingModalTitle">
-      <button class="modal-close" id="closeShippingModal" type="button" aria-label="Close shipping countries" onclick="document.getElementById('shippingModal')?.classList.remove('open');document.getElementById('shippingModal')?.setAttribute('aria-hidden','true')">×</button>
-      <p class="eyebrow">Shipping Countries</p>
-      <h2 id="shippingModalTitle">Where Scentivity can currently ship.</h2>
-      <p class="shipping-intro">For now, online delivery checkout is available only within Ghana. For other countries, leave your details through Contact and we will notify you when shipping becomes available.</p>
-      <div class="shipping-country-list">
-        <article class="available">
-          <strong>Ghana</strong>
-          <span>Available now</span>
-          <p>Delivery is currently available in Ghana. Delivery fee will be determined after checkout based on your location.</p>
-        </article>
-        <article>
-          <strong>Nigeria</strong>
-          <span>Not available yet</span>
-          <p>Sorry, we can’t ship to this country now. When available, we will notify you. Enter your details in Contact.</p>
-        </article>
-        <article>
-          <strong>United States</strong>
-          <span>Not available yet</span>
-          <p>Sorry, we can’t ship to this country now. When available, we will notify you. Enter your details in Contact.</p>
-        </article>
-        <article>
-          <strong>United Kingdom</strong>
-          <span>Not available yet</span>
-          <p>Sorry, we can’t ship to this country now. When available, we will notify you. Enter your details in Contact.</p>
-        </article>
-        <article>
-          <strong>Canada</strong>
-          <span>Not available yet</span>
-          <p>Sorry, we can’t ship to this country now. When available, we will notify you. Enter your details in Contact.</p>
-        </article>
-        <article>
-          <strong>Other countries</strong>
-          <span>Coming later</span>
-          <p>Sorry, we can’t ship outside Ghana now. When available, we will notify you. Enter your details in Contact.</p>
-        </article>
-      </div>
-      <button class="btn primary" type="button" onclick="document.getElementById('shippingModal')?.classList.remove('open');document.getElementById('shippingModal')?.setAttribute('aria-hidden','true');document.getElementById('contactModal')?.classList.add('open');document.getElementById('contactModal')?.setAttribute('aria-hidden','false')">Enter details in Contact</button>
-    </div>
-  </div>
+  
+<!-- Shipping Countries modal removed. -->
+
 
   <div class="cart-overlay" id="cartOverlay" aria-hidden="true"></div>
   <aside class="cart-drawer" id="cartDrawer" aria-hidden="true" aria-label="Shopping cart and checkout">
@@ -485,13 +442,6 @@
       </fieldset>
 
       <div id="deliveryFields" class="delivery-fields">
-        <label>
-          Shipping country
-          <select name="shippingCountry" id="shippingCountry">
-            <option value="Ghana" selected>Ghana only for now</option>
-          </select>
-        </label>
-        <p class="cart-small-note shipping-country-note">Scentivity currently accepts delivery orders only within Ghana. Use the Shipping Countries button to see availability updates.</p>
         <label>
           Delivery address
           <textarea name="deliveryAddress" rows="3" placeholder="Enter delivery address, area, landmark, city, and any useful directions"></textarea>
@@ -539,7 +489,7 @@
 
   <button class="back-to-top" id="backToTop" type="button" aria-label="Move back to the top of the page">↑</button>
 
-  <script src="script.js?v=product-page-not-popup-20260608"></script>
+  <script src="script.js?v=home-productpage-menu-spacing-fix-20260608"></script>
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script>
     if (window.netlifyIdentity) {
