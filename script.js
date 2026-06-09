@@ -1,3 +1,4 @@
+// SCENTIVITY_CHECKOUT_REMOVE_SHIPPING_COUNTRY_20260609
 // SCENTIVITY_ADMIN_PRODUCT_STATUS_RATING_BARS_20260609
 // SCENTIVITY_HOME_PRODUCTPAGE_RETURN_SUPPORT_20260609
 // SCENTIVITY_SHOWCASE_PRODUCTPAGE_BOTTOMNAV_FOOTER_FIX_20260609
@@ -1430,7 +1431,7 @@ ${itemLines}
 
 Total before delivery: ${formatGHS(order.totalGHS)}
 Fulfillment: ${order.fulfillment}
-Shipping country: ${order.shippingCountry || 'Ghana'}\nDelivery address: ${order.deliveryAddress || 'N/A'}
+Delivery address: ${order.deliveryAddress || 'N/A'}
 Delivery fee note: Applies to delivery orders and will be determined after checkout based on location.
 Payment method: ${order.paymentMethodLabel}
 
