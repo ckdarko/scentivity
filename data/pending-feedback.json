@@ -1,3 +1,14 @@
 {
-  "pendingFeedback": []
+  "pendingFeedback": [
+    {
+      "id": "feedback-1780980993687",
+      "name": "Aj",
+      "rating": 4,
+      "productsPurchased": "Victoria's Secret Pure Wonder Fragrance Mist • Victoria's Secret • 236 mL • GH₵250",
+      "message": "Whshsbsjb",
+      "approved": false,
+      "date": "2026-06-09T04:56:33.687Z",
+      "source": "customer_submission"
+    }
+  ]
 }
