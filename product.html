@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Scentivity product details, scent notes, stock, reviews, and cart checkout." />
   <title>Scentivity Product</title>
-  <link rel="stylesheet" href="styles.css?v=productpage-exact-homepage-menu-working-20260609" />
+  <link rel="stylesheet" href="styles.css?v=productpage-exact-index-hamburger-single-promo-20260609" />
 </head>
 <body class="product-page-body has-product-bottom-nav" id="top">
   <div class="promo-bar product-page-promo-bar" aria-label="Scentivity highlights">
@@ -20,32 +20,32 @@
       <img src="assets/scentivity-logo-fused.png" alt="Scentivity logo" />
     </a>
 
-    <button class="header-menu-toggle" id="headerMenuToggle" type="button" onclick="return window.scentivityProductPageToggleMenu ? window.scentivityProductPageToggleMenu(event) : (function(e,b){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();var p=document.getElementById(\'headerMenuPanel\');if(!p)return false;var o=!p.classList.contains(\'open\');p.classList.toggle(\'open\',o);p.setAttribute(\'aria-hidden\',String(!o));b.setAttribute(\'aria-expanded\',String(o));document.body.classList.toggle(\'product-menu-open\',o);return false;})(event,this)" aria-label="Open menu" aria-expanded="false">
+    <button class="header-menu-toggle" id="headerMenuToggle" type="button" aria-label="Open menu" aria-expanded="false">
       <span></span>
       <span></span>
       <span></span>
     </button>
   </header>
 
-        <div class="header-menu-panel" id="headerMenuPanel" aria-hidden="true" onclick="if(event.target===this){window.scentivityProductPageCloseMenu?.(event);}">
-      <div class="header-menu-card">
-        <button class="header-menu-close perfume-menu-close" id="headerMenuClose" type="button" aria-label="Close menu" onclick="window.scentivityProductPageCloseMenu?.(event)">×</button>
+      <div class="header-menu-panel" id="headerMenuPanel" aria-hidden="true">
+    <div class="header-menu-card">
+      <button class="header-menu-close perfume-menu-close" id="headerMenuClose" type="button" aria-label="Close menu">×</button>
 
-        <div class="menu-search-wrap">
-          <span aria-hidden="true">⌕</span>
-          <input id="menuSearchInput" type="search" placeholder="search store....." aria-label="Search Scentivity store" />
-        </div>
-
-        <nav class="nav-links perfume-style-menu" aria-label="Main navigation">
-          <a href="index.html#products">SHOP</a>
-          <a href="https://wa.me/233534584470?text=Hello%20Scentivity%2C%20I%20want%20to%20preorder%20a%20product." target="_blank" rel="noreferrer">PREORDER</a>
-          <a href="index.html#quickShop">PRODUCT CATALOGUE</a>
-          <a href="index.html#about">ABOUT US</a>
-          <a href="https://wa.me/233534584470?text=Hello%20Scentivity%2C%20I%20need%20help%20with%20a%20product." target="_blank" rel="noreferrer">CONTACT</a>
-          <a class="cart-nav-button" href="index.html?openCart=true#cart" id="productPageMenuCartButton">CART <span id="cartCountMenu">0</span></a>
-        </nav>
+      <div class="menu-search-wrap">
+        <span aria-hidden="true">⌕</span>
+        <input id="menuSearchInput" type="search" placeholder="search store....." aria-label="Search Scentivity store" />
       </div>
+
+      <nav class="nav-links perfume-style-menu" aria-label="Main navigation">
+        <a href="index.html#products">SHOP</a>
+        <a href="https://wa.me/233534584470?text=Hello%20Scentivity%2C%20I%20want%20to%20preorder%20a%20product." target="_blank" rel="noreferrer">PREORDER</a>
+        <a href="index.html#quickShop">PRODUCT CATALOGUE</a>
+        <a href="index.html#about">ABOUT US</a>
+        <a href="https://wa.me/233534584470?text=Hello%20Scentivity%2C%20I%20need%20help%20with%20a%20product." target="_blank" rel="noreferrer">CONTACT</a>
+        <a class="cart-nav-button" href="index.html?openCart=true#cart" id="productPageMenuCartButton">CART <span id="cartCountMenu">0</span></a>
+      </nav>
     </div>
+  </div>
 
   <main class="product-page-main">
     <a class="back-to-shop" href="index.html#products">← Back to shop</a>
@@ -53,8 +53,8 @@
       <p class="empty-state">Loading product details...</p>
     </div>
   </main>
-  <script src="product-page-homepage-menu-copy-20260609.js?v=productpage-exact-homepage-menu-working-20260609"></script>
-  <script src="product-page-not-popup-20260608.js?v=productpage-exact-homepage-menu-working-20260609"></script>
+
+  <script src="product-page-not-popup-20260608.js?v=productpage-exact-index-hamburger-single-promo-20260609"></script>
   <nav class="mobile-bottom-nav product-page-bottom-nav" aria-label="Product page quick navigation">
     <a href="index.html#products" aria-label="Shop"><span>⌕</span><strong>Shop</strong></a>
     <a href="index.html#featured-products" aria-label="Favorites"><span>❤️</span><strong>Favorites</strong></a>
