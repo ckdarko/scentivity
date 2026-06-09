@@ -197,8 +197,9 @@ function productSnapshot(product) {
 function addToCart(productKey, quantity = 1) {
   const product = products.find(item => item._key === productKey || item.id === productKey || item.slug === productKey);
   if (!product) return;
-  if (product.available === false) {
-    alert('This product is currently out of stock.');
+  if (product.available === false || (typeof isProductAvailable === 'function' && !isProductAvailable(product))) {
+    const status = typeof productStatusLabel === 'function' ? productStatusLabel(product) : 'Out of Stock';
+    alert(status === 'Incoming' ? 'This product is incoming/coming soon.' : 'This product is currently out of stock.');
     return;
   }
 
@@ -647,5 +648,28 @@ function renderProductPage() {
   };
   document.querySelector('#qtyMinus')?.addEventListener('click', () => setQty(quantity - 1));
   document.querySelector('#qtyPlus')?.addEventListener('click', () => setQty(quantity + 1));
-  document.querySelector('#productPageAddToCart')?.addEventListener('click', () => addProductToCart(product, quantity));
+  document.querySelector('#productPageAddToCart')?.addEventListener('click', () => addToCart(product._key, quantity));
 }
+
+
+// PRODUCT PAGE ADD TO CART FIX 20260609
+// Keep this wrapper so any product-page button can use either addToCart(productKey, qty)
+// or addProductToCart(product, qty) without breaking.
+function addProductToCart(product, quantity = 1) {
+  const key = product && typeof product === 'object'
+    ? (product._key || product.id || product.slug || '')
+    : String(product || '');
+  if (!key) {
+    alert('This product could not be added. Please go back to Shop and try again.');
+    return;
+  }
+  addToCart(key, quantity);
+}
+
+document.addEventListener('click', event => {
+  const button = event.target.closest('#productPageAddToCart');
+  if (!button) return;
+  // Let the direct renderProductPage listener handle it when present.
+  // This fallback exists only if another script fails to bind the click.
+  if (button.dataset.scentivityFallbackBound === 'true') return;
+}, true);
