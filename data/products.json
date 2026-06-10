@@ -306,16 +306,11 @@
         "Designer Fragrance"
       ],
       "showInCatalogue": true
-    },
-    {
-      "showInCatalogue": true,
-      "label": "MEN'S — for the guys",
-      "categoryName": "gift_sets"
     }
   ],
   "homepageVideo": {
     "enabled": true,
-    "videoFile": "assets/products/uploads/1.final-copy_fa63b4e2-b3bc-454d-97c7-4b43d0048a69.mp4",
+    "videoFile": "assets/products/uploads/00.-copy_e4b2e756-47f2-4ffd-947e-9e68987cddea-1.mp4",
     "posterImage": "assets/products/uploads/image-may-28-2026-07_52_05-pm-7-.png",
     "headline": "Sweet scents in motion.",
     "subheading": "Discover fragrance mists, body care, luxury scents, and gift-ready deals.",
