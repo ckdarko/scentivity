@@ -261,6 +261,15 @@
       "name": "CD",
       "message": "Perfect Gifts!!",
       "date": "2026-06-10T16:23:00.000-05:00"
+    },
+    {
+      "rating": 5,
+      "approved": true,
+      "source": "admin_added",
+      "productsPurchased": "A Thousand Wishes Pocket Hand Sanitizer • BBW • Travel size",
+      "name": "Abena",
+      "message": "Happy with my purchase.",
+      "date": "2026-06-10T16:32:00.000-05:00"
     }
   ],
   "productCatalogue": [
