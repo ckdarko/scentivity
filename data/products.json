@@ -252,7 +252,17 @@
     "discountThreeOrMore": 10,
     "note": "Turn on to allow buyers to build custom discounted bundles."
   },
-  "customerReviews": [],
+  "customerReviews": [
+    {
+      "rating": 5,
+      "approved": true,
+      "source": "admin_added",
+      "productsPurchased": "BBW A Thousand Wishes Fragrance Mist • Bath and Body Works • 236 mL",
+      "name": "CD",
+      "message": "Perfect Gifts!!",
+      "date": "2026-06-10T16:23:00.000-05:00"
+    }
+  ],
   "productCatalogue": [
     {
       "label": "BBW",
