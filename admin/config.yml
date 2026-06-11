@@ -149,6 +149,7 @@ collections:
               - { label: "Fragrance Notes", name: "fragranceNotes", widget: "text", required: false }
               - { label: "Ingredients", name: "ingredients", widget: "text", required: false }
               - { label: "Show Product on Website", name: "showOnWebsite", widget: "boolean", default: true, required: false, hint: "Turn this off to hide the product from the homepage, shop, and product detail popup." }
+              - { label: "Show in Customer Favorites / Coming Soon Section", name: "showInCustomerFavorites", widget: "boolean", default: false, required: false, hint: "Turn this on only for products you want displayed in the homepage Customer favorites / Available favorites and coming-soon scents section." }
 
 
 
