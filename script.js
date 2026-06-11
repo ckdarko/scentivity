@@ -1,3 +1,4 @@
+// SCENTIVITY_CUSTOMER_FAVORITES_ADMIN_TOGGLE_20260609
 // SCENTIVITY_CHECKOUT_REMOVE_SHIPPING_COUNTRY_20260609
 // SCENTIVITY_ADMIN_PRODUCT_STATUS_RATING_BARS_20260609
 // SCENTIVITY_HOME_PRODUCTPAGE_RETURN_SUPPORT_20260609
@@ -297,6 +298,10 @@ function buildWhatsAppLink(message) {
 
 const dealOfWeekCard = document.querySelector('#dealOfWeekCard') || document.querySelector('.hero-deal-card');
 const productGrid = document.querySelector('#productGrid');
+const productLoadMoreButton = document.querySelector('#productLoadMoreButton');
+const productLoadMoreNote = document.querySelector('#productLoadMoreNote');
+const PRODUCT_PAGE_SIZE = 8;
+let productDisplayLimit = PRODUCT_PAGE_SIZE;
 const comboDealsSection = document.querySelector('#comboDeals')?.closest('section') || document.querySelector('#comboDeals');
 const comboGrid = document.querySelector('#comboGrid');
 const bundleBuilderSection = document.querySelector('#bundleBuilder');
@@ -936,6 +941,24 @@ function renderCombos() {
   }).join('');
 }
 
+function resetProductDisplayLimit() {
+  productDisplayLimit = PRODUCT_PAGE_SIZE;
+}
+
+function renderProductLoadMoreControl(totalProducts = 0, shownProducts = 0) {
+  if (!productLoadMoreButton) return;
+  const total = Number(totalProducts || 0);
+  const shown = Math.min(Number(shownProducts || 0), total);
+  const remaining = Math.max(0, total - shown);
+  productLoadMoreButton.hidden = remaining <= 0;
+  productLoadMoreButton.disabled = remaining <= 0;
+  productLoadMoreButton.textContent = remaining > 0 ? `LOAD MORE${remaining ? ` (${remaining} MORE)` : ''}` : 'ALL PRODUCTS LOADED';
+  productLoadMoreButton.setAttribute('aria-label', remaining > 0 ? `Load ${Math.min(PRODUCT_PAGE_SIZE, remaining)} more Scentivity products` : 'All matching Scentivity products loaded');
+  if (productLoadMoreNote) {
+    productLoadMoreNote.textContent = total > PRODUCT_PAGE_SIZE ? `Showing ${shown} of ${total} matching products.` : '';
+  }
+}
+
 function compactProductCard(product = {}) {
   const name = cleanText(product.name || 'Untitled product');
   const brand = cleanText(product.brand || 'Scentivity');
@@ -974,13 +997,17 @@ function compactProductCard(product = {}) {
 function renderProducts() {
   if (!productGrid) return;
   const visibleProducts = getVisibleProducts();
+  const safeLimit = Math.max(PRODUCT_PAGE_SIZE, Number(productDisplayLimit || PRODUCT_PAGE_SIZE));
+  const productsToRender = visibleProducts.slice(0, safeLimit);
   productGrid.classList.add('two-product-mobile-grid');
   productGrid.innerHTML = '';
   if (!visibleProducts.length) {
     productGrid.innerHTML = '<p class="empty-state">No products match this selection yet. Try a different category, clear the search, or add the product from the Scentivity admin page.</p>';
+    renderProductLoadMoreControl(0, 0);
     return;
   }
-  productGrid.innerHTML = visibleProducts.map(product => compactProductCard(product)).join('');
+  productGrid.innerHTML = productsToRender.map(product => compactProductCard(product)).join('');
+  renderProductLoadMoreControl(visibleProducts.length, productsToRender.length);
 }
 
 function getHomepageSlides() {
@@ -1078,6 +1105,7 @@ function startShowcaseAutoplay() {
 }
 
 function refreshShop() {
+  resetProductDisplayLimit();
   renderMainCategoryFilters();
   renderSubCategoryFilters();
   renderProducts();
@@ -1614,6 +1642,7 @@ if (mainCategoryFilters) {
 
 productSearch?.addEventListener('input', event => {
   activeSearchTerm = cleanText(event.target.value);
+  resetProductDisplayLimit();
   renderProducts();
 });
 
@@ -1622,11 +1651,20 @@ navSearchButton?.addEventListener('click', () => {
   setTimeout(() => productSearch?.focus(), 350);
 });
 
+productLoadMoreButton?.addEventListener('click', () => {
+  productDisplayLimit += PRODUCT_PAGE_SIZE;
+  renderProducts();
+  window.setTimeout(() => {
+    productLoadMoreButton?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }, 50);
+});
+
 if (subCategoryFilters) {
   subCategoryFilters.addEventListener('click', event => {
     const button = event.target.closest('[data-sub]');
     if (!button) return;
     activeSubCategory = button.dataset.sub;
+    resetProductDisplayLimit();
     renderSubCategoryFilters();
     renderProducts();
     closeCatalogueModalFn();
@@ -2821,3 +2859,100 @@ function renderHomepageShowcase() {
     homepageProductDots.innerHTML = slides.map((_, index) => `<button type="button" class="showcase-dot ${index === showcaseIndex ? 'active' : ''}" data-slide-index="${index}" aria-label="Show product ${index + 1}"></button>`).join('');
   }
 }
+
+
+// CUSTOMER FAVORITES ADMIN TOGGLE OVERRIDE 20260609
+function showInCustomerFavorites(product = {}) {
+  return product.showInCustomerFavorites === true ||
+    String(product.showInCustomerFavorites || '').toLowerCase() === 'true' ||
+    product.showInHomepageFavorites === true ||
+    String(product.showInHomepageFavorites || '').toLowerCase() === 'true' ||
+    product.featuredOnHomepage === true ||
+    String(product.featuredOnHomepage || '').toLowerCase() === 'true';
+}
+
+function getHomepageSlides() {
+  const publishedProducts = products
+    .filter(product => isProductPublished(product))
+    .filter(product => showInCustomerFavorites(product));
+
+  const availableSlides = publishedProducts
+    .filter(product => typeof isProductAvailable === 'function' ? isProductAvailable(product) : product.available !== false)
+    .slice(0, 8)
+    .map(product => ({ ...product, _slideStatus: 'Available now', _slideType: 'available' }));
+
+  const incomingSlides = publishedProducts
+    .filter(product => typeof isProductIncoming === 'function' ? isProductIncoming(product) : product.available === false)
+    .slice(0, 4)
+    .map(product => ({ ...product, _slideStatus: 'Incoming', _slideType: 'coming-soon' }));
+
+  return [...availableSlides, ...incomingSlides].slice(0, 10);
+}
+
+function renderHomepageShowcase() {
+  if (!homepageProductSlides) return;
+  const slides = getHomepageSlides();
+  if (!slides.length) {
+    homepageProductSlides.innerHTML = `
+      <article class="showcase-slide active fallback-showcase">
+        <div class="showcase-image-wrap">
+          <img src="assets/scentivity-logo-fused.png" alt="Scentivity logo" loading="lazy" />
+          <span class="showcase-badge soon">No featured products</span>
+        </div>
+        <div class="showcase-copy">
+          <p class="eyebrow">Customer favorites</p>
+          <h3>Select products from admin</h3>
+          <p>Open a product in the admin page and turn on “Show in Customer Favorites / Coming Soon Section”.</p>
+        </div>
+      </article>
+    `;
+    if (homepageProductDots) homepageProductDots.innerHTML = '';
+    return;
+  }
+
+  showcaseIndex = ((showcaseIndex % slides.length) + slides.length) % slides.length;
+  const product = slides[showcaseIndex];
+  const name = cleanText(product.name || 'Scentivity product');
+  const price = cleanText(product.price || ((typeof isProductIncoming === 'function' && isProductIncoming(product)) ? 'Coming soon' : 'Price on request'));
+  const image = normalizeImagePath(product.image || 'assets/scentivity-logo-fused.png');
+  const available = typeof isProductAvailable === 'function' ? isProductAvailable(product) : product.available !== false;
+  const incoming = typeof isProductIncoming === 'function' ? isProductIncoming(product) : product.available === false;
+  const key = cleanText(product._key || '');
+  const meta = productDetailMeta(product);
+  const statusLabel = cleanText(product._slideStatus || (typeof productStatusLabel === 'function' ? productStatusLabel(product) : (available ? 'Available now' : 'Coming soon')));
+
+  homepageProductSlides.innerHTML = `
+    <article class="showcase-slide active simplified-showcase-slide product-click-card" data-product-key="${key}" tabindex="0" aria-label="View details for ${name}">
+      <div class="showcase-image-wrap">
+        <img src="${image}" alt="${name}" loading="lazy" onerror="this.onerror=null;this.src='assets/scentivity-logo-fused.png';" />
+        <span class="showcase-badge ${available ? 'available' : 'soon'}">${statusLabel}</span>
+      </div>
+      <div class="showcase-copy">
+        <p class="eyebrow">${statusLabel} • ${showcaseIndex + 1} of ${slides.length}</p>
+        <h3>${name}</h3>
+        <div class="compact-product-meta showcase-quick-meta">
+          <span class="star-rating-symbol">★</span>
+          <span>${meta.rating.toFixed(1)}</span>
+          ${meta.reviews ? `<span>| ${formatCompactCount(meta.reviews)} reviews</span>` : ''}
+          ${meta.bought ? `<span>| ${formatCompactCount(meta.bought)} bought</span>` : ''}
+        </div>
+        <div class="showcase-bottom">
+          <strong>${price}</strong>
+          ${available
+            ? `<button class="btn primary add-to-cart" type="button" data-product-key="${key}">Add to Cart</button>`
+            : `<button class="btn ghost" type="button" disabled>${incoming ? 'Coming Soon' : 'Out of Stock'}</button>`
+          }
+        </div>
+      </div>
+    </article>
+  `;
+  if (homepageProductDots) {
+    homepageProductDots.innerHTML = slides.map((_, index) => `<button type="button" class="showcase-dot ${index === showcaseIndex ? 'active' : ''}" data-slide-index="${index}" aria-label="Show product ${index + 1}"></button>`).join('');
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  window.setTimeout(() => {
+    if (homepageProductSlides && products.length) renderHomepageShowcase();
+  }, 500);
+});
