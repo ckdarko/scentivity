@@ -10,7 +10,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=productpage-exact-homepage-menu-working-20260609" />
-  <link rel="stylesheet" href="scentivity-safe-compliance-cart-loadmore-20260611.css?v=2" />
 </head>
 <body id="top">
 
@@ -299,11 +298,31 @@
         </div>
       </div>
       <div class="policy-card-grid">
-        <a class="policy-card" href="faq.html"><span>?</span><strong>FAQs</strong><small>Ordering, preorder, delivery, pickup, and payment answers.</small></a>
-        <a class="policy-card" href="terms-of-service.html"><span>§</span><strong>Terms of Service</strong><small>Customer responsibilities, order terms, and website rules.</small></a>
-        <a class="policy-card" href="refund-policy.html"><span>↺</span><strong>Refund Policy</strong><small>Wrong item, damaged item, hygiene, return, and refund guidance.</small></a>
-        <a class="policy-card" href="privacy-policy.html"><span>🔒</span><strong>Privacy Policy</strong><small>How customer names, phone numbers, delivery details, and reviews are handled.</small></a>
-        <a class="policy-card" href="shipping-delivery-policy.html"><span>🇬🇭</span><strong>Shipping & Delivery</strong><small>Ghana-only delivery, pickup, timelines, fees, and delivery support.</small></a>
+        <a class="policy-card" href="faq.html">
+          <span>?</span>
+          <strong>FAQs</strong>
+          <small>Ordering, preorder, delivery, pickup, and payment answers.</small>
+        </a>
+        <a class="policy-card" href="terms-of-service.html">
+          <span>§</span>
+          <strong>Terms of Service</strong>
+          <small>Customer responsibilities, order terms, and website rules.</small>
+        </a>
+        <a class="policy-card" href="refund-policy.html">
+          <span>↺</span>
+          <strong>Refund Policy</strong>
+          <small>Wrong item, damaged item, hygiene, return, and refund guidance.</small>
+        </a>
+        <a class="policy-card" href="privacy-policy.html">
+          <span>🔒</span>
+          <strong>Privacy Policy</strong>
+          <small>How customer names, phone numbers, delivery details, and reviews are handled.</small>
+        </a>
+        <a class="policy-card" href="shipping-delivery-policy.html">
+          <span>🇬🇭</span>
+          <strong>Shipping & Delivery</strong>
+          <small>Ghana-only delivery, pickup, timelines, fees, and delivery support.</small>
+        </a>
       </div>
       <p class="policy-security-note">Scentivity does not collect card details, card PINs, or MoMo PINs. Card and MoMo payments open through Paystack, a secure payment processor.</p>
     </section>
@@ -565,6 +584,11 @@
       <button class="nav-preorder-button" type="button" onclick="document.getElementById('contactModal')?.classList.add('open');document.getElementById('contactModal')?.setAttribute('aria-hidden','false')">Preorder</button>
       <button class="nav-catalogue-button" type="button" onclick="document.getElementById('catalogueModal')?.classList.add('open');document.getElementById('catalogueModal')?.setAttribute('aria-hidden','false')">Product Catalogue</button>
       <button class="nav-about-button" type="button" onclick="document.getElementById('aboutModal')?.classList.add('open');document.getElementById('aboutModal')?.setAttribute('aria-hidden','false')">About</button>
+      <a href="faq.html">FAQs</a>
+      <a href="terms-of-service.html">Terms</a>
+      <a href="refund-policy.html">Refund Policy</a>
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="shipping-delivery-policy.html">Shipping & Delivery</a>
       <button class="cart-nav-button" id="cartToggleFooter" data-open-cart="true" type="button" aria-label="Open cart">Cart <span id="cartCountFooter" data-cart-count>0</span></button>
     </nav>
     <p class="copyright">© <span id="year"></span> Scentivity. All rights reserved.</p>
@@ -574,7 +598,6 @@
 
   <script src="script.js?v=customer-favorites-admin-toggle-20260609"></script>
   <script src="scentivity-showcase-rescue-20260609.js?v=showcase-productpage-bottomnav-footer-fix-20260609"></script>
-  <script src="scentivity-safe-compliance-cart-loadmore-20260611.js?v=2" defer></script>
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script>
     if (window.netlifyIdentity) {

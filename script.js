@@ -298,6 +298,10 @@ function buildWhatsAppLink(message) {
 
 const dealOfWeekCard = document.querySelector('#dealOfWeekCard') || document.querySelector('.hero-deal-card');
 const productGrid = document.querySelector('#productGrid');
+const productLoadMoreButton = document.querySelector('#productLoadMoreButton');
+const productLoadMoreNote = document.querySelector('#productLoadMoreNote');
+const PRODUCT_PAGE_SIZE = 8;
+let productDisplayLimit = PRODUCT_PAGE_SIZE;
 const comboDealsSection = document.querySelector('#comboDeals')?.closest('section') || document.querySelector('#comboDeals');
 const comboGrid = document.querySelector('#comboGrid');
 const bundleBuilderSection = document.querySelector('#bundleBuilder');
@@ -937,6 +941,24 @@ function renderCombos() {
   }).join('');
 }
 
+function resetProductDisplayLimit() {
+  productDisplayLimit = PRODUCT_PAGE_SIZE;
+}
+
+function renderProductLoadMoreControl(totalProducts = 0, shownProducts = 0) {
+  if (!productLoadMoreButton) return;
+  const total = Number(totalProducts || 0);
+  const shown = Math.min(Number(shownProducts || 0), total);
+  const remaining = Math.max(0, total - shown);
+  productLoadMoreButton.hidden = remaining <= 0;
+  productLoadMoreButton.disabled = remaining <= 0;
+  productLoadMoreButton.textContent = remaining > 0 ? `LOAD MORE${remaining ? ` (${remaining} MORE)` : ''}` : 'ALL PRODUCTS LOADED';
+  productLoadMoreButton.setAttribute('aria-label', remaining > 0 ? `Load ${Math.min(PRODUCT_PAGE_SIZE, remaining)} more Scentivity products` : 'All matching Scentivity products loaded');
+  if (productLoadMoreNote) {
+    productLoadMoreNote.textContent = total > PRODUCT_PAGE_SIZE ? `Showing ${shown} of ${total} matching products.` : '';
+  }
+}
+
 function compactProductCard(product = {}) {
   const name = cleanText(product.name || 'Untitled product');
   const brand = cleanText(product.brand || 'Scentivity');
@@ -975,13 +997,17 @@ function compactProductCard(product = {}) {
 function renderProducts() {
   if (!productGrid) return;
   const visibleProducts = getVisibleProducts();
+  const safeLimit = Math.max(PRODUCT_PAGE_SIZE, Number(productDisplayLimit || PRODUCT_PAGE_SIZE));
+  const productsToRender = visibleProducts.slice(0, safeLimit);
   productGrid.classList.add('two-product-mobile-grid');
   productGrid.innerHTML = '';
   if (!visibleProducts.length) {
     productGrid.innerHTML = '<p class="empty-state">No products match this selection yet. Try a different category, clear the search, or add the product from the Scentivity admin page.</p>';
+    renderProductLoadMoreControl(0, 0);
     return;
   }
-  productGrid.innerHTML = visibleProducts.map(product => compactProductCard(product)).join('');
+  productGrid.innerHTML = productsToRender.map(product => compactProductCard(product)).join('');
+  renderProductLoadMoreControl(visibleProducts.length, productsToRender.length);
 }
 
 function getHomepageSlides() {
@@ -1079,6 +1105,7 @@ function startShowcaseAutoplay() {
 }
 
 function refreshShop() {
+  resetProductDisplayLimit();
   renderMainCategoryFilters();
   renderSubCategoryFilters();
   renderProducts();
@@ -1615,6 +1642,7 @@ if (mainCategoryFilters) {
 
 productSearch?.addEventListener('input', event => {
   activeSearchTerm = cleanText(event.target.value);
+  resetProductDisplayLimit();
   renderProducts();
 });
 
@@ -1623,11 +1651,20 @@ navSearchButton?.addEventListener('click', () => {
   setTimeout(() => productSearch?.focus(), 350);
 });
 
+productLoadMoreButton?.addEventListener('click', () => {
+  productDisplayLimit += PRODUCT_PAGE_SIZE;
+  renderProducts();
+  window.setTimeout(() => {
+    productLoadMoreButton?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }, 50);
+});
+
 if (subCategoryFilters) {
   subCategoryFilters.addEventListener('click', event => {
     const button = event.target.closest('[data-sub]');
     if (!button) return;
     activeSubCategory = button.dataset.sub;
+    resetProductDisplayLimit();
     renderSubCategoryFilters();
     renderProducts();
     closeCatalogueModalFn();
