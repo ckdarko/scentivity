@@ -985,7 +985,7 @@ function compactProductCard(product = {}) {
         <div class="compact-product-bottom">
           <strong>${price}</strong>
           ${available
-            ? `<button class="compact-cart-button add-to-cart" type="button" data-product-key="${key}" aria-label="Add ${name} to cart">🛒</button>`
+            ? `<button class="compact-cart-button add-to-cart" type="button" data-product-key="${key}" aria-label="Add ${name} to cart"><span class="compact-cart-icon" aria-hidden="true">🛒</span><span class="compact-cart-count-badge" data-product-cart-badge="${key}" hidden>0</span></button>`
             : `<button class="compact-cart-button notify-me-button" type="button" data-notify-product="${name}" data-notify-brand="${brand}" data-notify-size="${cleanText(product.size || '')}" aria-label="Notify me about ${name}">🔔</button>`
           }
         </div>
@@ -1007,6 +1007,7 @@ function renderProducts() {
     return;
   }
   productGrid.innerHTML = productsToRender.map(product => compactProductCard(product)).join('');
+  updateProductCartBadges();
   renderProductLoadMoreControl(visibleProducts.length, productsToRender.length);
 }
 
@@ -1156,21 +1157,40 @@ function updateCartTotals() {
   if (cartTotal) cartTotal.textContent = formatGHS(total);
 }
 
+function getCartQuantityForKey(productKey) {
+  if (!productKey) return 0;
+  const item = cart.find(entry => String(entry.key) === String(productKey));
+  return item ? Number(item.quantity || 0) : 0;
+}
+
+function updateProductCartBadges() {
+  document.querySelectorAll('[data-product-cart-badge]').forEach(badge => {
+    const key = badge.dataset.productCartBadge;
+    const quantity = getCartQuantityForKey(key);
+    badge.textContent = String(quantity);
+    badge.hidden = quantity <= 0;
+    badge.classList.toggle('is-visible', quantity > 0);
+    const button = badge.closest('.compact-cart-button, .add-to-cart');
+    if (button) button.classList.toggle('has-product-in-cart', quantity > 0);
+  });
+}
+
 function updateCartCount() {
   const quantityNumber = getCartQuantity();
   const quantity = String(quantityNumber);
 
-  [cartCount, cartCountFooter, mobileCartCount].forEach(target => {
-    if (target) target.textContent = quantity;
-  });
-
   document.querySelectorAll('[data-cart-count], #cartCount, #cartCountFooter, #mobileCartCount').forEach(target => {
     target.textContent = quantity;
+    target.setAttribute('aria-label', `${quantity} item${quantityNumber === 1 ? '' : 's'} in cart`);
+    target.classList.toggle('is-empty', quantityNumber <= 0);
   });
 
-  mobileCartButton?.classList.toggle('has-items', quantityNumber > 0);
-  cartToggle?.classList.toggle('has-items', quantityNumber > 0);
-  cartToggleFooter?.classList.toggle('has-items', quantityNumber > 0);
+  document.querySelectorAll('#mobileCartButton, #cartToggle, #cartToggleFooter, .cart-nav-button, [data-open-cart]').forEach(button => {
+    button.classList.toggle('has-items', quantityNumber > 0);
+    button.classList.add('cart-count-ready');
+  });
+
+  updateProductCartBadges();
 }
 
 function getBundleSelectedProducts() {
@@ -2629,6 +2649,35 @@ document.addEventListener('click', event => {
   document.querySelector('#emailRequestForm')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
 });
 
+
+function refreshCartIndicatorsFromStorage() {
+  cart = loadCart();
+  updateCartCount();
+}
+
+(function watchImmediateCartIndicators() {
+  const refreshSoon = () => {
+    [0, 60, 180, 420].forEach(delay => window.setTimeout(() => updateCartCount(), delay));
+  };
+
+  ['pointerup', 'touchend', 'click'].forEach(eventName => {
+    document.addEventListener(eventName, event => {
+      const target = event.target.closest('.add-to-cart[data-product-key], [data-deal-product-key], .add-combo-to-cart[data-combo-key], [data-deal-combo-key], [data-cart-action]');
+      if (target) refreshSoon();
+    }, true);
+  });
+
+  window.addEventListener('storage', event => {
+    if (event.key === CART_STORAGE_KEY) refreshCartIndicatorsFromStorage();
+  });
+
+  const observer = new MutationObserver(() => updateProductCartBadges());
+  document.addEventListener('DOMContentLoaded', () => {
+    if (document.body) observer.observe(document.body, { childList: true, subtree: true });
+    updateCartCount();
+  });
+})();
+
 updateCartCount();
 document.addEventListener('DOMContentLoaded', () => updateCartCount());
 loadProducts();
@@ -2775,7 +2824,7 @@ function compactProductCard(product = {}) {
         <div class="compact-product-bottom">
           <strong>${price}</strong>
           ${available
-            ? `<button class="compact-cart-button add-to-cart" type="button" data-product-key="${key}" aria-label="Add ${name} to cart">🛒</button>`
+            ? `<button class="compact-cart-button add-to-cart" type="button" data-product-key="${key}" aria-label="Add ${name} to cart"><span class="compact-cart-icon" aria-hidden="true">🛒</span><span class="compact-cart-count-badge" data-product-cart-badge="${key}" hidden>0</span></button>`
             : `<button class="compact-cart-button notify-me-button" type="button" data-notify-product="${name}" data-notify-brand="${brand}" data-notify-size="${cleanText(product.size || '')}" aria-label="Notify me about ${name}">🔔</button>`
           }
         </div>
