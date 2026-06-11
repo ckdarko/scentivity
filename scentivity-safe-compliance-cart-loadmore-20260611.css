@@ -1,0 +1,18 @@
+
+/* Scentivity safe recovery patch: policy pages, load more, and cart count badge. */
+.compliance-section { scroll-margin-top: 92px; }
+.policy-card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(175px, 1fr)); gap: 14px; margin-top: 18px; }
+.policy-card { display: grid; gap: 8px; padding: 16px; border: 1px solid rgba(74, 40, 62, 0.14); border-radius: 18px; background: rgba(255,255,255,0.82); text-decoration: none; color: inherit; box-shadow: 0 10px 28px rgba(74, 40, 62, 0.08); }
+.policy-card span { width: 34px; height: 34px; display: inline-grid; place-items: center; border-radius: 999px; background: rgba(174, 75, 128, 0.12); font-weight: 800; }
+.policy-card strong { font-size: 1rem; }
+.policy-card small, .compliance-intro, .policy-security-note, .product-load-more-note { color: rgba(74, 40, 62, 0.72); line-height: 1.5; }
+.policy-security-note { margin-top: 16px; padding: 12px 14px; border-radius: 14px; background: rgba(174, 75, 128, 0.08); }
+.product-load-more-wrap { display: grid; justify-items: center; gap: 8px; margin: 18px auto 6px; }
+.product-load-more-button[hidden] { display: none !important; }
+.cart-nav-button, #mobileCartButton, .compact-cart-button, .add-to-cart { position: relative; }
+[data-cart-count] { min-width: 1.35em; display: inline-grid; place-items: center; }
+#mobileCartCount, #cartCount, #cartCountFooter { transition: transform .18s ease, opacity .18s ease; }
+#mobileCartButton.has-items #mobileCartCount, .cart-nav-button.has-items [data-cart-count] { transform: scale(1.06); }
+.compact-cart-count-badge, .product-cart-count-badge { position: absolute; top: -8px; right: -8px; min-width: 18px; height: 18px; padding: 0 5px; border-radius: 999px; background: #4a283e; color: #fff; font-size: 11px; font-weight: 800; line-height: 18px; text-align: center; box-shadow: 0 4px 10px rgba(74, 40, 62, 0.25); pointer-events: none; }
+.compact-cart-button.has-product-in-cart, .add-to-cart.has-product-in-cart { box-shadow: 0 0 0 2px rgba(74, 40, 62, 0.12); }
+@media (max-width: 640px) { .policy-card-grid { grid-template-columns: 1fr; } .policy-card { padding: 14px; } }

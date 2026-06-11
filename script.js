@@ -298,10 +298,6 @@ function buildWhatsAppLink(message) {
 
 const dealOfWeekCard = document.querySelector('#dealOfWeekCard') || document.querySelector('.hero-deal-card');
 const productGrid = document.querySelector('#productGrid');
-const productLoadMoreButton = document.querySelector('#productLoadMoreButton');
-const productLoadMoreNote = document.querySelector('#productLoadMoreNote');
-const PRODUCT_PAGE_SIZE = 8;
-let productDisplayLimit = PRODUCT_PAGE_SIZE;
 const comboDealsSection = document.querySelector('#comboDeals')?.closest('section') || document.querySelector('#comboDeals');
 const comboGrid = document.querySelector('#comboGrid');
 const bundleBuilderSection = document.querySelector('#bundleBuilder');
@@ -941,24 +937,6 @@ function renderCombos() {
   }).join('');
 }
 
-function resetProductDisplayLimit() {
-  productDisplayLimit = PRODUCT_PAGE_SIZE;
-}
-
-function renderProductLoadMoreControl(totalProducts = 0, shownProducts = 0) {
-  if (!productLoadMoreButton) return;
-  const total = Number(totalProducts || 0);
-  const shown = Math.min(Number(shownProducts || 0), total);
-  const remaining = Math.max(0, total - shown);
-  productLoadMoreButton.hidden = remaining <= 0;
-  productLoadMoreButton.disabled = remaining <= 0;
-  productLoadMoreButton.textContent = remaining > 0 ? `LOAD MORE${remaining ? ` (${remaining} MORE)` : ''}` : 'ALL PRODUCTS LOADED';
-  productLoadMoreButton.setAttribute('aria-label', remaining > 0 ? `Load ${Math.min(PRODUCT_PAGE_SIZE, remaining)} more Scentivity products` : 'All matching Scentivity products loaded');
-  if (productLoadMoreNote) {
-    productLoadMoreNote.textContent = total > PRODUCT_PAGE_SIZE ? `Showing ${shown} of ${total} matching products.` : '';
-  }
-}
-
 function compactProductCard(product = {}) {
   const name = cleanText(product.name || 'Untitled product');
   const brand = cleanText(product.brand || 'Scentivity');
@@ -985,7 +963,7 @@ function compactProductCard(product = {}) {
         <div class="compact-product-bottom">
           <strong>${price}</strong>
           ${available
-            ? `<button class="compact-cart-button add-to-cart" type="button" data-product-key="${key}" aria-label="Add ${name} to cart"><span class="compact-cart-icon" aria-hidden="true">🛒</span><span class="compact-cart-count-badge" data-product-cart-badge="${key}" hidden>0</span></button>`
+            ? `<button class="compact-cart-button add-to-cart" type="button" data-product-key="${key}" aria-label="Add ${name} to cart">🛒</button>`
             : `<button class="compact-cart-button notify-me-button" type="button" data-notify-product="${name}" data-notify-brand="${brand}" data-notify-size="${cleanText(product.size || '')}" aria-label="Notify me about ${name}">🔔</button>`
           }
         </div>
@@ -997,18 +975,13 @@ function compactProductCard(product = {}) {
 function renderProducts() {
   if (!productGrid) return;
   const visibleProducts = getVisibleProducts();
-  const safeLimit = Math.max(PRODUCT_PAGE_SIZE, Number(productDisplayLimit || PRODUCT_PAGE_SIZE));
-  const productsToRender = visibleProducts.slice(0, safeLimit);
   productGrid.classList.add('two-product-mobile-grid');
   productGrid.innerHTML = '';
   if (!visibleProducts.length) {
     productGrid.innerHTML = '<p class="empty-state">No products match this selection yet. Try a different category, clear the search, or add the product from the Scentivity admin page.</p>';
-    renderProductLoadMoreControl(0, 0);
     return;
   }
-  productGrid.innerHTML = productsToRender.map(product => compactProductCard(product)).join('');
-  updateProductCartBadges();
-  renderProductLoadMoreControl(visibleProducts.length, productsToRender.length);
+  productGrid.innerHTML = visibleProducts.map(product => compactProductCard(product)).join('');
 }
 
 function getHomepageSlides() {
@@ -1106,7 +1079,6 @@ function startShowcaseAutoplay() {
 }
 
 function refreshShop() {
-  resetProductDisplayLimit();
   renderMainCategoryFilters();
   renderSubCategoryFilters();
   renderProducts();
@@ -1157,40 +1129,21 @@ function updateCartTotals() {
   if (cartTotal) cartTotal.textContent = formatGHS(total);
 }
 
-function getCartQuantityForKey(productKey) {
-  if (!productKey) return 0;
-  const item = cart.find(entry => String(entry.key) === String(productKey));
-  return item ? Number(item.quantity || 0) : 0;
-}
-
-function updateProductCartBadges() {
-  document.querySelectorAll('[data-product-cart-badge]').forEach(badge => {
-    const key = badge.dataset.productCartBadge;
-    const quantity = getCartQuantityForKey(key);
-    badge.textContent = String(quantity);
-    badge.hidden = quantity <= 0;
-    badge.classList.toggle('is-visible', quantity > 0);
-    const button = badge.closest('.compact-cart-button, .add-to-cart');
-    if (button) button.classList.toggle('has-product-in-cart', quantity > 0);
-  });
-}
-
 function updateCartCount() {
   const quantityNumber = getCartQuantity();
   const quantity = String(quantityNumber);
 
+  [cartCount, cartCountFooter, mobileCartCount].forEach(target => {
+    if (target) target.textContent = quantity;
+  });
+
   document.querySelectorAll('[data-cart-count], #cartCount, #cartCountFooter, #mobileCartCount').forEach(target => {
     target.textContent = quantity;
-    target.setAttribute('aria-label', `${quantity} item${quantityNumber === 1 ? '' : 's'} in cart`);
-    target.classList.toggle('is-empty', quantityNumber <= 0);
   });
 
-  document.querySelectorAll('#mobileCartButton, #cartToggle, #cartToggleFooter, .cart-nav-button, [data-open-cart]').forEach(button => {
-    button.classList.toggle('has-items', quantityNumber > 0);
-    button.classList.add('cart-count-ready');
-  });
-
-  updateProductCartBadges();
+  mobileCartButton?.classList.toggle('has-items', quantityNumber > 0);
+  cartToggle?.classList.toggle('has-items', quantityNumber > 0);
+  cartToggleFooter?.classList.toggle('has-items', quantityNumber > 0);
 }
 
 function getBundleSelectedProducts() {
@@ -1662,7 +1615,6 @@ if (mainCategoryFilters) {
 
 productSearch?.addEventListener('input', event => {
   activeSearchTerm = cleanText(event.target.value);
-  resetProductDisplayLimit();
   renderProducts();
 });
 
@@ -1671,20 +1623,11 @@ navSearchButton?.addEventListener('click', () => {
   setTimeout(() => productSearch?.focus(), 350);
 });
 
-productLoadMoreButton?.addEventListener('click', () => {
-  productDisplayLimit += PRODUCT_PAGE_SIZE;
-  renderProducts();
-  window.setTimeout(() => {
-    productLoadMoreButton?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  }, 50);
-});
-
 if (subCategoryFilters) {
   subCategoryFilters.addEventListener('click', event => {
     const button = event.target.closest('[data-sub]');
     if (!button) return;
     activeSubCategory = button.dataset.sub;
-    resetProductDisplayLimit();
     renderSubCategoryFilters();
     renderProducts();
     closeCatalogueModalFn();
@@ -2649,35 +2592,6 @@ document.addEventListener('click', event => {
   document.querySelector('#emailRequestForm')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
 });
 
-
-function refreshCartIndicatorsFromStorage() {
-  cart = loadCart();
-  updateCartCount();
-}
-
-(function watchImmediateCartIndicators() {
-  const refreshSoon = () => {
-    [0, 60, 180, 420].forEach(delay => window.setTimeout(() => updateCartCount(), delay));
-  };
-
-  ['pointerup', 'touchend', 'click'].forEach(eventName => {
-    document.addEventListener(eventName, event => {
-      const target = event.target.closest('.add-to-cart[data-product-key], [data-deal-product-key], .add-combo-to-cart[data-combo-key], [data-deal-combo-key], [data-cart-action]');
-      if (target) refreshSoon();
-    }, true);
-  });
-
-  window.addEventListener('storage', event => {
-    if (event.key === CART_STORAGE_KEY) refreshCartIndicatorsFromStorage();
-  });
-
-  const observer = new MutationObserver(() => updateProductCartBadges());
-  document.addEventListener('DOMContentLoaded', () => {
-    if (document.body) observer.observe(document.body, { childList: true, subtree: true });
-    updateCartCount();
-  });
-})();
-
 updateCartCount();
 document.addEventListener('DOMContentLoaded', () => updateCartCount());
 loadProducts();
@@ -2824,7 +2738,7 @@ function compactProductCard(product = {}) {
         <div class="compact-product-bottom">
           <strong>${price}</strong>
           ${available
-            ? `<button class="compact-cart-button add-to-cart" type="button" data-product-key="${key}" aria-label="Add ${name} to cart"><span class="compact-cart-icon" aria-hidden="true">🛒</span><span class="compact-cart-count-badge" data-product-cart-badge="${key}" hidden>0</span></button>`
+            ? `<button class="compact-cart-button add-to-cart" type="button" data-product-key="${key}" aria-label="Add ${name} to cart">🛒</button>`
             : `<button class="compact-cart-button notify-me-button" type="button" data-notify-product="${name}" data-notify-brand="${brand}" data-notify-size="${cleanText(product.size || '')}" aria-label="Notify me about ${name}">🔔</button>`
           }
         </div>
