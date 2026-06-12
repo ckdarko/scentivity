@@ -3,7 +3,7 @@
     {
       "paymentLink": "",
       "size": "236 mL",
-      "productStatus": "Incoming",
+      "productStatus": "Available",
       "isDealOfWeek": false,
       "notes": "A sparkling, sweet floral scent with notes of pink prosecco, crystal peonies, and creamy amaretto. Perfect for customers who love feminine, soft, celebratory fragrances.",
       "ingredients": "Ingredients/details may vary by batch. Please check the product packaging.",
@@ -62,7 +62,7 @@
     {
       "paymentLink": "",
       "size": "75 mL/2.5 oz",
-      "productStatus": "Incoming",
+      "productStatus": "Available",
       "isDealOfWeek": false,
       "notes": "A sparkling, sweet floral scent with notes of pink prosecco, crystal peonies, and creamy amaretto. Perfect for customers who love feminine, soft, celebratory fragrances.",
       "ingredients": "Ingredients/details may vary by batch. Please check the product packaging.",
@@ -92,7 +92,7 @@
     {
       "paymentLink": "",
       "size": "100 mL",
-      "productStatus": "Available",
+      "productStatus": "Incoming",
       "isDealOfWeek": false,
       "notes": "Fresh, confident masculine scent profile for everyday use and gifting.",
       "ingredients": "Ingredients/details may vary by batch. Please check the product packaging.",
@@ -112,7 +112,7 @@
       "rating3Count": 1,
       "rating2Count": 1,
       "id": "men-s-fresh-body-spray-3",
-      "image": "assets/products/oud-muse.svg",
+      "image": "assets/products/uploads/image-may-28-2026-07_50_07-pm.png",
       "rating1Count": 1,
       "rating": 4.8,
       "subCategory": "Men's Body Care",
@@ -121,7 +121,7 @@
     {
       "paymentLink": "",
       "size": "3-wick candle",
-      "productStatus": "Available",
+      "productStatus": "Incoming",
       "isDealOfWeek": false,
       "notes": "Home fragrance candle options for bedrooms, bathrooms, gifts, and cozy spaces.",
       "ingredients": "Ingredients/details may vary by batch. Please check the product packaging.",
@@ -142,7 +142,7 @@
       "rating3Count": 2,
       "rating2Count": 1,
       "id": "scented-3-wick-candle-4",
-      "image": "assets/products/velvet-rose.svg",
+      "image": "assets/products/uploads/image-may-28-2026-07_50_07-pm.png",
       "rating1Count": 0,
       "rating": 4.9,
       "subCategory": "Scented Candles",
@@ -151,7 +151,7 @@
     {
       "paymentLink": "",
       "size": "Travel size",
-      "productStatus": "Incoming",
+      "productStatus": "Available",
       "isDealOfWeek": false,
       "notes": "Portable scented sanitizer options for bags, cars, school, work, and gifting.",
       "ingredients": "Ingredients/details may vary by batch. Please check the product packaging.",
@@ -179,13 +179,13 @@
     },
     {
       "size": "50mL",
-      "productStatus": "Incoming",
+      "productStatus": "Available",
       "isDealOfWeek": false,
       "notes": "the best",
       "ingredients": "Kernel",
-      "brand": "Oppong",
+      "brand": "BBW",
       "price": "GH₵250",
-      "name": "Men's cologne",
+      "name": "Fiji Sunshine",
       "purchaseCount": 40,
       "fragranceNotes": "Aromatic",
       "productDetails": "The best x2",
@@ -235,7 +235,7 @@
       "showOnWebsite": true
     },
     {
-      "productStatus": "Available",
+      "productStatus": "Incoming",
       "isDealOfWeek": false,
       "brand": "BBW",
       "price": "GH₵250",
