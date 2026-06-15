@@ -1,0 +1,60 @@
+/* Scentivity mobile promo marquee fix
+   Lightweight: CSS transform only; no JavaScript, no timers, no DOM work after load. */
+
+.top-promo-marquee,
+.product-page-promo-bar {
+  overflow: hidden;
+  white-space: nowrap;
+  contain: content;
+}
+
+.top-promo-track,
+.product-page-promo-marquee.mobile-promo-track {
+  display: inline-flex;
+  align-items: center;
+  width: max-content;
+  min-width: 200%;
+  gap: 1.1rem;
+  will-change: transform;
+  animation: scentivityPromoMarquee 18s linear infinite;
+}
+
+.top-promo-track span,
+.product-page-promo-marquee.mobile-promo-track span {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.top-promo-track span::after,
+.product-page-promo-marquee.mobile-promo-track span::after {
+  content: "•";
+  margin-left: 1.1rem;
+  opacity: 0.65;
+}
+
+@keyframes scentivityPromoMarquee {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+
+/* Re-enable only this lightweight moving strip if the mobile speed CSS disabled animations globally. */
+@media (max-width: 900px) {
+  .top-promo-track,
+  .product-page-promo-marquee.mobile-promo-track {
+    animation: scentivityPromoMarquee 16s linear infinite !important;
+  }
+
+  .top-promo-marquee,
+  .product-page-promo-bar {
+    display: block !important;
+  }
+}
+
+/* Respect users who explicitly request reduced motion. */
+@media (prefers-reduced-motion: reduce) {
+  .top-promo-track,
+  .product-page-promo-marquee.mobile-promo-track {
+    animation: none !important;
+    transform: none !important;
+  }
+}
