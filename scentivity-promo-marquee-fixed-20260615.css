@@ -1,0 +1,110 @@
+/* SCENTIVITY_PROMO_MARQUEE_FIXED_20260615
+   Lightweight CSS + tiny JS track wrapper. Restores promo movement after mobile performance patches. */
+
+.top-promo.scentivity-promo-shell,
+.product-page-promo-bar.scentivity-promo-shell,
+.promo-bar.scentivity-promo-shell {
+  position: relative !important;
+  display: block !important;
+  width: 100% !important;
+  max-width: 100vw !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+  contain: layout paint !important;
+}
+
+.top-promo.scentivity-promo-shell {
+  background: #111 !important;
+  color: #fff !important;
+}
+
+.product-page-promo-bar.scentivity-promo-shell,
+.product-page-body .promo-bar.scentivity-promo-shell {
+  min-height: 38px !important;
+}
+
+.scentivity-promo-shell .scentivity-promo-track {
+  display: inline-flex !important;
+  align-items: center !important;
+  flex-wrap: nowrap !important;
+  gap: 2rem !important;
+  width: max-content !important;
+  max-width: none !important;
+  white-space: nowrap !important;
+  transform: translate3d(0,0,0);
+  animation-name: scentivityPromoFixedMove !important;
+  animation-duration: 22s !important;
+  animation-timing-function: linear !important;
+  animation-iteration-count: infinite !important;
+  animation-delay: 0s !important;
+  animation-fill-mode: both !important;
+  animation-play-state: running !important;
+  will-change: transform !important;
+  backface-visibility: hidden !important;
+}
+
+.top-promo.scentivity-promo-shell .scentivity-promo-track {
+  padding: 8px 0 !important;
+}
+
+.scentivity-promo-shell .scentivity-promo-track span {
+  display: inline-flex !important;
+  align-items: center !important;
+  flex: 0 0 auto !important;
+  width: auto !important;
+  min-width: max-content !important;
+  white-space: nowrap !important;
+  padding: 0 .25rem !important;
+  margin: 0 !important;
+  animation: none !important;
+  transform: none !important;
+}
+
+.scentivity-promo-shell .scentivity-promo-track span + span::before {
+  content: "•" !important;
+  display: inline-block !important;
+  position: static !important;
+  margin-right: 2rem !important;
+  color: #ffb6cf !important;
+}
+
+.product-page-body .promo-marquee.scentivity-promo-original,
+.product-page-promo-marquee.scentivity-promo-original {
+  animation: none !important;
+  transform: none !important;
+  display: block !important;
+  width: 100% !important;
+  overflow: hidden !important;
+}
+
+@keyframes scentivityPromoFixedMove {
+  0% { transform: translate3d(0,0,0); }
+  100% { transform: translate3d(-50%,0,0); }
+}
+
+@media (max-width: 768px) {
+  .top-promo.scentivity-promo-shell,
+  .product-page-promo-bar.scentivity-promo-shell,
+  .promo-bar.scentivity-promo-shell {
+    height: 38px !important;
+    min-height: 38px !important;
+    padding: 0 !important;
+    line-height: 1 !important;
+  }
+
+  .scentivity-promo-shell .scentivity-promo-track {
+    animation-duration: 18s !important;
+  }
+
+  .scentivity-promo-shell .scentivity-promo-track span {
+    font-size: .76rem !important;
+    font-weight: 900 !important;
+    line-height: 38px !important;
+    letter-spacing: .02em !important;
+  }
+
+  .product-page-promo-bar.scentivity-promo-shell .scentivity-promo-track span,
+  .product-page-body .promo-bar.scentivity-promo-shell .scentivity-promo-track span {
+    font-size: clamp(.82rem, 3.4vw, .95rem) !important;
+  }
+}
