@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="styles.css?v=productpage-exact-homepage-menu-working-20260609" />
   <link rel="stylesheet" href="scentivity-cart-count-badge-fix-20260611.css?v=cart-count-badge-fix-20260611" />
   <link rel="stylesheet" href="scentivity-mobile-performance-20260614.css?v=mobile-speed-20260614" />
+  <link rel="stylesheet" href="scentivity-lightweight-mobile-20260615.css?v=mobile-lite-20260615" />
 </head>
 <body class="product-page-body has-product-bottom-nav" id="top">
   <div class="promo-bar product-page-promo-bar" aria-label="Scentivity highlights">
@@ -21,7 +22,7 @@
   </div>
   <header class="site-header product-page-header" id="top">
     <a href="index.html?home=top" class="brand" aria-label="Scentivity homepage" data-home-logo="true">
-      <img src="assets/scentivity-logo-fused.png" alt="Scentivity logo" />
+      <img src="assets/scentivity-logo-fused.png" alt="Scentivity logo" decoding="async" />
     </a>
 
     <button class="header-menu-toggle" id="headerMenuToggle" type="button" onclick="return window.scentivityProductPageToggleMenu ? window.scentivityProductPageToggleMenu(event) : (function(e,b){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();var p=document.getElementById(\'headerMenuPanel\');if(!p)return false;var o=!p.classList.contains(\'open\');p.classList.toggle(\'open\',o);p.setAttribute(\'aria-hidden\',String(!o));b.setAttribute(\'aria-expanded\',String(o));document.body.classList.toggle(\'product-menu-open\',o);return false;})(event,this)" aria-label="Open menu" aria-expanded="false">
@@ -58,14 +59,15 @@
     </div>
   </main>
   <script src="product-page-homepage-menu-copy-20260609.js?v=productpage-exact-homepage-menu-working-20260609"></script>
-  <script src="product-page-not-popup-20260608.js?v=product-page-add-to-cart-fix-20260609"></script>
+  <script src="product-page-not-popup-20260608.js?v=mobile-lite-20260615"></script>
   <nav class="mobile-bottom-nav product-page-bottom-nav" aria-label="Product page quick navigation">
     <a href="index.html#products" aria-label="Shop"><span>⌕</span><strong>Shop</strong></a>
     <a href="index.html#featured-products" aria-label="Favorites"><span>❤️</span><strong>Favorites</strong></a>
     <a href="index.html?openCart=true#cart" id="productPageBottomCartButton" aria-label="Cart"><span>🛒</span><strong>Cart</strong><em id="productPageBottomCartCount">0</em></a>
     <a href="https://wa.me/233534584470?text=Hello%20Scentivity%2C%20I%20need%20help%20with%20a%20product." target="_blank" rel="noreferrer" aria-label="Contact"><span>☎️</span><strong>Contact</strong></a>
   </nav>
+  <script src="scentivity-lightweight-mobile-20260615.js?v=mobile-lite-20260615" defer></script>
   <script src="scentivity-mobile-performance-20260614.js?v=mobile-speed-20260614" defer></script>
-  <script src="scentivity-cart-count-badge-fix-20260611.js?v=cart-count-badge-fix-20260611"></script>
+  <script src="scentivity-cart-count-badge-fix-20260611.js?v=cart-count-badge-fix-20260611" defer></script>
 </body>
 </html>

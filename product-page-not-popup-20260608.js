@@ -40,6 +40,56 @@ const cartCount = document.querySelector('#cartCount');
 let products = [];
 let customerReviews = [];
 
+
+// SCENTIVITY_PRODUCT_PAGE_LIGHTWEIGHT_MEDIA_20260615
+const SCENTIVITY_PLACEHOLDER_IMAGE = 'data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20600%20420%27%3E%3Cdefs%3E%3ClinearGradient%20id%3D%27g%27%20x1%3D%270%27%20x2%3D%271%27%3E%3Cstop%20stop-color%3D%27%23fff5fa%27%2F%3E%3Cstop%20offset%3D%271%27%20stop-color%3D%27%23ffe3ec%27%2F%3E%3C%2FlinearGradient%3E%3ClinearGradient%20id%3D%27p%27%20x1%3D%270%27%20x2%3D%271%27%3E%3Cstop%20stop-color%3D%27%23e0005b%27%2F%3E%3Cstop%20offset%3D%271%27%20stop-color%3D%27%23ff8a8a%27%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D%27600%27%20height%3D%27420%27%20rx%3D%2732%27%20fill%3D%27url%28%23g%29%27%2F%3E%3Ccircle%20cx%3D%27300%27%20cy%3D%27200%27%20r%3D%27110%27%20fill%3D%27none%27%20stroke%3D%27url%28%23p%29%27%20stroke-width%3D%2710%27%20opacity%3D%27.65%27%2F%3E%3Cpath%20d%3D%27M325%2093c-50%2038-58%2074-12%20101%2039%2023%2032%2061-31%2096%27%20fill%3D%27none%27%20stroke%3D%27url%28%23p%29%27%20stroke-width%3D%2726%27%20stroke-linecap%3D%27round%27%2F%3E%3Ctext%20x%3D%27300%27%20y%3D%27332%27%20text-anchor%3D%27middle%27%20font-family%3D%27Arial%2C%20sans-serif%27%20font-size%3D%2730%27%20font-weight%3D%27700%27%20fill%3D%27%23e0005b%27%3EScentivity%3C%2Ftext%3E%3C%2Fsvg%3E';
+const SCENTIVITY_BROKEN_MEDIA_KEY = 'scentivityBrokenMediaV1';
+function getBrokenMediaCache() {
+  try { const list = JSON.parse(window.localStorage.getItem(SCENTIVITY_BROKEN_MEDIA_KEY) || '[]'); return new Set(Array.isArray(list) ? list : []); } catch { return new Set(); }
+}
+function saveBrokenMediaCache(cache) {
+  try { window.localStorage.setItem(SCENTIVITY_BROKEN_MEDIA_KEY, JSON.stringify([...cache].slice(-200))); } catch {}
+}
+function markBrokenMedia(src = '') {
+  const value = cleanText(src);
+  if (!value || value === SCENTIVITY_PLACEHOLDER_IMAGE) return;
+  const cache = getBrokenMediaCache(); cache.add(value); saveBrokenMediaCache(cache);
+}
+function isBrokenMedia(src = '') { const value = cleanText(src); return value ? getBrokenMediaCache().has(value) : false; }
+function escapeAttribute(value = '') {
+  return cleanText(value).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+function lightweightImageMarkup(src = '', alt = '') {
+  const realSrc = normalizeImagePath(src || SCENTIVITY_PLACEHOLDER_IMAGE);
+  const safeAlt = escapeAttribute(alt || 'Scentivity product');
+  if (!realSrc || isBrokenMedia(realSrc) || realSrc === SCENTIVITY_PLACEHOLDER_IMAGE) {
+    return `<img src="${SCENTIVITY_PLACEHOLDER_IMAGE}" alt="${safeAlt}" loading="lazy" decoding="async" />`;
+  }
+  return `<img class="scentivity-lazy-img" src="${SCENTIVITY_PLACEHOLDER_IMAGE}" data-src="${escapeAttribute(realSrc)}" alt="${safeAlt}" loading="lazy" decoding="async" />`;
+}
+function loadLazyImage(img) {
+  if (!img || img.dataset.loaded === 'true') return;
+  const realSrc = cleanText(img.dataset.src || '');
+  if (!realSrc || isBrokenMedia(realSrc)) { img.src = SCENTIVITY_PLACEHOLDER_IMAGE; img.dataset.loaded = 'true'; img.removeAttribute('data-src'); return; }
+  img.dataset.loaded = 'true';
+  const probe = new Image();
+  probe.onload = () => { img.src = realSrc; img.removeAttribute('data-src'); };
+  probe.onerror = () => { markBrokenMedia(realSrc); img.src = SCENTIVITY_PLACEHOLDER_IMAGE; img.removeAttribute('data-src'); };
+  probe.src = realSrc;
+}
+function initScentivityLazyMedia(root = document) {
+  const images = [...(root || document).querySelectorAll('img.scentivity-lazy-img[data-src]')];
+  if (!images.length) return;
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => { if (entry.isIntersecting || entry.intersectionRatio > 0) { loadLazyImage(entry.target); observer.unobserve(entry.target); } });
+    }, { rootMargin: '160px 0px' });
+    images.forEach(img => observer.observe(img));
+  } else {
+    images.slice(0, 4).forEach(loadLazyImage);
+  }
+}
+
 function cleanText(value = '') {
   return String(value ?? '').replace(/[<>]/g, '').trim();
 }
@@ -49,8 +99,8 @@ function slugify(value = '') {
 }
 
 function normalizeImagePath(path) {
-  if (!path) return 'assets/products/velvet-rose.svg';
-  return path.startsWith('/') ? path.slice(1) : path;
+  if (!path) return SCENTIVITY_PLACEHOLDER_IMAGE;
+  return String(path).startsWith('/') ? String(path).slice(1) : String(path);
 }
 
 function parseGHSPrice(price = '') {
@@ -277,7 +327,7 @@ function relatedProductsHtml(currentKey = '') {
     <div class="related-products-grid">
       ${otherProducts.map(product => `
         <a class="related-product-card" href="${productPageUrl(product)}">
-          <img src="${normalizeImagePath(product.image)}" alt="${cleanText(product.name || 'Product')}" loading="lazy" onerror="this.onerror=null;this.src='assets/scentivity-logo-fused.png';" />
+          ${lightweightImageMarkup(product.image, product.name || 'Product')}
           <strong>${cleanText(product.name || 'Scentivity product')}</strong>
           <span>${cleanText(product.price || 'Price on request')}</span>
         </a>
@@ -322,7 +372,7 @@ function renderProductPage() {
   productPageContent.innerHTML = `
     <section class="product-page-detail">
       <div class="product-page-gallery">
-        <img src="${image}" alt="${name}" onerror="this.onerror=null;this.src='assets/scentivity-logo-fused.png';" />
+        ${lightweightImageMarkup(image, name)}
       </div>
       <div class="product-page-summary">
         <div class="product-tags">
@@ -382,6 +432,8 @@ function renderProductPage() {
     </section>
   `;
 
+  initScentivityLazyMedia(productPageContent);
+
   let quantity = 1;
   const maxQty = stock || 99;
   const qtyValue = document.querySelector('#qtyValue');
@@ -404,7 +456,7 @@ async function initProductPage() {
   });
 
   try {
-    const response = await fetch(`${DATA_URL}?v=${Date.now()}`);
+    const response = await fetch(DATA_URL, { cache: 'no-cache' });
     if (!response.ok) throw new Error('Could not load product data.');
     const data = await response.json();
     products = enrichProducts(data.products || []);
@@ -578,7 +630,7 @@ function renderProductPage() {
   productPageContent.innerHTML = `
     <section class="product-page-detail">
       <div class="product-page-gallery">
-        <img src="${image}" alt="${name}" onerror="this.onerror=null;this.src='assets/scentivity-logo-fused.png';" />
+        ${lightweightImageMarkup(image, name)}
       </div>
       <div class="product-page-summary">
         <div class="product-tags">

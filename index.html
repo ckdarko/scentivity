@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="styles.css?v=productpage-exact-homepage-menu-working-20260609" />
   <link rel="stylesheet" href="scentivity-cart-count-badge-fix-20260611.css?v=cart-count-badge-fix-20260611" />
   <link rel="stylesheet" href="scentivity-mobile-performance-20260614.css?v=mobile-speed-20260614" />
+  <link rel="stylesheet" href="scentivity-lightweight-mobile-20260615.css?v=mobile-lite-20260615" />
 </head>
 <body id="top">
 
@@ -22,7 +23,7 @@
   </div>
   <header class="site-header" id="top">
     <a href="#top" class="brand" aria-label="Scentivity homepage" data-home-logo="true" data-home-logo="true">
-      <img src="assets/scentivity-logo-fused.png" alt="Scentivity logo" />
+      <img src="assets/scentivity-logo-fused.png" alt="Scentivity logo" decoding="async" />
     </a>
 
     <button class="header-menu-toggle" id="headerMenuToggle" type="button" aria-label="Open menu" aria-expanded="false">
@@ -82,7 +83,7 @@
 
     <section class="section homepage-video-section" id="homepageVideoSection" aria-label="Scentivity homepage video">
       <div class="homepage-video-card">
-        <video id="homepageVideo" class="homepage-video" autoplay muted loop playsinline webkit-playsinline preload="none" poster="assets/scentivity-video-poster.svg" data-scentivity-lazy-video="true">
+        <video id="homepageVideo" class="homepage-video" muted loop playsinline webkit-playsinline preload="none" poster="assets/scentivity-video-poster.svg" data-scentivity-lazy-video="true">
           <source data-src="assets/scentivity-homepage-video.mp4" type="video/mp4" />
         </video>
         <div class="homepage-video-fallback" aria-hidden="true">
@@ -383,7 +384,7 @@
     <div class="about-modal" role="dialog" aria-modal="true" aria-labelledby="aboutModalTitle">
       <button class="modal-close" id="closeAboutModal" type="button" aria-label="Close about Scentivity" onclick="document.getElementById('aboutModal')?.classList.remove('open');document.getElementById('aboutModal')?.setAttribute('aria-hidden','true')">×</button>
       <div class="about-modal-logo">
-        <img src="assets/scentivity-logo-fused.png" alt="Scentivity business logo" />
+        <img src="assets/scentivity-logo-fused.png" alt="Scentivity business logo" loading="lazy" decoding="async" />
       </div>
       <p class="eyebrow">About Scentivity</p>
       <h2 id="aboutModalTitle">Where beauty meets memory.</h2>
@@ -578,7 +579,7 @@
 
   <footer class="site-footer">
     <div class="footer-brand">
-      <img src="assets/scentivity-logo-fused.png" alt="Scentivity logo" />
+      <img src="assets/scentivity-logo-fused.png" alt="Scentivity logo" decoding="async" />
       <p>Everything Sweet Scented — perfumes, fragrance mists, body care essentials, home fragrances, and gift-ready products.</p>
     </div>
     <nav class="footer-nav" aria-label="Footer navigation">
@@ -598,22 +599,10 @@
 
   <button class="back-to-top" id="backToTop" type="button" aria-label="Move back to the top of the page">↑</button>
 
-  <script src="script.js?v=customer-favorites-admin-toggle-20260609"></script>
+  <script src="scentivity-lightweight-mobile-20260615.js?v=mobile-lite-20260615" defer></script>
+  <script src="script.js?v=mobile-lite-20260615"></script>
   <script src="scentivity-showcase-rescue-20260609.js?v=showcase-productpage-bottomnav-footer-fix-20260609"></script>
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-  <script>
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on('init', user => {
-        if (!user) {
-          window.netlifyIdentity.on('login', () => {
-            document.location.href = '/admin/';
-          });
-        }
-      });
-    }
-  </script>
-
-  <noscript>
+<noscript>
     <div style="position:fixed;left:1rem;right:1rem;bottom:1rem;z-index:9999;background:#fff0f6;border:1px solid #e0005b;border-radius:14px;padding:12px;font-weight:700;color:#330014;">
       JavaScript is required for the Scentivity product slideshow, filters, and cart. Please enable JavaScript.
     </div>
@@ -788,6 +777,6 @@
     })();
   </script>
   <script src="scentivity-mobile-performance-20260614.js?v=mobile-speed-20260614" defer></script>
-  <script src="scentivity-cart-count-badge-fix-20260611.js?v=cart-count-badge-fix-20260611"></script>
+  <script src="scentivity-cart-count-badge-fix-20260611.js?v=cart-count-badge-fix-20260611" defer></script>
 </body>
 </html>

@@ -1,0 +1,63 @@
+
+/* SCENTIVITY_LIGHTWEIGHT_MOBILE_PERFORMANCE_20260615
+   Add-on only. Keeps the same layout/settings while reducing slow mobile work. */
+.scentivity-lazy-img,
+.scentivity-img-placeholder {
+  background: linear-gradient(135deg, #fff7fb, #ffe5ee);
+  object-fit: contain;
+}
+.scentivity-lazy-img-loaded { background: transparent; }
+.homepage-video-section.mobile-video-disabled { display: none !important; }
+
+@media (max-width: 768px) {
+  html { scroll-behavior: auto; }
+  .homepage-video-section { display: none !important; }
+  .hero-highlights-track,
+  .promo-marquee,
+  .product-page-promo-marquee {
+    animation: none !important;
+    transform: none !important;
+  }
+  .section,
+  .product-card,
+  .combo-card,
+  .testimonial-slider,
+  .order-slider,
+  .policy-card-grid,
+  .site-footer {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 720px;
+  }
+  .product-card,
+  .combo-card,
+  .hero-card,
+  .showcase-slide,
+  .policy-card,
+  .cart-drawer,
+  .modal-overlay > *,
+  .header-menu-card {
+    box-shadow: 0 8px 22px rgba(61,18,36,.08) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  .product-card:hover,
+  .combo-card:hover,
+  .btn:hover {
+    transform: none !important;
+  }
+  * {
+    transition-duration: .12s !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+  .product-grid img,
+  .showcase-image-wrap img,
+  .combo-image-wrap img,
+  .product-detail-image img {
+    max-height: 240px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { scroll-behavior: auto !important; animation: none !important; transition-duration: .01ms !important; }
+}
