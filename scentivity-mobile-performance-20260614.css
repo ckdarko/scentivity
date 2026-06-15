@@ -1,0 +1,20 @@
+/* Scentivity mobile performance helper styles.
+   Visual layout is preserved; these rules only make below-the-fold rendering lighter. */
+@supports (content-visibility: auto) {
+  @media (max-width: 768px) {
+    .product-grid,
+    .products-grid,
+    .combo-grid,
+    .feedback-list,
+    .policy-grid,
+    .faq-grid,
+    .footer-grid {
+      content-visibility: auto;
+      contain-intrinsic-size: 1px 700px;
+    }
+  }
+}
+
+.homepage-video[preload="none"] {
+  background-color: #fff3f6;
+}

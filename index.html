@@ -11,6 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=productpage-exact-homepage-menu-working-20260609" />
   <link rel="stylesheet" href="scentivity-cart-count-badge-fix-20260611.css?v=cart-count-badge-fix-20260611" />
+  <link rel="stylesheet" href="scentivity-mobile-performance-20260614.css?v=mobile-speed-20260614" />
 </head>
 <body id="top">
 
@@ -81,8 +82,8 @@
 
     <section class="section homepage-video-section" id="homepageVideoSection" aria-label="Scentivity homepage video">
       <div class="homepage-video-card">
-        <video id="homepageVideo" class="homepage-video" autoplay muted loop playsinline webkit-playsinline preload="auto" poster="assets/scentivity-video-poster.svg">
-          <source src="assets/scentivity-homepage-video.mp4" type="video/mp4" />
+        <video id="homepageVideo" class="homepage-video" autoplay muted loop playsinline webkit-playsinline preload="none" poster="assets/scentivity-video-poster.svg" data-scentivity-lazy-video="true">
+          <source data-src="assets/scentivity-homepage-video.mp4" type="video/mp4" />
         </video>
         <div class="homepage-video-fallback" aria-hidden="true">
           <div class="video-fallback-bottle"><span>S</span></div>
@@ -294,7 +295,7 @@
       <div class="section-heading split">
         <div>
           <p class="eyebrow">Help & policies</p>
-          <h2>Information for every Scentivity order.</h2>
+          <h2>Clear information for every Scentivity order.</h2>
           <p class="compliance-intro">Review FAQs, terms, refunds, privacy, and Ghana delivery details before placing an order.</p>
         </div>
       </div>
@@ -786,6 +787,7 @@
       });
     })();
   </script>
+  <script src="scentivity-mobile-performance-20260614.js?v=mobile-speed-20260614" defer></script>
   <script src="scentivity-cart-count-badge-fix-20260611.js?v=cart-count-badge-fix-20260611"></script>
 </body>
 </html>
