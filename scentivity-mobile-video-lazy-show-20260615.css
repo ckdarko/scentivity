@@ -1,0 +1,84 @@
+/* SCENTIVITY_MOBILE_VIDEO_LAZY_SHOW_20260615
+   Re-enables the homepage video on phones/tablets without making it block first load.
+   This file intentionally overrides the ultra-light patch only for the video section. */
+
+@media (max-width: 900px) {
+  body.scentivity-mobile-video-enabled .homepage-video-section,
+  body.scentivity-mobile-video-enabled .homepage-video-section.mobile-video-disabled,
+  body.scentivity-mobile-video-enabled #homepageVideoSection {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    content-visibility: visible !important;
+    padding-top: 8px !important;
+    padding-bottom: 18px !important;
+    contain-intrinsic-size: auto !important;
+  }
+
+  body.scentivity-mobile-video-enabled .homepage-video-card {
+    display: block !important;
+    visibility: visible !important;
+    min-height: min(58vh, 430px) !important;
+    border-radius: 24px !important;
+    overflow: hidden !important;
+    background: linear-gradient(135deg, #fff4f8, #ffd7e4 52%, #e6005b) !important;
+  }
+
+  body.scentivity-mobile-video-enabled .homepage-video,
+  body.scentivity-mobile-video-enabled video.homepage-video {
+    display: block !important;
+    visibility: visible !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    opacity: 0 !important;
+    transition: opacity .18s ease !important;
+  }
+
+  body.scentivity-mobile-video-enabled .homepage-video-card.video-ready .homepage-video,
+  body.scentivity-mobile-video-enabled .homepage-video-card.video-playing .homepage-video {
+    opacity: 1 !important;
+  }
+
+  body.scentivity-mobile-video-enabled .homepage-video-fallback {
+    display: grid !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    z-index: 0 !important;
+  }
+
+  body.scentivity-mobile-video-enabled .homepage-video-card.video-ready .homepage-video-fallback,
+  body.scentivity-mobile-video-enabled .homepage-video-card.video-playing .homepage-video-fallback {
+    display: none !important;
+  }
+
+  body.scentivity-mobile-video-enabled .homepage-video-card::after {
+    display: block !important;
+    background: linear-gradient(180deg, rgba(16,2,8,.04) 0%, rgba(16,2,8,.18) 45%, rgba(16,2,8,.48) 100%) !important;
+  }
+
+  body.scentivity-mobile-video-enabled .homepage-video-overlay {
+    min-height: min(58vh, 430px) !important;
+    display: flex !important;
+    justify-content: flex-end !important;
+    padding: 22px 18px !important;
+    pointer-events: none !important;
+  }
+
+  body.scentivity-mobile-video-enabled .homepage-video-overlay .btn {
+    pointer-events: auto !important;
+  }
+
+  body.scentivity-mobile-video-enabled .video-fallback-bottle {
+    width: min(165px, 38vw) !important;
+    animation: none !important;
+  }
+}
+
+@media (min-width: 901px) {
+  body.scentivity-mobile-video-enabled .homepage-video-section,
+  body.scentivity-mobile-video-enabled .homepage-video-card,
+  body.scentivity-mobile-video-enabled video.homepage-video {
+    display: block !important;
+  }
+}

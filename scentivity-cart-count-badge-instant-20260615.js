@@ -186,29 +186,20 @@
   function patchLocalStorage() {
     if (localStoragePatched || !window.localStorage) return;
     localStoragePatched = true;
-    try {
-      const storageProto = Object.getPrototypeOf(window.localStorage);
-      if (!storageProto || storageProto.__scentivityCartPatched) return;
+    const originalSetItem = window.localStorage.setItem.bind(window.localStorage);
+    const originalRemoveItem = window.localStorage.removeItem.bind(window.localStorage);
 
-      const originalSetItem = storageProto.setItem;
-      const originalRemoveItem = storageProto.removeItem;
+    window.localStorage.setItem = function patchedSetItem(key, value) {
+      const result = originalSetItem(key, value);
+      if (CART_KEYS.includes(String(key))) scheduleRefresh();
+      return result;
+    };
 
-      storageProto.setItem = function patchedSetItem(key, value) {
-        const result = originalSetItem.call(this, key, value);
-        if (CART_KEYS.includes(String(key))) scheduleRefresh();
-        return result;
-      };
-
-      storageProto.removeItem = function patchedRemoveItem(key) {
-        const result = originalRemoveItem.call(this, key);
-        if (CART_KEYS.includes(String(key))) scheduleRefresh();
-        return result;
-      };
-
-      Object.defineProperty(storageProto, '__scentivityCartPatched', { value: true, configurable: false });
-    } catch {
-      // Some browsers can block method patching. The click/pageshow refresh handlers still keep counts synced.
-    }
+    window.localStorage.removeItem = function patchedRemoveItem(key) {
+      const result = originalRemoveItem(key);
+      if (CART_KEYS.includes(String(key))) scheduleRefresh();
+      return result;
+    };
   }
 
   function init() {
