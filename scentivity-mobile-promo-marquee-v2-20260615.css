@@ -1,0 +1,111 @@
+/* SCENTIVITY_MOBILE_PROMO_MARQUEE_V2_20260615
+   Fixes product-page promo movement after the lightweight mobile patch.
+   CSS-only animation: no fetches, no timers, no layout-heavy JavaScript. */
+
+.top-promo-marquee,
+.product-page-promo-bar,
+.product-page-body .promo-bar {
+  overflow: hidden !important;
+  white-space: nowrap !important;
+  contain: content;
+}
+
+.top-promo-track,
+.product-page-promo-marquee,
+.product-page-body .promo-marquee,
+.product-page-promo-marquee.mobile-promo-track {
+  display: inline-flex !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  width: max-content !important;
+  max-width: none !important;
+  min-width: 220% !important;
+  gap: 1.1rem !important;
+  white-space: nowrap !important;
+  will-change: transform !important;
+  transform: translate3d(0, 0, 0);
+
+  animation-name: scentivityPromoMarqueeV2 !important;
+  animation-duration: 18s !important;
+  animation-timing-function: linear !important;
+  animation-delay: 0s !important;
+  animation-iteration-count: infinite !important;
+  animation-direction: normal !important;
+  animation-fill-mode: none !important;
+  animation-play-state: running !important;
+}
+
+.top-promo-track span,
+.product-page-promo-marquee span,
+.product-page-body .promo-marquee span,
+.product-page-promo-marquee.mobile-promo-track span {
+  display: inline-flex !important;
+  flex: 0 0 auto !important;
+  width: auto !important;
+  white-space: nowrap !important;
+}
+
+.top-promo-track span::after,
+.product-page-promo-marquee span::after,
+.product-page-body .promo-marquee span::after {
+  content: "•";
+  margin-left: 1.1rem;
+  opacity: 0.65;
+}
+
+@keyframes scentivityPromoMarqueeV2 {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
+}
+
+/* Strong mobile override because the lightweight speed file disables most animations globally. */
+@media (max-width: 900px) {
+  .top-promo-marquee,
+  .product-page-promo-bar,
+  .product-page-body .promo-bar {
+    display: block !important;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+  }
+
+  .top-promo-track,
+  .product-page-promo-marquee,
+  .product-page-body .promo-marquee,
+  .product-page-promo-marquee.mobile-promo-track {
+    display: inline-flex !important;
+    flex-wrap: nowrap !important;
+    justify-content: flex-start !important;
+    width: max-content !important;
+    max-width: none !important;
+    min-width: 240% !important;
+    gap: 1.15rem !important;
+    white-space: nowrap !important;
+    transform: translate3d(0, 0, 0) !important;
+
+    animation-name: scentivityPromoMarqueeV2 !important;
+    animation-duration: 16s !important;
+    animation-timing-function: linear !important;
+    animation-delay: 0s !important;
+    animation-iteration-count: infinite !important;
+    animation-direction: normal !important;
+    animation-fill-mode: none !important;
+    animation-play-state: running !important;
+  }
+
+  .product-page-promo-marquee span,
+  .product-page-body .promo-marquee span,
+  .top-promo-track span {
+    width: auto !important;
+    min-width: max-content !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .top-promo-track,
+  .product-page-promo-marquee,
+  .product-page-body .promo-marquee {
+    animation: none !important;
+    transform: none !important;
+  }
+}
