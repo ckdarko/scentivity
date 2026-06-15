@@ -411,7 +411,7 @@ const dealOfWeekCard = document.querySelector('#dealOfWeekCard') || document.que
 const productGrid = document.querySelector('#productGrid');
 const productLoadMoreButton = document.querySelector('#productLoadMoreButton');
 const productLoadMoreNote = document.querySelector('#productLoadMoreNote');
-const PRODUCT_PAGE_SIZE = 8;
+const PRODUCT_PAGE_SIZE = SCENTIVITY_IS_MOBILE ? 6 : 8;
 let productDisplayLimit = PRODUCT_PAGE_SIZE;
 const comboDealsSection = document.querySelector('#comboDeals')?.closest('section') || document.querySelector('#comboDeals');
 const comboGrid = document.querySelector('#comboGrid');
@@ -1140,6 +1140,7 @@ function renderProducts() {
   productGrid.innerHTML = productsToRender.map(product => compactProductCard(product)).join('');
   renderProductLoadMoreControl(visibleProducts.length, productsToRender.length);
   initScentivityLazyMedia(productGrid);
+  window.scentivityRefreshCartBadges?.();
 }
 
 function getHomepageSlides() {
@@ -1222,6 +1223,7 @@ function renderHomepageShowcase() {
     `).join('');
   }
   initScentivityLazyMedia(homepageProductSlides);
+  window.scentivityRefreshCartBadges?.();
 }
 
 function moveShowcase(direction = 1) {
@@ -1232,7 +1234,7 @@ function moveShowcase(direction = 1) {
 }
 
 function startShowcaseAutoplay() {
-  if (!homepageProductSlides || SCENTIVITY_REDUCE_MOTION) return;
+  if (!homepageProductSlides || SCENTIVITY_REDUCE_MOTION || SCENTIVITY_IS_MOBILE) return;
   window.clearInterval(showcaseTimer);
   showcaseTimer = window.setInterval(() => moveShowcase(1), 8500);
 }
@@ -1304,6 +1306,7 @@ function updateCartCount() {
   mobileCartButton?.classList.toggle('has-items', quantityNumber > 0);
   cartToggle?.classList.toggle('has-items', quantityNumber > 0);
   cartToggleFooter?.classList.toggle('has-items', quantityNumber > 0);
+  window.scentivityRefreshCartBadges?.();
 }
 
 function getBundleSelectedProducts() {
@@ -1697,6 +1700,46 @@ async function handleCheckoutSubmit(event) {
   showPaymentStatus('Your order summary has been opened in WhatsApp for pickup confirmation.', 'success');
 }
 
+
+// ULTRA MOBILE PERFORMANCE 20260615
+// Render the above-the-fold shop/cart first, then hydrate lower-page sections on idle.
+let scentivityNonCriticalRendered = false;
+let scentivityFeedbackChoicesRendered = false;
+function scentivityRunIdle(callback, timeout = 1800) {
+  if (typeof callback !== 'function') return;
+  if ('requestIdleCallback' in window) return window.requestIdleCallback(callback, { timeout });
+  return window.setTimeout(callback, Math.min(timeout, 2200));
+}
+function scentivityRenderNonCriticalSections() {
+  if (scentivityNonCriticalRendered) return;
+  scentivityNonCriticalRendered = true;
+  try { renderCombos(); } catch (error) { console.warn('Combo render delayed:', error); }
+  try { renderBundleBuilder(); } catch (error) { console.warn('Bundle render delayed:', error); }
+  try { renderHomepageVideo(); } catch (error) { console.warn('Video render delayed:', error); }
+  try { renderCustomerReviews(); } catch (error) { console.warn('Review render delayed:', error); }
+  try { if (!SCENTIVITY_IS_MOBILE) startShowcaseAutoplay(); } catch (error) {}
+}
+function scentivityScheduleNonCriticalSections() {
+  if (!SCENTIVITY_IS_MOBILE) {
+    scentivityRunIdle(scentivityRenderNonCriticalSections, 700);
+    return;
+  }
+  const run = () => scentivityRunIdle(scentivityRenderNonCriticalSections, 1200);
+  window.addEventListener('scroll', run, { once: true, passive: true });
+  window.addEventListener('pointerdown', run, { once: true, passive: true });
+  window.setTimeout(run, 2400);
+}
+function scentivityEnsureFeedbackChoices() {
+  if (scentivityFeedbackChoicesRendered) return;
+  scentivityFeedbackChoicesRendered = true;
+  try { renderFeedbackProductChoices(); } catch (error) { console.warn('Feedback choices delayed:', error); }
+}
+document.addEventListener('click', event => {
+  if (event.target.closest('#openFeedbackButton, .nav-feedback-button, [data-open-feedback]')) {
+    scentivityEnsureFeedbackChoices();
+  }
+}, true);
+
 async function loadProducts() {
   products = enrichProducts(fallbackProducts);
   combos = enrichCombos(fallbackCombos);
@@ -1707,7 +1750,7 @@ async function loadProducts() {
   homepageVideoSettings = normalizeHomepageVideoSettings({});
   productCatalogue = normalizeProductCatalogue(defaultProductCatalogue);
   try {
-    const response = await fetch('data/products.json', { cache: 'no-cache' });
+    const response = await fetch('data/products.json', { cache: 'default' });
     if (!response.ok) throw new Error('Could not load product data.');
     const data = await response.json();
     if (Array.isArray(data.productCatalogue) && data.productCatalogue.length) {
@@ -1737,16 +1780,13 @@ async function loadProducts() {
   } catch (error) {
     console.warn('Using fallback products:', error.message);
   }
+  // Initial mobile load: only render visible/important sections first.
   refreshShop();
   renderDealOfWeek();
-  renderCombos();
-  renderBundleBuilder();
-  renderHomepageVideo();
-  renderFeedbackProductChoices();
-  renderCustomerReviews();
   renderHomepageShowcase();
-  startShowcaseAutoplay();
   renderCart();
+  window.scentivityRefreshCartBadges?.();
+  scentivityScheduleNonCriticalSections();
 }
 
 if (mainCategoryFilters) {
@@ -2382,7 +2422,7 @@ function showTestimonial(index) {
 
 function startTestimonialAutoplay() {
   window.clearInterval(testimonialTimer);
-  if (SCENTIVITY_REDUCE_MOTION) return;
+  if (SCENTIVITY_REDUCE_MOTION || SCENTIVITY_IS_MOBILE) return;
   const slides = [...document.querySelectorAll('#testimonialSlides > article')];
   if (slides.length <= 1 || slides[0]?.classList.contains('review-empty-state')) return;
   testimonialTimer = window.setInterval(() => showTestimonial(testimonialIndex + 1), 8500);
@@ -2512,7 +2552,7 @@ document.querySelector('#statsDots')?.addEventListener('click', event => {
 
 showOrderSlide(0);
 showStatsSlide(0);
-if (!SCENTIVITY_REDUCE_MOTION) {
+if (!SCENTIVITY_REDUCE_MOTION && !SCENTIVITY_IS_MOBILE) {
   window.setInterval(() => showStatsSlide(statsSlideIndex + 1), 9000);
 }
 
@@ -2997,6 +3037,7 @@ function renderHomepageShowcase() {
     homepageProductDots.innerHTML = slides.map((_, index) => `<button type="button" class="showcase-dot ${index === showcaseIndex ? 'active' : ''}" data-slide-index="${index}" aria-label="Show product ${index + 1}"></button>`).join('');
   }
   initScentivityLazyMedia(homepageProductSlides);
+  window.scentivityRefreshCartBadges?.();
 }
 
 
@@ -3089,6 +3130,7 @@ function renderHomepageShowcase() {
     homepageProductDots.innerHTML = slides.map((_, index) => `<button type="button" class="showcase-dot ${index === showcaseIndex ? 'active' : ''}" data-slide-index="${index}" aria-label="Show product ${index + 1}"></button>`).join('');
   }
   initScentivityLazyMedia(homepageProductSlides);
+  window.scentivityRefreshCartBadges?.();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
