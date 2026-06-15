@@ -1,0 +1,107 @@
+/* SCENTIVITY_STABLE_PROMO_MARQUEE_20260615
+   Reverts the broken V2 marquee override and restores the lightweight moving promo strip.
+   CSS-only: no JavaScript, no extra fetches, no image/video work. */
+
+/* Top homepage promo + product page promo containers */
+html body .top-promo.top-promo-marquee,
+html body .promo-bar.product-page-promo-bar,
+html body.product-page-body .promo-bar.product-page-promo-bar {
+  display: block !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+  contain: layout paint style !important;
+}
+
+/* Moving tracks. This intentionally loads AFTER the lightweight CSS so it can re-enable only this tiny animation. */
+html body .top-promo.top-promo-marquee > .top-promo-track,
+html body .promo-bar.product-page-promo-bar > .promo-marquee.product-page-promo-marquee,
+html body.product-page-body .promo-bar.product-page-promo-bar > .promo-marquee.product-page-promo-marquee.mobile-promo-track {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 1.15rem !important;
+  width: max-content !important;
+  max-width: none !important;
+  min-width: 200% !important;
+  white-space: nowrap !important;
+  transform: translate3d(0, 0, 0) !important;
+  will-change: transform !important;
+  animation-name: scentivityStablePromoMarquee !important;
+  animation-duration: 18s !important;
+  animation-timing-function: linear !important;
+  animation-delay: 0s !important;
+  animation-iteration-count: infinite !important;
+  animation-direction: normal !important;
+  animation-fill-mode: none !important;
+  animation-play-state: running !important;
+  transition: none !important;
+}
+
+html body .top-promo-track > span,
+html body .product-page-promo-marquee > span,
+html body .mobile-promo-track > span {
+  display: inline-flex !important;
+  flex: 0 0 auto !important;
+  width: auto !important;
+  min-width: max-content !important;
+  white-space: nowrap !important;
+}
+
+html body .top-promo-track > span::after,
+html body .product-page-promo-marquee > span::after,
+html body .mobile-promo-track > span::after {
+  content: "•";
+  margin-left: 1.15rem;
+  opacity: 0.7;
+}
+
+@keyframes scentivityStablePromoMarquee {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+
+@media (max-width: 900px) {
+  html body .top-promo.top-promo-marquee,
+  html body .promo-bar.product-page-promo-bar,
+  html body.product-page-body .promo-bar.product-page-promo-bar {
+    display: block !important;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+  }
+
+  html body .top-promo.top-promo-marquee > .top-promo-track,
+  html body .promo-bar.product-page-promo-bar > .promo-marquee.product-page-promo-marquee,
+  html body.product-page-body .promo-bar.product-page-promo-bar > .promo-marquee.product-page-promo-marquee.mobile-promo-track {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    justify-content: flex-start !important;
+    gap: 1rem !important;
+    width: max-content !important;
+    max-width: none !important;
+    min-width: 230% !important;
+    white-space: nowrap !important;
+    transform: translate3d(0, 0, 0) !important;
+    will-change: transform !important;
+    animation-name: scentivityStablePromoMarquee !important;
+    animation-duration: 15s !important;
+    animation-timing-function: linear !important;
+    animation-delay: 0s !important;
+    animation-iteration-count: infinite !important;
+    animation-direction: normal !important;
+    animation-fill-mode: none !important;
+    animation-play-state: running !important;
+    transition: none !important;
+  }
+}
+
+/* Respect reduced-motion devices only. */
+@media (prefers-reduced-motion: reduce) {
+  html body .top-promo.top-promo-marquee > .top-promo-track,
+  html body .promo-bar.product-page-promo-bar > .promo-marquee.product-page-promo-marquee,
+  html body.product-page-body .promo-bar.product-page-promo-bar > .promo-marquee.product-page-promo-marquee.mobile-promo-track {
+    animation: none !important;
+    transform: none !important;
+  }
+}
