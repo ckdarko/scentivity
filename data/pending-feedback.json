@@ -16,7 +16,7 @@
       "rating": 5,
       "productsPurchased": "Fiji Sunshine",
       "message": "I love it!\nExcellent customer service as well.",
-      "approved": false,
+      "approved": true,
       "date": "2026-06-16T17:10:51.608Z",
       "source": "customer_submission"
     },
