@@ -330,6 +330,15 @@
       "name": "Adwoa",
       "message": "Scentivity has great prices and lots of variety. They found a customer in me :)",
       "date": "2026-06-11T11:44:00.000-05:00"
+    },
+    {
+      "rating": 5,
+      "approved": true,
+      "source": "admin_added",
+      "productsPurchased": "Fiji Sunshine\n",
+      "name": "Jerry",
+      "message": " I love it! Excellent customer service as well.",
+      "date": "2026-06-16T10:51:00.000-05:00"
     }
   ],
   "productCatalogue": [
