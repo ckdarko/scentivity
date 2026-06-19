@@ -236,4 +236,158 @@
   } else {
     fixProductPageImage();
   }
+
+  /* OTHER AVAILABLE PRODUCTS IMAGE FIX 20260619
+     The product-page renderer only reads product.image for related product cards.
+     Admin uploads may store the file under photo/productPhoto/imageUrl/etc.
+     This repair fills the related cards from the full product data and loads
+     their real images without changing the current page layout. */
+  var RELATED_DATA_CACHE = null;
+
+  function fetchRelatedProductsData() {
+    if (RELATED_DATA_CACHE) return RELATED_DATA_CACHE;
+    RELATED_DATA_CACHE = fetch(DATA_URL, { cache: 'no-cache' })
+      .then(function (response) { return response.ok ? response.json() : { products: [] }; })
+      .then(function (data) { return Array.isArray(data.products) ? data.products : []; })
+      .catch(function () { return []; });
+    return RELATED_DATA_CACHE;
+  }
+
+  function getProductKeysForMap(product, index) {
+    var keys = [];
+    var key = productKey(product, index);
+    var id = cleanText(product && product.id);
+    var slug = cleanText((product && product.slug) || slugify(product && product.name));
+    var name = slugify(product && product.name);
+    [key, id, slug, name].forEach(function (value) {
+      value = cleanText(value);
+      if (value && keys.indexOf(value) === -1) keys.push(value);
+    });
+    return keys;
+  }
+
+  function buildProductLookup(products) {
+    var lookup = Object.create(null);
+    products.forEach(function (product, index) {
+      var image = resolveProductImage(product);
+      var name = cleanText(product && product.name);
+      var item = { product: product, image: image, name: name };
+      getProductKeysForMap(product, index).forEach(function (key) { lookup[key] = item; });
+    });
+    return lookup;
+  }
+
+  function linkKeys(link) {
+    var keys = [];
+    if (!link) return keys;
+    try {
+      var url = new URL(link.getAttribute('href') || link.href || '', window.location.href);
+      ['product', 'id', 'key', 'slug', 'name'].forEach(function (param) {
+        var value = cleanText(url.searchParams.get(param));
+        if (!value) return;
+        keys.push(value);
+        keys.push(slugify(value));
+      });
+    } catch (error) {}
+    return keys.filter(function (value, index, list) { return value && list.indexOf(value) === index; });
+  }
+
+  function setRelatedCardImage(card, image, name) {
+    image = normalizeImagePath(image);
+    if (!card || !image) return false;
+    var img = card.querySelector('img');
+    if (!img) {
+      img = document.createElement('img');
+      card.insertBefore(img, card.firstChild);
+    }
+    img.classList.remove('scentivity-lazy-img');
+    img.removeAttribute('data-src');
+    img.setAttribute('src', image);
+    img.setAttribute('loading', 'lazy');
+    img.setAttribute('decoding', 'async');
+    img.setAttribute('alt', cleanText(name || 'Scentivity product'));
+    img.style.display = 'block';
+    img.style.visibility = 'visible';
+    img.style.opacity = '1';
+    img.onerror = function () {
+      this.onerror = null;
+      this.src = FALLBACK_IMAGE;
+    };
+    return true;
+  }
+
+  function loadExistingRelatedLazyImages(root) {
+    (root || document).querySelectorAll('.related-product-card img[data-src]').forEach(function (img) {
+      var realSrc = normalizeImagePath(img.getAttribute('data-src') || '');
+      if (realSrc && realSrc !== SCENTIVITY_PLACEHOLDER_IMAGE && realSrc !== FALLBACK_IMAGE) {
+        img.classList.remove('scentivity-lazy-img');
+        img.removeAttribute('data-src');
+        img.src = realSrc;
+        img.onerror = function () {
+          this.onerror = null;
+          this.src = FALLBACK_IMAGE;
+        };
+      }
+    });
+  }
+
+  function fixRelatedProductImages() {
+    var root = document.getElementById('productPageContent') || document;
+    var cards = Array.prototype.slice.call(root.querySelectorAll('.related-product-card'));
+    if (!cards.length) return;
+
+    injectProductImageCss();
+    loadExistingRelatedLazyImages(root);
+
+    fetchRelatedProductsData().then(function (products) {
+      var lookup = buildProductLookup(products);
+      cards.forEach(function (card) {
+        var img = card.querySelector('img');
+        var currentSrc = normalizeImagePath((img && (img.getAttribute('src') || img.src)) || '');
+        var hasRealImage = currentSrc && currentSrc !== SCENTIVITY_PLACEHOLDER_IMAGE && currentSrc !== FALLBACK_IMAGE && currentSrc.indexOf('data:image/svg') !== 0;
+        if (hasRealImage) return;
+
+        var keys = linkKeys(card);
+        var item = null;
+        for (var i = 0; i < keys.length; i += 1) {
+          if (lookup[keys[i]]) { item = lookup[keys[i]]; break; }
+        }
+        if (item && item.image) setRelatedCardImage(card, item.image, item.name);
+      });
+    });
+  }
+
+  function injectRelatedImageCss() {
+    if (document.getElementById('scentivityRelatedProductImageCss')) return;
+    var style = document.createElement('style');
+    style.id = 'scentivityRelatedProductImageCss';
+    style.textContent = [
+      '.related-products-grid .related-product-card img{display:block!important;visibility:visible!important;opacity:1!important;width:100%!important;aspect-ratio:1/1;object-fit:contain;background:#fff6fa;border-radius:18px;}',
+      '.related-products-grid .related-product-card{overflow:hidden;}'
+    ].join('\n');
+    document.head.appendChild(style);
+  }
+
+  function startRelatedProductImageRepair() {
+    injectRelatedImageCss();
+    var run = function () {
+      fixRelatedProductImages();
+      setTimeout(fixRelatedProductImages, 250);
+      setTimeout(fixRelatedProductImages, 1000);
+    };
+    run();
+    var root = document.getElementById('productPageContent');
+    if (root && 'MutationObserver' in window) {
+      var observer = new MutationObserver(function () { run(); });
+      observer.observe(root, { childList: true, subtree: true });
+      setTimeout(function () { observer.disconnect(); }, 8000);
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', startRelatedProductImageRepair);
+  } else {
+    startRelatedProductImageRepair();
+  }
+
 })();
