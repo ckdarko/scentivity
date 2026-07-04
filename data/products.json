@@ -401,6 +401,23 @@
       "rating": 5,
       "subCategory": "Designer and Luxury Fragrances",
       "showOnWebsite": true
+    },
+    {
+      "productStatus": "Incoming",
+      "isDealOfWeek": false,
+      "brand": "Bath & Body works ",
+      "price": "450",
+      "name": "Noir Cologne Mist, Body cream & Body spray",
+      "rating5Count": 0,
+      "mainCategory": "Bath & Body works collection",
+      "showInCustomerFavorites": false,
+      "rating4Count": 0,
+      "rating3Count": 0,
+      "rating2Count": 0,
+      "image": "assets/products/uploads/img_0004.webp",
+      "rating1Count": 0,
+      "subCategory": "Gift sets",
+      "showOnWebsite": true
     }
   ],
   "combos": [
