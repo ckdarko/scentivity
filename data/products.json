@@ -418,6 +418,24 @@
       "rating1Count": 0,
       "subCategory": "Gift sets",
       "showOnWebsite": true
+    },
+    {
+      "size": "75 ml",
+      "productStatus": "Incoming",
+      "isDealOfWeek": false,
+      "brand": "Bath & Body Works",
+      "price": "GHC 70",
+      "name": "Warm Vanilla Sugar",
+      "rating5Count": 0,
+      "mainCategory": "Bath n Body works",
+      "showInCustomerFavorites": true,
+      "rating4Count": 0,
+      "rating3Count": 0,
+      "rating2Count": 0,
+      "image": "assets/products/uploads/img_0005.webp",
+      "rating1Count": 0,
+      "subCategory": "Fine Fragrance Mist",
+      "showOnWebsite": true
     }
   ],
   "combos": [
@@ -457,12 +475,12 @@
   ],
   "dealOfWeek": {
     "enabled": true,
-    "itemType": "combo",
+    "itemType": "product",
     "badgeText": "Deal of the Week",
     "title": "This week’s featured scent.",
     "comboName": "",
-    "productName": "VS bombshell passion Mist & BBW Gingham Handcrea",
-    "image": "assets/products/uploads/img_0075.webp",
+    "productName": "",
+    "image": "",
     "description": "A highlighted Scentivity favorite available this week.",
     "buttonText": "Add Deal to Cart"
   },
