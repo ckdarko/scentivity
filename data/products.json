@@ -407,7 +407,7 @@
     {
       "isDealOfWeek": true,
       "includedItems": "1 Fine Fragrance Mist (236 mL) + 1 Body Lotion/Cream (226 g or 8 oz)",
-      "available": true,
+      "available": false,
       "name": "Sweet Starter Combo",
       "discountText": "Save GH₵40",
       "originalPrice": "GH₵470",
@@ -418,7 +418,7 @@
     {
       "isDealOfWeek": false,
       "includedItems": "1 Body Care Item + 1 Hand Sanitizer + 1 Room Spray or Scented Candle",
-      "available": true,
+      "available": false,
       "name": "Home & Body Refresh Combo",
       "discountText": "Save GH₵55",
       "originalPrice": "GH₵565",
@@ -429,7 +429,7 @@
     {
       "isDealOfWeek": false,
       "includedItems": "1 Designer/Luxury Fragrance + 1 Fragrance Mist or Body Care Add-on + Gift-ready packaging note",
-      "available": true,
+      "available": false,
       "name": "Luxury Gift Combo",
       "discountText": "Save GH₵70",
       "originalPrice": "GH₵700",
