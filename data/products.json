@@ -527,6 +527,41 @@
       "rating1Count": 0,
       "subCategory": "Body Cream",
       "showOnWebsite": true
+    },
+    {
+      "size": "8 oz / 236 mL",
+      "productStatus": "Incoming",
+      "isDealOfWeek": false,
+      "brand": "Bath & Body Works",
+      "price": "GHC 150",
+      "name": "You’re the one",
+      "rating5Count": 0,
+      "mainCategory": "Bath & Body Works",
+      "showInCustomerFavorites": false,
+      "rating4Count": 0,
+      "rating3Count": 0,
+      "rating2Count": 0,
+      "rating1Count": 0,
+      "subCategory": "Fine fragrance mist",
+      "showOnWebsite": true
+    },
+    {
+      "size": "8 oz / 236 mL",
+      "productStatus": "Incoming",
+      "isDealOfWeek": false,
+      "brand": "Bath & Body Works",
+      "price": "GHC 150",
+      "name": "You’re the one ",
+      "availableQuantity": 1,
+      "rating5Count": 0,
+      "mainCategory": "Bath & Body Works",
+      "showInCustomerFavorites": false,
+      "rating4Count": 0,
+      "rating3Count": 0,
+      "rating2Count": 0,
+      "rating1Count": 0,
+      "subCategory": "Fine fragrance mist",
+      "showOnWebsite": true
     }
   ],
   "combos": [
