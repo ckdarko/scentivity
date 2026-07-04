@@ -404,7 +404,7 @@
     },
     {
       "productStatus": "Incoming",
-      "isDealOfWeek": false,
+      "isDealOfWeek": true,
       "brand": "Bath & Body works ",
       "price": "GHC 450",
       "name": "Noir Cologne Mist, Body cream & Body spray",
@@ -453,14 +453,6 @@
       "comboPrice": "GH₵630",
       "image": "assets/products/amber-noir.svg",
       "description": "A gift-ready combo for birthdays, appreciation packages, surprises, and special occasions."
-    },
-    {
-      "available": true,
-      "name": "VS bombshell passion Mist & BBW Gingham Handcream",
-      "includedItems": "1 VS bombshell passion Mist 75 ml + 1 BBW Gingham Handcream 29ml",
-      "originalPrice": "GHC 160",
-      "comboPrice": "140",
-      "image": "assets/products/uploads/img_0075.webp"
     }
   ],
   "dealOfWeek": {
