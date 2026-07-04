@@ -440,7 +440,7 @@
   ],
   "dealOfWeek": {
     "enabled": true,
-    "itemType": "product",
+    "itemType": "combo",
     "badgeText": "Deal of the Week",
     "title": "This week’s featured scent.",
     "comboName": "",
