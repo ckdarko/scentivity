@@ -436,6 +436,14 @@
       "comboPrice": "GH₵630",
       "image": "assets/products/amber-noir.svg",
       "description": "A gift-ready combo for birthdays, appreciation packages, surprises, and special occasions."
+    },
+    {
+      "available": true,
+      "name": "VS bombshell passion Mist & BBW Gingham Handcream",
+      "includedItems": "1 VS bombshell passion Mist 75 ml + 1 BBW Gingham Handcream 29ml",
+      "originalPrice": "GHC 160",
+      "comboPrice": "140",
+      "image": "assets/products/uploads/img_0075.webp"
     }
   ],
   "dealOfWeek": {
@@ -559,7 +567,7 @@
   },
   "comboDealsSettings": {
     "enabled": false,
-    "heading": "Save more with curated scent bundles.",
+    "heading": "",
     "description": "Pick a discounted combo, add it to cart, and checkout the same way as regular products."
   }
 }
