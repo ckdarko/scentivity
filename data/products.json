@@ -547,7 +547,7 @@
     },
     {
       "size": "8 oz / 236 mL",
-      "productStatus": "Incoming",
+      "productStatus": "Available",
       "isDealOfWeek": false,
       "brand": "Bath & Body Works",
       "price": "GHC 150",
@@ -560,7 +560,7 @@
       "rating3Count": 0,
       "rating2Count": 0,
       "rating1Count": 0,
-      "subCategory": "Fine fragrance mist",
+      "subCategory": "Body Cream",
       "showOnWebsite": true
     }
   ],
