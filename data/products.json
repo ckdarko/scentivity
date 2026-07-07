@@ -919,6 +919,23 @@
       "showOnWebsite": true
     },
     {
+      "size": "8 fl oz / 236 mL",
+      "productStatus": "Available",
+      "isDealOfWeek": false,
+      "price": "GHC 150",
+      "name": "Japanese cherry blossom mist",
+      "rating5Count": 0,
+      "mainCategory": "Bath & body works",
+      "showInCustomerFavorites": false,
+      "rating4Count": 0,
+      "rating3Count": 0,
+      "rating2Count": 0,
+      "image": "assets/products/uploads/img_0076.webp",
+      "rating1Count": 0,
+      "subCategory": "Fine fragrance mist",
+      "showOnWebsite": true
+    },
+    {
       "size": "236 mL & 226 g",
       "productStatus": "Available",
       "isDealOfWeek": false,
@@ -1413,23 +1430,6 @@
       "image": "assets/products/uploads/img_0080.webp",
       "rating1Count": 0,
       "subCategory": "Hand soap ",
-      "showOnWebsite": true
-    },
-    {
-      "size": "8 fl oz / 236 mL",
-      "productStatus": "Available",
-      "isDealOfWeek": false,
-      "price": "GHC 150",
-      "name": "Japanese cherry blossom mist",
-      "rating5Count": 0,
-      "mainCategory": "Bath & body works",
-      "showInCustomerFavorites": false,
-      "rating4Count": 0,
-      "rating3Count": 0,
-      "rating2Count": 0,
-      "image": "assets/products/uploads/img_0076.webp",
-      "rating1Count": 0,
-      "subCategory": "Fine fragrance mist",
       "showOnWebsite": true
     },
     {
