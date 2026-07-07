@@ -1291,6 +1291,7 @@
       "rating4Count": 0,
       "rating3Count": 0,
       "rating2Count": 0,
+      "image": "assets/products/uploads/img_0084.webp",
       "rating1Count": 0,
       "subCategory": "Fine fragrance mist & body cream",
       "showOnWebsite": true
@@ -1307,6 +1308,7 @@
       "rating4Count": 0,
       "rating3Count": 0,
       "rating2Count": 0,
+      "image": "assets/products/uploads/img_0083.webp",
       "rating1Count": 0,
       "subCategory": "Fine fragrance mist & body cream",
       "showOnWebsite": true
@@ -1323,11 +1325,13 @@
       "rating4Count": 0,
       "rating3Count": 0,
       "rating2Count": 0,
+      "image": "assets/products/uploads/img_0080.webp",
       "rating1Count": 0,
       "subCategory": "Hand soap ",
       "showOnWebsite": true
     },
     {
+      "size": "75mL & 29 mL",
       "productStatus": "Available",
       "isDealOfWeek": false,
       "price": "GHC 125",
@@ -1338,6 +1342,7 @@
       "rating4Count": 0,
       "rating3Count": 0,
       "rating2Count": 0,
+      "image": "assets/products/uploads/img_0078.webp",
       "rating1Count": 0,
       "subCategory": "Mini Body mist & hand cream",
       "showOnWebsite": true
@@ -1354,6 +1359,7 @@
       "rating4Count": 0,
       "rating3Count": 0,
       "rating2Count": 0,
+      "image": "assets/products/uploads/img_0076.webp",
       "rating1Count": 0,
       "subCategory": "Fine fragrance mist",
       "showOnWebsite": true
