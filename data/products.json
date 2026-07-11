@@ -1455,12 +1455,12 @@
     {
       "isDealOfWeek": true,
       "includedItems": "1 Fine Fragrance Mist (236 mL) + 1 Body Lotion/Cream (226 g or 8 oz)",
-      "available": false,
+      "available": true,
       "name": "Sweet Starter Combo",
       "discountText": "Save GH₵40",
       "originalPrice": "GH₵470",
       "comboPrice": "GH₵430",
-      "image": "assets/products/velvet-rose.svg",
+      "image": "assets/products/uploads/005_butterfly_body_cream_by_scentivity.webp",
       "description": "A simple everyday freshness bundle for someone starting with sweet Scentivity favorites."
     },
     {
