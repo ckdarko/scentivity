@@ -206,7 +206,7 @@
       "image": "assets/products/uploads/026_imagegen.webp",
       "rating1Count": 0,
       "rating": 5,
-      "subCategory": "Body Care",
+      "subCategory": "Body Cream",
       "showOnWebsite": true
     },
     {
@@ -382,7 +382,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0006.webp",
       "rating1Count": 0,
-      "subCategory": "Body cream",
+      "subCategory": "Body Cream",
       "showOnWebsite": true
     },
     {
@@ -1466,12 +1466,12 @@
     {
       "isDealOfWeek": false,
       "includedItems": "1 Body Care Item + 1 Hand Sanitizer + 1 Room Spray or Scented Candle",
-      "available": false,
+      "available": true,
       "name": "Home & Body Refresh Combo",
       "discountText": "Save GH₵55",
       "originalPrice": "GH₵565",
       "comboPrice": "GH₵510",
-      "image": "assets/products/citrus-bloom.svg",
+      "image": "assets/products/uploads/img_0130.webp",
       "description": "A balanced personal-care and room-refresh bundle for a sweet-smelling body and space."
     },
     {
@@ -1606,7 +1606,7 @@
     "buttonLink": "#products"
   },
   "comboDealsSettings": {
-    "enabled": false,
+    "enabled": true,
     "heading": "",
     "description": "Pick a discounted combo, add it to cart, and checkout the same way as regular products."
   }
