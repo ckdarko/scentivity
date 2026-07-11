@@ -1606,7 +1606,7 @@
     "buttonLink": "#products"
   },
   "comboDealsSettings": {
-    "enabled": true,
+    "enabled": false,
     "heading": "",
     "description": "Perfectly paired scents just for you. Add to cart for a sweet scent experience!"
   }
