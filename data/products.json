@@ -1477,12 +1477,12 @@
     {
       "isDealOfWeek": false,
       "includedItems": "1 Designer/Luxury Fragrance + 1 Fragrance Mist or Body Care Add-on + Gift-ready packaging note",
-      "available": false,
+      "available": true,
       "name": "Luxury Gift Combo",
       "discountText": "Save GH₵70",
       "originalPrice": "GH₵700",
       "comboPrice": "GH₵630",
-      "image": "assets/products/amber-noir.svg",
+      "image": "assets/products/uploads/img_0130.webp",
       "description": "A gift-ready combo for birthdays, appreciation packages, surprises, and special occasions."
     }
   ],
