@@ -1449,6 +1449,22 @@
       "rating1Count": 0,
       "subCategory": "Hand soap",
       "showOnWebsite": true
+    },
+    {
+      "productStatus": "Available",
+      "isDealOfWeek": false,
+      "price": "GHC 150",
+      "name": "Hello Happiness",
+      "rating5Count": 0,
+      "mainCategory": "Bath & Body works",
+      "showInCustomerFavorites": false,
+      "rating4Count": 0,
+      "rating3Count": 0,
+      "rating2Count": 0,
+      "image": "assets/products/uploads/img_0093.webp",
+      "rating1Count": 0,
+      "subCategory": "Fine fragrance mist",
+      "showOnWebsite": true
     }
   ],
   "combos": [
