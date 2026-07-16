@@ -1916,6 +1916,7 @@
       "price": "GHC 300",
       "name": "Freshwater body spray & cream",
       "fragranceNotes": "Italian bergamot, mountain spring water and oak moss",
+      "availableQuantity": 3,
       "rating5Count": 0,
       "mainCategory": "Bath & body works",
       "showInCustomerFavorites": false,
