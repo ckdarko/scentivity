@@ -1896,6 +1896,8 @@
       "isDealOfWeek": false,
       "price": "GHC 150",
       "name": "Fruity musk mist",
+      "fragranceNotes": "dewy raspberry, sugared musk, and velvet moss",
+      "availableQuantity": 2,
       "rating5Count": 0,
       "mainCategory": "Bath & body works",
       "showInCustomerFavorites": false,
@@ -1904,6 +1906,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0131.webp",
       "rating1Count": 0,
+      "rating": 5,
       "subCategory": "Fine fragrance mist",
       "showOnWebsite": true
     },
@@ -1925,6 +1928,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0132.webp",
       "rating1Count": 0,
+      "rating": 5,
       "subCategory": "Body spray & cream",
       "showOnWebsite": true
     }
