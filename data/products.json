@@ -1962,17 +1962,16 @@
       "description": "A balanced personal-care and room-refresh bundle for a sweet-smelling body and space."
     }
   ],
-  "dealOfWeek": {
-    "enabled": true,
-    "itemType": "product",
-    "badgeText": "Deal of the Week",
-    "title": "This week’s featured scent.",
-    "comboName": "",
-    "productName": "",
-    "image": "",
-    "description": "Sweet scents curated just for you.",
-    "buttonText": "Add Deal to Cart"
-  },
+"dealOfWeek": {
+  "enabled": false,
+  "itemType": "product",
+  "badgeText": "Deal of the Week",
+  "title": "This week’s featured scent.",
+  "comboName": "",
+  "productName": "Japanese cherry blossom mist & body cream",
+  "description": "Sweet scents curated just for you.",
+  "buttonText": "Add Deal to Cart"
+},
   "bundleBuilder": {
     "enabled": false,
     "discountTwoItems": 5,
