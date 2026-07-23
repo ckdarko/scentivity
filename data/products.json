@@ -7,6 +7,8 @@
       "brand": "Bath & Body Works",
       "price": "GHC 295",
       "name": "A thousand wishes mist & body cream",
+      "fragranceNotes": "Pink prosecco (or sparkling champagne), Sparkling quince, Crystal peonies, Gilded amber, Amaretto crème",
+      "productDetails": "Sweet and fruity, Feminine, elegant, and slightly festive—great for everyday wear or special occasions.",
       "rating5Count": 0,
       "mainCategory": "Bath & Body Works",
       "showInCustomerFavorites": false,
@@ -15,7 +17,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0030.webp",
       "rating1Count": 0,
-      "subCategory": "Fine Fragrance Mist & Body Cream",
+      "subCategory": "Fine fragrance mist & body cream",
       "showOnWebsite": true
     },
     {
@@ -109,7 +111,7 @@
     },
     {
       "paymentLink": "",
-      "size": "",
+      "size": "Single wick candle",
       "productStatus": "Incoming",
       "isDealOfWeek": false,
       "notes": "Fill your space with a warm, celebratory fragrance featuring sparkling pink prosecco, delicate crystal peonies, rich gilded amber, and sweet amaretto crème.\nFragrance Notes: Pink Prosecco, Crystal Peonies, Gilded Amber, Amaretto Crème.",
@@ -133,7 +135,7 @@
       "image": "assets/products/uploads/058_scentivity_candle_with_pink_accents.webp",
       "rating1Count": 1,
       "rating": 4.8,
-      "subCategory": "Scented Candles",
+      "subCategory": "Scented Candle",
       "showOnWebsite": true
     },
     {
@@ -223,7 +225,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0084.webp",
       "rating1Count": 0,
-      "subCategory": "Fine Fragrance Mist & Body Cream",
+      "subCategory": "Fine fragrance mist & body cream",
       "showOnWebsite": true
     },
     {
@@ -287,7 +289,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0050.webp",
       "rating1Count": 0,
-      "subCategory": "Fine Fragrance Mist - Mini",
+      "subCategory": "Fine fragrance mist - mini",
       "showOnWebsite": true
     },
     {
@@ -305,7 +307,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0024.webp",
       "rating1Count": 0,
-      "subCategory": "Gift Sets",
+      "subCategory": "Gift set",
       "showOnWebsite": true
     },
     {
@@ -344,7 +346,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0009.webp",
       "rating1Count": 0,
-      "subCategory": "Fine Fragrance Mist",
+      "subCategory": "Fine fragrance mist",
       "showOnWebsite": true
     },
     {
@@ -399,7 +401,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0090.webp",
       "rating1Count": 0,
-      "subCategory": "Fine Fragrance Mist & Body Cream",
+      "subCategory": "Fine fragrance mist & body cream ",
       "showOnWebsite": true
     },
     {
@@ -417,7 +419,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0007.webp",
       "rating1Count": 0,
-      "subCategory": "Fine Fragrance Mist",
+      "subCategory": "Fine fragrance mist",
       "showOnWebsite": true
     },
     {
@@ -435,7 +437,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0008.webp",
       "rating1Count": 0,
-      "subCategory": "Scented Candles",
+      "subCategory": "Scented candles",
       "showOnWebsite": true
     },
     {
@@ -453,7 +455,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0011.webp",
       "rating1Count": 0,
-      "subCategory": "Fine Fragrance Mist",
+      "subCategory": "Fine fragrance mist",
       "showOnWebsite": true
     },
     {
@@ -470,7 +472,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0092.webp",
       "rating1Count": 0,
-      "subCategory": "Body Cream",
+      "subCategory": "Body cream",
       "showOnWebsite": true
     },
     {
@@ -528,7 +530,7 @@
       "image": "assets/products/uploads/134_sweet_strawberry_bliss_product_promo.webp",
       "rating1Count": 0,
       "rating": 5,
-      "subCategory": "Fine Fragrance Mist & Body Cream",
+      "subCategory": "Fine Fragrance Mist & Body cream",
       "showOnWebsite": true
     },
     {
@@ -551,7 +553,7 @@
       "image": "assets/products/uploads/135_sweet_strawberry_pound_cake_collection.webp",
       "rating1Count": 0,
       "rating": 5,
-      "subCategory": "Fine Fragrance Mist & Body Cream",
+      "subCategory": "Fine fragrance mist & body cream",
       "showOnWebsite": true
     },
     {
@@ -569,7 +571,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0022.webp",
       "rating1Count": 0,
-      "subCategory": "Fine Fragrance Mist - Mini",
+      "subCategory": "Fine fragrance mist - mini",
       "showOnWebsite": true
     },
     {
@@ -587,7 +589,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0014.webp",
       "rating1Count": 0,
-      "subCategory": "Fine Fragrance Mist",
+      "subCategory": "Fine fragrance mist",
       "showOnWebsite": true
     },
     {
@@ -605,7 +607,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0017.webp",
       "rating1Count": 0,
-      "subCategory": "Fine Fragrance Mist",
+      "subCategory": "Fine fragrance mist",
       "showOnWebsite": true
     },
     {
@@ -623,7 +625,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0020.webp",
       "rating1Count": 0,
-      "subCategory": "Fine Fragrance Mist - Mini",
+      "subCategory": "Fine fragrance mist - mini",
       "showOnWebsite": true
     },
     {
@@ -664,7 +666,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0048.webp",
       "rating1Count": 0,
-      "subCategory": "Fine Fragrance Mist & Body Cream",
+      "subCategory": "Fine fragrance mist and body cream",
       "showOnWebsite": true
     },
     {
@@ -676,13 +678,13 @@
       "name": "Gingham love",
       "rating5Count": 0,
       "mainCategory": "Bath & body works",
-      "showInCustomerFavorites": true,
+      "showInCustomerFavorites": false,
       "rating4Count": 0,
       "rating3Count": 0,
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0086.webp",
       "rating1Count": 0,
-      "subCategory": "Body Cream",
+      "subCategory": "Body cream",
       "showOnWebsite": true
     },
     {
@@ -694,13 +696,13 @@
       "name": "Snow White mini mist",
       "rating5Count": 0,
       "mainCategory": "Bath & Body Works",
-      "showInCustomerFavorites": true,
+      "showInCustomerFavorites": false,
       "rating4Count": 0,
       "rating3Count": 0,
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0021.webp",
       "rating1Count": 0,
-      "subCategory": "Fine Fragrance Mist - Mini",
+      "subCategory": "Fine fragrance mist - mini",
       "showOnWebsite": true
     },
     {
@@ -712,13 +714,13 @@
       "name": "Mini Tease mist",
       "rating5Count": 0,
       "mainCategory": "Victoria’s Secret",
-      "showInCustomerFavorites": true,
+      "showInCustomerFavorites": false,
       "rating4Count": 0,
       "rating3Count": 0,
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0026.webp",
       "rating1Count": 0,
-      "subCategory": "Fine Fragrance Mist",
+      "subCategory": "Fine fragrance mist",
       "showOnWebsite": true
     },
     {
@@ -730,13 +732,13 @@
       "name": "Touch of Gold mist & Hand cream",
       "rating5Count": 0,
       "mainCategory": "Bath & Body works",
-      "showInCustomerFavorites": true,
+      "showInCustomerFavorites": false,
       "rating4Count": 0,
       "rating3Count": 0,
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0041.webp",
       "rating1Count": 0,
-      "subCategory": "Fine Fragrance Mist & Hand Cream",
+      "subCategory": "Fine fragrance mist & Hand cream",
       "showOnWebsite": true
     },
     {
@@ -754,7 +756,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0032.webp",
       "rating1Count": 0,
-      "subCategory": "Fine Fragrance Mist",
+      "subCategory": "Fine fragrance mist",
       "showOnWebsite": true
     },
     {
@@ -772,7 +774,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0035.webp",
       "rating1Count": 0,
-      "subCategory": "Fine Fragrance Mist - Mini",
+      "subCategory": "Fine fragrance mist- mini",
       "showOnWebsite": true
     },
     {
@@ -790,7 +792,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0046.webp",
       "rating1Count": 0,
-      "subCategory": "Body Cream - Mini",
+      "subCategory": "Body cream - mini",
       "showOnWebsite": true
     },
     {
@@ -808,7 +810,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0037.webp",
       "rating1Count": 0,
-      "subCategory": "Fine Fragrance Mist & Body Cream",
+      "subCategory": "Fine fragrance mist and body cream",
       "showOnWebsite": true
     },
     {
@@ -826,7 +828,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0055.webp",
       "rating1Count": 0,
-      "subCategory": "Body Cream",
+      "subCategory": "Body cream",
       "showOnWebsite": true
     },
     {
@@ -843,7 +845,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0068.webp",
       "rating1Count": 0,
-      "subCategory": "Fine Fragrance Mist",
+      "subCategory": "Fine fragrance mist",
       "showOnWebsite": true
     },
     {
@@ -861,7 +863,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0039.webp",
       "rating1Count": 0,
-      "subCategory": "Fine Fragrance Mist ",
+      "subCategory": "Fine fragrance mist ",
       "showOnWebsite": true
     },
     {
@@ -879,7 +881,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0040.webp",
       "rating1Count": 0,
-      "subCategory": "Fine Fragrance Mist - Mini",
+      "subCategory": "Fine fragrance mist - mini",
       "showOnWebsite": true
     },
     {
@@ -897,7 +899,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0044.webp",
       "rating1Count": 0,
-      "subCategory": "Fine Fragrance Mist & Body Cream",
+      "subCategory": "Fine fragrance mist & body cream",
       "showOnWebsite": true
     },
     {
@@ -932,7 +934,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0076.webp",
       "rating1Count": 0,
-      "subCategory": "Fine Fragrance Mist",
+      "subCategory": "Fine fragrance mist",
       "showOnWebsite": true
     },
     {
@@ -949,7 +951,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0083.webp",
       "rating1Count": 0,
-      "subCategory": "Fine Fragrance Mist & Body Cream",
+      "subCategory": "Fine fragrance mist & body cream",
       "showOnWebsite": true
     },
     {
@@ -967,7 +969,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0036.webp",
       "rating1Count": 0,
-      "subCategory": "Fine Fragrance Mist & Body Cream",
+      "subCategory": "Fine fragrance mist and body cream",
       "showOnWebsite": true
     },
     {
@@ -985,7 +987,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0052.webp",
       "rating1Count": 0,
-      "subCategory": "Fine Fragrance Mist",
+      "subCategory": "Fine fragrance mist",
       "showOnWebsite": true
     },
     {
@@ -1003,7 +1005,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0061.webp",
       "rating1Count": 0,
-      "subCategory": "Body Cream",
+      "subCategory": "Body cream",
       "showOnWebsite": true
     },
     {
@@ -1077,7 +1079,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0059.webp",
       "rating1Count": 0,
-      "subCategory": "Fine Fragrance Mist - Mini",
+      "subCategory": "Fine fragrance mist mini",
       "showOnWebsite": true
     },
     {
@@ -1095,7 +1097,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0063.webp",
       "rating1Count": 0,
-      "subCategory": "Fine Fragrance Mist",
+      "subCategory": "Fine fragrance mist",
       "showOnWebsite": true
     },
     {
@@ -1113,7 +1115,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0066.webp",
       "rating1Count": 0,
-      "subCategory": "Hand Soap",
+      "subCategory": "Hand soap",
       "showOnWebsite": true
     },
     {
@@ -1131,7 +1133,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0064.webp",
       "rating1Count": 0,
-      "subCategory": "Fine Fragrance Mist & Body Cream",
+      "subCategory": "Fine fragrance mist and body cream",
       "showOnWebsite": true
     },
     {
@@ -1196,7 +1198,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0054.webp",
       "rating1Count": 0,
-      "subCategory": "Cologne Mist",
+      "subCategory": "Cologne mist",
       "showOnWebsite": true
     },
     {
@@ -1214,7 +1216,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0058.webp",
       "rating1Count": 0,
-      "subCategory": "Body Spray",
+      "subCategory": "Body spray",
       "showOnWebsite": true
     },
     {
@@ -1232,7 +1234,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0004.webp",
       "rating1Count": 0,
-      "subCategory": "Gift Sets",
+      "subCategory": "Gift sets",
       "showOnWebsite": true
     },
     {
@@ -1249,7 +1251,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0034.webp",
       "rating1Count": 0,
-      "subCategory": "Body Cream",
+      "subCategory": "Body cream",
       "showOnWebsite": true
     },
     {
@@ -1266,7 +1268,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0070.webp",
       "rating1Count": 0,
-      "subCategory": "Body Lotion",
+      "subCategory": "Body lotion",
       "showOnWebsite": true
     },
     {
@@ -1284,7 +1286,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0067.webp",
       "rating1Count": 0,
-      "subCategory": "Fine Fragrance Mist, Body Lotion & Hand Cream",
+      "subCategory": "Fine fragrance mist, body lotion & hand cream",
       "showOnWebsite": true
     },
     {
@@ -1301,7 +1303,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0088.webp",
       "rating1Count": 0,
-      "subCategory": "Hand Cream",
+      "subCategory": "Hand cream",
       "showOnWebsite": true
     },
     {
@@ -1318,7 +1320,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0069.webp",
       "rating1Count": 0,
-      "subCategory": "Fine Fragrance Mist & Body Cream",
+      "subCategory": "Fine fragrance mist & body cream",
       "showOnWebsite": true
     },
     {
@@ -1335,7 +1337,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0078.webp",
       "rating1Count": 0,
-      "subCategory": "Mini Body Mist & Hand Cream",
+      "subCategory": "Mini Body mist & hand cream",
       "showOnWebsite": true
     },
     {
@@ -1352,7 +1354,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0073.webp",
       "rating1Count": 0,
-      "subCategory": "Fine Fragrance Mist",
+      "subCategory": "Fine fragrance mist",
       "showOnWebsite": true
     },
     {
@@ -1369,7 +1371,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0089.webp",
       "rating1Count": 0,
-      "subCategory": "Fine Fragrance Mist & Body Cream",
+      "subCategory": "Fine fragrance mist & body cream",
       "showOnWebsite": true
     },
     {
@@ -1412,7 +1414,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0074.webp",
       "rating1Count": 0,
-      "subCategory": "Hand Soap",
+      "subCategory": "Hand soap",
       "showOnWebsite": true
     },
     {
@@ -1429,7 +1431,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0080.webp",
       "rating1Count": 0,
-      "subCategory": "Hand Soap",
+      "subCategory": "Hand soap ",
       "showOnWebsite": true
     },
     {
@@ -1447,7 +1449,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0060.webp",
       "rating1Count": 0,
-      "subCategory": "Hand Soap",
+      "subCategory": "Hand soap",
       "showOnWebsite": true
     },
     {
@@ -1463,7 +1465,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0093.webp",
       "rating1Count": 0,
-      "subCategory": "Fine Fragrance Mist",
+      "subCategory": "Fine fragrance mist",
       "showOnWebsite": true
     },
     {
@@ -1480,7 +1482,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0096.webp",
       "rating1Count": 0,
-      "subCategory": "Hand Cream",
+      "subCategory": "Hand cream ",
       "showOnWebsite": true
     },
     {
@@ -1514,7 +1516,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0101.webp",
       "rating1Count": 0,
-      "subCategory": "Body Cream",
+      "subCategory": "Body cream",
       "showOnWebsite": true
     },
     {
@@ -1531,7 +1533,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0102.webp",
       "rating1Count": 0,
-      "subCategory": "Hand Cream",
+      "subCategory": "Hand cream",
       "showOnWebsite": true
     },
     {
@@ -1548,7 +1550,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0104.webp",
       "rating1Count": 0,
-      "subCategory": "Fine Fragrance Mist",
+      "subCategory": "Fine fragrance mist",
       "showOnWebsite": true
     },
     {
@@ -1565,7 +1567,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0106.webp",
       "rating1Count": 0,
-      "subCategory": "Fine Fragrance Mist & Body Cream",
+      "subCategory": "Fine fragrance mist & body cream",
       "showOnWebsite": true
     },
     {
@@ -1582,7 +1584,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0107.webp",
       "rating1Count": 0,
-      "subCategory": "Fine Fragrance Mist & Body Cream",
+      "subCategory": "Fine fragrance mist & body cream",
       "showOnWebsite": true
     },
     {
@@ -1598,7 +1600,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0108.webp",
       "rating1Count": 0,
-      "subCategory": "Fine Fragrance Mist",
+      "subCategory": "Fine fragrance mist",
       "showOnWebsite": true
     },
     {
@@ -1615,7 +1617,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0110.webp",
       "rating1Count": 0,
-      "subCategory": "Cologne Mist",
+      "subCategory": "Cologne mist",
       "showOnWebsite": true
     },
     {
@@ -1632,7 +1634,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0111.webp",
       "rating1Count": 0,
-      "subCategory": "Fine Fragrance Mist",
+      "subCategory": "Fine fragrance mist",
       "showOnWebsite": true
     },
     {
@@ -1649,7 +1651,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0112.webp",
       "rating1Count": 0,
-      "subCategory": "Fine Fragrance Mist",
+      "subCategory": "Fine fragrance mist",
       "showOnWebsite": true
     },
     {
@@ -1666,7 +1668,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0113.webp",
       "rating1Count": 0,
-      "subCategory": "Body Spray, Body cream & Cologne Mist",
+      "subCategory": "Body spray, body cream & cologne mist",
       "showOnWebsite": true
     },
     {
@@ -1717,7 +1719,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0116.webp",
       "rating1Count": 0,
-      "subCategory": "Fine Fragrance Mist & Body Cream",
+      "subCategory": "Fine fragrance mist & body cream",
       "showOnWebsite": true
     },
     {
@@ -1734,7 +1736,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0117.webp",
       "rating1Count": 0,
-      "subCategory": "Fine Fragrance Mist",
+      "subCategory": "Fine fragrance mist",
       "showOnWebsite": true
     },
     {
@@ -1751,7 +1753,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0118.webp",
       "rating1Count": 0,
-      "subCategory": "Fine Fragrance Mist",
+      "subCategory": "Fine fragrance mist",
       "showOnWebsite": true
     },
     {
@@ -1768,7 +1770,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0120.webp",
       "rating1Count": 0,
-      "subCategory": "Fine Fragrance Mist",
+      "subCategory": "Fine fragrance mist",
       "showOnWebsite": true
     },
     {
@@ -1785,7 +1787,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0121.webp",
       "rating1Count": 0,
-      "subCategory": "Body Cream",
+      "subCategory": "Body cream",
       "showOnWebsite": true
     },
     {
@@ -1802,7 +1804,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0122.webp",
       "rating1Count": 0,
-      "subCategory": "Eau de Parfum",
+      "subCategory": "Eau de parfum",
       "showOnWebsite": true
     },
     {
@@ -1819,7 +1821,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0125.webp",
       "rating1Count": 0,
-      "subCategory": "Fine Fragrance Mist",
+      "subCategory": "Fine fragrance mist",
       "showOnWebsite": true
     },
     {
@@ -1836,7 +1838,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0126.webp",
       "rating1Count": 0,
-      "subCategory": " Single Wick Candle",
+      "subCategory": " Single wick candle",
       "showOnWebsite": true
     },
     {
@@ -1853,7 +1855,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0127.webp",
       "rating1Count": 0,
-      "subCategory": "Cologne Mist",
+      "subCategory": "Cologne mist",
       "showOnWebsite": true
     },
     {
@@ -1870,7 +1872,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0128.webp",
       "rating1Count": 0,
-      "subCategory": "3 Wick Candle",
+      "subCategory": "3 wick candle",
       "showOnWebsite": true
     },
     {
@@ -1887,7 +1889,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0129.webp",
       "rating1Count": 0,
-      "subCategory": "Body Cream",
+      "subCategory": "Body cream",
       "showOnWebsite": true
     },
     {
@@ -1907,7 +1909,7 @@
       "image": "assets/products/uploads/img_0131.webp",
       "rating1Count": 0,
       "rating": 5,
-      "subCategory": "Fine Fragrance Mist",
+      "subCategory": "Fine fragrance mist",
       "showOnWebsite": true
     },
     {
@@ -1929,22 +1931,7 @@
       "image": "assets/products/uploads/img_0132.webp",
       "rating1Count": 0,
       "rating": 5,
-      "subCategory": "Body Spray & Cream",
-      "showOnWebsite": true
-    },
-    {
-      "productStatus": "Available",
-      "isDealOfWeek": false,
-      "price": "GH₵1",
-      "name": "Test Product",
-      "rating5Count": 0,
-      "mainCategory": "BBW",
-      "showInCustomerFavorites": false,
-      "rating4Count": 0,
-      "rating3Count": 0,
-      "rating2Count": 0,
-      "rating1Count": 0,
-      "subCategory": "Beauty",
+      "subCategory": "Body spray & cream",
       "showOnWebsite": true
     }
   ],
@@ -1952,7 +1939,7 @@
     {
       "isDealOfWeek": true,
       "includedItems": "1 Fine Fragrance Mist (236 mL) + 1 Body Lotion/Cream (226 g or 8 oz)",
-      "available": false,
+      "available": true,
       "name": "Sweet Starter Combo",
       "discountText": "Save GH₵40",
       "originalPrice": "GH₵470",
@@ -1963,13 +1950,24 @@
     {
       "isDealOfWeek": false,
       "includedItems": "1 Body Care Item + 1 Hand Sanitizer + 1 Room Spray or Scented Candle",
-      "available": false,
+      "available": true,
       "name": "Home & Body Refresh Combo",
       "discountText": "Save GH₵55",
       "originalPrice": "GH₵565",
       "comboPrice": "GH₵510",
       "image": "assets/products/uploads/img_0130.webp",
       "description": "A balanced personal-care and room-refresh bundle for a sweet-smelling body and space."
+    },
+    {
+      "isDealOfWeek": false,
+      "includedItems": "1 Designer/Luxury Fragrance + 1 Fragrance Mist or Body Care Add-on + Gift-ready packaging note",
+      "available": true,
+      "name": "Luxury Gift Combo",
+      "discountText": "Save GH₵70",
+      "originalPrice": "GH₵700",
+      "comboPrice": "GH₵630",
+      "image": "assets/products/uploads/img_0130.webp",
+      "description": "A gift-ready combo for birthdays, appreciation packages, surprises, and special occasions."
     }
   ],
   "dealOfWeek": {
