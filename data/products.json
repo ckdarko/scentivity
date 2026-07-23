@@ -1963,12 +1963,13 @@
     }
   ],
 "dealOfWeek": {
-  "enabled": false,
+  "enabled": true,
   "itemType": "product",
   "badgeText": "Deal of the Week",
   "title": "This week’s featured scent.",
   "comboName": "",
-  "productName": "Japanese cherry blossom mist & body cream",
+  "productName": "",
+  "image": "",
   "description": "Sweet scents curated just for you.",
   "buttonText": "Add Deal to Cart"
 },
