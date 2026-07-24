@@ -1094,7 +1094,7 @@
       "name": "Meet me in Miami ",
       "rating5Count": 0,
       "mainCategory": "Bath & body works",
-      "showInCustomerFavorites": false,
+      "showInCustomerFavorites": true,
       "rating4Count": 0,
       "rating3Count": 0,
       "rating2Count": 0,
@@ -1106,7 +1106,7 @@
     {
       "size": "259 mL",
       "productStatus": "Available",
-      "isDealOfWeek": false,
+      "isDealOfWeek": true,
       "brand": "Bath & body works",
       "price": "GH₵ 100",
       "name": "Meet me in Miami hand soap ",
