@@ -136,7 +136,7 @@
       "image": "assets/products/uploads/058_scentivity_candle_with_pink_accents.webp",
       "rating1Count": 1,
       "rating": 4.8,
-      "subCategory": "Scented Candle",
+      "subCategory": "Scented Candles",
       "showOnWebsite": true
     },
     {
@@ -308,7 +308,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0024.webp",
       "rating1Count": 0,
-      "subCategory": "Gift set",
+      "subCategory": "Gift Set",
       "showOnWebsite": true
     },
     {
@@ -424,7 +424,7 @@
       "showOnWebsite": true
     },
     {
-      "size": "Single wick",
+      "size": "Single Wick",
       "productStatus": "Incoming",
       "isDealOfWeek": false,
       "brand": "Bath & Body Works",
@@ -438,7 +438,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0008.webp",
       "rating1Count": 0,
-      "subCategory": "Scented candles",
+      "subCategory": "Scented Candles",
       "showOnWebsite": true
     },
     {
@@ -1201,7 +1201,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0054.webp",
       "rating1Count": 0,
-      "subCategory": "Cologne mist",
+      "subCategory": "Cologne Mist",
       "showOnWebsite": true
     },
     {
@@ -1223,7 +1223,7 @@
       "showOnWebsite": true
     },
     {
-      "size": "Gift set",
+      "size": "",
       "productStatus": "Incoming",
       "isDealOfWeek": true,
       "brand": "Bath & Body works ",
@@ -1237,7 +1237,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0004.webp",
       "rating1Count": 0,
-      "subCategory": "Gift sets",
+      "subCategory": "Gift Set",
       "showOnWebsite": true
     },
     {
@@ -1962,17 +1962,17 @@
       "description": "A balanced personal-care and room-refresh bundle for a sweet-smelling body and space."
     }
   ],
-"dealOfWeek": {
-  "enabled": true,
-  "itemType": "product",
-  "badgeText": "Deal of the Week",
-  "title": "This week’s featured scent.",
-  "comboName": "",
-  "productName": "",
-  "image": "",
-  "description": "Sweet scents curated just for you.",
-  "buttonText": "Add Deal to Cart"
-},
+  "dealOfWeek": {
+    "enabled": true,
+    "itemType": "product",
+    "badgeText": "Deal of the Week",
+    "title": "This week’s featured scent.",
+    "comboName": "",
+    "productName": "",
+    "image": "",
+    "description": "Sweet scents curated just for you.",
+    "buttonText": "Add Deal to Cart"
+  },
   "bundleBuilder": {
     "enabled": false,
     "discountTwoItems": 5,
