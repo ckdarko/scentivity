@@ -1936,6 +1936,21 @@
       "rating": 5,
       "subCategory": "Body Spray & Cream",
       "showOnWebsite": true
+    },
+    {
+      "productStatus": "Available",
+      "isDealOfWeek": false,
+      "price": "GH₵ 1",
+      "name": "Test Product",
+      "rating5Count": 0,
+      "mainCategory": "BBW",
+      "showInCustomerFavorites": false,
+      "rating4Count": 0,
+      "rating3Count": 0,
+      "rating2Count": 0,
+      "rating1Count": 0,
+      "subCategory": "Gift Sets",
+      "showOnWebsite": true
     }
   ],
   "combos": [
