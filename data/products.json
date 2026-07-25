@@ -24,7 +24,7 @@
     {
       "paymentLink": "",
       "size": "236 mL",
-      "productStatus": "Incoming",
+      "productStatus": "Available",
       "isDealOfWeek": false,
       "notes": "A sparkling, sweet floral scent with notes of pink prosecco, crystal peonies, and creamy amaretto. Perfect for customers who love feminine, soft, celebratory fragrances.",
       "ingredients": "Ingredients/details may vary by batch. Please check the product packaging.",
@@ -83,7 +83,7 @@
     {
       "paymentLink": "",
       "size": "75 mL/2.5 oz",
-      "productStatus": "Incoming",
+      "productStatus": "Available",
       "isDealOfWeek": false,
       "notes": "A sparkling, sweet floral scent with notes of pink prosecco, crystal peonies, and creamy amaretto. Perfect for customers who love feminine, soft, celebratory fragrances.",
       "ingredients": "Ingredients/details may vary by batch. Please check the product packaging.",
@@ -113,7 +113,7 @@
     {
       "paymentLink": "",
       "size": "Single wick candle",
-      "productStatus": "Incoming",
+      "productStatus": "Available",
       "isDealOfWeek": false,
       "notes": "Fill your space with a warm, celebratory fragrance featuring sparkling pink prosecco, delicate crystal peonies, rich gilded amber, and sweet amaretto crème.\nFragrance Notes: Pink Prosecco, Crystal Peonies, Gilded Amber, Amaretto Crème.",
       "ingredients": "Ingredients/details may vary by batch. Please check the product packaging.",
@@ -142,7 +142,7 @@
     {
       "paymentLink": "",
       "size": "3-wick candle",
-      "productStatus": "Incoming",
+      "productStatus": "Available",
       "isDealOfWeek": false,
       "notes": "Fill your space with a warm, celebratory fragrance featuring sparkling pink prosecco, delicate crystal peonies, rich gilded amber, and sweet amaretto crème.\nFragrance Notes: Pink Prosecco, Crystal Peonies, Gilded Amber, Amaretto Crème.",
       "ingredients": "Ingredients/details may vary by batch. Please check the product packaging.",
@@ -171,7 +171,7 @@
     },
     {
       "size": "75 ml",
-      "productStatus": "Incoming",
+      "productStatus": "Available",
       "isDealOfWeek": false,
       "brand": "Bath & Body Works",
       "price": "GH₵ 70",
