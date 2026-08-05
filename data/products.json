@@ -2401,6 +2401,42 @@
       "rating1Count": 0,
       "subCategory": "Fine Fragrance Mist",
       "showOnWebsite": true
+    },
+    {
+      "productStatus": "Available",
+      "isDealOfWeek": false,
+      "notes": "Juicy Citrus, Ocean Breeze, Tropical Blooms.",
+      "brand": "Victoria's Secret",
+      "price": "GH₵ 160",
+      "name": "Aqua Kiss Vacation Mist",
+      "fragranceNotes": "Juicy Citrus, Ocean Breeze, Tropical Blooms.",
+      "rating5Count": 0,
+      "mainCategory": "Victoria's Secret",
+      "showInCustomerFavorites": false,
+      "rating4Count": 0,
+      "rating3Count": 0,
+      "rating2Count": 0,
+      "image": "assets/products/uploads/aqua_kiss_vacation_scentivity.webp",
+      "rating1Count": 0,
+      "subCategory": "Fine Fraagrance Mist",
+      "showOnWebsite": true
+    },
+    {
+      "productStatus": "Available",
+      "isDealOfWeek": false,
+      "brand": "Victoria's Secret",
+      "price": "GH₵ 160",
+      "name": "Amber Romance Brulee Mist",
+      "rating5Count": 0,
+      "mainCategory": "Victoria's Secret",
+      "showInCustomerFavorites": false,
+      "rating4Count": 0,
+      "rating3Count": 0,
+      "rating2Count": 0,
+      "image": "assets/products/uploads/amber_romance_brulee_scentivity.webp",
+      "rating1Count": 0,
+      "subCategory": "Fine Fragrance Mist",
+      "showOnWebsite": true
     }
   ],
   "combos": [
