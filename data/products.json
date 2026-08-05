@@ -612,7 +612,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0022.webp",
       "rating1Count": 0,
-      "subCategory": "Mini Mist",
+      "subCategory": "Fine Fragrance Mist - Mini",
       "showOnWebsite": true
     },
     {
@@ -632,7 +632,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0014.webp",
       "rating1Count": 0,
-      "subCategory": "Fine fragrance Mist",
+      "subCategory": "Fine Fragrance Mist",
       "showOnWebsite": true
     },
     {
@@ -652,7 +652,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0017.webp",
       "rating1Count": 0,
-      "subCategory": "Fine fragrance Mist",
+      "subCategory": "Fine Fragrance Mist",
       "showOnWebsite": true
     },
     {
@@ -703,19 +703,19 @@
       "productStatus": "Available",
       "isDealOfWeek": false,
       "notes": "Juicy Pear, Sparkling Clementine, Fresh Daisies.",
-      "brand": "Bath & Body works",
+      "brand": "Bath & Body Works",
       "price": "GH₵ 310",
       "name": "Gingham Fresh Mist & Body Cream",
       "fragranceNotes": "Juicy Pear, Sparkling Clementine, Fresh Daisies.",
       "rating5Count": 0,
-      "mainCategory": "Bath & Body works",
+      "mainCategory": "Bath & Body Works",
       "showInCustomerFavorites": false,
       "rating4Count": 0,
       "rating3Count": 0,
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0048.webp",
       "rating1Count": 0,
-      "subCategory": "Fine Fragrance Mist & Body Cream",
+      "subCategory": "Mist & Body Cream",
       "showOnWebsite": true
     },
     {
@@ -775,7 +775,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0026.webp",
       "rating1Count": 0,
-      "subCategory": "Fine fragrance mist",
+      "subCategory": "Fine Fragrance Mist -Mini",
       "showOnWebsite": true
     },
     {
@@ -783,12 +783,12 @@
       "productStatus": "Available",
       "isDealOfWeek": false,
       "notes": "Golden Bergamot, Sunlit Blossoms, Rich Amber.",
-      "brand": "Bath & Body works",
+      "brand": "Bath & Body Works",
       "price": "GH₵ 215",
       "name": "Touch of Gold Mist & Hand cream",
       "fragranceNotes": "Golden Bergamot, Sunlit Blossoms, Rich Amber.",
       "rating5Count": 0,
-      "mainCategory": "Bath & Body works",
+      "mainCategory": "Bath & Body Works",
       "showInCustomerFavorites": false,
       "rating4Count": 0,
       "rating3Count": 0,
@@ -1288,7 +1288,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0016.webp",
       "rating1Count": 0,
-      "subCategory": "Body Cream",
+      "subCategory": "Men's Body Care",
       "showOnWebsite": true
     },
     {
