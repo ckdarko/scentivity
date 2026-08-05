@@ -1,6 +1,6 @@
-/* SCENTIVITY_MOBILE_VIDEO_STARTUP_20260615
-   Starts homepage video on mobile/tablet soon after first paint while avoiding render-blocking downloads.
-   Requirements for mobile autoplay: muted + playsinline + small compressed MP4/WebM. */
+/* SCENTIVITY_MOBILE_VIDEO_STARTUP_20260615 - speed refresh 2026-08-05
+   Faster startup: begins loading the default homepage MP4 immediately after first paint instead
+   of waiting for products.json settings first. Does not edit or delete media files. */
 (function () {
   'use strict';
 
@@ -12,6 +12,13 @@
   function ready(fn) {
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn, { once: true });
     else fn();
+  }
+
+  function isSlowConnection() {
+    var c = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    if (!c) return false;
+    if (c.saveData) return true;
+    return /(^|\s)(slow-2g|2g)(\s|$)/i.test(String(c.effectiveType || ''));
   }
 
   function cleanPath(value, fallback) {
@@ -34,7 +41,6 @@
     if (!els.section || !els.video) return null;
 
     document.body.classList.add('scentivity-mobile-video-startup-enabled');
-    // Also add the old class so any existing video-show CSS from an older upload will not fight this patch.
     document.body.classList.add('scentivity-mobile-video-enabled');
 
     els.section.classList.remove('hidden', 'mobile-video-disabled');
@@ -54,8 +60,7 @@
     els.video.setAttribute('playsinline', '');
     els.video.setAttribute('webkit-playsinline', '');
     els.video.setAttribute('autoplay', '');
-    // Keep first load light. JS switches to metadata immediately before playing.
-    els.video.setAttribute('preload', 'none');
+    els.video.setAttribute('preload', isSlowConnection() ? 'metadata' : 'auto');
     if (!els.video.getAttribute('poster')) els.video.setAttribute('poster', POSTER_DEFAULT);
     return els;
   }
@@ -87,13 +92,25 @@
     if (settings.buttonLink) button.setAttribute('href', settings.buttonLink);
   }
 
+  function setVideoSource(els, src, poster) {
+    if (!els || !els.video || !src) return;
+    var source = els.source || els.video.querySelector('source');
+    var current = source ? source.getAttribute('src') : els.video.getAttribute('src');
+    if (poster) els.video.setAttribute('poster', poster);
+    if (source) {
+      if (current !== src) source.setAttribute('src', src);
+    } else if (current !== src) {
+      els.video.setAttribute('src', src);
+    }
+    try { els.video.load(); } catch (e) {}
+  }
+
   function attemptPlay(video, card) {
     if (!video) return;
     try {
       var playPromise = video.play();
       if (playPromise && typeof playPromise.catch === 'function') {
         playPromise.catch(function () {
-          // Low Power Mode/Data Saver may block autoplay. Keep poster visible and start on the first tap/scroll.
           if (card) card.classList.add('video-paused');
           var resume = function () {
             video.play().catch(function () {});
@@ -111,76 +128,67 @@
     }
   }
 
+  function attachVideoEvents(els) {
+    if (!els || !els.video || els.video.dataset.scentivityVideoEventsAttached === 'true') return;
+    els.video.dataset.scentivityVideoEventsAttached = 'true';
+    var markReady = function () {
+      if (els.card) {
+        els.card.classList.add('video-ready');
+        els.card.classList.remove('video-paused');
+      }
+    };
+    els.video.addEventListener('loadeddata', markReady);
+    els.video.addEventListener('canplay', markReady);
+    els.video.addEventListener('playing', function () {
+      if (els.card) {
+        els.card.classList.add('video-ready', 'video-playing');
+        els.card.classList.remove('video-paused');
+      }
+    });
+    els.video.addEventListener('error', function () {
+      if (els.card) els.card.classList.add('video-paused');
+    });
+  }
+
   function startHomepageVideo() {
     if (STARTED) return;
     STARTED = true;
 
     var els = prepareShell();
     if (!els || !els.video) return;
+    attachVideoEvents(els);
 
+    // Fast path: use the HTML data-src/default MP4 immediately.
+    var fastSrc = cleanPath(
+      (els.source && (els.source.getAttribute('data-src') || els.source.getAttribute('src'))) || els.video.getAttribute('data-src') || VIDEO_DEFAULT,
+      VIDEO_DEFAULT
+    );
+    setVideoSource(els, fastSrc, els.video.getAttribute('poster') || POSTER_DEFAULT);
+    attemptPlay(els.video, els.card);
+
+    // Settings path: update poster/button/custom video after the first load has already started.
     readVideoSettings().then(function (settings) {
-      if (!settings || settings.enabled === false || !settings.videoFile) return;
+      if (!settings || settings.enabled === false) return;
       setOverlay(settings);
-
       els = getEls();
       if (!els.video) return;
-      var source = els.source || els.video.querySelector('source');
-
-      els.video.poster = settings.posterImage || POSTER_DEFAULT;
-      els.video.preload = 'metadata';
-      els.video.muted = true;
-      els.video.defaultMuted = true;
-      els.video.playsInline = true;
-      els.video.autoplay = true;
-      els.video.setAttribute('muted', '');
-      els.video.setAttribute('playsinline', '');
-      els.video.setAttribute('webkit-playsinline', '');
-      els.video.setAttribute('autoplay', '');
-
-      if (source) {
-        if (source.getAttribute('src') !== settings.videoFile) source.setAttribute('src', settings.videoFile);
-      } else if (!els.video.getAttribute('src')) {
-        els.video.setAttribute('src', settings.videoFile);
+      attachVideoEvents(els);
+      if (settings.posterImage) els.video.setAttribute('poster', settings.posterImage);
+      if (settings.videoFile && settings.videoFile !== fastSrc) {
+        setVideoSource(els, settings.videoFile, settings.posterImage || POSTER_DEFAULT);
+        attemptPlay(els.video, els.card);
       }
-
-      var markReady = function () {
-        if (els.card) {
-          els.card.classList.add('video-ready');
-          els.card.classList.remove('video-paused');
-        }
-      };
-      els.video.addEventListener('loadeddata', markReady, { once: true });
-      els.video.addEventListener('canplay', markReady, { once: true });
-      els.video.addEventListener('playing', function () {
-        if (els.card) {
-          els.card.classList.add('video-ready', 'video-playing');
-          els.card.classList.remove('video-paused');
-        }
-      }, { once: true });
-      els.video.addEventListener('error', function () {
-        if (els.card) els.card.classList.add('video-paused');
-      }, { once: true });
-
-      try { els.video.load(); } catch (e) {}
-      attemptPlay(els.video, els.card);
     });
   }
 
   function boot() {
-    // Show the section immediately with the lightweight poster/fallback so mobile does not show a blank area.
     prepareShell();
-
-    // Start shortly after first paint: quick enough to feel like startup, but not render-blocking.
-    var startAfterPaint = function () {
-      window.setTimeout(startHomepageVideo, 220);
-    };
+    var startAfterPaint = function () { window.setTimeout(startHomepageVideo, 120); };
     if ('requestAnimationFrame' in window) {
       requestAnimationFrame(function () { requestAnimationFrame(startAfterPaint); });
     } else {
-      window.setTimeout(startHomepageVideo, 450);
+      window.setTimeout(startHomepageVideo, 260);
     }
-
-    // If the customer touches/scrolls before the timer, start immediately.
     ['touchstart', 'pointerdown', 'scroll'].forEach(function (name) {
       window.addEventListener(name, startHomepageVideo, { once: true, passive: true });
     });
