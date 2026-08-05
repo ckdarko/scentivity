@@ -3,6 +3,7 @@
     {
       "productStatus": "Available",
       "isDealOfWeek": false,
+      "brand": "Bath &Body Works",
       "price": "GH₵ 1",
       "name": "Test Product",
       "availableQuantity": 5,
@@ -13,7 +14,7 @@
       "rating3Count": 0,
       "rating2Count": 0,
       "rating1Count": 0,
-      "subCategory": "Gift Sets",
+      "subCategory": "Gift Set",
       "showOnWebsite": true
     },
     {
@@ -21,7 +22,7 @@
       "productStatus": "Available",
       "isDealOfWeek": false,
       "brand": "Bath & Body Works",
-      "price": "GH₵ 310",
+      "price": "GH₵ 300",
       "name": "A Thousand Wishes Mist & Body Cream",
       "fragranceNotes": "Pink prosecco (or sparkling champagne), Sparkling quince, Crystal peonies, Gilded amber, Amaretto crème",
       "productDetails": "Sweet and fruity, Feminine, elegant, and slightly festive—great for everyday wear or special occasions.",
@@ -45,7 +46,7 @@
       "notes": "A sparkling, sweet floral scent with notes of pink prosecco, crystal peonies, and creamy amaretto. Perfect for customers who love feminine, soft, celebratory fragrances.",
       "ingredients": "Ingredients/details may vary by batch. Please check the product packaging.",
       "brand": "Bath & Body Works",
-      "price": "GH₵160",
+      "price": "GH₵150",
       "available": true,
       "name": " A Thousand Wishes Mist",
       "slug": "victoria-s-secret-pure-wonder-fragrance-mist",
@@ -75,7 +76,7 @@
       "notes": "Moisturizing body cream with notes of pink prosecco, crystal peonies, and creamy amaretto. Perfect for customers who love feminine, soft, celebratory fragrances.",
       "ingredients": "Ingredients/details may vary by batch. Please check the product packaging.",
       "brand": "Bath & Body Works",
-      "price": "GH₵160",
+      "price": "GH₵150",
       "available": true,
       "name": "A Thousand Wishes Body Cream",
       "slug": "bath-and-body-works-body-cream",
