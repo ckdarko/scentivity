@@ -6,6 +6,7 @@
       "brand": "Bath &Body Works",
       "price": "GH₵ 0",
       "name": "Test Product",
+      "purchaseCount": 1,
       "availableQuantity": 5,
       "rating5Count": 0,
       "mainCategory": "BBW",
