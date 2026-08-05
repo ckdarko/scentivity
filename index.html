@@ -14,7 +14,6 @@
   <link rel="stylesheet" href="scentivity-lightweight-mobile-20260615.css?v=ultra-mobile-20260615" />
   <link rel="stylesheet" href="scentivity-mobile-video-startup-20260615.css?v=mobile-video-startup-20260615" />
   <link rel="stylesheet" href="scentivity-promo-marquee-fixed-20260615.css?v=promo-fixed-20260615" />
-  <link rel="preload" as="image" href="assets/scentivity-video-poster.svg" fetchpriority="high" />
 </head>
 <body id="top">
 
@@ -597,7 +596,6 @@
 
   <button class="back-to-top" id="backToTop" type="button" aria-label="Move back to the top of the page">↑</button>
 
-  <script src="scentivity-image-video-speed-20260805.js?v=speed-boost-20260805" defer></script>
   <script src="script.js?v=ultra-mobile-20260615" defer></script>
   <script src="scentivity-mobile-video-startup-20260615.js?v=mobile-video-startup-20260615" defer></script>
 <noscript>
@@ -771,6 +769,24 @@
 
       document.addEventListener('keydown', (event) => {
         if (event.key === 'Escape') closeFeedback();
+      });
+    })();
+  </script>
+
+  <script>
+    (() => {
+      const scrollToHelpPolicies = () => {
+        if (window.location.hash !== '#help-policies') return;
+        const section = document.getElementById('help-policies');
+        if (!section) return;
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      };
+
+      window.addEventListener('hashchange', scrollToHelpPolicies);
+      window.addEventListener('load', () => {
+        scrollToHelpPolicies();
+        setTimeout(scrollToHelpPolicies, 250);
+        setTimeout(scrollToHelpPolicies, 900);
       });
     })();
   </script>
