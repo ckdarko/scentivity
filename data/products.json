@@ -4,7 +4,7 @@
       "productStatus": "Available",
       "isDealOfWeek": false,
       "brand": "Bath &Body Works",
-      "price": "GH₵ 1",
+      "price": "GH₵ 0",
       "name": "Test Product",
       "availableQuantity": 5,
       "rating5Count": 0,
@@ -792,7 +792,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0026.webp",
       "rating1Count": 0,
-      "subCategory": "Fine Fragrance Mist -Mini",
+      "subCategory": "Fine Fragrance Mist - Mini",
       "showOnWebsite": true
     },
     {
@@ -1949,7 +1949,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0117.webp",
       "rating1Count": 0,
-      "subCategory": "Fine Fragrance Mist -Mini",
+      "subCategory": "Fine Fragrance Mist - Mini",
       "showOnWebsite": true
     },
     {
@@ -2738,7 +2738,7 @@
     },
     {
       "label": "GIFT SET",
-      "categoryName": "gift_sets",
+      "categoryName": "gift_set",
       "subcategories": [
         "Gift Set"
       ],
