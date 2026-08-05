@@ -2243,7 +2243,6 @@
         "Fine Fragrance Mist",
         "Body Wash & Shower Gels",
         "Hand Sanitizers",
-        "Home Fragrances",
         "Scented Candles",
         "Room Sprays",
         "Car Fragrances",
@@ -2255,12 +2254,7 @@
       "label": "VICTORIA’S SECRET",
       "categoryName": "Victoria's Secret Collection",
       "subcategories": [
-        "Body Care",
-        "Body Lotions and Cream",
-        "Fine Fragrance Mist",
-        "Body Wash & Shower Gels",
-        "Men's Body Care",
-        "Gift Sets"
+        "Fine Fragrance Mist"
       ],
       "showInCatalogue": true
     },
@@ -2268,11 +2262,7 @@
       "label": "DESIGNER FRAGRANCE",
       "categoryName": "Designer and Luxury Fragrances",
       "subcategories": [
-        "Designer Fragrance",
-        "Fine Fragrance Mist",
-        "Home Fragrances",
-        "Men's Body Care",
-        "Gift Sets"
+        "Designer Fragrance"
       ],
       "showInCatalogue": true
     },
@@ -2280,10 +2270,7 @@
       "label": "GIFT SETS",
       "categoryName": "gift_sets",
       "subcategories": [
-        "Body care",
-        "Fine fragrance mist",
-        "Gift sets",
-        "Designer Fragrance"
+        "Gift sets"
       ],
       "showInCatalogue": true
     }
@@ -2292,7 +2279,7 @@
     "enabled": true,
     "videoFile": "assets/products/uploads/00.-copycompressed_e4b2e756-47f2-4ffd-947e-9e68987cddea-1.mp4",
     "posterImage": "assets/products/uploads/137_vanilla_romance_in_luxe_blooms.webp",
-    "headline": "Sweet Scents in Motion.",
+    "headline": "Sweet scents in motion.",
     "subheading": "Discover fragrance mists, body care, luxury scents, and gift-ready deals.",
     "buttonText": "Shop the collection",
     "buttonLink": "#products"
