@@ -224,7 +224,13 @@ function getStockValue(product) {
   return Number.isFinite(number) ? Math.max(0, Math.floor(number)) : null;
 }
 
-function deductStock(productsData, orderItems) {
+function getPurchaseValue(product) {
+  const value = product.purchaseCount ?? product.numberPurchased ?? product.purchases ?? product.soldCount ?? product.boughtCount ?? 0;
+  const number = Number(value);
+  return Number.isFinite(number) ? Math.max(0, Math.floor(number)) : 0;
+}
+
+function applyPurchaseAndStockUpdates(productsData, orderItems) {
   const products = Array.isArray(productsData?.products) ? productsData.products : [];
   const changes = [];
   const skipped = [];
@@ -237,30 +243,44 @@ function deductStock(productsData, orderItems) {
     }
 
     const { product, index } = match;
+    const purchasedQuantity = Math.max(1, Math.floor(Number(orderItem.quantity || 1)));
+
+    const purchaseBefore = getPurchaseValue(product);
+    const purchaseAfter = purchaseBefore + purchasedQuantity;
+    product.purchaseCount = purchaseAfter;
+
+    let stockBefore = null;
+    let stockAfter = null;
+    let stockChanged = false;
+    let stockNote = '';
+
     if (!hasStockField(product)) {
-      skipped.push({ name: product.name || orderItem.name, quantity: orderItem.quantity, reason: 'No stock field on product' });
-      continue;
-    }
-
-    const before = getStockValue(product);
-    if (before === null) {
-      skipped.push({ name: product.name || orderItem.name, quantity: orderItem.quantity, reason: 'Stock field is not numeric' });
-      continue;
-    }
-
-    const after = Math.max(0, before - orderItem.quantity);
-    product.availableQuantity = after;
-    if (after <= 0) {
-      product.productStatus = 'Out of Stock';
-      product.available = false;
+      stockNote = 'Purchase count updated; no stock field found.';
+    } else {
+      stockBefore = getStockValue(product);
+      if (stockBefore === null) {
+        stockNote = 'Purchase count updated; stock field is not numeric.';
+      } else {
+        stockAfter = Math.max(0, stockBefore - purchasedQuantity);
+        product.availableQuantity = stockAfter;
+        stockChanged = true;
+        if (stockAfter <= 0) {
+          product.productStatus = 'Out of Stock';
+          product.available = false;
+        }
+      }
     }
 
     changes.push({
       index,
       name: product.name || orderItem.name,
-      quantityPurchased: orderItem.quantity,
-      before,
-      after
+      quantityPurchased: purchasedQuantity,
+      purchaseBefore,
+      purchaseAfter,
+      stockBefore,
+      stockAfter,
+      stockChanged,
+      note: stockNote
     });
   }
 
@@ -319,7 +339,7 @@ exports.handler = async function handler(event) {
       return jsonResponse(200, { ok: true, reference, duplicate: true, message: 'Reference already processed.' });
     }
 
-    const { changes, skipped } = deductStock(productsData, orderItems);
+    const { changes, skipped } = applyPurchaseAndStockUpdates(productsData, orderItems);
     if (!changes.length) {
       processedReferences.push(reference);
       processedData.processedReferences = processedReferences.slice(-1000);
@@ -335,7 +355,7 @@ exports.handler = async function handler(event) {
         { path: PROCESSED_PATH, content: JSON.stringify(processedData, null, 2) + '\n' }
       ], `Record Paystack stock event ${reference}`);
 
-      return jsonResponse(200, { ok: true, reference, changes, skipped, message: 'Webhook processed, but no stock fields were changed.' });
+      return jsonResponse(200, { ok: true, reference, changes, skipped, message: 'Webhook processed, but no product records were changed.' });
     }
 
     processedReferences.push(reference);
@@ -350,7 +370,7 @@ exports.handler = async function handler(event) {
     const commitSha = await commitFiles(repo, branch, [
       { path: PRODUCTS_PATH, content: JSON.stringify(productsData, null, 2) + '\n' },
       { path: PROCESSED_PATH, content: JSON.stringify(processedData, null, 2) + '\n' }
-    ], `Reduce Scentivity stock after Paystack payment ${reference}`);
+    ], `Update Scentivity purchase count and stock after Paystack payment ${reference}`);
 
     await triggerOptionalBuildHook();
 
