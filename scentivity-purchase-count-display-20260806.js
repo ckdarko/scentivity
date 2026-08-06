@@ -177,24 +177,53 @@
     return card.querySelector('.compact-product-meta, .showcase-quick-meta, .product-meta, .product-card-meta, .product-info, .showcase-copy, .product-page-meta, .product-detail-meta') || card;
   }
 
+  function isPurchaseCountNode(node) {
+    if (!node) return false;
+    if (node.hasAttribute?.('data-purchase-count-display')) return true;
+    const text = cleanText(node.textContent || '');
+    // Match short count labels like "0 bought", "| 8 bought", "1.2k bought" only.
+    // This avoids removing longer product descriptions that may use the word "bought".
+    return /^\|?\s*(?:\d+(?:[,.]\d+)?|\d+(?:\.\d+)?[kKmM])\s+bought\.?$/i.test(text);
+  }
+
+  function existingCountNode(card) {
+    return Array.from(card.querySelectorAll('[data-purchase-count-display], span, em, small, p'))
+      .find(isPurchaseCountNode);
+  }
+
+  function shouldUseSeparator(container) {
+    return !!container?.closest?.('.compact-product-meta, .showcase-quick-meta, .product-card-meta') ||
+      !!container?.classList?.contains?.('compact-product-meta') ||
+      !!container?.classList?.contains?.('showcase-quick-meta') ||
+      !!container?.classList?.contains?.('product-card-meta');
+  }
+
   function updateOrCreateCount(card, count) {
     if (!card) return;
-    const textValue = `${formatCount(count)} bought`;
-    const existing = Array.from(card.querySelectorAll('[data-purchase-count-display], span, em, small, p'))
-      .find(node => /\bbought\b/i.test(node.textContent || ''));
+    const safeCount = Number.isFinite(Number(count)) ? Math.max(0, Math.floor(Number(count))) : 0;
+    const existing = existingCountNode(card);
 
-    if (existing) {
-      existing.textContent = textValue;
-      existing.setAttribute('data-purchase-count-display', 'true');
-      existing.setAttribute('aria-label', `${count} purchases`);
+    // Do not show "0 bought" or any bought label before the first sale.
+    if (safeCount <= 0) {
+      if (existing) existing.remove();
       return;
     }
 
     const container = getMetaContainer(card);
+    const textValue = `${formatCount(safeCount)} bought`;
+    const displayValue = shouldUseSeparator(existing || container) ? `| ${textValue}` : textValue;
+
+    if (existing) {
+      existing.textContent = displayValue;
+      existing.setAttribute('data-purchase-count-display', 'true');
+      existing.setAttribute('aria-label', `${safeCount} purchases`);
+      return;
+    }
+
     const span = document.createElement(container.classList?.contains('product-page-content') ? 'p' : 'span');
     span.setAttribute('data-purchase-count-display', 'true');
-    span.setAttribute('aria-label', `${count} purchases`);
-    span.textContent = textValue;
+    span.setAttribute('aria-label', `${safeCount} purchases`);
+    span.textContent = displayValue;
 
     if (container !== card && container.children.length) {
       container.appendChild(span);
