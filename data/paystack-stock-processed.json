@@ -1,4 +1,21 @@
 {
-  "processedReferences": [],
-  "events": []
+  "processedReferences": [
+    "SCENTIVITY-1785989942333-E46AWB"
+  ],
+  "events": [
+    {
+      "reference": "SCENTIVITY-1785989942333-E46AWB",
+      "processedAt": "2026-08-06T04:20:04.304Z",
+      "changes": [
+        {
+          "index": 0,
+          "name": "Test Product",
+          "quantityPurchased": 5,
+          "before": 5,
+          "after": 0
+        }
+      ],
+      "skipped": []
+    }
+  ]
 }

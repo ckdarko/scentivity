@@ -1,13 +1,13 @@
 {
   "products": [
     {
-      "productStatus": "Available",
+      "productStatus": "Out of Stock",
       "isDealOfWeek": false,
       "brand": "Bath &Body Works",
       "price": "GH₵ 1",
       "name": "Test Product",
       "purchaseCount": 1,
-      "availableQuantity": 5,
+      "availableQuantity": 0,
       "rating5Count": 0,
       "mainCategory": "BBW",
       "showInCustomerFavorites": false,
@@ -16,7 +16,8 @@
       "rating2Count": 0,
       "rating1Count": 0,
       "subCategory": "Gift Set",
-      "showOnWebsite": true
+      "showOnWebsite": true,
+      "available": false
     },
     {
       "size": "8 oz / 226 mL",
