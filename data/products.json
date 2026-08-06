@@ -5,6 +5,7 @@
       "isDealOfWeek": false,
       "brand": "Bath &Body Works",
       "price": "GH₵ 1",
+      "available": false,
       "name": "Test Product",
       "purchaseCount": 1,
       "availableQuantity": 0,
@@ -16,8 +17,7 @@
       "rating2Count": 0,
       "rating1Count": 0,
       "subCategory": "Gift Set",
-      "showOnWebsite": true,
-      "available": false
+      "showOnWebsite": true
     },
     {
       "size": "8 oz / 226 mL",
@@ -2744,7 +2744,7 @@
       "subcategories": [
         "Gift Set"
       ],
-      "showInCatalogue": true
+      "showInCatalogue": false
     }
   ],
   "homepageVideo": {
