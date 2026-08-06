@@ -174,7 +174,7 @@
       "purchaseCount": 0,
       "fragranceNotes": "Fragrance Notes: Pink Prosecco, Crystal Peonies, Gilded Amber, Amaretto Crème.",
       "productDetails": "Fill your space with a warm, celebratory fragrance featuring sparkling pink prosecco, delicate crystal peonies, rich gilded amber, and sweet amaretto crème.\nFragrance Notes: Pink Prosecco, Crystal Peonies, Gilded Amber, Amaretto Crème.",
-      "availableQuantity": "",
+      "availableQuantity": 0,
       "reviewCount": 1,
       "rating5Count": 48,
       "mainCategory": "Bath & Body Works ",
@@ -198,6 +198,7 @@
       "price": "GH₵ 70",
       "name": "Warm Vanilla Sugar Mini Mist",
       "fragranceNotes": "Intoxicating Vanilla, White Orchid, Sparkling Sugar, Fresh Jasmine, Creamy Sandalwood.",
+      "availableQuantity": 1,
       "rating5Count": 0,
       "mainCategory": "Bath & Body works",
       "showInCustomerFavorites": false,
@@ -206,7 +207,7 @@
       "rating2Count": 0,
       "image": "assets/products/uploads/img_0005.webp",
       "rating1Count": 0,
-      "subCategory": "Fine Fragrance Mist",
+      "subCategory": "Fine Fragrance Mist - Mini",
       "showOnWebsite": true
     },
     {
