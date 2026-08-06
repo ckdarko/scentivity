@@ -74,7 +74,7 @@
     {
       "paymentLink": "",
       "size": "8 oz / 226 g ",
-      "productStatus": "Available",
+      "productStatus": "Out of Stock",
       "isDealOfWeek": false,
       "notes": "Moisturizing body cream with notes of pink prosecco, crystal peonies, and creamy amaretto. Perfect for customers who love feminine, soft, celebratory fragrances.",
       "ingredients": "Ingredients/details may vary by batch. Please check the product packaging.",
@@ -115,7 +115,7 @@
       "purchaseCount": "",
       "fragranceNotes": "A sparkling, sweet floral scent with notes of pink prosecco, crystal peonies, and creamy amaretto. Perfect for customers who love feminine, soft, celebratory fragrances.",
       "productDetails": "A polished sweet scent profile with soft florals, vanilla, amber, and clean musk.",
-      "availableQuantity": "",
+      "availableQuantity": 1,
       "reviewCount": "",
       "rating5Count": 32,
       "mainCategory": "Bath & Body Works",
