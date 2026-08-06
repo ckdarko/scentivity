@@ -1,14 +1,14 @@
 {
   "products": [
     {
-      "productStatus": "Out of Stock",
+      "productStatus": "Available",
       "isDealOfWeek": false,
       "brand": "Bath &Body Works",
       "price": "GH₵ 1",
       "available": false,
       "name": "Test Product",
       "purchaseCount": 1,
-      "availableQuantity": 0,
+      "availableQuantity": 2,
       "rating5Count": 0,
       "mainCategory": "BBW",
       "showInCustomerFavorites": false,
