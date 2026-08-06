@@ -133,3 +133,14 @@
   .scentivity-ai-launcher strong { display: none; }
   .scentivity-ai-modal { border-radius: 20px; padding: 1rem; }
 }
+
+/* Free smart assistant note */
+.scentivity-ai-free-note {
+  margin: 0 0 0.85rem;
+  font-size: 0.88rem;
+  color: #7a3155;
+  background: #fff3f8;
+  border: 1px solid rgba(224, 0, 91, 0.16);
+  border-radius: 14px;
+  padding: 0.7rem 0.85rem;
+}

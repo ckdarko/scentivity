@@ -9,17 +9,17 @@
 
   button.addEventListener('click', async () => {
     const value = input.value.trim();
-    if (!value) {
+    if (!value && task.value !== 'stock_insights') {
       output.textContent = 'Enter product, review, stock, or caption details first.';
       return;
     }
     button.disabled = true;
-    output.textContent = 'Generating...';
+    output.textContent = 'Generating with the free Scentivity smart helper...';
     try {
-      const answer = await window.ScentivityAI.askAI(task.value, value);
+      const answer = await window.ScentivityAI.askAI(task.value, value || 'Analyze current products');
       output.textContent = answer;
     } catch (error) {
-      output.textContent = error.message || 'AI admin helper is temporarily unavailable.';
+      output.textContent = error.message || 'Free smart helper is temporarily unavailable.';
     } finally {
       button.disabled = false;
     }
