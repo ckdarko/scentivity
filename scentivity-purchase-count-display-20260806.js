@@ -1,4 +1,4 @@
-// SCENTIVITY_PURCHASE_COUNT_DISPLAY_20260806
+// SCENTIVITY_PURCHASE_COUNT_DISPLAY_20260806_STRONG_HIDE_ZERO
 // Displays the live purchase/bought count for product cards and product detail pages.
 // Safe: reads data/products.json only; does not edit products, data, or uploaded images.
 (function () {
@@ -186,9 +186,52 @@
     return /^\|?\s*(?:\d+(?:[,.]\d+)?|\d+(?:\.\d+)?[kKmM])\s+bought\.?$/i.test(text);
   }
 
+  function existingCountNodes(card) {
+    return Array.from(card.querySelectorAll('[data-purchase-count-display], span, em, small, p, div'))
+      .filter(isPurchaseCountNode);
+  }
+
   function existingCountNode(card) {
-    return Array.from(card.querySelectorAll('[data-purchase-count-display], span, em, small, p'))
-      .find(isPurchaseCountNode);
+    return existingCountNodes(card)[0] || null;
+  }
+
+  function removeZeroBoughtText(root) {
+    if (!root) return;
+
+    // Remove standalone labels such as "0 bought" or "| 0 bought".
+    root.querySelectorAll('[data-purchase-count-display], span, em, small, p').forEach(node => {
+      const text = cleanText(node.textContent || '');
+      if (/^\|?\s*0\s+bought\.?$/i.test(text)) node.remove();
+    });
+
+    // Some product cards render metadata as one text node, e.g.
+    // "★ 4.9 | 20 reviews | 0 bought". Remove only the zero-bought segment.
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      acceptNode(node) {
+        const value = node.nodeValue || '';
+        return /(?:^|\|)\s*0\s+bought\.?/i.test(value) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+      }
+    });
+
+    const textNodes = [];
+    while (walker.nextNode()) textNodes.push(walker.currentNode);
+
+    textNodes.forEach(node => {
+      let value = node.nodeValue || '';
+      value = value
+        .replace(/\s*\|\s*0\s+bought\.?/gi, '')
+        .replace(/^\s*0\s+bought\.?\s*$/gi, '')
+        .replace(/\s{2,}/g, ' ');
+      node.nodeValue = value;
+    });
+  }
+
+  function removeAllBoughtLabels(root) {
+    if (!root) return;
+    root.querySelectorAll('[data-purchase-count-display], span, em, small, p').forEach(node => {
+      const text = cleanText(node.textContent || '');
+      if (/^\|?\s*(?:\d+(?:[,.]\d+)?|\d+(?:\.\d+)?[kKmM])\s+bought\.?$/i.test(text)) node.remove();
+    });
   }
 
   function shouldUseSeparator(container) {
@@ -201,14 +244,18 @@
   function updateOrCreateCount(card, count) {
     if (!card) return;
     const safeCount = Number.isFinite(Number(count)) ? Math.max(0, Math.floor(Number(count))) : 0;
-    const existing = existingCountNode(card);
+
+    // Always clean any existing "0 bought" text first, including combined meta text.
+    removeZeroBoughtText(card);
 
     // Do not show "0 bought" or any bought label before the first sale.
     if (safeCount <= 0) {
-      if (existing) existing.remove();
+      existingCountNodes(card).forEach(node => node.remove());
+      removeZeroBoughtText(card);
       return;
     }
 
+    const existing = existingCountNode(card);
     const container = getMetaContainer(card);
     const textValue = `${formatCount(safeCount)} bought`;
     const displayValue = shouldUseSeparator(existing || container) ? `| ${textValue}` : textValue;
@@ -219,6 +266,9 @@
       existing.setAttribute('aria-label', `${safeCount} purchases`);
       return;
     }
+
+    // Avoid duplicate bought labels before inserting the updated one.
+    removeAllBoughtLabels(container || card);
 
     const span = document.createElement(container.classList?.contains('product-page-content') ? 'p' : 'span');
     span.setAttribute('data-purchase-count-display', 'true');
@@ -254,15 +304,37 @@
     });
   }
 
+  function hideZeroBoughtEverywhere() {
+    const broadTargets = [
+      document.getElementById('homepageProductSlides'),
+      document.getElementById('productGrid'),
+      document.getElementById('comboGrid'),
+      document.getElementById('productPageContent'),
+      document.body
+    ].filter(Boolean);
+
+    broadTargets.forEach(removeZeroBoughtText);
+  }
+
   async function refreshPurchaseCounts(force) {
+    hideZeroBoughtEverywhere();
+
     const index = await loadProducts(force);
-    if (!index) return;
+    if (!index) {
+      hideZeroBoughtEverywhere();
+      return;
+    }
 
     productCardCandidates().forEach(card => {
       const info = findInfo(index, card);
-      if (!info) return;
+      if (!info) {
+        removeZeroBoughtText(card);
+        return;
+      }
       updateOrCreateCount(card, info.count);
     });
+
+    hideZeroBoughtEverywhere();
   }
 
   function refreshSoon(force) {
