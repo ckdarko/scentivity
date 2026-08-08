@@ -999,7 +999,7 @@
     },
     {
       "size": "2.5 fl oz / 7mL",
-      "productStatus": "Out of Stock",
+      "productStatus": "Available",
       "isDealOfWeek": false,
       "notes": "Spun Sugar, Pink Berries, Whipped Vanilla.",
       "brand": "Bath & Body Works",
@@ -1007,6 +1007,7 @@
       "name": "Cotton Candy Clouds Mini Mist",
       "fragranceNotes": "Spun Sugar, Pink Berries, Whipped Vanilla.",
       "productDetails": "A sweet, dreamy fragrance that wraps you in fluffy spun sugar, juicy berries, and soft vanilla for a playful scent that's irresistibly cozy.",
+      "availableQuantity": 1,
       "rating5Count": 0,
       "mainCategory": "Bath & Body Works",
       "showInCustomerFavorites": false,
