@@ -4,21 +4,30 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Thank You | Scentivity</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=ultra-mobile-20260615" />
+  <link rel="stylesheet" href="scentivity-cart-count-badge-fix-20260611.css?v=ultra-mobile-20260615" />
 </head>
 <body>
   <main class="section" style="min-height: 70vh; display: grid; place-items: center; text-align: center;">
     <div>
-      <p class="eyebrow">Message received</p>
+      <p class="eyebrow">Order received</p>
       <h1 style="font-size: clamp(3rem, 7vw, 6rem);">Thank you.</h1>
-      <p class="hero-text" style="margin-left: auto; margin-right: auto;">Your request has been prepared for Scentivity. You can also contact us by email at scentivitygh@gmail.com or WhatsApp at 053 458 4470.</p>
+      <p class="hero-text" style="margin-left: auto; margin-right: auto;">Your payment/order has been received. Scentivity will confirm your order shortly.</p>
+      <p id="paymentReference" class="hero-text"></p>
       <div class="hero-actions" style="justify-content: center;">
         <a class="btn primary" href="/">Return home</a>
-        <a class="btn ghost" href="mailto:scentivitygh@gmail.com?subject=Scentivity%20Product%20Request&body=Hello%20Scentivity%2C%0A%0AI%20would%20like%20to%20send%20a%20product%20request.">Email Scentivity</a>
+        <a class="btn ghost" href="https://wa.me/233534584470?text=Hello%20Scentivity%2C%20I%20just%20completed%20an%20order%20and%20would%20like%20to%20confirm%20the%20details." target="_blank" rel="noreferrer">Message Scentivity</a>
       </div>
     </div>
-  <p id="paymentReference" class="hero-text"></p>
   </main>
-<script>const ref = new URLSearchParams(location.search).get("reference"); const el = document.getElementById("paymentReference"); if (el && ref) el.textContent = "Payment reference: " + ref + ". Scentivity will confirm your order shortly.";</script>
+  <script src="scentivity-clear-cart-after-checkout-20260808.js?v=clear-cart-20260808" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const params = new URLSearchParams(location.search || '');
+      const ref = params.get('reference') || params.get('trxref') || params.get('paystackReference');
+      const el = document.getElementById('paymentReference');
+      if (el && ref) el.textContent = 'Payment reference: ' + ref + '. Your cart has been cleared.';
+    });
+  </script>
 </body>
 </html>
