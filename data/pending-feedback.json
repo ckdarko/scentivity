@@ -1,6 +1,16 @@
 {
   "pendingFeedback": [
     {
+      "id": "feedback-1786318388487",
+      "name": "Robertlaw",
+      "rating": 2,
+      "productsPurchased": "",
+      "message": "Xin chào, tôi muốn biết giá của bạn.",
+      "approved": false,
+      "date": "2026-08-09T23:33:08.487Z",
+      "source": "customer_submission"
+    },
+    {
       "id": "feedback-1786266813886",
       "name": "Adwoa",
       "rating": 5,
