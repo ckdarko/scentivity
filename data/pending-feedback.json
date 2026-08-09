@@ -1,6 +1,16 @@
 {
   "pendingFeedback": [
     {
+      "id": "feedback-1786266813886",
+      "name": "Adwoa",
+      "rating": 5,
+      "productsPurchased": "A Thousand Wishes Mist",
+      "message": "Good service lovely website",
+      "approved": false,
+      "date": "2026-08-09T09:13:33.886Z",
+      "source": "customer_submission"
+    },
+    {
       "id": "feedback-1786150296929",
       "name": "Ronaldecole",
       "rating": 2,
