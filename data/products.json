@@ -680,7 +680,7 @@
       "showOnWebsite": true
     },
     {
-      "productStatus": "Available",
+      "productStatus": "Out of Stock",
       "isDealOfWeek": false,
       "notes": "Fragrance Notes: Juicy Pear, Sparkling Clementine, Fresh Daisies.",
       "ingredients": "Ingredients/details may vary by batch. Please check the product packaging.",
@@ -689,7 +689,7 @@
       "name": "Gingham Fresh Mist",
       "fragranceNotes": "Fragrance Notes: Juicy Pear, Sparkling Clementine, Fresh Daisies.",
       "productDetails": "A crisp, uplifting fragrance that blends juicy fruits with blooming florals for a fresh, clean scent that feels effortlessly vibrant.",
-      "availableQuantity": 2,
+      "availableQuantity": 0,
       "reviewCount": "",
       "rating5Count": "",
       "mainCategory": "Bath & Body Works ",
@@ -835,7 +835,7 @@
     },
     {
       "size": "2.5 fl oz / 75 mL",
-      "productStatus": "Available",
+      "productStatus": "Out of Stock",
       "isDealOfWeek": false,
       "notes": "Frangipani Blossoms, Toasted Coconut, Bergamot Waters, Sea Salt Breeze, Sun-Kissed Musk.",
       "brand": "Bath & Body Works",
@@ -843,7 +843,7 @@
       "name": "At The Beach - Mini Mist",
       "fragranceNotes": "Frangipani Blossoms, Toasted Coconut, Bergamot Waters, Sea Salt Breeze, Sun-Kissed Musk.",
       "productDetails": "Escape to the coast with a fresh, sun-kissed fragrance that blends creamy coconut, breezy florals, and warm musk for the perfect beach-day scent.",
-      "availableQuantity": 1,
+      "availableQuantity": "",
       "rating5Count": 0,
       "mainCategory": "Bath & Body Works",
       "showInCustomerFavorites": false,
