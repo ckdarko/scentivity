@@ -1,28 +1,6 @@
 {
   "products": [
     {
-      "size": "8 oz / 226 mL",
-      "productStatus": "Out of Stock",
-      "isDealOfWeek": false,
-      "brand": "Bath & Body Works",
-      "price": "GH₵ 300",
-      "name": "A Thousand Wishes Mist & Body Cream",
-      "fragranceNotes": "Pink prosecco (or sparkling champagne), Sparkling quince, Crystal peonies, Gilded amber, Amaretto crème",
-      "productDetails": "Sweet and fruity, Feminine, elegant, and slightly festive—great for everyday wear or special occasions.",
-      "availableQuantity": "",
-      "rating5Count": 0,
-      "mainCategory": "Bath & Body Works",
-      "showInCustomerFavorites": false,
-      "rating4Count": 0,
-      "rating3Count": 0,
-      "rating2Count": 0,
-      "image": "assets/products/uploads/img_0030.webp",
-      "rating1Count": 0,
-      "rating": 4.9,
-      "subCategory": "Mist & Body Cream",
-      "showOnWebsite": true
-    },
-    {
       "paymentLink": "",
       "size": "236 mL",
       "productStatus": "Available",
@@ -1856,7 +1834,7 @@
     },
     {
       "size": "236 mL & 226 g",
-      "productStatus": "Available",
+      "productStatus": "Out of Stock",
       "isDealOfWeek": false,
       "notes": "Sugared Red Berries, Blushing Freesia, Rose Meringue.",
       "brand": "Bath & Body Works",
@@ -1907,7 +1885,7 @@
       "name": "Ocean Cologne Mist",
       "fragranceNotes": "Blue Cypress, Vetiver, Coastal Air.",
       "productDetails": "A crisp, refreshing fragrance inspired by the sea, blending cool woods and fresh air for a clean, invigorating scent that's perfect for everyday wear.",
-      "availableQuantity": 1,
+      "availableQuantity": 2,
       "rating5Count": 0,
       "mainCategory": "Bath & Body Works",
       "showInCustomerFavorites": false,
@@ -1951,7 +1929,7 @@
       "name": "Champagne Toast Mist",
       "fragranceNotes": "Bubbly Champagne, Sparkling Berries, Juicy Tangerine.",
       "productDetails": "A sparkling, fruity fragrance that blends bubbly champagne, juicy berries, and bright citrus for a fresh, fun scent that's perfect for any occasion.",
-      "availableQuantity": 9,
+      "availableQuantity": 4,
       "rating5Count": 0,
       "mainCategory": "Bath & Body Works",
       "showInCustomerFavorites": false,
@@ -1973,7 +1951,7 @@
       "name": "Gingham Gorgeous Body Cream",
       "fragranceNotes": "Pink Strawberries, Peach Nectar, Peony Blooms.",
       "productDetails": "A bright, feminine fragrance that blends juicy berries with delicate florals for a fresh, radiant scent that's effortlessly beautiful.",
-      "availableQuantity": 2,
+      "availableQuantity": 1,
       "rating5Count": 0,
       "mainCategory": "Bath & Body Works",
       "showInCustomerFavorites": false,
@@ -1987,7 +1965,7 @@
     },
     {
       "size": "236 mL / 226 g",
-      "productStatus": "Available",
+      "productStatus": "Out of Stock",
       "isDealOfWeek": false,
       "notes": "Pink Strawberries, Peach Nectar, Peony Blooms.",
       "brand": "Bath & Body Works",
@@ -2075,7 +2053,7 @@
     },
     {
       "size": "2.5 fl oz / 75 mL",
-      "productStatus": "Out of Stock",
+      "productStatus": "Available",
       "isDealOfWeek": false,
       "notes": "Sparkling Pear, Jasmine Petals, Soft Sandalwood.",
       "brand": "Bath & Body Works",
@@ -2083,6 +2061,7 @@
       "name": "Aurora - Mini",
       "fragranceNotes": "Sparkling Pear, Jasmine Petals, Soft Sandalwood.",
       "productDetails": "A radiant, elegant fragrance that blends sparkling fruits, delicate florals, and soft woods for a luminous scent that's both graceful and enchanting.",
+      "availableQuantity": 2,
       "rating5Count": 0,
       "mainCategory": "Bath & Body Works",
       "showInCustomerFavorites": false,
@@ -2126,7 +2105,7 @@
       "name": "Gingham Perfume",
       "fragranceNotes": "Blue Freesia, White Peach, Fresh Clementine.",
       "productDetails": "A fresh and cheerful scent that combines bright citrus, juicy fruit, and soft florals for an effortlessly classic fragrance.",
-      "availableQuantity": 1,
+      "availableQuantity": 2,
       "rating5Count": 0,
       "mainCategory": "Bath & Body Works",
       "showInCustomerFavorites": false,
@@ -2140,7 +2119,7 @@
     },
     {
       "size": "3.4 fl oz / 100 mL",
-      "productStatus": "Available",
+      "productStatus": "Out of Stock",
       "isDealOfWeek": false,
       "notes": "Black Cardamom, Smoky Vanilla, Musk.",
       "brand": "Bath & Body Works",
@@ -2228,30 +2207,7 @@
       "showOnWebsite": true
     },
     {
-      "size": "104 g & 226 g",
       "productStatus": "Out of Stock",
-      "isDealOfWeek": false,
-      "notes": "Italian Bergamot, Mountain Spring Water, Oakmoss.",
-      "brand": "Bath & Body Works",
-      "price": "GH₵ 300",
-      "name": "Freshwater Body Spray & Cream",
-      "fragranceNotes": "Italian Bergamot, Mountain Spring Water, Oakmoss.",
-      "productDetails": "A crisp, refreshing fragrance that blends bright citrus, fresh herbs, and smooth woods for a clean, invigorating scent that's perfect for everyday wear.",
-      "availableQuantity": "",
-      "rating5Count": 0,
-      "mainCategory": "Bath & Body Works",
-      "showInCustomerFavorites": false,
-      "rating4Count": 0,
-      "rating3Count": 0,
-      "rating2Count": 0,
-      "image": "assets/products/uploads/img_0132.webp",
-      "rating1Count": 0,
-      "rating": 5,
-      "subCategory": "Men's Body Care",
-      "showOnWebsite": true
-    },
-    {
-      "productStatus": "Available",
       "isDealOfWeek": false,
       "notes": "Lush Blooms, Creamy Coconut, Glowing Sunshine.",
       "brand": "Victoria's Secret",
@@ -2343,7 +2299,7 @@
       "name": "Amber Romance Mist",
       "fragranceNotes": "Deep Amber, Sugar Kisses.",
       "productDetails": "A warm, sensual fragrance that blends rich amber with creamy vanilla for a soft, cozy scent that's effortlessly irresistible.",
-      "availableQuantity": 2,
+      "availableQuantity": 1,
       "rating5Count": 0,
       "mainCategory": "Victoria's Secret",
       "showInCustomerFavorites": false,
@@ -2419,7 +2375,7 @@
       "showOnWebsite": true
     },
     {
-      "productStatus": "Available",
+      "productStatus": "Out of Stock",
       "isDealOfWeek": false,
       "notes": "Warm Cinnamon Spice, Creamy Vanilla, Amber Woods.",
       "brand": "Victoria's Secret",
@@ -2482,7 +2438,7 @@
       "showOnWebsite": true
     },
     {
-      "productStatus": "Out of Stock",
+      "productStatus": "Available",
       "isDealOfWeek": false,
       "notes": "Island Coconut, Warm Sands, Vanilla.",
       "brand": "Victoria's Secret",
@@ -2490,7 +2446,7 @@
       "name": "Coconut Passion Mist",
       "fragranceNotes": "Island Coconut, Warm Sands, Vanilla.",
       "productDetails": "A warm, tropical fragrance that blends creamy coconut with rich vanilla for a soft, indulgent scent that's irresistibly cozy.",
-      "availableQuantity": 0,
+      "availableQuantity": 1,
       "rating5Count": 0,
       "mainCategory": "Victoria's Secret",
       "showInCustomerFavorites": false,
@@ -2545,7 +2501,7 @@
       "showOnWebsite": true
     },
     {
-      "productStatus": "Available",
+      "productStatus": "Out of Stock",
       "isDealOfWeek": false,
       "notes": "Golden Amber, Crème Brûlée, Vanilla Bean.",
       "brand": "Victoria's Secret",
@@ -2566,7 +2522,7 @@
       "showOnWebsite": true
     },
     {
-      "productStatus": "Out of Stock",
+      "productStatus": "Incoming",
       "isDealOfWeek": false,
       "notes": "Peach Nectar, Magnolia Blossom, Mandarin.",
       "brand": "Bath & Body Works",
@@ -2586,7 +2542,7 @@
       "showOnWebsite": true
     },
     {
-      "productStatus": "Out of Stock",
+      "productStatus": "Incoming",
       "isDealOfWeek": false,
       "notes": "Sweet Strawberry Syrup, Fresh Matcha, Creamy Cold Foam.",
       "brand": "Bath & Body Works",
@@ -2596,7 +2552,7 @@
       "productDetails": "Start your day with a refreshing cleanse that blends fruity sweetness with creamy matcha for a soft, uplifting fragrance.",
       "rating5Count": 0,
       "mainCategory": "Bath & Body Works",
-      "showInCustomerFavorites": false,
+      "showInCustomerFavorites": true,
       "rating4Count": 0,
       "rating3Count": 0,
       "rating2Count": 0,
@@ -2606,7 +2562,7 @@
       "showOnWebsite": true
     },
     {
-      "productStatus": "Out of Stock",
+      "productStatus": "Incoming",
       "isDealOfWeek": false,
       "notes": "Sweet Pea, Pink Lavender, Vanilla Musk.",
       "brand": "Bath & Body Works",
@@ -2616,7 +2572,7 @@
       "productDetails": "A soft, cozy fragrance that blends delicate florals with creamy sweetness and warm musk for a charming, comforting scent.",
       "rating5Count": 0,
       "mainCategory": "Bath & Body Works",
-      "showInCustomerFavorites": false,
+      "showInCustomerFavorites": true,
       "rating4Count": 0,
       "rating3Count": 0,
       "rating2Count": 0,
@@ -2634,10 +2590,10 @@
       "name": "Bare Vanilla Body Cream",
       "fragranceNotes": "Whipped Vanilla, Soft Cashmere.",
       "productDetails": "A warm, comforting fragrance that blends whipped vanilla with soft cashmere for a cozy, effortlessly beautiful scent you'll reach for every day.",
-      "availableQuantity": 1,
+      "availableQuantity": 2,
       "rating5Count": 0,
       "mainCategory": "Victoria's Secret",
-      "showInCustomerFavorites": false,
+      "showInCustomerFavorites": true,
       "rating4Count": 0,
       "rating3Count": 0,
       "rating2Count": 0,
@@ -2647,7 +2603,7 @@
       "showOnWebsite": true
     },
     {
-      "productStatus": "Available",
+      "productStatus": "Out of Stock",
       "isDealOfWeek": false,
       "notes": "Lush Blooms, Creamy Coconut, Glowing Sunshine.",
       "brand": "Victoria's Secret",
@@ -2676,7 +2632,7 @@
       "name": "Sundrenched Blooms Body Cream",
       "fragranceNotes": "Sunlit Wildflowers, Juicy Pear, Soft Amber.",
       "productDetails": "A bright, radiant fragrance that blends sun-kissed florals with soft fruits for a fresh, uplifting scent that captures the warmth of a perfect summer day.",
-      "availableQuantity": 1,
+      "availableQuantity": 0,
       "rating5Count": 0,
       "mainCategory": "Victoria's Secret",
       "showInCustomerFavorites": false,
@@ -2710,7 +2666,7 @@
       "showOnWebsite": true
     },
     {
-      "productStatus": "Available",
+      "productStatus": "Out of Stock",
       "isDealOfWeek": false,
       "notes": "Juicy Berries, Tropical Fruits, Sun-Kissed Florals.",
       "brand": "Victoria's Secret",
@@ -2718,7 +2674,7 @@
       "name": "Pure Seduction Body Cream",
       "fragranceNotes": "Juicy Berries, Tropical Fruits, Sun-Kissed Florals.",
       "productDetails": "A bold, fruity fragrance that blends juicy plum with soft florals for a sweet, irresistible scent that's playful and effortlessly alluring.",
-      "availableQuantity": 2,
+      "availableQuantity": 0,
       "rating5Count": 0,
       "mainCategory": "Victoria's Secret",
       "showInCustomerFavorites": false,
