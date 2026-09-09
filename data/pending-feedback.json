@@ -1,6 +1,16 @@
 {
   "pendingFeedback": [
     {
+      "id": "feedback-1788917584281",
+      "name": "Robertlaw",
+      "rating": 3,
+      "productsPurchased": "",
+      "message": "Γεια σου, ήθελα να μάθω την τιμή σας.",
+      "approved": false,
+      "date": "2026-09-09T01:33:04.281Z",
+      "source": "customer_submission"
+    },
+    {
       "id": "feedback-1788840642337",
       "name": "Williamsow",
       "rating": 1,
