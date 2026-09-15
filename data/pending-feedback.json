@@ -1,6 +1,16 @@
 {
   "pendingFeedback": [
     {
+      "id": "feedback-1789455395514",
+      "name": "Robertlaw",
+      "rating": 2,
+      "productsPurchased": "",
+      "message": "Sveiki, es gribēju zināt savu cenu.",
+      "approved": false,
+      "date": "2026-09-15T06:56:35.514Z",
+      "source": "customer_submission"
+    },
+    {
       "id": "feedback-1789373551799",
       "name": "Williamsow",
       "rating": 2,
