@@ -1,6 +1,7 @@
 {
   "processedReferences": [
-    "SCENTIVITY-1785989942333-E46AWB"
+    "SCENTIVITY-1785989942333-E46AWB",
+    "SCENTIVITY-1790878905205-7GUWXK"
   ],
   "events": [
     {
@@ -13,6 +14,46 @@
           "quantityPurchased": 5,
           "before": 5,
           "after": 0
+        }
+      ],
+      "skipped": []
+    },
+    {
+      "reference": "SCENTIVITY-1790878905205-7GUWXK",
+      "processedAt": "2026-10-01T18:22:25.261Z",
+      "changes": [
+        {
+          "index": 9,
+          "name": "Mini Gingham Mist",
+          "quantityPurchased": 1,
+          "purchaseBefore": 0,
+          "purchaseAfter": 1,
+          "stockBefore": 1,
+          "stockAfter": 0,
+          "stockChanged": true,
+          "note": ""
+        },
+        {
+          "index": 39,
+          "name": "Pink Obsessed Mist",
+          "quantityPurchased": 1,
+          "purchaseBefore": 0,
+          "purchaseAfter": 1,
+          "stockBefore": 1,
+          "stockAfter": 0,
+          "stockChanged": true,
+          "note": ""
+        },
+        {
+          "index": 22,
+          "name": "Mini Strawberry Pound Cake  Mist & Cream",
+          "quantityPurchased": 1,
+          "purchaseBefore": 0,
+          "purchaseAfter": 1,
+          "stockBefore": 1,
+          "stockAfter": 0,
+          "stockChanged": true,
+          "note": ""
         }
       ],
       "skipped": []

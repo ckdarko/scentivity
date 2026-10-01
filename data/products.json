@@ -237,7 +237,7 @@
     },
     {
       "size": "2.5 fl oz / 75 mL",
-      "productStatus": "Available",
+      "productStatus": "Out of Stock",
       "isDealOfWeek": false,
       "notes": "Blue Freesia, White Peach, Fresh Clementine.",
       "brand": "Bath & Body works",
@@ -245,7 +245,7 @@
       "name": "Mini Gingham Mist",
       "fragranceNotes": "Blue Freesia, White Peach, Fresh Clementine.",
       "productDetails": "A fresh and cheerful scent that combines bright citrus, juicy fruit, and soft florals for an effortlessly classic fragrance.",
-      "availableQuantity": 1,
+      "availableQuantity": 0,
       "rating5Count": 0,
       "mainCategory": "Bath & Body works",
       "showInCustomerFavorites": false,
@@ -255,7 +255,9 @@
       "image": "assets/products/uploads/img_0050.webp",
       "rating1Count": 0,
       "subCategory": "Fine Fragrance Mist - Mini",
-      "showOnWebsite": true
+      "showOnWebsite": true,
+      "purchaseCount": 1,
+      "available": false
     },
     {
       "size": "(2) x 2.5 fl oz 75mL + (1) 1 fl oz/ 29 mL",
@@ -522,7 +524,7 @@
     },
     {
       "size": "75 mL",
-      "productStatus": "Available",
+      "productStatus": "Out of Stock",
       "isDealOfWeek": false,
       "notes": "Fresh Strawberries, Golden Shortcake, Whipped Cream.",
       "brand": "Bath & Body Works",
@@ -530,7 +532,7 @@
       "name": "Mini Strawberry Pound Cake  Mist & Cream",
       "fragranceNotes": "Fresh Strawberries, Golden Shortcake, Whipped Cream.",
       "productDetails": "A deliciously sweet fragrance that blends fresh strawberries, fluffy cake, and whipped cream for a warm, bakery-inspired scent that's simply irresistible.",
-      "availableQuantity": 1,
+      "availableQuantity": 0,
       "reviewCount": "",
       "rating5Count": 0,
       "mainCategory": "Bath & Body Works",
@@ -542,7 +544,9 @@
       "rating1Count": 0,
       "rating": 5,
       "subCategory": "Mist & Body Cream - Mini",
-      "showOnWebsite": true
+      "showOnWebsite": true,
+      "purchaseCount": 1,
+      "available": false
     },
     {
       "size": "236 mL",
@@ -902,7 +906,7 @@
     },
     {
       "size": "8 fl oz / 236 mL",
-      "productStatus": "Available",
+      "productStatus": "Out of Stock",
       "isDealOfWeek": false,
       "notes": "Blushing Jasmine, Cashmere Praline, Vanilla Bourbon",
       "brand": "Bath & Body Works",
@@ -910,7 +914,7 @@
       "name": "Pink Obsessed Mist",
       "fragranceNotes": "Blushing Jasmine, Cashmere Praline, Vanilla Bourbon",
       "productDetails": "A soft, feminine fragrance that blends warm florals with creamy vanilla for a sweet, sophisticated scent that lingers beautifully.",
-      "availableQuantity": 1,
+      "availableQuantity": 0,
       "rating5Count": 0,
       "mainCategory": "Bath & Body Works",
       "showInCustomerFavorites": false,
@@ -920,7 +924,9 @@
       "image": "assets/products/uploads/img_0068.webp",
       "rating1Count": 0,
       "subCategory": "Fine Fragrance Mist",
-      "showOnWebsite": true
+      "showOnWebsite": true,
+      "purchaseCount": 1,
+      "available": false
     },
     {
       "size": "8 oz / 236 mL",
