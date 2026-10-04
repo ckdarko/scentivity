@@ -1,7 +1,8 @@
 {
   "processedReferences": [
     "SCENTIVITY-1785989942333-E46AWB",
-    "SCENTIVITY-1790878905205-7GUWXK"
+    "SCENTIVITY-1790878905205-7GUWXK",
+    "SCENTIVITY-1791110851548-23D4VE"
   ],
   "events": [
     {
@@ -52,6 +53,57 @@
           "purchaseAfter": 1,
           "stockBefore": 1,
           "stockAfter": 0,
+          "stockChanged": true,
+          "note": ""
+        }
+      ],
+      "skipped": []
+    },
+    {
+      "reference": "SCENTIVITY-1791110851548-23D4VE",
+      "processedAt": "2026-10-04T10:48:21.509Z",
+      "changes": [
+        {
+          "index": 0,
+          "name": " A Thousand Wishes Mist",
+          "quantityPurchased": 1,
+          "purchaseBefore": 0,
+          "purchaseAfter": 1,
+          "stockBefore": 1,
+          "stockAfter": 0,
+          "stockChanged": true,
+          "note": ""
+        },
+        {
+          "index": 98,
+          "name": "Pure Seduction Shimmer",
+          "quantityPurchased": 1,
+          "purchaseBefore": 0,
+          "purchaseAfter": 1,
+          "stockBefore": 1,
+          "stockAfter": 0,
+          "stockChanged": true,
+          "note": ""
+        },
+        {
+          "index": 64,
+          "name": "Into The Night Mist ",
+          "quantityPurchased": 1,
+          "purchaseBefore": 0,
+          "purchaseAfter": 1,
+          "stockBefore": 6,
+          "stockAfter": 5,
+          "stockChanged": true,
+          "note": ""
+        },
+        {
+          "index": 83,
+          "name": "Champagne Toast Mist",
+          "quantityPurchased": 1,
+          "purchaseBefore": 0,
+          "purchaseAfter": 1,
+          "stockBefore": 2,
+          "stockAfter": 1,
           "stockChanged": true,
           "note": ""
         }
