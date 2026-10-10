@@ -1,6 +1,16 @@
 {
   "pendingFeedback": [
     {
+      "id": "feedback-1791672470958",
+      "name": "Robertlaw",
+      "rating": 3,
+      "productsPurchased": "",
+      "message": "Здравейте, исках да знам цената ви.",
+      "approved": false,
+      "date": "2026-10-10T22:47:50.958Z",
+      "source": "customer_submission"
+    },
+    {
       "id": "feedback-1791596403180",
       "name": "JeremyToUct",
       "rating": 1,
