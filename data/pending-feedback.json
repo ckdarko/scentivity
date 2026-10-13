@@ -1,6 +1,16 @@
 {
   "pendingFeedback": [
     {
+      "id": "feedback-1791894644023",
+      "name": "Robertlaw",
+      "rating": 1,
+      "productsPurchased": "",
+      "message": "Hæ, ég vildi vita verð þitt.",
+      "approved": false,
+      "date": "2026-10-13T12:30:44.023Z",
+      "source": "customer_submission"
+    },
+    {
       "id": "feedback-1791867175700",
       "name": "JeremyToUct",
       "rating": 3,
