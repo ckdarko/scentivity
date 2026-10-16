@@ -1,6 +1,16 @@
 {
   "pendingFeedback": [
     {
+      "id": "feedback-1792192323479",
+      "name": "Robertlaw",
+      "rating": 3,
+      "productsPurchased": "",
+      "message": "Hej, jeg ønskede at kende din pris.",
+      "approved": false,
+      "date": "2026-10-16T23:12:03.479Z",
+      "source": "customer_submission"
+    },
+    {
       "id": "feedback-1792136469459",
       "name": "JeremyToUct",
       "rating": 3,
