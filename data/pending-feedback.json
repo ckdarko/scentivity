@@ -1,6 +1,16 @@
 {
   "pendingFeedback": [
     {
+      "id": "feedback-1793360935618",
+      "name": "Robertlaw",
+      "rating": 3,
+      "productsPurchased": "",
+      "message": "Hai, saya ingin tahu harga Anda.",
+      "approved": false,
+      "date": "2026-10-30T11:48:55.618Z",
+      "source": "customer_submission"
+    },
+    {
       "id": "feedback-1793334450897",
       "name": "Audra",
       "rating": 4,
