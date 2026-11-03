@@ -1,6 +1,16 @@
 {
   "pendingFeedback": [
     {
+      "id": "feedback-1793691930709",
+      "name": "Robertlaw",
+      "rating": 3,
+      "productsPurchased": "",
+      "message": "Hola, volia saber el seu preu.",
+      "approved": false,
+      "date": "2026-11-03T07:45:30.709Z",
+      "source": "customer_submission"
+    },
+    {
       "id": "feedback-1793662286761",
       "name": "Margueriteyarx",
       "rating": 1,
