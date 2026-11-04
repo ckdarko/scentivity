@@ -1,6 +1,16 @@
 {
   "pendingFeedback": [
     {
+      "id": "feedback-1793752375674",
+      "name": "Maddison Rooney",
+      "rating": 2,
+      "productsPurchased": "",
+      "message": "Hi,\r\n\r\nI'll keep this short since you didn't ask for it.\r\n\r\nI built a desktop tool called CompanyScout that finds businesses by trade and location, then pulls their email addresses and contact pages. You can search something like \"marketing companies in Gauteng\", get a list with names, phones, addresses and websites, and export it to CSV. Searching and exporting are free, and there's no account needed to try it.\r\n\r\nYou only pay if you want the app to send the emails or submit contact forms for you — that part is $27 a month.\r\n\r\nIt runs on your own PC, so the data stays with you rather than sitting on someone else's server. If it's not useful, the free part costs you nothing but the download.\r\n\r\nfreeb2bdata.org\r\n\r\nIf you'd rather not hear from me, reply with \"no\" and I won't follow up.\r\n\r\nThanks for your time, The team at FreeB2BData",
+      "approved": false,
+      "date": "2026-11-04T00:32:55.674Z",
+      "source": "customer_submission"
+    },
+    {
       "id": "feedback-1793691930709",
       "name": "Robertlaw",
       "rating": 3,
