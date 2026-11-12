@@ -1,6 +1,16 @@
 {
   "pendingFeedback": [
     {
+      "id": "feedback-1794488772919",
+      "name": "Robertlaw",
+      "rating": 2,
+      "productsPurchased": "",
+      "message": "হাই, আমি আপনার মূল্য জানতে চেয়েছিলাম.",
+      "approved": false,
+      "date": "2026-11-12T13:06:12.919Z",
+      "source": "customer_submission"
+    },
+    {
       "id": "feedback-1794331793761",
       "name": "Dalene",
       "rating": 2,
