@@ -25,6 +25,18 @@ exports.handler = async function handler(event) {
   if (event.httpMethod === 'OPTIONS') return jsonResponse(200, { ok: true });
   if (event.httpMethod !== 'POST') return jsonResponse(405, { error: 'Method not allowed' });
 
+  // Temporarily pause purchases during Scentivity's holiday break.
+  const holidayStart = Date.UTC(2026, 10, 15, 0, 0, 0);
+  const holidayEnd = Date.UTC(2026, 11, 1, 0, 0, 0);
+
+  if (Date.now() >= holidayStart && Date.now() < holidayEnd) {
+    return jsonResponse(423, {
+      error: 'Scentivity is on break from November 15–30, 2026. Purchases resume December 1 with our end-of-year sale.',
+      checkout_paused: true,
+      resumes_at: '2026-12-01T00:00:00Z'
+    });
+  }
+
   const secretKey = process.env.PAYSTACK_SECRET_KEY;
   if (!secretKey) {
     return jsonResponse(500, {
