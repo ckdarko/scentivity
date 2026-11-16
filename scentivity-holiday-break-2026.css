@@ -1,0 +1,19 @@
+/* Scentivity holiday break (2026). Separate stylesheet; no product/image overrides. */
+.scentivity-holiday-marquee{position:relative;z-index:25;display:block;width:100%;overflow:hidden;background:linear-gradient(100deg,#520021,#9d0048,#520021);color:#fff5d1;border-bottom:2px solid #e5ad41;font-family:Inter,Arial,sans-serif}
+.scentivity-holiday-marquee__inner{display:flex;width:max-content;animation:scentivityHolidayScroll 37s linear infinite;align-items:center;min-height:41px}
+.scentivity-holiday-marquee__group{display:flex;align-items:center;gap:1.6rem;white-space:nowrap;flex:0 0 auto;padding-right:1.6rem;font-weight:750;letter-spacing:.035em;font-size:.82rem}
+.scentivity-holiday-marquee__dot{color:#ffc94e;font-size:1.15rem}
+@keyframes scentivityHolidayScroll{to{transform:translateX(-50%)}}
+.scentivity-holiday-notice{margin:1rem auto;max-width:1160px;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:1.15rem;background:linear-gradient(135deg,#fff9f6,#ffe9ef);color:#53052d;border:1px solid #e5b2c7;border-radius:16px;padding:1rem 1.15rem;box-shadow:0 7px 22px rgba(74,4,41,.08);font-family:Inter,Arial,sans-serif}
+.scentivity-holiday-notice__eyebrow{margin:0 0 .3rem;color:#aa1758;text-transform:uppercase;font-size:.72rem;font-weight:800;letter-spacing:.16em}
+.scentivity-holiday-notice h2{margin:.1rem 0 .45rem;font-family:inherit;font-size:clamp(1.15rem,2vw,1.65rem);line-height:1.2;color:#52002a}
+.scentivity-holiday-notice p{margin:0 0 .45rem;font-size:.93rem;line-height:1.5}
+.scentivity-holiday-notice strong{color:#8b003e}
+.scentivity-holiday-notice__poster{display:block;flex-shrink:0;line-height:0;border:1px solid #e3b1c4;border-radius:12px;overflow:hidden;background:white}
+.scentivity-holiday-notice__poster img{display:block;width:112px;height:112px;object-fit:cover}
+.scentivity-holiday-notice__poster:focus-visible{outline:3px solid #a40050;outline-offset:3px}
+.scentivity-holiday-checkout-message{padding:12px 14px;margin:10px 0 14px;border-radius:12px;background:#fff0f5;border:1px solid #ce6e99;color:#6b1041;font-size:.9rem;line-height:1.45;font-weight:650}
+body.scentivity-holiday-paused .top-promo{display:none!important} /* Existing delivery/weekly-deals ticker is inaccurate during closure */
+body.scentivity-holiday-paused #checkoutForm .checkout-submit{cursor:not-allowed;opacity:.75;filter:grayscale(.15)}
+@media(max-width:700px){.scentivity-holiday-marquee__inner{animation-duration:27s;min-height:38px}.scentivity-holiday-marquee__group{font-size:.76rem;gap:1rem}.scentivity-holiday-notice{margin:12px;padding:.85rem;gap:.7rem}.scentivity-holiday-notice__poster img{width:76px;height:76px}.scentivity-holiday-notice p{font-size:.84rem}}
+@media(prefers-reduced-motion:reduce){.scentivity-holiday-marquee__inner{animation:none}.scentivity-holiday-marquee{overflow-x:auto}}
