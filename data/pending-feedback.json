@@ -1,6 +1,16 @@
 {
   "pendingFeedback": [
     {
+      "id": "feedback-1795110092271",
+      "name": "Magnolia Serena",
+      "rating": 2,
+      "productsPurchased": "",
+      "message": "Hi,\r\n\r\nWe built an AI assistant that answers your visitors’ questions from your own site content, even while you’re asleep, and emails you the details of anyone who wants to get in touch.\r\n\r\nFree to try for 14 days: https://trychatbot.org\r\n\r\nKind Regards,\r\nMagnolia",
+      "approved": false,
+      "date": "2026-11-19T17:41:32.271Z",
+      "source": "customer_submission"
+    },
+    {
       "id": "feedback-1795024036558",
       "name": "Monika",
       "rating": 1,
